@@ -221,6 +221,10 @@ footer {
     right:50px;
     top:52px;
   }
+
+  footer {
+    margin:0;
+  }
 }
 
 @media print, screen and (max-width: 720px) {
