@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body>
+
+  <div class="wrapper">
+    {% include header.html %}
+
+    <!-- Your content goes here... -->
+    <section>
+      <h1>{{ post.title }}</h1>
+      {{ content }}
+    </section>
+
+    {% include footer.html %}
+  </div>
+
+  {% include js.html %}
+</body>
+</html>

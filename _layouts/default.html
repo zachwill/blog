@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body>
+
+  <div class="wrapper">
+    {% include header.html %}
+
+    <!-- ALL THE POSTS! -->
+    {% for post in site.posts %}
+      
+      <section>
+        <h1>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </h1>
+        {{ post.content }}
+      </section>
+    {% endfor %}
+
+    {% include footer.html %}
+  </div>
+
+  {% include js.html %}
+</body>
+</html>
