@@ -1,0 +1,26 @@
+---
+layout    : post
+title     : If everyone else is such an idiot
+permalink : /idiot/
+---
+
+> The available evidence seems to indicate that at some point, Reed Hastings was
+> a smart guy. Smart enough to count to twenty with his shoes on. Smart enough
+> read pages 1-15 of the kind of introductory strategy text where they solemnly
+> tell you to figure out what business you’re really in. Smart enough to grind
+> Blockbuster into a pile of gleaming blue-and-white sand while launching a
+> streaming service so popular that it now accounts for something like 20% of
+> peak-load internet traffic. If you want to write an article on how he’s a big
+> fat idiot who couldn’t find his ass with both hands in the dark, then you
+> should probably have a theory of the transition between these two states of
+> Reed Hastings. Did he suffer a stroke? Start dating distractingly gorgeous
+> supermodels? Has he been licking the paint chips in his gloriously restored
+> Victorian mansion?
+> 
+> If you do not have a theory—if you believe that Reed Hastings just suddenly
+> and for no apparent reason became an idiot—then one of two things is likely.
+> Either there is some undiagnosed medical condition that Mr. Hastings' doctor
+> should investigate immediately, or you are committing the fallacy of
+> Chesterton’s fence.
+
+&mdash; [Megan McArdle](http://www.theatlantic.com/business/archive/2011/12/if-everyone-else-is-such-an-idiot-how-come-youre-not-rich/249430/)
