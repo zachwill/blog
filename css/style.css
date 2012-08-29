@@ -3,12 +3,13 @@
 body {
   padding:50px;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color:#777;
+  color:#666;
   font-weight:300;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color:#222;
+  font-weight:400;
   margin:0 0 20px;
 }
 
@@ -40,7 +41,7 @@ a {
 
 a small {
   font-size:11px;
-  color:#777;
+  color:#666;
   margin-top:-0.6em;
   display:block;
 }
@@ -51,7 +52,8 @@ a small {
 }
 
 blockquote {
-  border-left:1px solid #e5e5e5;
+  border-left:3px solid #e5e5e5;
+  color:#999;
   margin:0;
   padding:0 0 0 20px;
   font-style:italic;
@@ -96,7 +98,7 @@ img {
 }
 
 header {
-  width:270px;
+  width:250px;
   float:left;
   position:fixed;
 }
@@ -160,7 +162,7 @@ header ul a strong {
 }
 
 section {
-  width:500px;
+  width:520px;
   float:right;
   padding-bottom:50px;
 }
@@ -197,12 +199,12 @@ footer {
   }
   
   header {
+    border:1px solid #e5e5e5;
+    border-width:0 0 1px;
     padding-right:320px;
   }
   
   section {
-    border:1px solid #e5e5e5;
-    border-width:1px 0 0;
     padding:20px 0;
     margin:0 0 20px;
   }
