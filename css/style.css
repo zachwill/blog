@@ -222,6 +222,11 @@ footer {
     top:52px;
   }
 
+  header h1, header h2 {
+    margin: 0 0 10px;
+  }
+  
+
   footer {
     margin:0;
   }
@@ -239,7 +244,7 @@ footer {
   header ul, header p.view {
     position:static;
   }
-  
+
   pre, code {
     word-wrap:normal;
   }
