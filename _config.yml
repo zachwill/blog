@@ -1,6 +1,7 @@
 markdown  : maruku
 permalink : pretty
 pygments  : true
+redirects : true
 exclude   :
   - README.md
 
