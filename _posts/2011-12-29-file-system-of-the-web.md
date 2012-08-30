@@ -1,6 +1,6 @@
 ---
 layout    : post
-title     : The New File System of the Web
+title     : The New File System
 permalink : /dropbox/
 ---
 
