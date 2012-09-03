@@ -7,14 +7,14 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 body {
-  color:#666;
+  color:#555;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight:300;
   padding:50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#222;
+  color:#333;
   font-weight:400;
   margin:0 0 20px;
 }
@@ -47,7 +47,7 @@ a {
 
 a small {
   font-size:11px;
-  color:#666;
+  color:#555;
   margin-top:-0.6em;
   display:block;
 }
@@ -59,7 +59,7 @@ a small {
 
 blockquote {
   border-left:3px solid #e5e5e5;
-  color:#7a7a7a;
+  color:#666;
   margin:0;
   padding:0 0 0 20px;
   font-style:italic;
