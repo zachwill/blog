@@ -4,20 +4,7 @@
 <body>
 
   <div class="wrapper">
-    {% include header.html %}
-
-    <!-- ALL THE POSTS! -->
-    {% for post in site.posts %}
-      
-      <section>
-        <h2>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </h2>
-        {{ post.content }}
-      </section>
-    {% endfor %}
-
-    {% include footer.html %}
+    {{ content }}
   </div>
 
   {% include js.html %}

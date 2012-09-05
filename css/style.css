@@ -7,7 +7,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 body {
-  color:#555;
+  color:#444;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight:300;
   padding:50px;
@@ -47,7 +47,7 @@ a {
 
 a small {
   font-size:11px;
-  color:#555;
+  color:#444;
   margin-top:-0.6em;
   display:block;
 }
