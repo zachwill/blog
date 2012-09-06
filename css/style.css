@@ -7,7 +7,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 body {
-  color:#444;
+  color:#505050;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight:300;
   padding:50px;
@@ -15,7 +15,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color:#333;
-  font-weight:400;
+  font-weight:300;
   margin:0 0 20px;
 }
 
@@ -41,13 +41,12 @@ h3, h4, h5, h6 {
 
 a {
   color:#39c;
-  font-weight:400;
   text-decoration:none;
 }
 
 a small {
   font-size:11px;
-  color:#444;
+  color:#505050;
   margin-top:-0.6em;
   display:block;
 }
