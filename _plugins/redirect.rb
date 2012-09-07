@@ -1,5 +1,3 @@
-# Stolen from:  http://www.marran.com/tech/creating-redirects-with-jekyll/
-
 module Jekyll
 
   # The redirect page creates a simple page that refreshes a user from a URL alias to an existing post.
@@ -29,7 +27,7 @@ module Jekyll
 
   end
 
-  # A class for generating the redirect pages.
+  # a class for generating the redirect pages.
   class RedirectPage < Page
     
     def initialize(site, base, path, destination)
