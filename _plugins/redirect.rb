@@ -17,7 +17,7 @@ module Jekyll
     def generate_redirects(site)
       site.posts.select{|x| x.data.key? 'redirects' }.each do |p|
         p.data['redirects'].each do |r| 
-          redirect = RedirectPage.new(site, site.source, r, p.id)
+          redirect = RedirectPage.new(site, site.source, r, p.permalink)
           redirect.render(site.layouts, site.site_payload)
           redirect.write(site.dest)
           site.pages << redirect
