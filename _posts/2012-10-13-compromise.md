@@ -4,8 +4,11 @@ title     : Compromise
 permalink : /compromise/
 ---
 
-> The question is, really, what are you not willing to compromise on? Good.
-> Cheap. On-time. Now, that makes it easy and says there are only three factors,
+> The question is, really, what are you not willing to compromise on?
+> 
+> Good. Cheap. On-time.
+> 
+> Now, that makes it easy and says there are only three factors,
 > but, in the real world, there's many, many, many, many factors. But, I think
 > however many aspects of a project there are, the only way to really get it
 > done is to have one of them that your group, your team, your whatever &mdash;
