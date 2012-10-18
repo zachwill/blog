@@ -7,7 +7,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 body {
-  color:#4a4d4f;
+  color:#3a3c3e;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight:300;
   padding:50px;
@@ -36,7 +36,7 @@ h2 {
 }
 
 h3, h4, h5, h6 {
-  color:#494949;
+  color:#393939;
 }
 
 a {
@@ -46,7 +46,7 @@ a {
 
 a small {
   font-size:11px;
-  color:#4a4d4f;
+  color:#3a3c3e;
   margin-top:-0.6em;
   display:block;
 }
@@ -58,7 +58,7 @@ a small {
 
 blockquote {
   border-left:3px solid #e5e5e5;
-  color:#505456;
+  color:#46484b;
   margin:0;
   padding:0 0 0 20px;
   font-style:italic;
