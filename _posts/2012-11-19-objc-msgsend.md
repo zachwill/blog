@@ -4,7 +4,7 @@ title     : objc_msgSend
 permalink : /objc-msgSend/
 ---
 
-In which [Mike Ash] blows my mind, by implementing `objc_msgSend` in assembly:
+In which [Mike Ash](https://twitter.com/mikeash) blows my mind, by implementing `objc_msgSend` in assembly:
 
 > The need to go fast becomes much less important at this point, partly because
 > it's already doomed to be slow, and partly because this path should be taken
