@@ -200,6 +200,25 @@ footer {
   margin-left:600px;
 }
 
+.embed-video-container {
+  height: 0;
+  margin-bottom: 10px;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* 16/9 ratio */
+  padding-top: 30px;      /* IE6 workaround*/
+  position: relative;
+}
+
+.embed-video-container iframe,
+.embed-video-container object,
+.embed-video-container embed {
+  height:100%;
+  left:0;
+  position:absolute;
+  top:0;
+  width:100%;
+}
+
 @media print, screen and (max-width: 960px) {
   
   div.wrapper {
