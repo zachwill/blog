@@ -12,13 +12,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#333;
-  font-weight:300;
-  margin:0 0 20px;
+  color:#393939;
+  font-weight:200;
+  margin:0 0 16px;
 }
 
 p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
+  margin:0 0 16px;
 }
 
 h1, h2, h3 {
@@ -27,14 +27,6 @@ h1, h2, h3 {
 
 h1 {
   font-size:28px;
-}
-
-h2 {
-  color:#393939;
-}
-
-h3, h4, h5, h6 {
-  color:#393939;
 }
 
 a {
