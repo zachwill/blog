@@ -4,7 +4,7 @@ title     : Flask/iOS screencast
 permalink : /screencast/
 ---
 
-<div class="embed-video-container">
+<div class="embed">
   <iframe src="http://player.vimeo.com/video/54584111" frameborder="0">&nbsp;</iframe>
 </div>
 

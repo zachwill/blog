@@ -190,7 +190,7 @@ footer {
   margin-left:600px;
 }
 
-.embed-video-container {
+.embed {
   height: 0;
   margin-bottom: 10px;
   overflow: hidden;
@@ -199,9 +199,9 @@ footer {
   position: relative;
 }
 
-.embed-video-container iframe,
-.embed-video-container object,
-.embed-video-container embed {
+.embed iframe,
+.embed object,
+.embed embed {
   height:100%;
   left:0;
   position:absolute;
@@ -263,7 +263,7 @@ footer {
   }
 
   blockquote {
-    padding-left:14px;  
+    padding-left:14px;
   }
 
   pre, code {
