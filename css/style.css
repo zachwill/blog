@@ -162,10 +162,10 @@ header ul a strong {
 }
 
 header h1, header h2, header h3 {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 
-section {
+article, section {
   width:520px;
   float:left;
   padding-bottom:50px;
@@ -216,7 +216,7 @@ footer {
     margin:0;
   }
   
-  header, section, footer {
+  header, article, section, footer {
     float:none;
     position:static;
     width:auto;
@@ -229,7 +229,7 @@ footer {
     margin:0 0 10px;
   }
   
-  section {
+  article, section {
     padding:20px 0;
     margin:0;
   }
