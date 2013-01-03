@@ -223,8 +223,8 @@ footer {
   }
   
   header {
-    border:3px solid #e5e5e5;
-    border-width:0 0 1px;
+    border:1px solid #e5e5e5;
+    border-width:0 0 3px;
     padding-right:320px;
     margin:0 0 10px;
   }
