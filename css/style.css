@@ -47,10 +47,10 @@ a small {
 }
 
 blockquote {
-  border-left:3px solid #e5e5e5;
+  border-left:2px solid #e5e5e5;
   color:#46484b;
   margin:0;
-  padding:0 0 0 20px;
+  padding:0 0 0 18px;
   font-style:italic;
 }
 
@@ -223,7 +223,7 @@ footer {
   }
   
   header {
-    border:1px solid #e5e5e5;
+    border:2px solid #e5e5e5;
     border-width:0 0 2px;
     padding-right:320px;
     margin:0 0 10px;
@@ -260,6 +260,10 @@ footer {
   
   header ul, header p.view {
     position:static;
+  }
+
+  blockquote {
+    padding-left:14px;  
   }
 
   pre, code {
