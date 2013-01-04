@@ -22,7 +22,7 @@ Experience
 
 ### **Code for America**, January - November 2012
 
-Selected as one of 26 fellows out of a pool of 550 applicants. Collaborated on a team of three with the city of Macon, GA for the year. Prototyped tools dealing with transit and public works data, including a SMS bus notification application and a SMS public works reporting tool. Created an Open311 Python wrapper capable of interacting with 31 cities’ Open311 and public works endpoints. Also, mentored a Google Summer of Code intern that created an open-source Open311 server.
+Selected as one of 26 fellows out of a pool of 550 applicants. Collaborated on a team of three with the city of Macon, GA for the year. Prototyped tools dealing with transit and public works data, including a SMS bus notification application and a [SMS public works reporting tool](http://messagemacon.com/). Created an Open311 Python wrapper capable of interacting with 31 cities’ Open311 and public works endpoints. Also, mentored a Google Summer of Code intern that created an open-source Open311 server.
 
 ### **Contractor**, August - December 2011
 
