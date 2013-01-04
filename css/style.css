@@ -263,7 +263,7 @@ footer {
   }
 
   blockquote {
-    padding-left:14px;
+    padding-left:12px;
   }
 
   pre, code {
@@ -273,7 +273,7 @@ footer {
 
 @media print, screen and (max-width: 480px) {
   body {
-    padding:8px;
+    padding:8px 5px;
   }
   
   header ul {
