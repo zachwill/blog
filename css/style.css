@@ -217,6 +217,10 @@ footer {
   margin-bottom: 8px;  
 }
 
+.resume h3 {
+  font-style:italic;
+}
+
 
 @media print, screen and (max-width: 960px) {
   
@@ -282,7 +286,7 @@ footer {
 
 @media print, screen and (max-width: 480px) {
   body {
-    padding:8px 5px;
+    padding:8px 4px;
   }
   
   header ul {
@@ -290,8 +294,12 @@ footer {
   }
 
   .resume h2 {
-    padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom:12px;
+    padding-top:10px;
+  }
+  
+  .resume h3 {
+    font-size:1em;
   }
 }
 
