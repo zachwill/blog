@@ -36,15 +36,15 @@ Selected as one of 8 students to work with Code for America through Google Summe
 Projects
 --------
 
-### **Drinkups**, [trydrinkups.com]()
+### **Drinkups**, [trydrinkups.com](http://trydrinkups.com)
 
 An iOS application that combines GitHub’s blog posts and Foursquare’s API to update users of upcoming GitHub meetups. Uses numerous iOS 6 APIs for layout, creating reminders, and sending tweets.
 
-### **Three**, [github.com/codeforamerica/three]()
+### **Three**, [github.com/codeforamerica/three](https://github.com/codeforamerica/three)
 
 A vendor-agnostic Python Open311 API wrapper capable of interacting with 31 cities’ Open311 endpoints.  Currently in use in numerous Code for America Chicago projects. Downloaded [over 6,100](https://crate.io/packages/three/) times.
 
-### **GitHub**, [github.com/zachwill]()
+### **GitHub**, [github.com/zachwill](https://github.com/zachwill)
 
 I’m a strong believer in contributing to open-source projects. Almost all of my own personal projects can be found on my GitHub account.
 
