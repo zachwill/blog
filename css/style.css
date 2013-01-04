@@ -209,6 +209,15 @@ footer {
   width:100%;
 }
 
+.resume h2 {
+  padding-top: 16px;  
+}
+
+.resume h1, .resume h3 {
+  margin-bottom: 8px;  
+}
+
+
 @media print, screen and (max-width: 960px) {
   
   div.wrapper {
