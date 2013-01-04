@@ -288,6 +288,10 @@ footer {
   header ul {
     display:none;
   }
+
+  .resume h2 {
+    padding-top: 0px;
+  }
 }
 
 @media print {
