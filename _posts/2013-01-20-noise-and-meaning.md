@@ -17,4 +17,4 @@ permalink : /noise-and-meaning/
 > intentionally prone to the confusion between *noise* and *meaning*, that is,
 > between a randomly constructed arrangement and a precisely intended message.
 
-&mdash; [Fooled by Randomness](http://www.amazon.com/Fooled-Randomness-Hidden-Markets-ebook/dp/B001FA0W5W/), Nassim Nicholas Taleb
+&mdash; Nassim Nicholas Taleb, [Fooled by Randomness](http://www.amazon.com/Fooled-Randomness-Hidden-Markets-ebook/dp/B001FA0W5W/)
