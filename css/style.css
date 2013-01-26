@@ -293,6 +293,11 @@ footer {
     display:none;
   }
 
+  article, section {
+    padding:10px 0;
+    margin:0;
+  }
+
   .resume h2 {
     margin-bottom:12px;
     padding-top:10px;
