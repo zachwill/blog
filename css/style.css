@@ -48,10 +48,9 @@ a small {
 
 blockquote {
   border-left:2px solid #e5e5e5;
-  color:#46484b;
+  color:#55585b;
   margin:0;
   padding:0 0 0 18px;
-  font-style:italic;
 }
 
 blockquote code {
