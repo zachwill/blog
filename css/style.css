@@ -41,6 +41,17 @@ a small {
   display:block;
 }
 
+a.home {
+  background: #3a92d9;
+  border: 1px solid #3789cc;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  width: 50%;
+}
+
 .wrapper {
   width:860px;
   margin:0 auto;
@@ -183,11 +194,10 @@ hr {
 }
 
 footer {
+  clear: both;
+  float: none;
+  position: static;
   width:270px;
-  float:right;
-  position:fixed;
-  bottom:50px;
-  margin-left:600px;
 }
 
 .embed {
