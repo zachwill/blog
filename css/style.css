@@ -30,19 +30,20 @@ h1 {
 }
 
 a {
-  color:#059cd3;
+  color:#3a92d9;
   text-decoration:none;
 }
 
 a small {
   font-size:11px;
+  color:#3a3c3e;
   margin-top:-0.6em;
   display:block;
 }
 
 a.home {
-  background: #059cd3;
-  border: 1px solid #0592c7;
+  background: #3a92d9;
+  border: 1px solid #3789cc;
   border-radius: 3px;
   color: #fff;
   display: block;
