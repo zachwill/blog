@@ -6,8 +6,7 @@
 
 body {
   color:#3a3c3e;
-  font:14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight:300;
+  font:300 15px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding:50px;
 }
 
@@ -52,7 +51,7 @@ a.home {
 }
 
 .wrapper {
-  width:860px;
+  width:900px;
   margin:0 auto;
 }
 
@@ -106,10 +105,10 @@ img {
 }
 
 header {
-  width:270px;
+  width:280px;
   float:right;
   position:fixed;
-  margin-left:600px;
+  margin-left:610px;
 }
 
 header ul {
@@ -231,6 +230,10 @@ footer {
 
 
 @media print, screen and (max-width: 960px) {
+
+  body {
+    font:300 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
   
   div.wrapper {
     width:auto;
@@ -272,6 +275,7 @@ footer {
 
 @media print, screen and (max-width: 720px) {
   body {
+    font:300 15px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
     word-wrap:break-word;
   }
   
