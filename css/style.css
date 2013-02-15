@@ -176,6 +176,13 @@ header h1, header h2, header h3 {
 article, section {
   width:520px;
   float:left;
+}
+
+article {
+  padding-bottom:25px;
+}
+
+section {
   padding-bottom:50px;
 }
 
