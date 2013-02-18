@@ -317,6 +317,14 @@ footer {
     margin:0;
   }
 
+  pre {
+    padding: 8px 6px;
+  }
+
+  pre > code {
+    font-size: 10px;
+  }
+
   .resume h2 {
     margin-bottom:12px;
     padding-top:10px;
