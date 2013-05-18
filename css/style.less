@@ -8,22 +8,23 @@
 
 body {
   color:#3a3c3e;
-  font:300 15px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font:300 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding:50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color:#393939;
-  font-weight:200;
+  font-weight: 400;
+  font-family: Helvetica, Arial, sans-serif;
   margin:0 0 16px;
 }
 
 p, ul, ol, table, pre, dl {
-  margin:0 0 16px;
+  margin:0 0 1.1em;
 }
 
 h1, h2, h3 {
-  line-height:1.1;
+  line-height:1;
 }
 
 h1 {
@@ -44,7 +45,7 @@ a small {
 a.home {
   @color: #059cd3;
   background: @color;
-  border: 1px solid darken(@color, 3%);
+  border: 1px solid darken(@color, 5%);
   border-radius: 3px;
   color: #fff;
   display: block;
@@ -72,15 +73,16 @@ blockquote {
 code {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   color: #333;
-  font-size: .8em;
+  font-size: .78em;
 }
 
 pre {
-  padding:8px 15px;
   background: #f8f8f8;  
-  border-radius:5px;
+  border-radius:3px;
   border:1px solid @light;
+  line-height: 1.2;
   overflow-x: auto;
+  padding:8px 15px;
 }
 
 table {
@@ -127,7 +129,7 @@ article {
 }
 
 section {
-  padding-bottom: 50px;
+  padding-bottom: 3.4em;
 }
 
 small {
