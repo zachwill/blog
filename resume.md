@@ -42,7 +42,7 @@ An iOS application that combines GitHub’s blog posts and Foursquare’s API to
 
 ### **Three**, [github.com/codeforamerica/three](https://github.com/codeforamerica/three)
 
-A vendor-agnostic Python Open311 API wrapper capable of interacting with 31 cities’ Open311 endpoints.  Currently in use in numerous Code for America Chicago projects. Downloaded [over 6,100](https://crate.io/packages/three/) times.
+A vendor-agnostic Python Open311 API wrapper capable of interacting with 31 cities’ Open311 endpoints.  Currently in use in numerous Code for America Chicago projects. Downloaded [over 12,000](https://crate.io/packages/three/) times.
 
 ### **GitHub**, [github.com/zachwill](https://github.com/zachwill)
 
