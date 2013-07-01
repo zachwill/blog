@@ -7,13 +7,12 @@
 @light: #eceef1;
 
 body {
-  color:#3a3c3e;
+  color:#222;
   font:300 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding:50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#393939;
   font-weight: 400;
   font-family: Helvetica, Arial, sans-serif;
   margin:0 0 16px;
@@ -44,10 +43,10 @@ a small {
 
 a.home {
   @color: #059cd3;
-  background: @color;
-  border: 1px solid darken(@color, 5%);
+  background: #fff;
+  border: 1px solid @color;
   border-radius: 3px;
-  color: #fff;
+  color: @color;
   display: block;
   max-width: 250px;
   padding: 10px;
@@ -71,7 +70,6 @@ blockquote {
 
 code {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  color: #333;
   font-size: .78em;
 }
 
