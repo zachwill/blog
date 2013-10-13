@@ -5,6 +5,7 @@
  */
 
 @light: #e8eaed;
+@color: #007aff;
 
 .transition {
 	-webkit-transition: all 300ms;
@@ -15,9 +16,9 @@
 }
 
 body {
-  color:#222;
-  font:300 17px/1.46 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding:40px;
+  color: #222;
+  font: 300 18px/1.46 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 2em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,14 +40,13 @@ h1 {
 }
 
 a {
-  color:#059cd3;
-  text-decoration:none;
+  color: @color;
+  text-decoration: none;
 }
 
 a.home {
-  @color: #059cd3;
   background: #fff;
-  border: 1px solid @color;
+  border: 2px solid @light;
   border-radius: 3px;
   color: @color;
   display: block;
@@ -58,8 +58,8 @@ a.home {
 }
 
 .wrapper {
-  width:915px;
   margin:0 auto;
+  width: 630px;
 }
 
 blockquote {
@@ -72,7 +72,7 @@ blockquote {
 }
 
 code {
-  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+  font-family: "Menlo", Monaco, Bitstream Vera Sans Mono, Lucida Console, monospace;
   font-size: .7em;
 }
 
@@ -110,17 +110,16 @@ img {
 }
 
 header {
-  width:325px;
-  float:right;
-  position:fixed;
-  margin-left:600px;
+  border-bottom: 2px solid @light;
+  margin-bottom: 2em;
+  width: 630px;
   h1, h2, h3 {
     margin: 0 0 10px;
   }
 }
 
 article, section {
-  width: 532px;
+  width: 630px;
   float: left;
 }
 
@@ -129,7 +128,7 @@ article {
 }
 
 section {
-  padding-bottom: 3.4em;
+  padding-bottom: 2em;
 }
 
 small {
@@ -184,100 +183,4 @@ footer {
 
 .resume h3 {
   font-style:italic;
-}
-
-
-@media print, screen and (max-width: 960px) {
-
-  body {
-    font:300 18px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  
-  div.wrapper {
-    width:auto;
-    margin:0;
-  }
-  
-  header, article, section, footer {
-    float:none;
-    position:static;
-    width:auto;
-  }
-  
-  header {
-    border-bottom:2px solid #eceef1;
-    margin:0 0 18px;
-  }
-
-  br {
-    display: none;
-  }
-  
-  article, section {
-    padding:16px 0;
-    margin:0;
-  }
-
-  footer {
-    margin-top: 20px;
-  }
-}
-
-@media print, screen and (max-width: 720px) {
-  body {
-    font:300 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    word-wrap:break-word;
-  }
-  
-  header {
-    padding:0;
-  }
-  
-  header ul, header p.view {
-    position:static;
-  }
-
-  blockquote {
-    padding-left:12px;
-  }
-
-  pre, code {
-    word-wrap:normal;
-  }
-}
-
-@media print, screen and (max-width: 480px) {
-  body {
-    padding:12px 4px;
-  }
-
-  article, section {
-    padding:12px 0;
-    margin:0;
-  }
-
-  pre {
-    padding: 8px 6px;
-  }
-
-  pre > code {
-    font-size: 10px;
-  }
-
-  .resume h2 {
-    margin-bottom:12px;
-    padding-top:10px;
-  }
-  
-  .resume h3 {
-    font-size:1em;
-  }
-}
-
-@media print {
-  body {
-    padding:0.4in;
-    font-size:12pt;
-    color:#444;
-  }
 }
