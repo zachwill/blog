@@ -4,7 +4,7 @@ title     : Design Guy
 permalink : /design-guy/
 ---
 
-> Nick is a design guy and it makes sense that Craigslist would horrify him –
+> Nick is a design guy and it makes sense that Craigslist would horrify him &mdash;
 > “it feels stuck in the 1990s, where links are electric blue and everything is
 > underlined.”
 > 
