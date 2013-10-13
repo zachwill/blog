@@ -6,6 +6,7 @@
 
 @light: #e8eaed;
 @color: #007aff;
+@width: 630px;
 
 .transition {
 	-webkit-transition: all 300ms;
@@ -18,13 +19,14 @@
 body {
   color: #222;
   font: 300 18px/1.46 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 2em;
+  margin: 0;
+  padding: 3em;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   font-family: Helvetica, Arial, sans-serif;
-  margin:0 0 16px;
+  margin:0 0 18px;
 }
 
 p, ul, ol, table, pre, dl {
@@ -112,14 +114,12 @@ img {
 header {
   border-bottom: 2px solid @light;
   margin-bottom: 2em;
-  width: 630px;
   h1, h2, h3 {
     margin: 0 0 10px;
   }
 }
 
 article, section {
-  width: 630px;
   float: left;
 }
 
@@ -144,14 +144,7 @@ hr {
   border: 0;
   background: @light;
   height: 2px;
-  margin: 0 0 20px;
-}
-
-footer {
-  clear: both;
-  float: none;
-  position: static;
-  width:270px;
+  margin: 0 0 2em;
 }
 
 .embed {
