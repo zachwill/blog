@@ -6,7 +6,7 @@ permalink : /noise-and-meaning/
 
 > We are still very close to our ancestors who roamed the savannah. The
 > formation of our beliefs is fraught with superstitions &mdash; even today (I
-> might say, especially today)...
+> might say, especially today)&hellip;
 > 
 > This confusion strikes people of different persuasions; the literature
 > professor invests a deep meaning into a mere coincidental occurrence of word
