@@ -40,7 +40,7 @@ Even after possibly using some sort of small bot network, the total app download
 
 **February 1st Dong Nguyen, on the other hand, must have questioned if the world had lost its mind.**
 
-On February 1st, reviews exploded to 800 in a single hour. **6,500 iTunes App Store reviews in a single day.** February 1st is the day Dong Nguyen woke up, started his computer, checked Twitter, checked email, checked iTunes, and witnessed millions of downloads happening.
+On February 1st, reviews exploded to 800 in a single hour. **6,500 iTunes App Store reviews in a single day.** February 1st is the day Dong Nguyen woke up, stretched, checked email, checked Twitter, checked iTunes, and witnessed millions of downloads happening.
 
 **Millions.**
 
