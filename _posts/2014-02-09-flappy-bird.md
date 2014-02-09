@@ -52,9 +52,10 @@ You can only imagine what that must have felt like.
 
 This is the same app no one cared about for more than half a year. Just one month prior, it was a great day if Flappy Bird got 20 total reviews on the App Store. Up until January 9th, there had never been an hour in which Flappy Bird received even 10 reviews (most of the time it was under 5).
 
-After that, the rest is history. An obscure game no one loved became the most downloaded app on the App Store (not of all time, but of the moment). [The App Store even tweeted their high score.][tweet] And then, he took it down.
+After that, the rest is history. An obscure game no one loved became the most downloaded app on the App Store (not of all time, but of the moment). [The App Store even tweeted their high score.][tweet] And then, [he took it down][removed].
 
 [tweet]: https://twitter.com/AppStore/status/431537791642918912
+[removed]: http://www.macrumors.com/2014/02/09/flappy-bird-removed/
 
 **This is less a story about a guy making $50,000 a day and more about a developer who just rode one hell of a roller coaster this past month.**
 
