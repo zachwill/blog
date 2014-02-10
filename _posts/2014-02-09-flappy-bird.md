@@ -6,7 +6,7 @@ permalink : /flappy-bird/
 
 After hearing about [Flappy Bird][app] the past couple days, I decided to download its 68,000 iTunes reviews last night. I explain some of the technical details down below, but I honestly don't think that's the most interesting story here. In fact, while the internet keeps pushing The Verge's [$50,000-a-day story][verge] about the app, I think the onslaught of Flappy Bird downloads that's happened in the past two weeks is a much more interesting storyline.
 
-[app]: https://itunes.apple.com/us/app/flappy-bird/id642099621
+[app]: http://en.wikipedia.org/wiki/Flappy_Bird
 [verge]: http://www.theverge.com/2014/2/5/5383708/flappy-bird-revenue-50-k-per-day-dong-nguyen-interview
 
 ---
@@ -72,4 +72,4 @@ I was originally planning to focus on the December/January Flappy Bird reviews �
 
 [pandas]: http://pandas.pydata.org
 
-The bump in reviews on January 9th probably started the snowball effect for Flappy Bird. I'm not exactly sure what influencer or dumb luck helped make that possible, but the 20ish reviews each day at the end of December are a pretty moot point. Diving into the numbers for the past two weeks, I'd be surprised if Dong even remembers that time. He's seriously been on one hell of a roller coaster ride — and that ended up being much more interesting (at least to me).
+**The bump in reviews on January 9th probably started the snowball effect for Flappy Bird.** I'm not exactly sure what influencer or dumb luck helped make that possible, but the 20ish reviews each day at the end of December are a pretty moot point. Diving into the numbers for the past two weeks, I'd be surprised if Dong even remembers that time. He's seriously been on one hell of a roller coaster ride — and that ended up being much more interesting (at least to me).
