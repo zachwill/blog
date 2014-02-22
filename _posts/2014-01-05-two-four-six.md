@@ -4,7 +4,7 @@ title     : Two, Four, Six
 permalink : /two-four-six/
 ---
 
-> The first experiment I know of concerning this phenomenon was done by the psychologist P.C. Wason. He presented subjects with the three-number sequence of 2, 4, 6 and asked them to try to guess the rule generating it. Their method of guessing was to produce other three-number sequences, to which the experimenter would response "yes" or "no" depending on whether the new sequences were consistent with the rule. Once confident with their answers, the subjects would formulate the rule. (Note the similarity of this experiment to the discussion in Chapter 1 of the way history presents itself to us: assuming history is generated according to some logic, we see only the events, never the rules, but need to guess how it works.)
+> The first experiment I know of concerning this phenomenon was done by the psychologist P.C. Wason. **He presented subjects with the three-number sequence of 2, 4, 6 and asked them to try to guess the rule generating it.** Their method of guessing was to produce other three-number sequences, to which the experimenter would response "yes" or "no" depending on whether the new sequences were consistent with the rule. Once confident with their answers, the subjects would formulate the rule.
 > 
 > **The correct rule was "numbers in ascending order," nothing more.** Very few subjects discovered it because in order to do so they had to offer a series in descending order (that they experimenter would say "no" to). Wason noticed that the subjects had a rule in mind, but gave him examples aimed at confirming it instead of trying to supply series that were inconsistent with their hypothesis. Subjects tenaciously kept trying to confirm the rules that *they* had made up.
 > 
