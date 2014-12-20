@@ -13,8 +13,8 @@ permalink : /data-science/
 > domain experts, curating data, using data tools, and applying machine learning
 > and statistics).
 > 
-> Once you define what a data scientist does, you find fewer people want to work
-> as one.
+> **Once you define what a data scientist does, you find fewer people want to work
+> as one.**
 
 &mdash; [Win-Vector Blog][blog]
 
