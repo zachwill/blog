@@ -1,4 +1,4 @@
-markdown  : maruku
+markdown  : kramdown
 permalink : pretty
 pygments  : true
 redirects : true
