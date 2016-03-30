@@ -11,6 +11,6 @@ permalink : /paraoxanase/
 > paraoxanase*. Some people have a lot of *paraoxanase* activity and are able to
 > break down the pesticides really fast. Guess which subpopulation scientists
 > are beginning to find has significantly reduced *paraoxanase* activity?
-> **People with autism.**
+> People with autism.
 
 &mdash; [Reddit](https://www.reddit.com/r/worldnews/comments/4ckbod/hundreds_of_thousands_of_leaked_emails_reveal/d1j0gyj)
