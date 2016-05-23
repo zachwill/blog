@@ -5,6 +5,7 @@ permalink : /academic-reactor/
 ---
 
 > An academic reactor or reactor plant almost always has the following basic characteristics:
+> 
 > 1. It is simple.
 > 2. It is small.
 > 3. It is cheap.
@@ -15,6 +16,7 @@ permalink : /academic-reactor/
 > 8. The reactor is in the study phase. It is not being built now.
 > 
 > On the other hand, a practical reactor plant can be distinguished by the following characteristics:
+> 
 > 1. It is being built now.
 > 2. It is behind schedule.
 > 3. It is requiring an immense amount of development on apparently trivial items.  Corrosion, in particular, is a problem.
