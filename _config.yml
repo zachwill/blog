@@ -1,5 +1,5 @@
 markdown    : kramdown
-highlighter : rogue
+highlighter : rouge
 permalink   : pretty
 redirects   : true
 exclude     : 
