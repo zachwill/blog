@@ -19,4 +19,4 @@ permalink : /log-time-scale/
 
 &mdash; Terrence Sejnowski, [*Powers of Ten*][edge]
 
-[edge]: https://t.co/sToxfHn5Cm
+[edge]: https://www.edge.org/response-detail/10298
