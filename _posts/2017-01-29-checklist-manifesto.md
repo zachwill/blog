@@ -4,8 +4,8 @@ title     : Checklist Manifesto
 permalink : /checklist-manifesto/
 ---
 
-Recently finished reading **Checklist Manifesto**, and thought this excerpt was
-great:
+Recently finished reading [Checklist Manifesto](https://www.goodreads.com/book/show/6667514-the-checklist-manifesto),
+and thought this excerpt was great:
 
 > Some years ago Geoff Smart, a PhD psychologist who was then at Claremont
 > Graduate University, conducted a [revealing research
