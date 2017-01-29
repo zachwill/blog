@@ -27,7 +27,7 @@ and thought this excerpt was great:
 > 
 > Smart identified a half dozen different ways the venture capitalists decided
 > they’d found such an entrepreneur. _Art Critics_ assessed entrepreneurs
-> almost at a glance, the way an art critic can asses the quality of a painting
+> almost at a glance, the way an art critic can assess the quality of a painting
 > — intuitively and based on long experience. _Sponges_ took more time
 > gathering information about their targets, soaking up whatever they could from
 > interviews, on-site visits, references, and the like. Then they went with
