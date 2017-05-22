@@ -1,7 +1,7 @@
 ---
 layout    : post
 title     : Consistently Good
-permalink : /ads/
+permalink : /consistently-good/
 ---
 
 > I learned a lesson: it was easy to be great. Every entertainer has a night
