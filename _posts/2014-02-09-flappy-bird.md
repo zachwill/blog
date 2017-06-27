@@ -38,7 +38,7 @@ You've got to keep in mind that this game is a [Helicopter clone][helicopter] wi
 
 [helicopter]: http://helicoptergame.net
 
-Even after possibly using some sort of small bot network, the total app downloads had to be relatively minor at the beginning of January. It was still going completely unnoticed on the App Store. (I'd suggest probably less than 10,000 iOS devices had Flappy Bird on them before January 9th.)
+Even after possibly using a small bot network, the total app downloads had to be relatively minor at the beginning of January. It was still going completely unnoticed on the App Store. (I'd suggest probably less than 10,000 iOS devices had Flappy Bird on them before January 9th.)
 
 **January 22nd Dong Nguyen was probably extremely excited about the couple months worth of revenue his marketing experiment had pulled off.** With the recurring in-game ads and 800 reviews in a single day, Flappy Bird was beyond a success. Mission accomplished.
 
