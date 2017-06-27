@@ -28,7 +28,7 @@ But wait, by the 12th, that number doubled — and by the 17th, it doubled again
 
 And, then it started to come back down to Earth. Still over 600 reviews a day on January 20th and 21st, but it had probably peaked. All good things must come to an end, right?
 
-**Except January 22nd was the first day of 100 reviews in an hour.** In a single hour, 100 reviews. A new record of 800 total reviews on the day. If you keep that in mind, and use the numbers as a yardstick for what his download count must have looked like, **the next week must have been absolutely insane.**
+Except January 22nd was the first day of 100 reviews in an hour. In a single hour, 100 reviews. A new record of 800 total reviews on the day. If you keep that in mind, and use the numbers as a yardstick for what his download count must have looked like, **the next week must have been absolutely insane.**
 
 On the 24th, Flappy Bird had 136 reviews submitted in a single hour — over 1,100 total reviews on the day. Two days later, on January 26th, it peaked at 206 an hour (and 1,600 reviews on the day). Two days later, 330 reviews an hour. The next day, over 400. On January 30th, more than 500 reviews in an hour (more than 4,600 total reviews on the day). On the last day of the month, more than 630 reviews in a single hour — 5,500 total on the day.
 
@@ -44,9 +44,9 @@ Even after possibly using some sort of small bot network, the total app download
 
 **February 1st Dong Nguyen, on the other hand, must have questioned if the world had lost its mind.**
 
-On February 1st, reviews exploded to 800 in a single hour. **6,500 iTunes App Store reviews in a single day.** February 1st is the day Dong Nguyen woke up, stretched, checked email, checked Twitter, checked iTunes, and witnessed millions of downloads happening.
+On February 1st, reviews exploded to 800 in a single hour. 6,500 iTunes App Store reviews in a single day. February 1st is the day Dong Nguyen woke up, stretched, checked email, checked Twitter, checked iTunes, and witnessed millions of downloads happening.
 
-**Millions.**
+Millions.
 
 You can only imagine what that must have felt like.
 
