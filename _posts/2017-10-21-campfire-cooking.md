@@ -15,9 +15,9 @@ permalink : /campfire-cooking/
 > 
 > People are sometimes surprised at the games I create solo when they only see
 > the final product. In reality each game I make is the product of _many, many,
-> many_ incremental improvements on repeated failures. **It’s pretty much
+> many_ incremental improvements on repeated failures. It’s pretty much
 > impossible to get something right the first time, or the second, third or
-> fourth time. You have to be mercilessly objective about your own work and be
+> fourth time. **You have to be mercilessly objective about your own work and be
 > willing to throw away ideas that aren’t working, or pick apart ones that have
 > potential but also have problems.** Re-engineer them, use different parts, try a
 > different coat of paint… is the idea working now? 
