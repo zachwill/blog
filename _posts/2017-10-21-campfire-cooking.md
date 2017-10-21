@@ -9,22 +9,9 @@ permalink : /campfire-cooking/
 > important part of this process was showing my work to colleagues that weren’t
 > afraid to be critical, as **I lose objectivity quickly when working alone. It
 > takes a certain kind of grit to ask for feedback at the very beginning of a
-> project but it’s invaluable.** In my case with _Campfire Cooking_, the early feedback
+> project but it’s invaluable.** In my case with _Campfire Cooking_ the early feedback
 > highlighted that I’d missed the mark with the visual style. I scrapped the
 > darkness and slowly injected more colour into the game.
-> 
-> My approach to adding a new puzzle elements into _Campfire Cooking_ followed in
-> the footsteps of my previous games. I try to focus on mechanics that are
-> playful over mechanics that are numeric. Rather than counting moves to solve
-> problems players are encouraged experiment with the elements on the board.
-> Usually playful interactions are more memorable as well. This is also why
-> there’s no move limits or other arbitrary restrictions.
->
-> Designing this way forces me to find simple logic based interactions that are
-> immediately visible, those that can (for the most part) be learned through
-> gameplay, rather than heavily tutorialization. The “keep the best, discard the
-> rest” rule also applies here. I prototyped double the number of mechanics I’d
-> need and kept only the best of the bunch.
 > 
 > People are sometimes surprised at the games I create solo when they only see
 > the final product. In reality each game I make is the product of _many, many,
