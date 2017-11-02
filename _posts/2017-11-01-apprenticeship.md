@@ -12,9 +12,9 @@ permalink : /apprenticeship/
 > of dreams and fantasies about the future. Your knowledge of the world is
 > subjective, based on emotions, insecurities, and limited experience. Slowly,
 > you will ground yourself in reality, in the objective world represented by the
-> knowledge ad skills that make people successful in it. You will learn how to
+> knowledge and skills that make people successful in it. You will learn how to
 > work with others and handle criticism. In the process you will transform
 > yourself form someone who is impatient and scattered into someone who is
-> disciplined and focused, with mind that can handle complexity.
+> disciplined and focused, with a mind that can handle complexity.
 
 &mdash; [Mastery](https://www.goodreads.com/book/show/13589182-mastery)
