@@ -15,7 +15,6 @@ permalink : /apprenticeship/
 > knowledge ad skills that make people successful in it. You will learn how to
 > work with others and handle criticism. In the process you will transform
 > yourself form someone who is impatient and scattered into someone who is
-> disciplined and focused, with mind that can handle complexity. In the end, you
-> will master yourself and all of your weaknesses.
+> disciplined and focused, with mind that can handle complexity.
 
 &mdash; [Mastery](https://www.goodreads.com/book/show/13589182-mastery)
