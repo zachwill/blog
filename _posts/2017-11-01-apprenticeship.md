@@ -14,7 +14,7 @@ permalink : /apprenticeship/
 > you will ground yourself in reality, in the objective world represented by the
 > knowledge and skills that make people successful in it. You will learn how to
 > work with others and handle criticism. In the process you will transform
-> yourself form someone who is impatient and scattered into someone who is
+> yourself from someone who is impatient and scattered into someone who is
 > disciplined and focused, with a mind that can handle complexity.
 
 &mdash; [Mastery](https://www.goodreads.com/book/show/13589182-mastery)
