@@ -4,7 +4,7 @@ title     : Enter the Divergence
 permalink : /enter-the-divergence/
 ---
 
-> Why do complex chart patterns form? Double tops, double bottoms, head and
+> Why do complex [chart patterns][patterns] form? Double tops, double bottoms, head and
 > shoulders and inverse head and shoulders? __All about divergences__.
 > 
 > Distribution patterns happen because on the lower timeframe, you have
@@ -22,7 +22,12 @@ permalink : /enter-the-divergence/
 > 
 > _Bam!_
 > 
-> A head and shoulders formation. And then finally all timeframes are weak.
-> Market tanks.
+> A [head and shoulders][hschart] formation.
+>
+> And then finally all timeframes are weak. Market tanks.
 
 &mdash; [Kewltech](http://web.archive.org/web/20170119214644/http://kewltech.blogspot.com/2010/01/issue-017-momentum-part-deux.html)
+
+[hschart]: http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:chart_patterns:head_and_shoulders_top_reversal
+
+[patterns]: http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:chart_patterns
