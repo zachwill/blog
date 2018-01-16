@@ -1,0 +1,28 @@
+---
+layout    : post
+title     : Enter the Divergence
+permalink : /enter-the-divergence/
+---
+
+> Why do complex chart patterns form? Double tops, double bottoms, head and
+> shoulders and inverse head and shoulders? __All about divergences__.
+> 
+> Distribution patterns happen because on the lower timeframe, you have
+> declining bullish momentum. In the higher timeframe, it has not experienced
+> this decline of bullish momentum, because it was heavily bullish, and so as
+> the shorter timeframe continues to lose bullish momentum, the higher
+> timeframe's bullishness pushes the price higher and you get negative
+> divergence in the shorter timeframe. The shorter timeframe maintains its
+> decline in bullish momentum, finally causing the higher timeframe to weaken.
+> 
+> _Bam!_
+> 
+> Price pops up forming a double top. Price goes down hard. Oh but wait, the
+> higher timeframe's next adjacent higher timeframe is still a bit bullish.
+> 
+> _Bam!_
+> 
+> A head and shoulders formation. And then finally all timeframes are weak.
+> Market tanks.
+
+&mdash; [Kewltech](http://web.archive.org/web/20170119214644/http://kewltech.blogspot.com/2010/01/issue-017-momentum-part-deux.html)
