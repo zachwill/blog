@@ -4,10 +4,10 @@ title     : Enter the Divergence
 permalink : /enter-the-divergence/
 ---
 
-> Why do complex [chart patterns][patterns] form? Double tops, double bottoms, head and
-> shoulders and inverse head and shoulders? __All about divergences__.
+> Why do complex [chart patterns][patterns] form? Double tops, [double bottoms][doublebottom],
+> head and shoulders, and [inverse head and shoulders][invhns]? __All about divergences__.
 > 
-> Distribution patterns happen because on the lower timeframe, you have
+> [Distribution patterns][dist] happen because on the lower timeframe, you have
 > declining bullish momentum. In the higher timeframe, it has not experienced
 > this decline of bullish momentum, because it was heavily bullish, and so as
 > the shorter timeframe continues to lose bullish momentum, the higher
@@ -31,3 +31,9 @@ permalink : /enter-the-divergence/
 [hschart]: http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:chart_patterns:head_and_shoulders_top_reversal
 
 [patterns]: http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:chart_patterns
+
+[doublebottom]: http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:chart_patterns:double_bottom_reversal
+
+[invhns]: http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:chart_patterns:head_and_shoulders_bottom_reversal
+
+[dist]: http://stockcharts.com/school/doku.php?st=distribution&id=chart_school:glossary_d#distribution
