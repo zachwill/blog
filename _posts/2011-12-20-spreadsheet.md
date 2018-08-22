@@ -14,4 +14,4 @@ permalink : /spreadsheet/
 > if all I’m doing is replicating the features of a spreadsheet in a web app.
 > Why wouldn’t a user just use a spreadsheet then?
 
-&mdash; [Nathan Kontny](http://natekontny.com/post/14518334287/37signals-doesnt-like-you-sorting-stuff-or-why-are)
+&mdash; [Nathan Kontny](http://n8.tumblr.com/post/14518334287/37signals-doesnt-like-you-sorting-stuff-or-why)
