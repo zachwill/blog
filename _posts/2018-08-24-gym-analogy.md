@@ -4,10 +4,11 @@ title     : The Gym Analogy
 permalink : /the-gym-analogy/
 ---
 
-> What I've told people is to imagine a world where muscle is "it". Muscle is
-> *THE ANSWER*, muscle is enlightenment, muscle is what deep down every person
-> strives for. So in that world, there are those that realize muscle is the
-> answer, they've found it.
+> What I've told people is to imagine a world where muscle is "it".
+
+> Muscle is *THE ANSWER*, muscle is enlightenment, muscle is what deep down
+> every person strives for. So in that world, there are those that realize
+> muscle is the answer, they've found it.
 
 > So they write books about the wonders of muscle. They gives lectures and
 > teachings and write books about what muscle does and how and why it is the
