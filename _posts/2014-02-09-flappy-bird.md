@@ -15,7 +15,7 @@ After hearing about [Flappy Bird][app] the past couple days, I decided to downlo
 
 [graph]: /img/flappy_bird.png
 
-In late December and early January, I'm guessing [Dong Nguyen][dongatory] probably used [some sort of service to download/rate Flappy Bird][bots] on the App Store. The end goal was probably to generate some buzz for a game that originally had been released at the end of May and then updated in September for iOS 7. With six months of nothing happening on a game he had made in a week's spare time, a marketing experiment around the holiday download season couldn't hurt.
+In late December and early January, I'm guessing [Dong Nguyen][dongatory] probably used [some sort of service to download/rate Flappy Bird][bots] on the App Store. The end goal was likely to generate some buzz for a game that originally had been released at the end of May and then updated in September for iOS 7. With six months of nothing happening on a game he had made in a week's spare time, a marketing experiment around the holiday download season couldn't hurt.
 
 [bots]: http://www.bluecloudsolutions.com/blog/flappy-birds-smoke-mirrors-scamming-app-store/
 [dongatory]: https://twitter.com/dongatory
@@ -38,9 +38,9 @@ You've got to keep in mind that this game is a [Helicopter clone][helicopter] wi
 
 [helicopter]: http://helicoptergame.net
 
-Even after possibly using a small bot network, the total app downloads had to be relatively minor at the beginning of January. It was still going completely unnoticed on the App Store. (I'd suggest probably less than 10,000 iOS devices had Flappy Bird on them before January 9th.)
+Even after possibly using a small bot network, the total app downloads had to be relatively minor at the beginning of January. It was still going completely unnoticed on the App Store. (I'd suggest less than 10,000 iOS devices had Flappy Bird on them before January 9th.)
 
-**January 22nd Dong Nguyen was probably extremely excited about the couple months worth of revenue his marketing experiment had pulled off.** With the recurring in-game ads and 800 reviews in a single day, Flappy Bird was beyond a success. Mission accomplished.
+**January 22nd Dong Nguyen was likely extremely excited about the couple months worth of revenue his marketing experiment had pulled off.** With the recurring in-game ads and 800 reviews in a single day, Flappy Bird was beyond a success. Mission accomplished.
 
 **February 1st Dong Nguyen, on the other hand, must have questioned if the world had lost its mind.**
 
@@ -72,4 +72,4 @@ I was originally planning to focus on the December/January Flappy Bird reviews �
 
 [pandas]: http://pandas.pydata.org
 
-**The bump in reviews on January 9th probably started the snowball effect for Flappy Bird.** I'm not exactly sure what influencer or dumb luck helped make that possible, but the 20ish reviews each day at the end of December are a pretty moot point. Diving into the numbers for the past two weeks, I'd be surprised if Dong even remembers that time. He's seriously been on one hell of a roller coaster ride — and that ended up being much more interesting (at least to me).
+**The bump in reviews on January 9th most likely started the snowball effect for Flappy Bird.** I'm not exactly sure what influencer or dumb luck helped make that possible, but the 20ish reviews each day at the end of December are a pretty moot point. Diving into the numbers for the past two weeks, I'd be surprised if Dong even remembers that time. He's seriously been on one hell of a roller coaster ride — and that ended up being much more interesting (at least to me).
