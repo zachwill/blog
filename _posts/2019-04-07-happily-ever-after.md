@@ -1,3 +1,9 @@
+---
+layout    : post
+title     : Happily Ever After
+permalink : /happily-ever-after/
+---
+
 A great take on _Game of Thrones_ being the _Happily Ever After_ ending to a
 book never written...
 
