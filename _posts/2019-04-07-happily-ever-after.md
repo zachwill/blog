@@ -4,14 +4,16 @@ title     : Happily Ever After
 permalink : /happily-ever-after/
 ---
 
-A great take on _Game of Thrones_ being the _Happily Ever After_ ending to a
+A great take on _Game of Thrones_ really being the _Happily Ever After_ ending to a
 book never written...
 
-> This isn't a story that ends with _Happily Ever After_. __That is where we
-> started. This whole series is the sequel to a book never written. A classic
-> fantasy, about heroes who fought against an unambiguous evil, about people who
-> took their lives and their honor into their own hands and stormed the gates of
-> the mad king.__ The brave hero became king and married a beautiful woman, his
+> This isn't a story that ends with _Happily Ever After_. That is where we
+> started.
+> 
+> __This whole series is the sequel to a book never written. A classic fantasy,
+> about heroes who fought against an unambiguous evil, about people who took
+> their lives and their honor into their own hands and stormed the gates of the
+> mad king.__ The brave hero became king and married a beautiful woman, his
 > friend and comrade returned home to raise his family in happiness in the keep
 > of his forefathers, and they all lived happily ever after.
 > 
