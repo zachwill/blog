@@ -4,8 +4,7 @@ title     : Happily Ever After
 permalink : /happily-ever-after/
 ---
 
-A great take on _Game of Thrones_ really being the _Happily Ever After_ ending to a
-book never written...
+A great take on _Game of Thrones_...
 
 > This isn't a story that ends with _Happily Ever After_. That is where we
 > started.
