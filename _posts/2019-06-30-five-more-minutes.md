@@ -11,7 +11,9 @@ permalink : /five-more-minutes/
 > the people. You think about all the cities and all the world watching you. How
 > much that's involved. The investments you have going. If you lose: that's
 > going to destroy you, and everything you planned, and everything that's
-> involved. And the man's a good opponent.
+> involved.
+> 
+> And the man's a good opponent.
 > 
 > You walk into the ring. You hear all these people hootin' and hollerin'. 
 > Then you see the cameras and the lights...
