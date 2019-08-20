@@ -17,10 +17,9 @@ permalink : /things-to-be-fascinated-about-lottery/
 > high IQ and a few other subsidiary skills to get super rich. People who draw
 > math can pursue perfect pure and philosophical truth, or excel at pretty much
 > any science they choose and advance human knowledge. People who draw science
-> without math have a harder time &mdash; I think I’m one of those &mdash; but
-> there are still places for them.
+> without math have a harder time &mdash; but there are still places for them.
 > 
-> And, then there are other people who get other straws. There are some people
+> Then there are other people who get other straws. There are some people
 > who are really into politics and find science really boring. There others who
 > couldn’t care less about politics or science, as long as their sportsball team
 > wins the Sports Bowl.
