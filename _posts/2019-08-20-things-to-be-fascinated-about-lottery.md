@@ -5,11 +5,10 @@ permalink : /things-to-be-fascinated-about-lottery/
 ---
 
 
-> I remember talking about a friend who was really into the worst types of
-> politics... and somewhere in the middle of the conversation my tone switched
-> from “Yeah, what a loser to be concerned about that kind of thing” to **“Yeah,
-> poor guy, apparently he drew the short straw in the _Things To Be Fascinated
-> About Lottery_.”**
+> Somewhere in the middle of the conversation my tone switched from “Yeah, what
+> a loser to be concerned about that kind of thing” to **“Yeah, poor guy,
+> apparently he drew the short straw in the _Things To Be Fascinated About
+> Lottery_.”**
 > 
 > Since then I have returned to the idea of this _Things To Be Fascinated About
 > Lottery_ a lot. There are some good draws you can get: people who are honestly
