@@ -11,12 +11,17 @@ permalink : /things-to-be-fascinated-about-lottery/
 > Lottery_.”**
 > 
 > Since then I have returned to the idea of this _Things To Be Fascinated About
-> Lottery_ a lot. There are some good draws you can get: people who are honestly
-> fascinated with business and intrinsically motivated to pursue it only need
-> high IQ and a few other subsidiary skills to get super rich. People who draw
-> math can pursue perfect pure and philosophical truth, or excel at pretty much
-> any science they choose and advance human knowledge. People who draw science
-> without math have a harder time &mdash; but there are still places for them.
+> Lottery_ a lot. There are some good draws you can get:
+>
+> * People who are honestly fascinated with business and intrinsically motivated
+>   to pursue it only need high IQ and a few other subsidiary skills to get
+>   super rich.
+>
+> * People who draw math can pursue perfect pure and philosophical truth, or
+>   excel at pretty much any science they choose and advance human knowledge.
+>
+> * People who draw science without math have a harder time &mdash; but there
+>   are still places for them.
 > 
 > Then there are other people who get other straws. There are some people
 > who are really into politics and find science really boring. There others who
