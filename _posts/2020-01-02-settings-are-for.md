@@ -5,7 +5,7 @@ permalink : /settings-are-for/
 ---
 
 
-> Settings are for succeessful products.
+> Settings are for successful products.
 >
 > For MVPs, just get the defaults right.
 
