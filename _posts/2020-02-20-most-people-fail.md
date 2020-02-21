@@ -1,7 +1,7 @@
 ---
 layout    : post
-title     : People Miss The Point
-permalink : /people-miss-the-point/
+title     : Most People Fail
+permalink : /most-people-fail/
 ---
 
 > People miss the point of the "minimum viable product" for startups.
