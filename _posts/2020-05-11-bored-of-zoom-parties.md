@@ -4,11 +4,11 @@ title     : Bored of Zoom Parties
 permalink : /bored-of-zoom-parties/
 ---
 
-![Pandemic Meme](https://i.imgur.com/vU24eeC.jpg)
-
 > _Single person (left) complaining to a parent (right) about how they’re getting bored
 > of attending Zoom parties during shelter-in-place._
-> 
+
+![Pandemic Meme](https://i.imgur.com/vU24eeC.jpg)
+
 > This meme going around about the difference in the pandemic experience of single
 > people and parents is so real to me right now. Just know that if you’re a single
 > person complaining about boredom or horniness or procuring flour, or if you’re a
