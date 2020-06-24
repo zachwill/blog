@@ -11,4 +11,4 @@ permalink : /design-guy/
 > But sometimes design doesn’t matter, even though that thought scares the hell
 > out of designers.
 
-&mdash; [Craigslist (and Silicon Valley) Greatly Offends the NY Times](http://uncrunched.com/2012/07/29/craigslist-and-silicon-valley-greatly-offends-the-ny-times/)
+&mdash; [Craigslist (and Silicon Valley) Greatly Offends the NY Times](https://web.archive.org/web/20151023234143/http://uncrunched.com/2012/07/29/craigslist-and-silicon-valley-greatly-offends-the-ny-times/)
