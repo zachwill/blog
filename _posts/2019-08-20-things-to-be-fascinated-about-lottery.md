@@ -13,8 +13,8 @@ permalink : /things-to-be-fascinated-about-lottery/
 > Since then I have returned to the idea of this _Things To Be Fascinated About
 > Lottery_ a lot. There are some good draws you can get:
 >
-> * People who are honestly fascinated with business and intrinsically motivated
->   to pursue it only need high IQ and a few other subsidiary skills to get
+> * People who are fascinated with business &mdash; and intrinsically motivated
+>   to pursue it &mdash; only need high IQ and a few other subsidiary skills to get
 >   super rich.
 >
 > * People who draw math can pursue perfect pure and philosophical truth, or
@@ -23,15 +23,11 @@ permalink : /things-to-be-fascinated-about-lottery/
 > * People who draw science without math have a harder time &mdash; but there
 >   are still places for them.
 > 
-> Then there are other people who get other straws. There are some people
-> who are really into politics and find science really boring. There others who
-> couldn’t care less about politics or science, as long as their sportsball team
-> wins the Sports Bowl.
-> 
-> I’d hate to turn this into a “rank which straws are best” contest, but some
-> certainly earn you more money, some certainly help you contribute to the
-> future of humankind more, and some certainly land you in healthy areas of
-> study with nice people and mostly rational thought...
+> Then there are other people who get other straws. I’d hate to turn this into
+> a “rank which straws are best” contest, but some certainly earn you more
+> money, some certainly help you contribute to the future of humankind more,
+> and some certainly land you in healthy areas of study with nice people and
+> mostly rational thought...
 
 
 &mdash; [Scott Alexander](https://slatestarcodex.com/2013/06/30/the-lottery-of-fascinations/)
