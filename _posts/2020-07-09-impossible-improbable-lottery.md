@@ -26,6 +26,6 @@ permalink : /impossible-improbable-lottery/
 > by sunlight and lightning in the airs and waters of youthful planets; where
 > the raw material for biological evolution is sometimes made by the explosion
 > of a star halfway across the Galaxy,” Sagan reflects. “How pallid by
-> comparison are the pretensions of superstition and pseudoscience.”
+> comparison are the pretensions of superstition and pseudoscience...”
 
 &mdash; Maria Konnikova, [_The Biggest Bluff_](https://www.goodreads.com/book/show/49814228-the-biggest-bluff)
