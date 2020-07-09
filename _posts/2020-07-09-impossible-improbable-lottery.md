@@ -12,9 +12,9 @@ permalink : /impossible-improbable-lottery/
 > mind-boggling to even consider. “In the teeth of these stupefying odds it is
 > you and I, in our ordinariness, that are here.”
 > 
-> We have won the impossible, improbable lottery of birth. And we don’t know what
+> **We have won the impossible, improbable lottery of birth. And we don’t know what
 > will happen. We never can. There’s no skill in birth and death. At the
-> beginning and at the end, luck reigns unchallenged. Here’s the truth: most of
+> beginning and at the end, luck reigns unchallenged.** Here’s the truth: most of
 > the world is noise, and we spend most of our lives trying to make sense of it.
 > We are, in the end, nothing more than interpreters of static. We can never see
 > beyond the present moment. We don’t know what the next card will be &mdash; and we
