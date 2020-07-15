@@ -10,4 +10,4 @@ permalink : /how-dare-you/
 > you are, ricky gervais, wait you mean you aren’t ricky gervais, sir, how dare
 > you, this is about art.
 
-&mdash; [Chris Mohney](http://chrismohney.com/post/43985917450/how-dare-you-sir)
+&mdash; [Chris Mohney](https://web.archive.org/web/20160418222802/http://chrismohney.com/post/43985917450/how-dare-you-sir)
