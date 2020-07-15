@@ -1,6 +1,6 @@
 ---
 layout    : post
-title     : Auhoritative Parroting
+title     : Authoritative Parroting
 permalink : /authoritative-parroting/
 ---
 
