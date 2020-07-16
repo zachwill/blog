@@ -6,11 +6,10 @@ permalink : /newtons-flaming-laser-sword/
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Mike_Alder#Newton's_flaming_laser_sword):
 
-> _Newton's Flaming Laser Sword_ is a philosophical razor devised by Mike Alder in an
-> essay titled "Why Mathematicians and Scientists Don't like Philosophy but Do
-> It Anyway" on the conflicting positions of scientists and philosophers on
-> epistemology and knowledge. **It can be summarized as "what cannot be settled by experiment is not worth
-> debating".**
+> _Newton's Flaming Laser Sword_ is a philosophical razor devised by Mike Alder
+> in an essay on the conflicting positions of scientists and philosophers on
+> epistemology and knowledge. **It can be summarized as "what cannot be settled
+> by experiment is not worth debating".**
 
 From the [original essay](https://philosophynow.org/issues/46/Newtons_Flaming_Laser_Sword):
 
