@@ -1,6 +1,6 @@
 ---
 layout    : post
-title     : Newton's flaming laser sword
+title     : Newton's Flaming Laser Sword
 permalink : /newtons-flaming-laser-sword/
 ---
 
