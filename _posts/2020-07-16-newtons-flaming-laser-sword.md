@@ -19,7 +19,7 @@ From the [original essay](https://philosophynow.org/issues/46/Newtons_Flaming_La
 > 
 > * When he asks questions and is willing to learn, I have no quarrel with him.
 > * When he is merely trying to lure you into a word game which has no
->   prospect of leading anywhere, you really have to decide if you like playing
+>   prospect of leading anywhere, you have to decide if you like playing
 >   that sort of game.
 > 
 > Mathematicians and scientists feel that they have found a more difficult but
