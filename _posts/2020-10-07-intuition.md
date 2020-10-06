@@ -9,7 +9,7 @@ permalink : /intuition/
 
 > _Negative intuition_: this feels off, it gives me the creeps, etc.
 > 
-> There's danger outside your conscious thought.
+> **There's danger outside your conscious thought.**
 
 > _Positive intuition_: I have a good feeling about this one, it's a good culture fit, etc.
 > 
