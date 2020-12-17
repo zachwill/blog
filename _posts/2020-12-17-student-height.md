@@ -14,13 +14,13 @@ permalink : /student-height/
 > criticized the use of value-added models (VAMs) to evaluate teachers, they
 > remain a widely-used measure of teacher performance.
 > 
-> Yet questions remain about the reliability, validity, and practical use of
-> VAMs. This paper interrogates concerns raised by prior research on VAMs and
+> 
+> This paper interrogates concerns raised by prior research on VAMs and
 > raises new concerns about the use of VAMs in career and compensation
-> decisions. **We explore the bias and reliability of commonly estimated VAMs
+> decisions. We explore the bias and reliability of commonly estimated VAMs
 > by comparing estimates of teacher value-added in mathematics and ELA with
 > parallel estimates of teacher value-added on a well-measured biomarker that
-> teachers should not impact: student height.**
+> teachers should not impact: _student height_.
 > 
 > Using administrative data from New York City, we find estimated teacher
 > “effects” on height that are comparable in magnitude to actual teacher
