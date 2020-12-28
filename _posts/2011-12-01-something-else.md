@@ -1,7 +1,7 @@
 ---
 layout    : post
-title     : Why
-permalink : /why/
+title     : Otherwise Do Something Else
+permalink : /otherwise-do-something-else/
 ---
 
 > In 1995, I was a graduate student studying philosophy at Columbia.  I was
