@@ -8,7 +8,7 @@ permalink : /linkedin-is-bizarre/
 > Even though it’s not. Not when you add stories, audio messages, DMs, a social
 > feed, or anything else. The platform might be less alternate universe and
 > more down to earth if the truth was acknowledged: performative
-> professionalism, job hunting, and networking are extensions of work not play.
+> professionalism, job hunting, and networking are extensions of work &mdash; not play.
 
 &mdash; [Fadeke Adegbuyi][twitter]
 
