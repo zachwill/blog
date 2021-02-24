@@ -5,9 +5,9 @@ permalink : /student-height/
 ---
 
 
-> This paper compares estimates of teacher value-added in mathematics
-> and ELA with **parallel estimates of teacher value-added on a biomarker
-> that teachers should not impact: _student height_.**
+> This paper compares estimates of teacher value-added in mathematics and ELA
+> with **parallel estimates on a biomarker that teachers should not impact:
+> _student height_.**
 > 
 > Using administrative data from New York City, we find estimated teacher
 > “effects” on height are comparable in magnitude to actual teacher
