@@ -16,10 +16,3 @@ permalink : /griefbacon/
 > version of one another. The person they lost is still lost. They can’t ever
 > have the romance they imagined having with the person they fell in love with,
 > because that person no longer exists.
-> 
-> The time that they would have had together in that gloriously stupid
-> eyes-barely-open youth is gone and can never come back, and what they feel
-> about each other reuniting nine years later is inextricably bound up with
-> those losses. It’s the same thing as the long day melting against the
-> horizon, turning the city gold. Trying to believe something lasts only
-> highlights how fast it goes, how little anything can be held. 
