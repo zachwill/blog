@@ -4,16 +4,10 @@ title     : Chicken of Tomorrow
 permalink : /chicken-of-tomorrow/
 ---
 
-> On a sunny June day in 1951, 8,000 chicken fans filled the Razorback Stadium
-> at the University of Arkansas in the culmination of a nationwide effort to
-> create the fowl of the future. As a band played and the crowd cheered, the US
-> vice president Alben Barkley handed a California farmer named Charles
-> Vantress a $5,000 cheque for his winning entry.
-> 
-> **The Chicken of Tomorrow award marked the rise of a vast new industry and the
+> The Chicken of Tomorrow award marked the rise of a vast new industry and the
 > metamorphosis of the backyard bird into a technological wonder akin to
 > missiles, the transistor, and the thermonuclear weapon — which had been
-> tested for the first time six weeks earlier.** The winning bird was chosen not
+> tested for the first time six weeks earlier. The winning bird was chosen not
 > for its exotic stature or pure breeding, but for its similarity to a wax
 > model of the perfect carcass as devised by a team of poultry scientists. The
 > grilled chicken in your sandwich or wrap comes from a descendant of the bird
