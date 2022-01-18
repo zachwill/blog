@@ -15,11 +15,6 @@ permalink : /chicken-of-tomorrow/
 > from a descendant of the bird that Vantress created by crossing California
 > Cornish males with New Hampshire females.
 > 
-> This hardy bird with just the right mix of genes weighed an average of more
-> than four pounds, twice the size of a typical barnyard chicken of the day.
-> The speed with which it became the industry norm is astonishing. Within a few
-> years, most commercial broilers came from this stock.
-> 
 > **Until the early 1950s, most US flocks contained no more than 200 chickens,
 > about the size advocated by ancient Roman agricultural writers 2,000 years
 > earlier.** In the wake of the Chicken of Tomorrow contest, farms raised tens of
