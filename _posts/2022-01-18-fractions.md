@@ -4,9 +4,9 @@ title     : Fractions
 permalink : /fractions/
 ---
 
-> In the everyday speech of ordinary people, **the use of _half_ long predated the other fractions**.
-> 
-> This is the earliest entry in the Oxford English Dictionary, from the year 835:
+> In the everyday speech of ordinary people, **the use of _half_ long predated
+> the other fractions**. This is the earliest entry in the Oxford English Dictionary,
+> from the year 835:
 > 
 > > Charter in Old Eng. Texts 447, & him man selle an half swulung an ciollan dene.
 > 
