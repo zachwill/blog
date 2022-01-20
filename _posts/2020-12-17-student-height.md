@@ -15,4 +15,4 @@ permalink : /student-height/
 > respectively. **On its face, such results raise concerns about the validity
 > of these models.**
 
-&mdash; [Teacher Effects on Student Achievement and Height](https://www.nber.org/system/files/working_papers/w26480/w26480.pdf)
+&mdash; [Teacher effects on student achievement and height](https://www.nber.org/system/files/working_papers/w26480/w26480.pdf)
