@@ -8,9 +8,9 @@ permalink : /otherwise-do-something-else/
 > also doing computer programming on the side.  The programming was going well
 > and I was getting some good job offers. I happened to get to have dinner with
 > the philosopher Daniel Dennett, and I asked him what he thought I should do
-> with my career.  He said: “If there is absolutely no way you can imagine
+> with my career.  **He said: “If there is absolutely no way you can imagine
 > being happy except studying philosophy, study philosophy. Otherwise do
-> something else.”
+> something else.”**
 > 
 > I’d say the same thing about starting companies.
 
