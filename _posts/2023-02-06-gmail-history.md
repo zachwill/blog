@@ -1,6 +1,6 @@
 ---
 layout    : post
-title     : Gmail originally was a search engine for Paul Buchheit's emails
+title     : Gmail origin story
 permalink : /gmail-history/
 ---
 
