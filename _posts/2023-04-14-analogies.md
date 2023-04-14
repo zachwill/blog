@@ -6,7 +6,7 @@ permalink : /analogies/
 
 > **My basic rule is: analogies are great for a sympathetic audience and bad for
 > an antagonistic one.**
-
+> 
 > If you're trying to illuminate something to someone who wants to understand
 > your point, an analogy is a great shortcut to building a tangible architecture
 > in their mind. But if the other person has an opposing viewpoint and you're
