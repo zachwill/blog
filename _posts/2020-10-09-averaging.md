@@ -15,4 +15,4 @@ permalink : /averaging/
 > The effect will be especially strong whenever the network is confident when
 > it’s right and unconfident when it’s wrong.
 
-&mdash; [Ilya Sutskever](https://mlwave.com/kaggle-ensembling-guide/)
+&mdash; [Ilya Sutskever](https://web.archive.org/web/20181116061422/https://mlwave.com/kaggle-ensembling-guide/)
