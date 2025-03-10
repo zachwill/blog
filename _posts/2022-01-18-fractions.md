@@ -4,7 +4,7 @@ title     : Fractions
 permalink : /fractions/
 ---
 
-> In the everyday speech of ordinary people, **the use of _half_ long predated
+> **In everyday speech, the use of _half_ long predated
 > the other fractions**. This is the earliest entry in the Oxford English Dictionary,
 > from the year 835:
 > 
