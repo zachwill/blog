@@ -1,0 +1,194 @@
+@import "pygments.css";
+
+body {
+    color: #000;
+    font: 400 20px/1.5 ui-rounded, system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+    padding: 3em 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 800;
+    font-family: system-ui, sans-serif;
+    letter-spacing: -0.5px;
+    margin: 0 0 .5em;
+}
+
+p,
+ul,
+ol,
+table,
+pre,
+dl {
+    margin: 0 0 1em;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1;
+}
+
+h1 {
+    font-size: 1.75em;
+}
+
+a {
+    color: #007aff;
+    text-decoration: none;
+}
+
+a.home {
+    background: #fff;
+    border: 2px solid #e8eaed;
+    border-radius: 3px;
+    color: #007aff;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    width: 160px;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -ms-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 740px;
+}
+
+blockquote {
+    border-left: 2px solid #e8eaed;
+    margin: 0;
+    padding: 0 0 0 1em;
+}
+
+blockquote code {
+    font-style: normal;
+}
+
+code {
+    font-family: "Menlo", Monaco, Bitstream Vera Sans Mono, Lucida Console, monospace;
+    font-size: .75em;
+}
+
+pre {
+    background: #f8f8f8;
+    border-radius: 3px;
+    border: 2px solid #e8eaed;
+    line-height: 1.25;
+    overflow-x: scroll;
+    padding: .5em 1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e8eaed;
+}
+
+dt {
+    color: #444;
+    font-weight: 700;
+}
+
+th {
+    color: #444;
+}
+
+img {
+    max-width: 100%;
+}
+
+header {
+    border-bottom: 2px solid #e8eaed;
+    margin-bottom: 2em;
+}
+
+header h1,
+header h2,
+header h3 {
+    margin: 0 0 10px;
+}
+
+article {
+    padding-bottom: 20px;
+}
+
+section {
+    padding-bottom: 2em;
+}
+
+small {
+    font-size: 11px;
+}
+
+strong {
+    background: #fffeca;
+    font-weight: 500;
+    padding: 0em 0.1em;
+    box-shadow: #fffeca 0 0 3px;
+}
+
+em {
+    text-decoration: underline;
+}
+
+hr {
+    border: 0;
+    background: #e8eaed;
+    height: 2px;
+    margin: 0 0 1em;
+}
+
+footer {
+    clear: both;
+}
+
+.embed {
+    height: 0;
+    margin-bottom: 16px;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    /* 16/9 ratio */
+    padding-top: 30px;
+    /* IE6 workaround*/
+    position: relative;
+}
+
+.embed iframe,
+.embed object,
+.embed embed {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.resume h2 {
+    padding-top: 16px;
+}
+
+.resume h1,
+.resume h3 {
+    margin-bottom: 8px;
+}
+
+.resume h3 {
+    font-style: italic;
+}

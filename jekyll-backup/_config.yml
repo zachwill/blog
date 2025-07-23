@@ -1,0 +1,14 @@
+markdown    : kramdown
+highlighter : rouge
+permalink   : pretty
+redirects   : true
+exclude     : 
+  - README.md
+
+author      : Zach Williams, @zachwill
+email       : git@zachwill.com
+url         : http://zachwill.com
+description : Zach Williams is a superhero currently based in Portland.
+
+# Custom variables.
+analytics   : UA-11117730-1
