@@ -2,7 +2,7 @@
     "name": "blog-static-site",
     "type": "module",
     "scripts": {
-        "build": "bun run src/build.ts",
+        "build": "bun run src/build.tsx",
         "dev": "bun run src/dev.ts"
     },
     "dependencies": {
