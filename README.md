@@ -22,12 +22,13 @@ blog/
 ├── .github/
 │   └── workflows/
 │       └── pages.yml          # GitHub Actions deployment
+├── content/                   # All content in one logical place
+│   ├── posts/                 # Published blog posts (.md and .mdx)
+│   ├── drafts/                # Draft posts (unpublished)
+│   └── pages/                 # Static pages (resume, about, etc.)
 ├── docs/
 │   ├── MIGRATION.md           # Migration documentation
 │   └── examples/              # Usage examples
-├── content/
-│   └── pages/                 # Future .mdx pages
-├── drafts/                    # Draft posts (unpublished)
 ├── src/
 │   ├── templates/             # React components
 │   │   ├── Layout.tsx         # Main layout wrapper
@@ -42,14 +43,42 @@ blog/
 │   ├── build.ts               # Main build script
 │   ├── dev.ts                 # Development server
 │   └── site.config.ts         # Site configuration
-├── _posts/                    # Blog posts (.md and .mdx)
 ├── dist/                      # Generated static files (git-ignored)
 ├── package.json               # Dependencies and scripts
 ├── bunfig.toml               # Bun configuration
 ├── CNAME                     # GitHub Pages domain
-├── README.md                 # This file
-└── resume.md                 # Resume page source
+└── README.md                 # This file
 ```
+
+### Writing Content
+
+#### Blog Posts
+
+Create new posts in the `content/posts/` directory with the filename format:
+```
+YYYY-MM-DD-slug.md     # For regular Markdown posts
+YYYY-MM-DD-slug.mdx    # For MDX posts with React components
+```
+
+Example frontmatter:
+```yaml
+---
+layout: post
+title: My Great Post
+permalink: /my-great-post/
+---
+```
+
+#### Draft Posts
+
+Place draft posts in `content/drafts/` using the same naming convention. They won't be published until moved to `content/posts/`.
+
+#### Static Pages
+
+Add Markdown or MDX files to `content/pages/`:
+- `content/pages/about.md` or `about.mdx`
+- `content/pages/contact.md` or `contact.mdx`
+- `content/pages/resume.md` (already exists)
 
 ## 🛠️ Development
 

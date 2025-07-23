@@ -93,15 +93,15 @@ async function runDev() {
     await createDevScript();
 
     console.log('\n📁 Watching for changes in:');
-    console.log('  - _posts/');
+    console.log('  - content/posts/');
+    console.log('  - content/pages/');
+    console.log('  - content/drafts/');
     console.log('  - src/');
-    console.log('  - *.md (root files)\n');
 
     // Set up file watching
     const watcher = chokidar.watch([
-        '_posts/**/*.{md,mdx}',
+        'content/**/*.{md,mdx}',
         'src/**/*.{ts,tsx,css}',
-        '*.{md,mdx}',
         'src/assets/**/*'
     ], {
         ignored: /node_modules|dist|\.git/,

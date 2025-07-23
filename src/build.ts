@@ -94,7 +94,7 @@ async function processPosts() {
     const posts: PostData[] = [];
 
     try {
-        const postFiles = await readdir('_posts');
+        const postFiles = await readdir('content/posts');
 
         for (const filename of postFiles) {
             const ext = extname(filename);
@@ -103,7 +103,7 @@ async function processPosts() {
             const isMdx = ext === '.mdx';
             console.log(`Processing ${isMdx ? 'MDX' : 'Markdown'} post: ${filename}`);
 
-            const filePath = join('_posts', filename);
+            const filePath = join('content/posts', filename);
             const fileContent = await readFile(filePath, 'utf-8');
             const { data: frontmatter, content } = matter(fileContent);
 
@@ -164,43 +164,41 @@ async function processPages() {
     console.log('Processing static pages...');
 
     try {
-        // Check for both .md and .mdx versions of pages
-        const pageFiles = ['resume.md', 'resume.mdx', 'about.md', 'about.mdx'];
+        // Process all pages in content/pages/
+        const pageFiles = await readdir('content/pages');
 
         for (const filename of pageFiles) {
-            try {
-                const isMdx = filename.endsWith('.mdx');
-                const pageContent = await readFile(filename, 'utf-8');
-                const { data: frontmatter, content } = matter(pageContent);
+            const ext = extname(filename);
+            if (!ext.match(/\.(md|mdx)$/)) continue;
 
-                console.log(`Processing ${isMdx ? 'MDX' : 'Markdown'} page: ${filename}`);
+            const isMdx = ext === '.mdx';
+            console.log(`Processing ${isMdx ? 'MDX' : 'Markdown'} page: ${filename}`);
 
-                const processedContent = isMdx
-                    ? await processMdxContent(content)
-                    : await processMarkdownContent(content);
+            const filePath = join('content/pages', filename);
+            const pageContent = await readFile(filePath, 'utf-8');
+            const { data: frontmatter, content } = matter(pageContent);
 
-                const pageHtml = renderToStaticMarkup(
-                    React.createElement(Page, {
-                        title: frontmatter.title || filename.replace(/\.(md|mdx)$/, ''),
-                        showHeader: frontmatter.layout !== 'resume',
-                        children: React.createElement('div', {
-                            dangerouslySetInnerHTML: { __html: processedContent }
-                        })
+            const processedContent = isMdx
+                ? await processMdxContent(content)
+                : await processMarkdownContent(content);
+
+            const pageHtml = renderToStaticMarkup(
+                React.createElement(Page, {
+                    title: frontmatter.title || filename.replace(/\.(md|mdx)$/, ''),
+                    showHeader: frontmatter.layout !== 'resume',
+                    children: React.createElement('div', {
+                        dangerouslySetInnerHTML: { __html: processedContent }
                     })
-                );
+                })
+            );
 
-                // Determine output path from filename or frontmatter
-                const baseName = filename.replace(/\.(md|mdx)$/, '');
-                const permalink = frontmatter.permalink || `/${baseName}/`;
-                const outputPath = join('dist', permalink.slice(1), 'index.html');
+            // Determine output path from filename or frontmatter
+            const baseName = filename.replace(/\.(md|mdx)$/, '');
+            const permalink = frontmatter.permalink || `/${baseName}/`;
+            const outputPath = join('dist', permalink.slice(1), 'index.html');
 
-                await writeHtmlFile(outputPath, pageHtml);
-                console.log(`Processed page: ${filename}`);
-
-            } catch (error) {
-                // File doesn't exist, skip silently
-                continue;
-            }
+            await writeHtmlFile(outputPath, pageHtml);
+            console.log(`Processed page: ${filename}`);
         }
 
     } catch (error) {
