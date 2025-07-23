@@ -1,5 +1,5 @@
 import { readdir, readFile, writeFile, mkdir, cp } from 'fs/promises';
-import { join, basename, dirname, extname } from 'path';
+import { join, dirname, extname } from 'path';
 import matter from 'gray-matter';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
-import { compile, evaluate } from '@mdx-js/mdx';
+import { evaluate } from '@mdx-js/mdx';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Post from './templates/Post';
@@ -25,13 +25,7 @@ interface PostData {
     isMdx: boolean;
 }
 
-interface PageData {
-    title: string;
-    permalink: string;
-    content: string;
-    layout?: string;
-    isMdx: boolean;
-}
+
 
 // Ensure directory exists
 async function ensureDir(dirPath: string) {
