@@ -92,7 +92,7 @@ export default function AppShell({
               </a>
             </div>
 
-            <div id="app-toolbar" className="wa-cluster">
+            <div id="app-toolbar" className="wa-flex wa-gap-xs">
               <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
                 <wa-button appearance="plain" size="small">
                   <wa-icon family="brands" name="github" label="GitHub"></wa-icon>
@@ -101,11 +101,11 @@ export default function AppShell({
 
               <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
                 <wa-button appearance="plain" size="small">
-                  <wa-icon family="brands" name="twitter" label="Twitter/X"></wa-icon>
+                  <wa-icon family="brands" name="twitter" label="Twitter"></wa-icon>
                 </wa-button>
               </a>
 
-              <a href={`mailto:${siteConfig.social.email}`}>
+              <a href={`mailto:hey AT zachwill DOT com`}>
                 <wa-button appearance="plain" size="small">
                   <wa-icon name="envelope" label="Email"></wa-icon>
                 </wa-button>
