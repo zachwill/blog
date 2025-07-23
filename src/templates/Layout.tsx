@@ -95,13 +95,13 @@ export default function AppShell({
             <div id="app-toolbar" className="wa-flex wa-gap-xs">
               <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
                 <wa-button appearance="plain" size="small">
-                  <wa-icon family="brands" name="github" label="GitHub"></wa-icon>
+                  <wa-icon name="code" label="GitHub"></wa-icon>
                 </wa-button>
               </a>
 
               <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
                 <wa-button appearance="plain" size="small">
-                  <wa-icon family="brands" name="twitter" label="Twitter"></wa-icon>
+                  <wa-icon name="at" label="Twitter"></wa-icon>
                 </wa-button>
               </a>
 
