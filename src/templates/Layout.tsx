@@ -93,21 +93,17 @@ export default function AppShell({
             </div>
 
             <div id="app-toolbar" className="wa-cluster">
-              <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
-                <wa-button appearance="plain" size="small">
-                  <wa-icon name="brand-twitter" label="Twitter/X"></wa-icon>
-                </wa-button>
-              </a>
-
-              <wa-divider className="wa-mobile-only" orientation="vertical"></wa-divider>
-
               <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
                 <wa-button appearance="plain" size="small">
-                  <wa-icon name="brand-github" label="GitHub"></wa-icon>
+                  <wa-icon family="brands" name="github" label="GitHub"></wa-icon>
                 </wa-button>
               </a>
 
-              <wa-divider className="wa-mobile-only" orientation="vertical"></wa-divider>
+              <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
+                <wa-button appearance="plain" size="small">
+                  <wa-icon family="brands" name="twitter" label="Twitter/X"></wa-icon>
+                </wa-button>
+              </a>
 
               <a href={`mailto:${siteConfig.social.email}`}>
                 <wa-button appearance="plain" size="small">
@@ -119,74 +115,38 @@ export default function AppShell({
 
           {/* Navigation Sidebar */}
           <div slot="navigation" id="nav">
-            <div className="navigation-content">
-              {/* Home Link */}
-              <div className="nav-section">
-                <h3><a href="/" className={isHomePage ? 'current' : ''}>Home</a></h3>
-              </div>
-
-              {/* Pages */}
-              {navigationData.pages.length > 0 && (
-                <div className="nav-section">
-                  <h3>Pages</h3>
-                  <ul>
-                    {navigationData.pages.map(page => (
-                      <li key={page.permalink}>
-                        <a
-                          href={page.permalink}
-                          className={currentPath === page.permalink ? 'current' : ''}
-                        >
-                          {page.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Posts by Year */}
-              <div className="nav-section">
-                <h3>Posts</h3>
-                {Object.entries(navigationData.postsByYear)
-                  .sort(([a], [b]) => b.localeCompare(a)) // Sort years descending
-                  .map(([year, posts]) => (
-                    <details key={year} open={year === new Date().getFullYear().toString()}>
-                      <summary className="year-header">{year}</summary>
-                      <ul className="posts-list">
-                        {posts.map(post => (
-                          <li key={post.permalink}>
-                            <a
-                              href={post.permalink}
-                              className={currentPath === post.permalink ? 'current' : ''}
-                            >
-                              {post.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </details>
-                  ))}
-              </div>
+            {/* Posts by Year */}
+            <div className="nav-section">
+              {Object.entries(navigationData.postsByYear)
+                .sort(([a], [b]) => b.localeCompare(a)) // Sort years descending
+                .map(([year, posts]) => (
+                  <div>
+                    <h2>{year}</h2>
+                    <ul className="posts-list">
+                      {posts.map(post => (
+                        <li key={post.permalink}>
+                          <a
+                            href={post.permalink}
+                            className={currentPath === post.permalink ? 'current' : ''}
+                          >
+                            {post.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
             </div>
           </div>
 
           {/* Main Content */}
           <main>
             {/* Main Header */}
-            <div slot="main-header" className="wa-flex wa-align-items-center wa-gap-m"
-              style={{ marginBlockEnd: 'var(--wa-space-l)' }}>
-              <wa-badge appearance="filled"
-                style={{
-                  fontSize: 'var(--wa-font-size-xl)',
-                  backgroundColor: 'var(--wa-color-purple-90)'
-                }}>
-                <wa-icon name="bolt" style={{ color: 'var(--wa-color-purple-50)' }}></wa-icon>
-              </wa-badge>
-              <span className="wa-heading-xl">{contentData.title}</span>
-            </div>
-
-            {/* Content Area */}
-            <div className="content-area">
+            <div id="main" slot="main-content">
+              {/* if this is a post, show the title */}
+              {contentData.type === 'post' && (
+                <h1 className="wa-heading-xl">{contentData.title}</h1>
+              )}
               <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
             </div>
           </main>
@@ -201,6 +161,6 @@ export default function AppShell({
           });
         ` }} />
       </body>
-    </html>
+    </html >
   );
 } 

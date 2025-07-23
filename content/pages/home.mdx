@@ -4,30 +4,24 @@ layout: home
 permalink: /
 ---
 
-# About Me
+<div class="wa-stack wa-gap-m">
+    <div class="wa-flex wa-flex-column wa-gap-s" style={{"padding-bottom": 'var(--wa-space-s)'}}>
+    <wa-badge appearance="filled" style={{ fontSize: 'var(--wa-font-size-xl)', backgroundColor: 'var(--wa-color-purple-90)' }}>
+        <wa-icon name="bolt" style={{ color: 'var(--wa-color-purple-50)' }}></wa-icon>
+    </wa-badge>
+    <span className="wa-heading-xl">About</span>
+    </div>
 
-I'm currently **Director of Data Science** for the [Portland Trail Blazers](https://www.nba.com/blazers/zach-williams). I've been working with data, building products, and solving problems for over a decade.
+    <div style={{ fontSize: 'var(--wa-font-size-l)' }}>
+        I'm currently **Director of Data Science** for the [Portland Trail Blazers](https://www.nba.com/blazers/zach-williams).
+    </div>
+    <div style={{ fontSize: 'var(--wa-font-size-l)' }}>
+        Several of my open-source projects are on [GitHub](https://github.com/zachwill).
+    </div>
+</div>
 
-I write about data science, product development, basketball analytics, and the occasional random thought. Most of my posts are short observations or lessons learned along the way.
-
-You can find me on [Twitter](https://twitter.com/zachwill) where I share thoughts on data science and basketball, or check out my projects on [GitHub](https://github.com/zachwill). Feel free to reach out at [hey@zachwill.com](mailto:hey@zachwill.com).
-
-## Favorite Posts
-
-Here are some posts I'm particularly proud of or that have resonated with readers:
-
-<FavoritePosts />
-
-## Projects & Work
-
-### Portland Trail Blazers
-Director of Data Science for the NBA team
-- [Team profile](https://www.nba.com/blazers/zach-williams)
-
-### GitHub Projects  
-Open-source projects and contributions
-- [GitHub profile](https://github.com/zachwill)
-
-## Recent Posts
+<div style={{ margin: 'var(--wa-space-xl) 0' }}>
+    <wa-divider orientation="horizontal"></wa-divider>
+</div>
 
 <RecentPosts /> 

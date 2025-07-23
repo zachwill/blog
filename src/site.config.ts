@@ -15,7 +15,7 @@ export default {
     // WebAwesome configuration
     webawesome: {
         version: "3.0.0-beta.3",
-        theme: "wa-palette-rudimentary wa-theme-tailspin",
+        theme: "wa-palette-zach wa-theme-zach",
         cdnBase: "https://early.webawesome.com/webawesome@3.0.0-beta.3/dist"
     },
 

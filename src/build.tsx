@@ -306,7 +306,7 @@ async function generateContent(posts: PostData[], pages: PageData[], navigationD
         const contentData: ContentData = {
             type: page.layout === 'home' ? 'home' : 'page',
             title: page.title,
-            content: `<div class="content-area">${processedContent}</div>`
+            content: processedContent
         };
 
         const html = renderToStaticMarkup(
