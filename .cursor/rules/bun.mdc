@@ -1,3 +1,7 @@
+---
+description: Bun static site generator
+alwaysApply: true
+---
 # Bun Static Site Generator - Development Guide
 
 This project is a custom static site generator built with Bun, React, and Markdown/MDX processing. Here are the key patterns and conventions to follow when working on this codebase.
@@ -34,11 +38,11 @@ blog/
 ## 📝 Content Conventions
 
 ### Blog Posts
-- **Location**: `content/posts/`
-- **Naming**: `YYYY-MM-DD-slug.md` or `YYYY-MM-DD-slug.mdx`
-- **Frontmatter**: Always include `title`, optionally `permalink`
-- **Date extraction**: Date comes from filename, not frontmatter
-- **Slug generation**: Auto-generated from filename unless `permalink` specified
+- Location: `content/posts/`
+- Naming: `YYYY-MM-DD-slug.md` or `YYYY-MM-DD-slug.mdx`
+- Frontmatter: Always include `title`, optionally `permalink`
+- Date extraction: Date comes from filename, not frontmatter
+- Slug generation: Auto-generated from filename unless `permalink` specified
 
 Example post:
 ```markdown
@@ -52,9 +56,9 @@ Content goes here...
 ```
 
 ### Static Pages
-- **Location**: `content/pages/`
-- **Naming**: `page-name.md` or `page-name.mdx`
-- **Special handling**: `resume.md` gets `layout: resume` treatment (no header)
+- Location: `content/pages/`
+- Naming: `page-name.md` or `page-name.mdx`
+- Special handling: `resume.md` gets `layout: resume` treatment (no header)
 
 ### MDX Support
 - Use `.mdx` extension for files that need React components
@@ -64,18 +68,18 @@ Content goes here...
 ## 🔧 Development Patterns
 
 ### Build System (`src/build.ts`)
-- **Unified pipeline**: Use `unified()` with `remarkParse`, `remarkGfm`, `remarkRehype`, `rehypeHighlight`, `rehypeStringify`
-- **MDX compilation**: Use `@mdx-js/mdx` with `outputFormat: 'function-body'`
-- **React rendering**: All templates use `renderToStaticMarkup` for static HTML
-- **Asset copying**: Copy `src/assets/` to `dist/assets/` and root-level assets
-- **RSS generation**: Auto-generate `dist/atom.xml` from latest 20 posts
+- Unified pipeline: Use `unified()` with `remarkParse`, `remarkGfm`, `remarkRehype`, `rehypeHighlight`, `rehypeStringify`
+- MDX compilation: Use `@mdx-js/mdx` with `outputFormat: 'function-body'`
+- React rendering: All templates use `renderToStaticMarkup` for static HTML
+- Asset copying: Copy `src/assets/` to `dist/assets/` and root-level assets
+- RSS generation: Auto-generate `dist/atom.xml` from latest 20 posts
 
 ### Development Server (`src/dev.ts`)
-- **Use Bun.serve()**: Never spawn external servers like Python's http.server
-- **Static file serving**: Handle via `fetch` handler, not `static` option (which doesn't exist)
-- **File watching**: Use Node.js built-in `fs.watch()`, not external libraries like chokidar
-- **Rebuild triggers**: Watch `content/` and `src/` directories for changes
-- **Port**: Default to 3000 for development
+- Use Bun.serve(): Never spawn external servers like Python's http.server
+- Static file serving: Handle via `fetch` handler, not `static` option (which doesn't exist)
+- File watching: Use Node.js built-in `fs.watch()`, not external libraries like chokidar
+- Rebuild triggers: Watch `content/` and `src/` directories for changes
+- Port: Default to 3000 for development
 
 ### Package.json Scripts
 ```json
@@ -94,7 +98,7 @@ Content goes here...
 import { serve } from 'bun';
 
 const server = serve({
-  port: 3000,
+  port: 8000,
   development: true, // Enable dev mode
   
   async fetch(req) {

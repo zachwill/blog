@@ -30,7 +30,7 @@ async function startDevServer() {
     console.log('🚀 Starting Bun development server...');
 
     const server = serve({
-        port: 3000,
+        port: 8000,
         development: true,
 
         async fetch(req) {
