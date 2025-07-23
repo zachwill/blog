@@ -7,12 +7,13 @@ import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
-import { compile } from '@mdx-js/mdx';
+import { compile, evaluate } from '@mdx-js/mdx';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Post from './templates/Post';
 import Page from './templates/Page';
-import Layout from './templates/Layout';
+import Home from './templates/Home';
+import generateRssXml from './templates/Rss';
 
 interface PostData {
     title: string;
@@ -69,16 +70,15 @@ async function processMarkdownContent(markdownContent: string) {
 // Process MDX content to HTML
 async function processMdxContent(mdxContent: string) {
     try {
-        const compiledMdx = await compile(mdxContent, {
-            outputFormat: 'function-body',
+        // Use evaluate approach instead of compile for simpler MDX handling
+        const { default: MdxComponent } = await evaluate(mdxContent, {
             development: false,
             remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeHighlight]
+            rehypePlugins: [rehypeHighlight],
+            jsx: React.createElement,
+            jsxs: React.createElement,
+            Fragment: React.Fragment
         });
-
-        // Create a simple function to execute the compiled MDX
-        const mdxFunction = new Function('React', String(compiledMdx));
-        const MdxComponent = mdxFunction(React);
 
         return renderToStaticMarkup(React.createElement(MdxComponent));
     } catch (error) {
@@ -226,24 +226,10 @@ async function generateHomepage(posts: PostData[]) {
         })
     );
 
-    const homeContent = React.createElement('div', null,
-        processedPosts.map(post =>
-            React.createElement('section', { key: post.slug },
-                React.createElement('h2', null,
-                    React.createElement('a', { href: post.permalink }, post.title)
-                ),
-                React.createElement('div', {
-                    dangerouslySetInnerHTML: { __html: post.processedContent }
-                })
-            )
-        )
-    );
-
     const homeHtml = renderToStaticMarkup(
-        React.createElement(Layout, {
-            title: 'zachwill.com',
-            showHeader: true,
-            children: homeContent
+        React.createElement(Home, {
+            posts: processedPosts,
+            title: 'zachwill.com'
         })
     );
 
@@ -255,55 +241,11 @@ async function generateHomepage(posts: PostData[]) {
 async function generateRssFeed(posts: PostData[]) {
     console.log('Generating RSS feed...');
 
-    // Sort posts by date (newest first)
-    const sortedPosts = posts.sort((a, b) => b.date.localeCompare(a.date));
-    const latestPosts = sortedPosts.slice(0, 20); // Latest 20 posts
-
-    // Get the latest post date for the feed
-    const lastBuildDate = latestPosts[0]?.date ? new Date(latestPosts[0].date).toUTCString() : new Date().toUTCString();
-
-    const rssItems = latestPosts.map(post => {
-        const postDate = new Date(post.date).toUTCString();
-        const fullUrl = `http://zachwill.com${post.permalink}`;
-
-        return `    <item>
-      <title>${escapeXml(post.title)}</title>
-      <link>${fullUrl}</link>
-      <guid>${fullUrl}</guid>
-      <pubDate>${postDate}</pubDate>
-      <description>${escapeXml(post.content.substring(0, 200) + '...')}</description>
-    </item>`;
-    }).join('\n');
-
-    const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>zachwill.com</title>
-    <link>http://zachwill.com</link>
-    <description>Zach Williams is a superhero currently based in Portland.</description>
-    <language>en-us</language>
-    <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <atom:link href="http://zachwill.com/rss.xml" rel="self" type="application/rss+xml" />
-${rssItems}
-  </channel>
-</rss>`;
-
+    const rssXml = generateRssXml({ posts });
     await writeFile('dist/atom.xml', rssXml);
-    console.log(`Generated RSS feed with ${latestPosts.length} posts`);
-}
 
-// Helper function to escape XML characters
-function escapeXml(unsafe: string): string {
-    return unsafe.replace(/[<>&'"]/g, function (c) {
-        switch (c) {
-            case '<': return '&lt;';
-            case '>': return '&gt;';
-            case '&': return '&amp;';
-            case '\'': return '&apos;';
-            case '"': return '&quot;';
-            default: return c;
-        }
-    });
+    const postCount = posts.sort((a, b) => b.date.localeCompare(a.date)).slice(0, 20).length;
+    console.log(`Generated RSS feed with ${postCount} posts`);
 }
 
 // Copy assets
