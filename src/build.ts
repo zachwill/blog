@@ -232,10 +232,7 @@ async function generateHomepage(posts: PostData[]) {
         processedPosts.map(post =>
             React.createElement('section', { key: post.slug },
                 React.createElement('h2', null,
-                    React.createElement('a', { href: post.permalink }, post.title),
-                    post.isMdx && React.createElement('small', {
-                        style: { marginLeft: '8px', fontSize: '0.6em', color: '#007aff', fontWeight: 'normal' }
-                    }, 'MDX')
+                    React.createElement('a', { href: post.permalink }, post.title)
                 ),
                 React.createElement('div', {
                     dangerouslySetInnerHTML: { __html: post.processedContent }
@@ -293,7 +290,7 @@ ${rssItems}
   </channel>
 </rss>`;
 
-    await writeFile('dist/rss.xml', rssXml);
+    await writeFile('dist/atom.xml', rssXml);
     console.log(`Generated RSS feed with ${latestPosts.length} posts`);
 }
 
@@ -318,13 +315,12 @@ async function copyAssets() {
         await ensureDir('dist/assets');
         await cp('src/assets', 'dist/assets', { recursive: true });
 
-        // Also copy favicon and other root assets
+        // Copy root assets that GitHub Pages needs
         try {
-            await cp('favicon.ico', 'dist/favicon.ico');
+            await cp('src/assets/favicon.ico', 'dist/favicon.ico');
             await cp('CNAME', 'dist/CNAME');
-            await cp('atom.xml', 'dist/atom.xml');
         } catch (error) {
-            // These files might not exist, that's okay
+            console.warn('Some optional assets not found:', error);
         }
 
         console.log('Assets copied');

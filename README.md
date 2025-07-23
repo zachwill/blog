@@ -18,18 +18,37 @@ cd dist && python3 -m http.server 8000
 ## 📁 Directory Structure
 
 ```
+blog/
+├── .github/
+│   └── workflows/
+│       └── pages.yml          # GitHub Actions deployment
+├── docs/
+│   ├── MIGRATION.md           # Migration documentation
+│   └── examples/              # Usage examples
+├── content/
+│   └── pages/                 # Future .mdx pages
+├── drafts/                    # Draft posts (unpublished)
 ├── src/
-│   ├── templates/        # React components for layouts
-│   │   ├── Layout.tsx    # Main layout wrapper
-│   │   ├── Post.tsx      # Blog post template
-│   │   └── Page.tsx      # Static page template
-│   ├── assets/           # CSS, images, and other assets
-│   ├── build.ts          # Main build script
-│   ├── dev.ts            # Development script
-│   └── site.config.ts    # Site configuration
-├── _posts/               # Blog posts (Markdown)
-├── dist/                 # Generated static files (git-ignored)
-└── .github/workflows/    # GitHub Actions for deployment
+│   ├── templates/             # React components
+│   │   ├── Layout.tsx         # Main layout wrapper
+│   │   ├── Post.tsx           # Blog post template
+│   │   └── Page.tsx           # Static page template
+│   ├── assets/                # All static assets
+│   │   ├── style.css          # Main stylesheet
+│   │   ├── pygments.css       # Code syntax highlighting
+│   │   ├── favicon.ico        # Site icon
+│   │   ├── resume.pdf         # Resume PDF
+│   │   └── *.png              # Images and icons
+│   ├── build.ts               # Main build script
+│   ├── dev.ts                 # Development server
+│   └── site.config.ts         # Site configuration
+├── _posts/                    # Blog posts (.md and .mdx)
+├── dist/                      # Generated static files (git-ignored)
+├── package.json               # Dependencies and scripts
+├── bunfig.toml               # Bun configuration
+├── CNAME                     # GitHub Pages domain
+├── README.md                 # This file
+└── resume.md                 # Resume page source
 ```
 
 ## 🛠️ Development
