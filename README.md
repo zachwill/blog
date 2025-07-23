@@ -32,13 +32,31 @@ cd dist && python3 -m http.server 8000
 └── .github/workflows/    # GitHub Actions for deployment
 ```
 
-## ✍️ Writing Content
+## 🛠️ Development
 
-### Blog Posts
+```bash
+# Hot-reload development server (recommended)
+bun run dev
+
+# Manual build and serve
+bun run build
+cd dist && python3 -m http.server 8000
+```
+
+The development server will:
+- 🔨 Build the site automatically on file changes
+- 📁 Watch for changes in `_posts/`, `src/`, and root `.md`/`.mdx` files
+- 🚀 Serve the site at http://localhost:8000
+- 🔄 Show build status in the terminal
+
+### Writing Content
+
+#### Blog Posts
 
 Create new posts in the `_posts/` directory with the filename format:
 ```
-YYYY-MM-DD-slug.md
+YYYY-MM-DD-slug.md     # For regular Markdown posts
+YYYY-MM-DD-slug.mdx    # For MDX posts with React components
 ```
 
 Example frontmatter:
@@ -50,41 +68,60 @@ permalink: /my-great-post/
 ---
 ```
 
-### Static Pages
+#### MDX Posts
 
-Add Markdown files to the root directory (like `resume.md`). They'll be processed automatically.
+MDX posts support all Markdown features plus React components:
+
+```mdx
+---
+layout: post
+title: Interactive Post
+permalink: /interactive-example/
+---
+
+# Regular Markdown works
+
+- Lists
+- **Bold text**
+- Code blocks
+
+## Add React Components
+
+<div style={{
+  background: 'linear-gradient(45deg, #007aff, #00d4ff)',
+  color: 'white',
+  padding: '20px',
+  borderRadius: '8px'
+}}>
+  This is a React component in your post!
+</div>
+```
+
+#### Static Pages
+
+Add Markdown or MDX files to the root directory:
+- `about.md` or `about.mdx`
+- `resume.md` or `resume.mdx`
 
 ## 🔧 Features
 
-- **Fast Builds**: Powered by Bun for lightning-fast processing
-- **React Components**: Customizable layouts and templates
-- **Markdown Support**: Full GitHub Flavored Markdown with syntax highlighting
-- **Asset Processing**: Automatic copying of CSS, images, and other assets
-- **GitHub Actions**: Automated deployment to GitHub Pages
-- **Pretty URLs**: Clean permalink structure maintained from Jekyll
+- **⚡ Fast Builds**: Powered by Bun for lightning-fast processing
+- **🔥 Hot Reload**: Development server with automatic rebuilds
+- **⚛️ React Components**: Customizable layouts and MDX support
+- **📝 Dual Format**: Both Markdown (.md) and MDX (.mdx) support
+- **🎨 Syntax Highlighting**: Code blocks with syntax highlighting
+- **📡 RSS Feed**: Automatically generated at `/rss.xml`
+- **🚀 GitHub Actions**: Automated deployment to GitHub Pages
+- **🔗 Pretty URLs**: Clean permalink structure maintained from Jekyll
 
-## 🚀 Deployment
+## 🎯 Future Enhancements
 
-The site automatically deploys to GitHub Pages when you push to the `main` or `gh-pages` branch via GitHub Actions.
-
-### Manual Deployment
-
-```bash
-# Build the site
-bun run build
-
-# The dist/ directory contains all static files ready for deployment
-```
-
-## 🛠️ Development
-
-```bash
-# Run the build system
-bun run build
-
-# Start a local server for testing
-cd dist && python3 -m http.server 8000
-```
+- [ ] Hot-reload development server ✅ **DONE**
+- [ ] MDX support for interactive components ✅ **DONE**
+- [ ] RSS feed generation ✅ **DONE**
+- [ ] Sitemap.xml generation
+- [ ] Tag pages and filtering
+- [ ] Search functionality
 
 ## 📝 Migration Notes
 
@@ -94,15 +131,6 @@ This site was migrated from Jekyll in 2025. Key improvements:
 - **Modern Stack**: React components with TypeScript
 - **Simplified**: No Ruby dependencies, just Bun and Node.js
 - **Future-Ready**: Easy to extend with MDX support for interactive content
-
-## 🎯 Future Enhancements
-
-- [ ] Hot-reload development server
-- [ ] MDX support for interactive components
-- [ ] RSS feed generation
-- [ ] Sitemap.xml generation
-- [ ] Tag pages and filtering
-- [ ] Search functionality
 
 ## 🏗️ Technical Details
 
