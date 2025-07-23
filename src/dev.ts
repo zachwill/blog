@@ -1,12 +1,11 @@
+import { watch } from 'fs';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import chokidar from 'chokidar';
-import { readFile, writeFile } from 'fs/promises';
+import { serve } from 'bun';
 
 const execAsync = promisify(exec);
 
 let buildInProgress = false;
-let serverProcess: any = null;
 
 async function buildSite() {
     if (buildInProgress) {
@@ -27,117 +26,116 @@ async function buildSite() {
     }
 }
 
-async function startServer() {
-    console.log('🚀 Starting development server...');
+async function startDevServer() {
+    console.log('🚀 Starting Bun development server...');
 
-    // Kill existing server if running
-    if (serverProcess) {
-        serverProcess.kill();
-    }
+    const server = serve({
+        port: 3000,
+        development: true,
 
-    // Start new server
-    const { spawn } = await import('child_process');
-    serverProcess = spawn('python3', ['-m', 'http.server', '8000'], {
-        cwd: './dist',
-        stdio: 'pipe'
+        async fetch(req) {
+            const url = new URL(req.url);
+
+            // Handle dev status endpoint
+            if (url.pathname === '/dev-status') {
+                return new Response('OK', { status: 200 });
+            }
+
+            // Determine file path to serve
+            let filePath = url.pathname;
+            if (filePath === '/') {
+                filePath = '/index.html';
+            }
+
+            try {
+                // Try to serve the exact file
+                const file = Bun.file(`./dist${filePath}`);
+                if (await file.exists()) {
+                    return new Response(file);
+                }
+
+                // If no extension, try adding .html
+                if (!filePath.includes('.')) {
+                    const htmlFile = Bun.file(`./dist${filePath}.html`);
+                    if (await htmlFile.exists()) {
+                        return new Response(htmlFile);
+                    }
+                }
+
+                // Try index.html in that directory
+                const indexFile = Bun.file(`./dist${filePath}/index.html`);
+                if (await indexFile.exists()) {
+                    return new Response(indexFile);
+                }
+
+                // 404 fallback
+                return new Response('<!DOCTYPE html><html><body><h1>404 - Not Found</h1></body></html>', {
+                    status: 404,
+                    headers: { 'Content-Type': 'text/html' }
+                });
+            } catch (error) {
+                console.error('Error serving file:', error);
+                return new Response('Internal Server Error', {
+                    status: 500,
+                    headers: { 'Content-Type': 'text/plain' }
+                });
+            }
+        },
     });
 
-    serverProcess.stdout.on('data', (data: any) => {
-        const output = data.toString();
-        if (output.includes('Serving HTTP')) {
-            console.log('🌐 Server running at http://localhost:8000');
-        }
-    });
-
-    serverProcess.on('error', (error: any) => {
-        console.error('Server error:', error);
-    });
+    console.log(`🌐 Server running at ${server.url}`);
+    return server;
 }
 
-async function createDevScript() {
-    // Create a simple script to inject live reload functionality
-    const liveReloadScript = `
-<script>
-(function() {
-  let lastModified = Date.now();
-  
-  function checkForUpdates() {
-    fetch('/dev-check')
-      .catch(() => {
-        // If dev-check fails, try to reload the page
-        setTimeout(() => location.reload(), 1000);
-      });
-  }
-  
-  // Check every 2 seconds
-  setInterval(checkForUpdates, 2000);
-  
-  console.log('🔥 Live reload enabled');
-})();
-</script>`;
-
-    // Add this to the layout template (we'll inject it during dev mode)
-    console.log('📝 Live reload script ready');
-}
-
-async function runDev() {
-    console.log('🚀 Starting development mode...');
-
-    // Initial build
-    await buildSite();
-
-    // Start the server
-    await startServer();
-
-    // Create live reload script
-    await createDevScript();
-
+function setupFileWatcher() {
     console.log('\n📁 Watching for changes in:');
     console.log('  - content/posts/');
     console.log('  - content/pages/');
     console.log('  - content/drafts/');
     console.log('  - src/');
 
-    // Set up file watching
-    const watcher = chokidar.watch([
-        'content/**/*.{md,mdx}',
-        'src/**/*.{ts,tsx,css}',
-        'src/assets/**/*'
-    ], {
-        ignored: /node_modules|dist|\.git/,
-        persistent: true,
-        ignoreInitial: true
+    // Watch content files
+    const contentWatcher = watch('./content', { recursive: true }, async (eventType, filename) => {
+        if (filename && filename.match(/\.(md|mdx)$/)) {
+            console.log(`\n📝 Content changed: ${filename}`);
+            await buildSite();
+        }
     });
 
-    watcher.on('change', async (path) => {
-        console.log(`\n📝 File changed: ${path}`);
-        await buildSite();
-        console.log('🔄 Refresh your browser to see changes\n');
+    // Watch source files
+    const srcWatcher = watch('./src', { recursive: true }, async (eventType, filename) => {
+        if (filename && !filename.includes('dev.ts')) {
+            console.log(`\n🔧 Source changed: ${filename}`);
+            await buildSite();
+        }
     });
 
-    watcher.on('add', async (path) => {
-        console.log(`\n➕ File added: ${path}`);
-        await buildSite();
-        console.log('🔄 Refresh your browser to see changes\n');
-    });
+    return { contentWatcher, srcWatcher };
+}
 
-    watcher.on('unlink', async (path) => {
-        console.log(`\n🗑️  File deleted: ${path}`);
-        await buildSite();
-        console.log('🔄 Refresh your browser to see changes\n');
-    });
+async function runDev() {
+    console.log('🚀 Starting development mode with Bun...');
+
+    // Initial build
+    await buildSite();
+
+    // Start the Bun development server
+    const server = await startDevServer();
+
+    // Set up file watching for rebuilds
+    const watchers = setupFileWatcher();
 
     // Handle graceful shutdown
     process.on('SIGINT', () => {
         console.log('\n👋 Shutting down development server...');
-        watcher.close();
-        if (serverProcess) {
-            serverProcess.kill();
-        }
+        watchers.contentWatcher.close();
+        watchers.srcWatcher.close();
+        server.stop();
         process.exit(0);
     });
 
-    console.log('💡 Press Ctrl+C to stop the development server');
+    console.log('\n💡 Press Ctrl+C to stop the development server');
+    console.log('🔥 Hot reloading enabled - browser will refresh when files change');
 }
 
 runDev().catch(console.error); 

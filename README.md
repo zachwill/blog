@@ -1,6 +1,6 @@
 # Blog - Bun Static Site Generator
 
-This blog has been migrated from Jekyll to a custom Bun-based static site generator with React components and Markdown support.
+A custom static site generator built with Bun, React SSR, and Markdown/MDX support.
 
 ## 🚀 Quick Start
 
@@ -8,182 +8,63 @@ This blog has been migrated from Jekyll to a custom Bun-based static site genera
 # Install dependencies
 bun install
 
-# Build the site
-bun run build
+# Development with hot reloading
+bun run dev          # → http://localhost:3000
 
-# Preview locally
-cd dist && python3 -m http.server 8000
+# Build for production  
+bun run build        # → outputs to dist/
 ```
 
-## 📁 Directory Structure
+## 📁 Content Structure
 
 ```
-blog/
-├── .github/
-│   └── workflows/
-│       └── pages.yml          # GitHub Actions deployment
-├── content/                   # All content in one logical place
-│   ├── posts/                 # Published blog posts (.md and .mdx)
-│   ├── drafts/                # Draft posts (unpublished)
-│   └── pages/                 # Static pages (resume, about, etc.)
-├── docs/
-│   ├── MIGRATION.md           # Migration documentation
-│   └── examples/              # Usage examples
-├── src/
-│   ├── templates/             # React components
-│   │   ├── Layout.tsx         # Main layout wrapper
-│   │   ├── Post.tsx           # Blog post template
-│   │   └── Page.tsx           # Static page template
-│   ├── assets/                # All static assets
-│   │   ├── style.css          # Main stylesheet
-│   │   ├── pygments.css       # Code syntax highlighting
-│   │   ├── favicon.ico        # Site icon
-│   │   ├── resume.pdf         # Resume PDF
-│   │   └── *.png              # Images and icons
-│   ├── build.ts               # Main build script
-│   ├── dev.ts                 # Development server
-│   └── site.config.ts         # Site configuration
-├── dist/                      # Generated static files (git-ignored)
-├── package.json               # Dependencies and scripts
-├── bunfig.toml               # Bun configuration
-├── CNAME                     # GitHub Pages domain
-└── README.md                 # This file
+content/
+├── posts/           # Blog posts: YYYY-MM-DD-slug.md/mdx
+├── drafts/          # Unpublished drafts (same naming)
+└── pages/           # Static pages: page-name.md/mdx
 ```
 
-### Writing Content
+### Writing Posts
 
-#### Blog Posts
+Create `content/posts/2024-01-01-my-post.md`:
 
-Create new posts in the `content/posts/` directory with the filename format:
-```
-YYYY-MM-DD-slug.md     # For regular Markdown posts
-YYYY-MM-DD-slug.mdx    # For MDX posts with React components
-```
-
-Example frontmatter:
-```yaml
+```markdown
 ---
-layout: post
 title: My Great Post
-permalink: /my-great-post/
+permalink: /custom-url/    # Optional
 ---
+
+Your content here...
 ```
 
-#### Draft Posts
+### MDX Support
 
-Place draft posts in `content/drafts/` using the same naming convention. They won't be published until moved to `content/posts/`.
+Use `.mdx` extension for React components in Markdown:
 
-#### Static Pages
+```jsx
+---
+title: Interactive Post
+---
 
-Add Markdown or MDX files to `content/pages/`:
-- `content/pages/about.md` or `about.mdx`
-- `content/pages/contact.md` or `contact.mdx`
-- `content/pages/resume.md` (already exists)
+# Regular Markdown
+
+<CustomComponent prop="value" />
+
+More markdown...
+```
+
+## 🔧 Architecture
+
+- **Build**: React SSR with `renderToStaticMarkup()` 
+- **Content**: Unified pipeline (remark → rehype → highlight)
+- **Dev Server**: Bun.serve() with file watching
+- **Output**: Static HTML/CSS/assets in `dist/`
 
 ## 🛠️ Development
 
-```bash
-# Hot-reload development server (recommended)
-bun run dev
+- **File watching**: Auto-rebuilds on content/src changes
+- **Static serving**: All files served from `dist/`
+- **Clean URLs**: `/my-post/` → `/my-post/index.html`
+- **Assets**: `src/assets/` → `dist/assets/`
 
-# Manual build and serve
-bun run build
-cd dist && python3 -m http.server 8000
-```
-
-The development server will:
-- 🔨 Build the site automatically on file changes
-- 📁 Watch for changes in `_posts/`, `src/`, and root `.md`/`.mdx` files
-- 🚀 Serve the site at http://localhost:8000
-- 🔄 Show build status in the terminal
-
-### Writing Content
-
-#### Blog Posts
-
-Create new posts in the `_posts/` directory with the filename format:
-```
-YYYY-MM-DD-slug.md     # For regular Markdown posts
-YYYY-MM-DD-slug.mdx    # For MDX posts with React components
-```
-
-Example frontmatter:
-```yaml
----
-layout: post
-title: My Great Post
-permalink: /my-great-post/
----
-```
-
-#### MDX Posts
-
-MDX posts support all Markdown features plus React components:
-
-```mdx
----
-layout: post
-title: Interactive Post
-permalink: /interactive-example/
----
-
-# Regular Markdown works
-
-- Lists
-- **Bold text**
-- Code blocks
-
-## Add React Components
-
-<div style={{
-  background: 'linear-gradient(45deg, #007aff, #00d4ff)',
-  color: 'white',
-  padding: '20px',
-  borderRadius: '8px'
-}}>
-  This is a React component in your post!
-</div>
-```
-
-#### Static Pages
-
-Add Markdown or MDX files to the root directory:
-- `about.md` or `about.mdx`
-- `resume.md` or `resume.mdx`
-
-## 🔧 Features
-
-- **⚡ Fast Builds**: Powered by Bun for lightning-fast processing
-- **🔥 Hot Reload**: Development server with automatic rebuilds
-- **⚛️ React Components**: Customizable layouts and MDX support
-- **📝 Dual Format**: Both Markdown (.md) and MDX (.mdx) support
-- **🎨 Syntax Highlighting**: Code blocks with syntax highlighting
-- **📡 RSS Feed**: Automatically generated at `/rss.xml`
-- **🚀 GitHub Actions**: Automated deployment to GitHub Pages
-- **🔗 Pretty URLs**: Clean permalink structure maintained from Jekyll
-
-## 🎯 Future Enhancements
-
-- [ ] Hot-reload development server ✅ **DONE**
-- [ ] MDX support for interactive components ✅ **DONE**
-- [ ] RSS feed generation ✅ **DONE**
-- [ ] Sitemap.xml generation
-- [ ] Tag pages and filtering
-- [ ] Search functionality
-
-## 📝 Migration Notes
-
-This site was migrated from Jekyll in 2025. Key improvements:
-
-- **Speed**: Build times reduced from ~30s to ~3s
-- **Modern Stack**: React components with TypeScript
-- **Simplified**: No Ruby dependencies, just Bun and Node.js
-- **Future-Ready**: Easy to extend with MDX support for interactive content
-
-## 🏗️ Technical Details
-
-- **Runtime**: Bun
-- **Templates**: React with TypeScript
-- **Markdown**: Unified/Remark pipeline with GFM support
-- **Styling**: CSS (converted from LESS)
-- **Deployment**: GitHub Actions + GitHub Pages
+Built with Bun's native capabilities - no external bundlers or servers needed.
