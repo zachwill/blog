@@ -30,6 +30,7 @@ html:has(.wa-dark) {
 
 body {
     opacity: 1;
+    overflow-x: hidden;
     transition: opacity 200ms ease-out;
 
     a {

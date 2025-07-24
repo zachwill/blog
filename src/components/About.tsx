@@ -13,8 +13,7 @@ export function About() {
       <div style={{ fontSize: 'var(--wa-font-size-l)' }}>
         <wa-tooltip for="zach-linkedin">LinkedIn</wa-tooltip>
         <wa-tooltip for="zach-nba">NBA.com</wa-tooltip>
-        I'm currently <a id="zach-linkedin" href="https://linkedin.com/in/heyzachwill">Director of Data Science</a>
-        for the <a id="zach-nba" href="https://www.nba.com/blazers/zach-williams">Portland Trail Blazers</a>.
+        I'm currently <a id="zach-linkedin" href="https://linkedin.com/in/heyzachwill">Director of Data Science</a> for the <a id="zach-nba" href="https://www.nba.com/blazers/zach-williams">Portland Trail Blazers</a>.
       </div>
       <div style={{ fontSize: 'var(--wa-font-size-l)' }}>
         <wa-tooltip for="zach-github-repos">GitHub</wa-tooltip>

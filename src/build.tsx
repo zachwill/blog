@@ -17,7 +17,7 @@ import siteConfig from './site.config';
 
 // Fix React SSR bug with custom elements - converts 'className' to 'class' for web components
 function fixWebComponentAttributes(html: string): string {
-    return html.replace(/(<wa-[^>]*)\sclassName="([^"]*)"/g, '$1 class="$2"');
+    return html.replace(/className=/g, 'class=');
 }
 
 interface PostData {

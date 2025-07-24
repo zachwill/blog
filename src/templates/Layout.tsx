@@ -1,6 +1,6 @@
 import React from 'react';
 import siteConfig from '../site.config';
-import { formatDate } from '../components';
+import { Post } from './Post';
 
 interface NavigationData {
   postsByYear: {
@@ -65,18 +65,6 @@ export default function AppShell({
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
         {/* Datastar */}
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
-
-        {/* Content data for client-side routing */}
-        <script
-          type="application/json"
-          id="navigation-data"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(navigationData) }}
-        />
-        <script
-          type="application/json"
-          id="content-data"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(contentData) }}
-        />
       </head>
 
       <body
@@ -161,39 +149,14 @@ export default function AppShell({
             {/* Main Header */}
             <div id="main" slot="main-content">
               {/* if this is a post, show the title */}
-              {contentData.type === 'post' && (
-                <>
-                  <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
-                    <h1 className="wa-heading-xl">{contentData.title}</h1>
-                    {contentData.metadata?.date && (
-                      <time className="wa-body-s">
-                        {formatDate(contentData.metadata.date)}
-                      </time>
-                    )}
-                  </div>
-                  <div className="wa-mobile-only wa-stack wa-gap-s" style={{ marginBottom: 'var(--wa-space-m)' }}>
-                    <h1 className="wa-heading-xl">{contentData.title}</h1>
-                    {contentData.metadata?.date && (
-                      <time className="wa-body-s">
-                        {formatDate(contentData.metadata.date)}
-                      </time>
-                    )}
-                  </div>
-                </>
+              {contentData.type === 'post' ? (
+                <Post contentData={contentData} />
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
               )}
-              <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
             </div>
           </main>
         </wa-page>
-
-        {/* Client-side routing script for future enhancement */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-          // Basic navigation handling - can be enhanced later
-          document.addEventListener('DOMContentLoaded', function() {
-            console.log('WebAwesome blog shell loaded');
-          });
-        ` }} />
       </body>
     </html >
   );
