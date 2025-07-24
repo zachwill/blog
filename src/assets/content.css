@@ -91,12 +91,8 @@ main,
 [slot='main-footer'] {
     max-width: var(--app-content-max-width);
     margin-inline: auto;
-    padding-inline: var(--wa-space-xl);
+    padding: var(--wa-space-l);
     /* Generous padding for desktop */
-}
-
-main {
-    padding-top: var(--wa-space-xl);
 }
 
 [slot='main-footer'] {
@@ -191,13 +187,6 @@ html.wa-dark .icon.purple {
   This is more reliable and direct than trying to do it all with component attributes.
 */
 @media screen and (max-width: 1080px) {
-
-    main,
-    [slot='main-footer'] {
-        padding-inline: var(--wa-space-l);
-        /* Reduce side padding on mobile */
-    }
-
     blockquote {
         /* Your original blockquote style is good here */
         font-size: var(--wa-font-size-m);
