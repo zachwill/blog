@@ -78,7 +78,7 @@ export default function AppShell({
       </head>
 
       <body className={siteConfig.webawesome.theme}>
-        <wa-page view="desktop" disable-navigation-toggle="" mobile-breakpoint="1180">
+        <wa-page view="desktop" disable-navigation-toggle="" mobile-breakpoint="1080">
           {/* Header */}
           <header slot="header" className="wa-split wa-align-items-center">
             <div id="app-branding" className="wa-align-items-center">

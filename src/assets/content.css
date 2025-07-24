@@ -102,12 +102,8 @@ main {
 
     /* Navigation toggle button */
     wa-button[data-toggle-nav] {
-        font-size: 1rem;
-        margin-inline-start: -0.875rem;
-        margin-inline-end: 0;
-
         &::part(base) {
-            padding-inline: 0.875rem;
+            outline-color: transparent;
         }
     }
 
