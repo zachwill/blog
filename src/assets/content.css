@@ -1,100 +1,6 @@
 /* Content area styling for WebAwesome blog */
 @import url('theme.css');
 
-/* Year headers in posts navigation */
-.year-header {
-    font-size: var(--wa-font-size-m);
-    font-weight: var(--wa-font-weight-semibold);
-    color: var(--wa-color-neutral-700);
-    padding: var(--wa-space-xs) 0;
-    cursor: pointer;
-    list-style: none;
-}
-
-.year-header:hover {
-    color: var(--wa-color-brand);
-}
-
-.posts-list {
-    margin-top: var(--wa-space-xs);
-    margin-left: var(--wa-space-m);
-}
-
-/* Homepage specific styling */
-.favorites-grid {
-    display: grid;
-    gap: var(--wa-space-m);
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    margin: var(--wa-space-l) 0;
-}
-
-.favorite-post {
-    padding: var(--wa-space-m);
-    border: 1px solid var(--wa-color-neutral-200);
-    border-radius: var(--wa-border-radius-m);
-    transition: border-color 0.2s ease;
-}
-
-.favorite-post:hover {
-    border-color: var(--wa-color-brand);
-}
-
-.favorite-post h3 {
-    margin-top: 0;
-    margin-bottom: var(--wa-space-s);
-    font-size: var(--wa-font-size-l);
-}
-
-.favorite-post h3 a {
-    color: var(--wa-color-neutral-900);
-    text-decoration: none;
-}
-
-.favorite-post h3 a:hover {
-    color: var(--wa-color-brand);
-}
-
-.favorite-post .post-excerpt {
-    color: var(--wa-color-neutral-600);
-    font-size: var(--wa-font-size-m);
-    line-height: 1.5;
-}
-
-.recent-posts-list {
-    list-style: none;
-    padding: 0;
-    margin: var(--wa-space-l) 0;
-}
-
-.recent-posts-list li {
-    padding: var(--wa-space-s) 0;
-    border-bottom: 1px solid var(--wa-color-neutral-200);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.recent-posts-list li:last-child {
-    border-bottom: none;
-}
-
-.recent-posts-list a {
-    color: var(--wa-color-neutral-900);
-    text-decoration: none;
-    font-weight: var(--wa-font-weight-medium);
-    flex: 1;
-}
-
-.recent-posts-list a:hover {
-    color: var(--wa-color-brand);
-}
-
-.post-date {
-    color: var(--wa-color-neutral-500);
-    font-size: var(--wa-font-size-s);
-    white-space: nowrap;
-    margin-left: var(--wa-space-s);
-}
 
 /* ============================================
    CSS ARCHITECTURE STRATEGY
@@ -112,9 +18,8 @@
     /* App-specific extensions to WebAwesome */
     --app-navigation-width: 340px;
     --app-aside-width: 0px;
-    --app-mobile-breakpoint: 1180px;
+    --app-mobile-breakpoint: 1080px;
     --app-content-max-width: 80ch;
-    --app-content-wide-max-width: 140ch;
 }
 
 body {
@@ -184,7 +89,7 @@ wa-page {
 }
 
 main {
-    padding: var(--wa-space-m);
+    padding: 0;
 }
 
 /* ============================================
@@ -242,27 +147,8 @@ main {
     --nav-item-padding: var(--wa-space-s) var(--wa-space-m);
     --nav-section-spacing: var(--wa-space-s);
 
-    padding-bottom: var(--wa-space-m);
-
-    /* Search trigger */
-    #search-trigger {
-        width: 100%;
-        margin-bottom: var(--wa-space-l);
-
-        &::part(base) {
-            background-color: var(--wa-form-control-background-color);
-            border: var(--wa-form-control-border-width) var(--wa-form-control-border-style) var(--wa-form-control-border-color);
-            box-shadow: none;
-        }
-
-        &::part(label) {
-            width: 100%;
-        }
-
-        kbd {
-            font-size: var(--wa-font-size-2xs);
-            line-height: var(--wa-form-control-value-line-height);
-        }
+    .nav-section {
+        padding-bottom: var(--wa-space-l);
     }
 
     /* Navigation sections */
@@ -395,7 +281,7 @@ main {
      MAIN SLOT CONTENT
      ============================================ */
 #main {
-    padding: var(--wa-space-m);
+    padding: var(--wa-space-l);
     max-width: var(--app-content-max-width);
     margin-inline: auto;
 
@@ -423,17 +309,6 @@ main {
     time {
         color: var(--wa-color-neutral-500);
         font-style: italic;
-    }
-}
-
-/* Wide layout modifier */
-.page-wide {
-    #main main {
-        max-width: var(--app-content-wide-max-width);
-    }
-
-    .max-line-length {
-        max-width: 80ch;
     }
 }
 

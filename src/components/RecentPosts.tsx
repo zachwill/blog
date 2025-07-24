@@ -11,7 +11,7 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
   const recentPosts = posts.slice(0, count);
 
   return (
-    <div className="wa-stack wa-gap-xl">
+    <div className="wa-stack wa-gap-l">
       {recentPosts.map((post, index) => (
         <div key={post.slug} className="post-content">
           {/* Post Header */}
