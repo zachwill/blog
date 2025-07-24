@@ -35,12 +35,6 @@ export function Post({ contentData }: { contentData: ContentData }) {
         </>
       )}
       <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
-
-      <div style={{ margin: 'var(--wa-space-3xl) 0' }}>
-        <wa-divider orientation="horizontal"></wa-divider>
-      </div>
-
-      <About />
     </>
   )
 }

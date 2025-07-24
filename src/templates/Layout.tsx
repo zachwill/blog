@@ -1,6 +1,7 @@
 import React from 'react';
 import siteConfig from '../site.config';
 import { Post } from './Post';
+import { About } from '@/components/About';
 
 interface NavigationData {
   postsByYear: {
@@ -154,6 +155,15 @@ export default function AppShell({
               ) : (
                 <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
               )}
+            </div>
+
+            <div id="main-footer" slot="main-footer">
+              <div style={{ margin: 'var(--wa-space-2xl) 0 var(--wa-space-s)' }}>
+                <wa-divider orientation="horizontal"></wa-divider>
+              </div>
+              <div className="about">
+                <About />
+              </div>
             </div>
           </main>
         </wa-page>

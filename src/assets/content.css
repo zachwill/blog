@@ -339,6 +339,14 @@ main {
     }
 }
 
+#main-footer {
+    .about {
+        padding: var(--wa-space-l);
+        max-width: var(--app-content-max-width);
+        margin-inline: auto;
+    }
+}
+
 /* ============================================
      SEARCH DIALOG (Complete)
      ============================================ */
