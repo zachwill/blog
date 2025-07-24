@@ -22,6 +22,12 @@
     --app-content-max-width: 80ch;
 }
 
+html:has(.wa-dark) {
+    background-color: var(--wa-color-neutral-05);
+
+}
+
+
 body {
     opacity: 1;
     transition: opacity 200ms ease-out;
@@ -311,6 +317,25 @@ main {
     time {
         color: var(--wa-color-neutral-500);
         font-style: italic;
+    }
+}
+
+
+:where(.icon) {
+    font-size: var(--wa-font-size-xl);
+
+    &.purple {
+        color: var(--wa-color-purple-50);
+        background-color: var(--wa-color-purple-90);
+    }
+}
+
+:where(.wa-dark) {
+    :where(.icon) {
+        &.purple {
+            color: var(--wa-color-purple-60);
+            background-color: var(--wa-color-purple-20);
+        }
     }
 }
 

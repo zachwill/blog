@@ -63,6 +63,8 @@ export default function AppShell({
 
         {/* WebAwesome JavaScript */}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
+        {/* Datastar */}
+        <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
 
         {/* Content data for client-side routing */}
         <script
@@ -77,7 +79,10 @@ export default function AppShell({
         />
       </head>
 
-      <body className={siteConfig.webawesome.theme}>
+      <body
+        className={siteConfig.webawesome.theme}
+        data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches"
+      >
         <wa-page view="desktop" disable-navigation-toggle="" mobile-breakpoint="1080">
           {/* Header */}
           <header slot="header" className="wa-split wa-align-items-center">
