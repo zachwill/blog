@@ -137,7 +137,7 @@ main {
 
 /* Header slot wrapper */
 [slot='header'] {
-    padding: var(--wa-space-s) var(--wa-space-l);
+    padding: var(--wa-space-s) var(--wa-space-m);
 }
 
 /* ============================================

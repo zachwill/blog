@@ -80,7 +80,7 @@ export default function AppShell({
       <body className={siteConfig.webawesome.theme}>
         <wa-page view="desktop" disable-navigation-toggle="" mobile-breakpoint="1180">
           {/* Header */}
-          <header slot="header" className="wa-split">
+          <header slot="header" className="wa-split wa-align-items-center">
             <div id="app-branding" className="wa-align-items-center">
               <wa-button appearance="plain" size="small" data-toggle-nav="">
                 <wa-icon name="bars" label="Toggle navigation"></wa-icon>
