@@ -13,7 +13,7 @@ After hearing about [Flappy Bird][app] the past couple days, I decided to downlo
 
 ![Flappy Bird Daily Reviews (US App Store)][graph]
 
-[graph]: /img/flappy_bird.png
+[graph]: /assets/flappy_bird.png
 
 In late December and early January, I'm guessing [Dong Nguyen][dongatory] probably used [some sort of service to download/rate Flappy Bird][bots] on the App Store. The end goal was likely to generate some buzz for a game that originally had been released at the end of May and then updated in September for iOS 7. With six months of nothing happening on a game he had made in a week's spare time, a marketing experiment around the holiday download season couldn't hurt.
 
