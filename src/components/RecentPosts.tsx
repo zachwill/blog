@@ -21,7 +21,7 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
   return (
     <div className="wa-stack wa-gap-xl">
       {recentPosts.map((post, index) => (
-        <article key={post.slug} className="post-content">
+        <div key={post.slug} className="post-content">
           {/* Post Header */}
           <header>
             <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
@@ -66,7 +66,7 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
               width: '100%'
             }} />
           )}
-        </article>
+        </div>
       ))}
     </div>
   );
