@@ -419,6 +419,11 @@ main {
             line-height: var(--wa-line-height-condensed);
         }
     }
+
+    time {
+        color: var(--wa-color-neutral-500);
+        font-style: italic;
+    }
 }
 
 /* Wide layout modifier */

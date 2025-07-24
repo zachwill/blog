@@ -22,11 +22,7 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
                   {post.title}
                 </h3>
               </a>
-              <time className="wa-body-s"
-                style={{
-                  color: 'var(--wa-color-neutral-500)',
-                  fontStyle: 'italic'
-                }}>
+              <time className="wa-body-s">
                 {formatDate(post.date)}
               </time>
             </div>
@@ -36,11 +32,7 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
                   {post.title}
                 </h3>
               </a>
-              <time className="wa-body-s"
-                style={{
-                  color: 'var(--wa-color-neutral-500)',
-                  fontStyle: 'italic'
-                }}>
+              <time className="wa-body-s">
                 {formatDate(post.date)}
               </time>
             </div>
@@ -52,11 +44,9 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
 
           {/* Post Separator */}
           {index < recentPosts.length - 1 && (
-            <div style={{
-              margin: 'var(--wa-space-xl) 0',
-              borderBottom: '2px solid var(--wa-color-neutral-200)',
-              width: '100%'
-            }} />
+            <div style={{ marginTop: 'var(--wa-space-2xl)' }}>
+              <wa-divider orientation="horizontal"></wa-divider>
+            </div>
           )}
         </div>
       ))}

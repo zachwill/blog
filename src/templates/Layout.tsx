@@ -161,11 +161,7 @@ export default function AppShell({
                   <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
                     <h1 className="wa-heading-xl">{contentData.title}</h1>
                     {contentData.metadata?.date && (
-                      <time className="wa-body-s"
-                        style={{
-                          color: 'var(--wa-color-neutral-500)',
-                          fontStyle: 'italic'
-                        }}>
+                      <time className="wa-body-s">
                         {formatDate(contentData.metadata.date)}
                       </time>
                     )}
@@ -173,11 +169,7 @@ export default function AppShell({
                   <div className="wa-mobile-only wa-stack wa-gap-s" style={{ marginBottom: 'var(--wa-space-m)' }}>
                     <h1 className="wa-heading-xl">{contentData.title}</h1>
                     {contentData.metadata?.date && (
-                      <time className="wa-body-s"
-                        style={{
-                          color: 'var(--wa-color-neutral-500)',
-                          fontStyle: 'italic'
-                        }}>
+                      <time className="wa-body-s">
                         {formatDate(contentData.metadata.date)}
                       </time>
                     )}
