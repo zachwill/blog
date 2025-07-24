@@ -158,7 +158,7 @@ export default function AppShell({
             </div>
 
             <div id="main-footer" slot="main-footer">
-              <div style={{ margin: 'var(--wa-space-2xl) 0 var(--wa-space-s)' }}>
+              <div style={{ margin: 'var(--wa-space-2xl) 0 0' }}>
                 <wa-divider orientation="horizontal"></wa-divider>
               </div>
               <div className="about">
