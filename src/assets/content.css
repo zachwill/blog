@@ -87,16 +87,12 @@ wa-page {
 }
 
 /* The main content area and its footer */
-main,
-[slot='main-footer'] {
+main:has(article),
+main:has(.about) {
     max-width: var(--app-content-max-width);
     margin-inline: auto;
     padding: var(--wa-space-l);
     /* Generous padding for desktop */
-}
-
-[slot='main-footer'] {
-    padding-block: var(--wa-space-xl);
 }
 
 /* ============================================

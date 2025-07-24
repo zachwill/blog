@@ -2,7 +2,7 @@ import React from 'react';
 
 export function About() {
   return (
-    <div className="wa-stack wa-gap-m">
+    <div className="wa-stack wa-gap-m about">
       <div className="wa-flex wa-align-items-center wa-gap-m">
         <wa-badge appearance="filled" className="icon purple">
           <wa-icon name="laptop-code" className="icon purple"></wa-icon>
