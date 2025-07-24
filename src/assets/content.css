@@ -320,7 +320,6 @@ main {
     }
 }
 
-
 :where(.icon) {
     font-size: var(--wa-font-size-xl);
 

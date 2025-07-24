@@ -1,31 +1,25 @@
 {
     "compilerOptions": {
+        // Target and environment
         "target": "ES2022",
         "lib": [
             "ES2022",
             "DOM",
             "DOM.Iterable"
         ],
+        // Module resolution (Bun-optimized)
         "module": "ESNext",
         "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "moduleDetection": "force",
+        // Type checking only (no compilation)
         "noEmit": true,
-        "composite": false,
+        // Strict type checking
         "strict": true,
-        "downlevelIteration": true,
         "skipLibCheck": true,
-        "jsx": "react-jsx",
-        "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "allowJs": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
         "isolatedModules": true,
-        "verbatimModuleSyntax": true,
-        "declaration": true,
-        "declarationMap": true,
-        "sourceMap": true,
+        // JSX support
+        "jsx": "react-jsx",
+        // Path mapping for your aliases
         "baseUrl": ".",
         "paths": {
             "@/*": [

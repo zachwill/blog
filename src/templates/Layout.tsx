@@ -83,7 +83,7 @@ export default function AppShell({
         className={siteConfig.webawesome.theme}
         data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches"
       >
-        <wa-page view="desktop" disable-navigation-toggle="" mobile-breakpoint="1080">
+        <wa-page view="desktop" disable-navigation-toggle={true} mobile-breakpoint="1080">
           {/* Header */}
           <header slot="header" className="wa-split wa-align-items-center">
             <div id="app-branding" className="wa-align-items-center">

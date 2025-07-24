@@ -15,6 +15,11 @@ import generateRssXml from './templates/Rss';
 import { mdxComponents } from './components';
 import siteConfig from './site.config';
 
+// Fix React SSR bug with custom elements - converts 'className' to 'class' for web components
+function fixWebComponentAttributes(html: string): string {
+    return html.replace(/(<wa-[^>]*)\sclassName="([^"]*)"/g, '$1 class="$2"');
+}
+
 interface PostData {
     title: string;
     date: string;
@@ -115,9 +120,10 @@ async function processMdxContent(
             return acc;
         }, {} as any);
 
-        return renderToStaticMarkup(
+        const html = renderToStaticMarkup(
             <MdxComponent components={ComponentsWithProps} />
         );
+        return fixWebComponentAttributes(html);
     } catch (error) {
         console.error('Error processing MDX:', error);
         return await processMarkdownContent(mdxContent);
@@ -275,14 +281,14 @@ async function generateContent(posts: PostData[], pages: PageData[], navigationD
             }
         };
 
-        const html = renderToStaticMarkup(
+        const html = fixWebComponentAttributes(renderToStaticMarkup(
             <Layout
                 title={post.title}
                 navigationData={navigationData}
                 contentData={contentData}
                 currentPath={post.permalink}
             />
-        );
+        ));
 
         const outputPath = join('dist', post.permalink.slice(1), 'index.html');
         await writeHtmlFile(outputPath, html);
@@ -309,14 +315,14 @@ async function generateContent(posts: PostData[], pages: PageData[], navigationD
             content: processedContent
         };
 
-        const html = renderToStaticMarkup(
+        const html = fixWebComponentAttributes(renderToStaticMarkup(
             <Layout
                 title={page.title}
                 navigationData={navigationData}
                 contentData={contentData}
                 currentPath={page.permalink}
             />
-        );
+        ));
 
         const outputPath = page.permalink === '/'
             ? 'dist/index.html'

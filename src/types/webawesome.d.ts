@@ -1027,63 +1027,70 @@ declare global {
 // ===============================================================================================
 // REACT / JSX-SPECIFIC TYPINGS
 // ===============================================================================================
-// This namespace tells the TSX compiler about the WebAwesome components
-// and what props they accept. It re-uses the interfaces defined above
-// and combines them with standard React HTML attributes.
+// For the modern JSX transform ("jsx": "react-jsx"), we need to augment the global
+// HTMLElementTagNameMap instead of the JSX namespace. This tells TypeScript about
+// the WebAwesome components and what props they accept.
 // ===============================================================================================
-declare namespace JSX {
-    interface IntrinsicElements {
-        'wa-animation': React.DetailedHTMLProps<React.HTMLAttributes<WaAnimation>, WaAnimation>;
-        'wa-avatar': React.DetailedHTMLProps<React.HTMLAttributes<WaAvatar>, WaAvatar>;
-        'wa-badge': React.DetailedHTMLProps<React.HTMLAttributes<WaBadge>, WaBadge>;
-        'wa-breadcrumb': React.DetailedHTMLProps<React.HTMLAttributes<WaBreadcrumb>, WaBreadcrumb>;
-        'wa-breadcrumb-item': React.DetailedHTMLProps<React.HTMLAttributes<WaBreadcrumbItem>, WaBreadcrumbItem>;
-        'wa-button': React.DetailedHTMLProps<React.HTMLAttributes<WaButton>, WaButton>;
-        'wa-button-group': React.DetailedHTMLProps<React.HTMLAttributes<WaButtonGroup>, WaButtonGroup>;
-        'wa-callout': React.DetailedHTMLProps<React.HTMLAttributes<WaCallout>, WaCallout>;
-        'wa-card': React.DetailedHTMLProps<React.HTMLAttributes<WaCard>, WaCard>;
-        'wa-carousel': React.DetailedHTMLProps<React.HTMLAttributes<WaCarousel>, WaCarousel>;
-        'wa-carousel-item': React.DetailedHTMLProps<React.HTMLAttributes<WaCarouselItem>, WaCarouselItem>;
-        'wa-checkbox': React.DetailedHTMLProps<React.HTMLAttributes<WaCheckbox>, WaCheckbox>;
-        'wa-color-picker': React.DetailedHTMLProps<React.HTMLAttributes<WaColorPicker>, WaColorPicker>;
-        'wa-copy-button': React.DetailedHTMLProps<React.HTMLAttributes<WaCopyButton>, WaCopyButton>;
-        'wa-details': React.DetailedHTMLProps<React.HTMLAttributes<WaDetails>, WaDetails>;
-        'wa-dialog': React.DetailedHTMLProps<React.HTMLAttributes<WaDialog>, WaDialog>;
-        'wa-divider': React.DetailedHTMLProps<React.HTMLAttributes<WaDivider>, WaDivider>;
-        'wa-drawer': React.DetailedHTMLProps<React.HTMLAttributes<WaDrawer>, WaDrawer>;
-        'wa-dropdown': React.DetailedHTMLProps<React.HTMLAttributes<WaDropdown>, WaDropdown>;
-        'wa-dropdown-item': React.DetailedHTMLProps<React.HTMLAttributes<WaDropdownItem>, WaDropdownItem>;
-        'wa-format-bytes': React.DetailedHTMLProps<React.HTMLAttributes<WaFormatBytes>, WaFormatBytes>;
-        'wa-format-date': React.DetailedHTMLProps<React.HTMLAttributes<WaFormatDate>, WaFormatDate>;
-        'wa-format-number': React.DetailedHTMLProps<React.HTMLAttributes<WaFormatNumber>, WaFormatNumber>;
-        'wa-icon': React.DetailedHTMLProps<React.HTMLAttributes<WaIcon>, WaIcon>;
-        'wa-include': React.DetailedHTMLProps<React.HTMLAttributes<WaInclude>, WaInclude>;
-        'wa-input': React.DetailedHTMLProps<React.HTMLAttributes<WaInput>, WaInput>;
-        'wa-mutation-observer': React.DetailedHTMLProps<React.HTMLAttributes<WaMutationObserver>, WaMutationObserver>;
-        'wa-option': React.DetailedHTMLProps<React.HTMLAttributes<WaOption>, WaOption>;
-        'wa-page': React.DetailedHTMLProps<React.HTMLAttributes<WaPage>, WaPage>;
-        'wa-popover': React.DetailedHTMLProps<React.HTMLAttributes<WaPopover>, WaPopover>;
-        'wa-progress-bar': React.DetailedHTMLProps<React.HTMLAttributes<WaProgressBar>, WaProgressBar>;
-        'wa-progress-ring': React.DetailedHTMLProps<React.HTMLAttributes<WaProgressRing>, WaProgressRing>;
-        'wa-qr-code': React.DetailedHTMLProps<React.HTMLAttributes<WaQrCode>, WaQrCode>;
-        'wa-radio': React.DetailedHTMLProps<React.HTMLAttributes<WaRadio>, WaRadio>;
-        'wa-radio-group': React.DetailedHTMLProps<React.HTMLAttributes<WaRadioGroup>, WaRadioGroup>;
-        'wa-rating': React.DetailedHTMLProps<React.HTMLAttributes<WaRating>, WaRating>;
-        'wa-relative-time': React.DetailedHTMLProps<React.HTMLAttributes<WaRelativeTime>, WaRelativeTime>;
-        'wa-resize-observer': React.DetailedHTMLProps<React.HTMLAttributes<WaResizeObserver>, WaResizeObserver>;
-        'wa-select': React.DetailedHTMLProps<React.HTMLAttributes<WaSelect>, WaSelect>;
-        'wa-skeleton': React.DetailedHTMLProps<React.HTMLAttributes<WaSkeleton>, WaSkeleton>;
-        'wa-slider': React.DetailedHTMLProps<React.HTMLAttributes<WaSlider>, WaSlider>;
-        'wa-split-panel': React.DetailedHTMLProps<React.HTMLAttributes<WaSplitPanel>, WaSplitPanel>;
-        'wa-spinner': React.DetailedHTMLProps<React.HTMLAttributes<WaSpinner>, WaSpinner>;
-        'wa-switch': React.DetailedHTMLProps<React.HTMLAttributes<WaSwitch>, WaSwitch>;
-        'wa-tab': React.DetailedHTMLProps<React.HTMLAttributes<WaTab>, WaTab>;
-        'wa-tab-group': React.DetailedHTMLProps<React.HTMLAttributes<WaTabGroup>, WaTabGroup>;
-        'wa-tab-panel': React.DetailedHTMLProps<React.HTMLAttributes<WaTabPanel>, WaTabPanel>;
-        'wa-tag': React.DetailedHTMLProps<React.HTMLAttributes<WaTag>, WaTag>;
-        'wa-textarea': React.DetailedHTMLProps<React.HTMLAttributes<WaTextarea>, WaTextarea>;
-        'wa-tooltip': React.DetailedHTMLProps<React.HTMLAttributes<WaTooltip>, WaTooltip>;
-        'wa-tree': React.DetailedHTMLProps<React.HTMLAttributes<WaTree>, WaTree>;
-        'wa-tree-item': React.DetailedHTMLProps<React.HTMLAttributes<WaTreeItem>, WaTreeItem>;
+
+// Helper type to merge WebAwesome component props with React HTML attributes
+type WaReactProps<T> = Partial<Omit<T, keyof HTMLElement>> & React.HTMLAttributes<T>;
+
+// Augment the global JSX namespace with properly typed WebAwesome components
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            'wa-animation': WaReactProps<WaAnimation>;
+            'wa-avatar': WaReactProps<WaAvatar>;
+            'wa-badge': WaReactProps<WaBadge>;
+            'wa-breadcrumb': WaReactProps<WaBreadcrumb>;
+            'wa-breadcrumb-item': WaReactProps<WaBreadcrumbItem>;
+            'wa-button': WaReactProps<WaButton>;
+            'wa-button-group': WaReactProps<WaButtonGroup>;
+            'wa-callout': WaReactProps<WaCallout>;
+            'wa-card': WaReactProps<WaCard>;
+            'wa-carousel': WaReactProps<WaCarousel>;
+            'wa-carousel-item': WaReactProps<WaCarouselItem>;
+            'wa-checkbox': WaReactProps<WaCheckbox>;
+            'wa-color-picker': WaReactProps<WaColorPicker>;
+            'wa-copy-button': WaReactProps<WaCopyButton>;
+            'wa-details': WaReactProps<WaDetails>;
+            'wa-dialog': WaReactProps<WaDialog>;
+            'wa-divider': WaReactProps<WaDivider>;
+            'wa-drawer': WaReactProps<WaDrawer>;
+            'wa-dropdown': WaReactProps<WaDropdown>;
+            'wa-dropdown-item': WaReactProps<WaDropdownItem>;
+            'wa-format-bytes': WaReactProps<WaFormatBytes>;
+            'wa-format-date': WaReactProps<WaFormatDate>;
+            'wa-format-number': WaReactProps<WaFormatNumber>;
+            'wa-icon': WaReactProps<WaIcon>;
+            'wa-include': WaReactProps<WaInclude>;
+            'wa-input': WaReactProps<WaInput>;
+            'wa-mutation-observer': WaReactProps<WaMutationObserver>;
+            'wa-option': WaReactProps<WaOption>;
+            'wa-page': WaReactProps<WaPage>;
+            'wa-popover': WaReactProps<WaPopover>;
+            'wa-progress-bar': WaReactProps<WaProgressBar>;
+            'wa-progress-ring': WaReactProps<WaProgressRing>;
+            'wa-qr-code': WaReactProps<WaQrCode>;
+            'wa-radio': WaReactProps<WaRadio>;
+            'wa-radio-group': WaReactProps<WaRadioGroup>;
+            'wa-rating': WaReactProps<WaRating>;
+            'wa-relative-time': WaReactProps<WaRelativeTime>;
+            'wa-resize-observer': WaReactProps<WaResizeObserver>;
+            'wa-select': WaReactProps<WaSelect>;
+            'wa-skeleton': WaReactProps<WaSkeleton>;
+            'wa-slider': WaReactProps<WaSlider>;
+            'wa-split-panel': WaReactProps<WaSplitPanel>;
+            'wa-spinner': WaReactProps<WaSpinner>;
+            'wa-switch': WaReactProps<WaSwitch>;
+            'wa-tab': WaReactProps<WaTab>;
+            'wa-tab-group': WaReactProps<WaTabGroup>;
+            'wa-tab-panel': WaReactProps<WaTabPanel>;
+            'wa-tag': WaReactProps<WaTag>;
+            'wa-textarea': WaReactProps<WaTextarea>;
+            'wa-tooltip': WaReactProps<WaTooltip>;
+            'wa-tree': WaReactProps<WaTree>;
+            'wa-tree-item': WaReactProps<WaTreeItem>;
+        }
     }
 }

@@ -1,4 +1,5 @@
 // Export all MDX components
+export { About } from './About';
 export { FavoritePosts } from './FavoritePosts';
 export { RecentPosts } from './RecentPosts';
 
@@ -16,10 +17,12 @@ export const formatDate = (dateString: string): string => {
 };
 
 // Create the mdxComponents object for use in MDX evaluation
+import { About } from './About';
 import { FavoritePosts } from './FavoritePosts';
 import { RecentPosts } from './RecentPosts';
 
 export const mdxComponents = {
+    About,
     FavoritePosts,
     RecentPosts,
 }; 
