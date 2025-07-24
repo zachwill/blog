@@ -35,6 +35,7 @@ interface AppShellProps {
   currentPath: string;
 }
 
+
 export default function AppShell({
   title,
   navigationData,
@@ -42,132 +43,144 @@ export default function AppShell({
   currentPath
 }: AppShellProps) {
   const pageTitle = title || siteConfig.title;
-  const isHomePage = currentPath === '/';
 
   return (
     <html lang="en" className="wa-cloak">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>⚡️ Zach Williams</title>
+        <title>⚡️ {pageTitle}</title>
         <meta name="author" content={siteConfig.author} />
         <meta name="description" content={siteConfig.description} />
-
-        {/* RSS Feed */}
         <link href="/atom.xml" rel="alternate" title="zachwill" type="application/atom+xml" />
-
-        {/* WebAwesome CSS */}
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
-
-        {/* Custom CSS for content styling */}
         <link rel="stylesheet" href="/assets/content.css" />
-
-        {/* WebAwesome JavaScript */}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
-        {/* Datastar */}
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
       </head>
 
       <body
-        className={siteConfig.webawesome.theme}
+        className="wa-palette-zach wa-theme-zach"
         data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches"
       >
-        <wa-page view="desktop" disable-navigation-toggle={true} mobile-breakpoint="1080">
-          {/* Header */}
-          <header slot="header" className="wa-split wa-align-items-center">
-            <div id="app-branding" className="wa-align-items-center">
-              <wa-button appearance="plain" size="small" data-toggle-nav="">
+        {/*
+          WHY THIS IS BETTER:
+          - We remove `disable-navigation-toggle` and `view="desktop"`. The component handles these automatically.
+          - We set the mobile breakpoint directly.
+        */}
+        <wa-page mobile-breakpoint="1080px">
+          {/* 
+            WHY THIS IS BETTER:
+            - This is a direct child of wa-page.
+            - We use `wa-split` as the top-level layout primitive for the header. No extra divs needed.
+            - We use `wa-cluster` to group related items. It's more declarative than a div with flex properties.
+          */}
+          <header slot="header" className="wa-split">
+            <div className="wa-cluster wa-align-items-center">
+              {/* This toggle button is now simpler and correctly placed. */}
+              <wa-button appearance="plain" size="small" data-toggle-nav>
                 <wa-icon name="bars" label="Toggle navigation"></wa-icon>
               </wa-button>
+
+              {/*
+                WHY THIS IS BETTER:
+                - The home link is a simple `<a>` tag styled with layout utilities. 
+                - No need for a complex button-within-a-button structure.
+                - This is more semantic and accessible.
+              */}
               <wa-tooltip for="zachwill">zachwill.com</wa-tooltip>
-              <a href="/">
-                <wa-button id="zachwill" appearance="plain" size="small">
-                  <div className="wa-flex wa-align-items-center wa-gap-s">
-                    <wa-icon name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-                    <span className="wa-heading-m">Zach Williams</span>
-                  </div>
-                </wa-button>
+              <a href="/" id="zachwill" className="wa-cluster wa-align-items-center wa-gap-s">
+                <wa-icon name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+                <span className="wa-heading-m">Zach Williams</span>
               </a>
             </div>
 
-            <div id="app-toolbar" className="wa-flex wa-gap-xs">
+            <div className="wa-cluster wa-gap-xs">
               <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
+                <wa-button id="zach-twitter" appearance="plain" size="small" aria-label="Twitter">
+                  <wa-icon name="at"></wa-icon>
+                </wa-button>
                 <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
-                <wa-button id="zach-twitter" appearance="plain" size="small">
-                  <wa-icon name="at" label="Twitter"></wa-icon>
-                </wa-button>
               </a>
-
               <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
-                <wa-tooltip for="zach-github">GitHub</wa-tooltip>
-                <wa-button id="zach-github" appearance="plain" size="small">
-                  <wa-icon name="code" label="GitHub"></wa-icon>
+                <wa-button id="zach-github" appearance="plain" size="small" aria-label="GitHub">
+                  <wa-icon name="code"></wa-icon>
                 </wa-button>
+                <wa-tooltip for="zach-github">GitHub</wa-tooltip>
               </a>
             </div>
           </header>
 
+          {/*
+            - This content will ONLY appear at the top of the mobile navigation drawer.
+            - We add `data-drawer="close"` to the link so it closes the menu if the user clicks it.
+          */}
           <div slot="navigation-header" className="wa-mobile-only">
-            <wa-tooltip for="zachwill-mobile">zachwill.com</wa-tooltip>
-            <a href="/">
-              <wa-button id="zachwill-mobile" appearance="plain" size="small">
-                <div className="wa-flex wa-align-items-center wa-gap-s">
-                  <wa-icon name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-                  <span className="wa-heading-m">zachwill.com</span>
-                </div>
-              </wa-button>
+            <wa-tooltip for="zachwill-dot-com">Home</wa-tooltip>
+            <a href="/" id="zachwill-dot-com" className="wa-cluster wa-align-items-center wa-gap-s" data-drawer="close">
+              <wa-icon name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+              <span className="wa-heading-m">zachwill.com</span>
             </a>
           </div>
 
-          {/* Navigation Sidebar */}
-          <div slot="navigation" id="nav">
-            {/* Posts by Year */}
-            <div className="nav-section">
-              {Object.entries(navigationData.postsByYear)
-                .sort(([a], [b]) => b.localeCompare(a)) // Sort years descending
-                .map(([year, posts]) => (
-                  <div>
-                    <h2>{year}</h2>
-                    <ul className="posts-list">
-                      {posts.map(post => (
-                        <li key={post.permalink}>
-                          <a
-                            href={post.permalink}
-                            className={currentPath === post.permalink ? 'current' : ''}
-                          >
-                            {post.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-            </div>
-          </div>
+          {/*
+            WHY THIS IS BETTER:
+            - The `navigation` content is now wrapped in a semantic `<nav>` tag.
+            - The component will automatically move this into a drawer on mobile.
+          */}
+          <nav slot="navigation">
+            {Object.entries(navigationData.postsByYear)
+              .sort(([a], [b]) => b.localeCompare(a))
+              .map(([year, posts]) => (
+                <div className="nav-section" key={year}>
+                  <h2>{year}</h2>
+                  <ul className="posts-list">
+                    {posts.map(post => (
+                      <li key={post.permalink}>
+                        <a
+                          href={post.permalink}
+                          className={currentPath === post.permalink ? 'current' : ''}
+                          // This is the "pro-tip" for closing the drawer on navigation
+                          data-drawer="close"
+                        >
+                          {post.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+          </nav>
 
-          {/* Main Content */}
+          {/* 
+            CORRECTED SLOT PLACEMENT:
+            - The main content area is now correctly composed of three *direct children* of `<wa-page>`.
+            - 1. A header for the main area (`main-header` slot)
+            - 2. The main content itself (`main` in the default slot)
+            - 3. A footer for the main area (`main-footer` slot)
+          */}
+
+          {/* This is an optional header that appears *above* your main content. We can leave it empty if not needed. */}
+          {/* <header slot="main-header">
+              ... could put a title here ...
+          </header> */}
+
+          {/* The default slot is for your primary content. */}
           <main>
-            {/* Main Header */}
-            <div id="main" slot="main-content">
-              {/* if this is a post, show the title */}
-              {contentData.type === 'post' ? (
-                <Post contentData={contentData} />
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
-              )}
-            </div>
-
-            <div id="main-footer" slot="main-footer">
-              <div style={{ margin: 'var(--wa-space-2xl) 0 0' }}>
-                <wa-divider orientation="horizontal"></wa-divider>
-              </div>
-              <div className="about">
-                <About />
-              </div>
-            </div>
+            {contentData.type === 'post' ? (
+              <Post contentData={contentData} />
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
+            )}
           </main>
+
+          {/* This footer appears directly below the main content, but before the page footer. */}
+          <footer slot="main-footer">
+            {/* <About /> */}
+          </footer>
+
         </wa-page>
       </body>
-    </html >
+    </html>
   );
-} 
+}

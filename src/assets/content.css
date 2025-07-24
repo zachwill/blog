@@ -1,356 +1,205 @@
-/* Content area styling for WebAwesome blog */
 @import url('theme.css');
 
-
 /* ============================================
-   CSS ARCHITECTURE STRATEGY
-   
-   1. wa-page::part() - ONLY for wa-page component structure
-   2. #id selectors - ONLY for slotted content we'll update via JS
-   3. CSS nesting - show clear relationships
-   4. :has(), :empty(), :not() - for conditional states
-   ============================================ */
-
-/* ============================================
-   THEME & GLOBALS
+   GLOBALS & LAYOUT VARIABLES
    ============================================ */
 :root {
-    /* App-specific extensions to WebAwesome */
-    --app-navigation-width: 340px;
-    --app-aside-width: 0px;
-    --app-mobile-breakpoint: 1080px;
+    --app-navigation-width: 360px;
     --app-content-max-width: 80ch;
+    --app-mobile-breakpoint: 1080px;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 
 html:has(.wa-dark) {
     background-color: var(--wa-color-neutral-05);
-
 }
 
-
 body {
-    opacity: 1;
-    overflow-x: hidden;
-    transition: opacity 200ms ease-out;
-
     a {
         color: var(--wa-color-brand);
     }
+}
 
-    &.theme-transitioning {
-        opacity: 0;
+/* ============================================
+   WA-PAGE: THE MAIN SCAFFOLD
+   ============================================ */
+wa-page {
+    /* Let the component handle its own background. We'll style the slots. */
+
+    /* Define column widths for the desktop view */
+    &[view='desktop'] {
+        --menu-width: var(--app-navigation-width);
+        --menu-padding: var(--wa-space-l);
+    }
+
+    /* Collapse columns on mobile. The 'auto' is key. */
+    &[view='mobile'] {
+        --menu-width: auto;
+        --menu-padding: var(--wa-space-l) 0;
     }
 }
 
 /* ============================================
-     WA-PAGE COMPONENT STRUCTURE
-     Only use ::part() for the component itself
-     ============================================ */
-wa-page {
-    background-color: var(--wa-color-surface-default);
+   SLOT-LEVEL STYLING
+   This is where you style the page regions.
+   ============================================ */
 
-    /* Desktop layout dimensions */
-    &[view='desktop'] {
-        --menu-width: var(--app-navigation-width);
-        --aside-width: var(--app-aside-width);
+/* The main page header */
+[slot='header'] {
+    border-bottom: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
+    padding: var(--wa-space-s) var(--wa-space-m);
+
+    /* The wa-split component inside provides the spacing, so we don't need much padding here. */
+    a {
+        color: var(--wa-color-text-normal);
+        text-decoration: none;
     }
+}
 
-    /* Mobile layout dimensions */
-    &[view='mobile'] {
-        --aside-width: 0;
+/* Styling for the mobile-only navigation header */
+[slot='navigation-header'] {
 
-        /* Mobile navigation drawer content */
-        & [slot='navigation-header'],
-        & [slot='navigation'] {
-            padding: 0;
-        }
+    /* Ensure the link inside looks right */
+    a {
+        color: var(--wa-color-text-normal);
+        text-decoration: none;
     }
+}
 
-    /* Component part styling */
-    &::part(header) {
-        background-color: var(--wa-color-surface-default);
-        border-bottom: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
+/* The navigation sidebar/drawer */
+[slot='navigation'] {
+    padding: var(--menu-padding);
+    /* Consistent padding for both mobile and desktop */
+
+    /* Add a border ONLY on desktop view */
+    wa-page[view='desktop'] & {
+        border-right: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
+        overflow-y: auto;
+        height: 100vh;
+        /* Ensure it can scroll independently */
     }
+}
 
-    &::part(body) {
-        padding-top: 0;
-    }
-
-    &::part(menu) {
-        scrollbar-width: thin;
-    }
-
-    &[view='desktop'] {
-        &::part(navigation) {
-            border-right: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
-            overflow-y: auto;
-            height: 100%;
-        }
-
-        &::part(aside) {
-            border-left: var(--wa-border-style) var(--wa-border-width-s) var(--wa-color-surface-border);
-            overflow-y: auto;
-            height: 100%;
-        }
-    }
-
-    &::part(main-content) {
-        container-type: inline-size;
-    }
+/* The main content area and its footer */
+main,
+[slot='main-footer'] {
+    max-width: var(--app-content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--wa-space-xl);
+    /* Generous padding for desktop */
 }
 
 main {
-    padding: 0;
+    padding-top: var(--wa-space-xl);
+}
+
+[slot='main-footer'] {
+    padding-block: var(--wa-space-xl);
 }
 
 /* ============================================
-     HEADER SLOT CONTENT
-     ============================================ */
-#app-branding {
-    display: flex;
-    align-items: center;
-    gap: var(--wa-space-s);
+   CONTENT & COMPONENT STYLING
+   ============================================ */
 
-    /* Navigation toggle button */
-    wa-button[data-toggle-nav] {
-        &::part(base) {
-            outline-color: transparent;
-        }
-    }
-
-    /* Home link */
-    a[href='/'] {
-        color: var(--wa-color-text-normal);
-        line-height: 1;
-        text-decoration: none;
-
-        svg {
-            width: auto;
-            height: 1.75rem;
-        }
-    }
-}
-
-#app-toolbar {
-    display: flex;
-    align-items: center;
-    gap: var(--wa-space-s);
-
-    /* Hide last divider */
-    wa-divider:last-child {
-        display: none;
-    }
-}
-
-/* Header slot wrapper */
-[slot='header'] {
-    padding: var(--wa-space-s) var(--wa-space-m);
-}
-
-/* ============================================
-     NAVIGATION SLOT CONTENT
-     ============================================ */
-#nav {
-    --nav-item-padding: var(--wa-space-s) var(--wa-space-m);
-    --nav-section-spacing: var(--wa-space-s);
-
+/* Navigation list styling */
+[slot='navigation'] {
     .nav-section {
         padding-bottom: var(--wa-space-l);
     }
 
-    /* Navigation sections */
     h2 {
         font-size: var(--wa-font-size-s);
         color: var(--wa-color-text-quiet);
-        margin: 0;
-        margin-block-start: var(--nav-section-spacing);
-
-        &:first-of-type {
-            margin-block-start: var(--wa-space-xs);
-        }
-
-        /* Section links (if needed) */
-        a {
-            display: flex;
-            align-items: center;
-            gap: 0.4em;
-            color: var(--wa-color-text-normal);
-            text-decoration: none;
-            text-wrap: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            wa-icon {
-                margin-block-end: -0.15em;
-                font-size: var(--wa-font-size-s);
-                font-weight: var(--wa-font-weight-action);
-                color: var(--wa-color-gray-70);
-            }
-
-            &:hover {
-                color: var(--wa-color-brand-on-normal);
-
-                wa-icon {
-                    color: var(--wa-color-brand-on-quiet);
-                }
-            }
-        }
+        margin: 0 0 var(--wa-space-xs) 0;
     }
 
-    /* Navigation lists */
     ul {
         border-inline-start: var(--wa-border-width-s) solid var(--wa-color-surface-border);
-        font-size: var(--wa-font-size-s);
-        line-height: var(--wa-line-height-condensed);
-        padding-inline-start: var(--wa-space-xs);
-        margin: 0;
         list-style: none;
-
-        /* Hide empty lists */
-        &:empty {
-            display: none;
-        }
-
-        /* Nested lists */
-        ul {
-            margin-block-start: var(--wa-space-m);
-        }
-    }
-
-    /* Navigation items */
-    li {
+        padding: 0;
         margin: 0;
+    }
 
-        &:first-child {
-            margin-block-start: var(--wa-space-xs);
+    li a {
+        display: block;
+        padding: var(--wa-space-s) var(--wa-space-m);
+        color: var(--wa-color-text-normal);
+        text-decoration: none;
+        border-radius: var(--wa-border-radius-m);
+        transition: background-color var(--wa-transition-normal);
+        /* --- ADD THESE THREE LINES FOR TRUNCATION --- */
+        /* 1. Prevent text from wrapping to multiple lines */
+        white-space: nowrap;
+        /* 2. Hide any text that goes beyond the element's width */
+        overflow: hidden;
+        /* 3. Display an ellipsis to indicate hidden text */
+        text-overflow: ellipsis;
+
+        &:hover {
+            background-color: var(--wa-color-surface-lowered);
         }
 
-        /* Navigation links */
-        a {
-            display: block;
-            padding: var(--nav-item-padding);
-            color: var(--wa-color-text-normal);
-            font-size: var(--wa-font-size-m);
-            text-decoration: none;
-            border-radius: var(--wa-border-radius-m);
-            transition: background-color var(--wa-transition-normal) var(--wa-transition-easing);
-
-            &:hover {
-                background-color: var(--wa-color-surface-lowered);
-            }
-
-            /* Current/active state */
-            &.current {
-                font-weight: var(--wa-font-weight-extrabold);
-                color: var(--wa-color-brand-on-loud);
-                background-color: var(--wa-color-brand-fill-loud);
-            }
-        }
-
-        /* Delete buttons */
-        wa-button.delete {
-            margin-inline-start: var(--wa-space-xs);
-
-            &:not(:hover, :focus) {
-                opacity: 0.5;
-            }
-
-            &::part(base):hover {
-                color: var(--wa-color-danger-on-quiet);
-                background: var(--wa-color-danger-fill-quiet);
-            }
-
-            /* Only show on list item hover */
-            &:not(li:hover > *, :focus) {
-                opacity: 0;
-            }
-        }
-
-        /* Badges */
-        wa-badge {
-            &::part(base) {
-                font-size: var(--wa-font-size-2xs);
-                font-weight: var(--wa-font-weight-bold);
-            }
-        }
-
-        /* Icons */
-        wa-icon {
-            color: var(--wa-color-text-quiet);
-            vertical-align: middle;
-
-            &[name='flask'] {
-                margin-inline: 0.125em;
-            }
+        &.current {
+            font-weight: var(--wa-font-weight-bold);
+            color: var(--wa-color-brand-on-loud);
+            background-color: var(--wa-color-brand-fill-loud);
         }
     }
+}
+
+wa-button[data-toggle-nav] {
+    &::part(base) {
+        outline-color: transparent;
+    }
+}
+
+.icon.purple {
+    /* 1. DEFINE and set default (light theme) values for your variables */
+    --icon-fg-color: var(--wa-color-purple-50);
+    --icon-bg-color: var(--wa-color-purple-90);
+
+    /* 2. USE the variables to style the component */
+    color: var(--icon-fg-color);
+    background-color: var(--icon-bg-color);
+
+    /* This is applied to a <wa-badge>, so let's set its size */
+    font-size: var(--wa-font-size-xl);
+}
+
+/*
+    3. REDEFINE ONLY THE VARIABLES for dark mode.
+    This is much cleaner than re-declaring all the properties again.
+  */
+html.wa-dark .icon.purple {
+    --icon-fg-color: var(--wa-color-purple-60);
+    --icon-bg-color: var(--wa-color-purple-20);
 }
 
 /* ============================================
-     MAIN SLOT CONTENT
-     ============================================ */
-#main {
-    padding: var(--wa-space-l);
-    max-width: var(--app-content-max-width);
-    margin-inline: auto;
+   MOBILE-SPECIFIC ADJUSTMENTS
+   ============================================ */
 
-    /* Page title */
-    h1.title {
-        wa-badge {
-            vertical-align: middle;
-            font-size: 1.5rem;
-        }
+/*
+  THE PADDING SOLUTION:
+  Use a media query matching your breakpoint to reduce padding on smaller screens.
+  This is more reliable and direct than trying to do it all with component attributes.
+*/
+@media screen and (max-width: 1080px) {
+
+    main,
+    [slot='main-footer'] {
+        padding-inline: var(--wa-space-l);
+        /* Reduce side padding on mobile */
     }
 
-    /* Component info */
-    .component-info {
-        display: flex;
-        gap: var(--wa-space-xs);
-        flex-wrap: wrap;
-        align-items: center;
-        margin-block-end: var(--wa-content-spacing);
-
-        code {
-            line-height: var(--wa-line-height-condensed);
-        }
-    }
-
-    time {
-        color: var(--wa-color-neutral-500);
-        font-style: italic;
-    }
-}
-
-:where(.icon) {
-    font-size: var(--wa-font-size-xl);
-
-    &.purple {
-        color: var(--wa-color-purple-50);
-        background-color: var(--wa-color-purple-90);
-    }
-}
-
-:where(.wa-dark) {
-    :where(.icon) {
-        &.purple {
-            color: var(--wa-color-purple-60);
-            background-color: var(--wa-color-purple-20);
-        }
-    }
-}
-
-#main-footer {
-    .about {
-        padding: var(--wa-space-l);
-        max-width: var(--app-content-max-width);
-        margin-inline: auto;
-    }
-}
-
-
-/* Mobile search adjustments */
-@media screen and (max-width: 900px) {
     blockquote {
+        /* Your original blockquote style is good here */
         font-size: var(--wa-font-size-m);
         padding: var(--wa-space-s) var(--wa-space-xs) var(--wa-space-s) var(--wa-space-m);
     }
