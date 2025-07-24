@@ -1,5 +1,6 @@
 import React from 'react';
 import { Post } from './types';
+import { formatDate } from './';
 
 interface RecentPostsProps {
   posts: Post[];
@@ -8,15 +9,6 @@ interface RecentPostsProps {
 
 export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
   const recentPosts = posts.slice(0, count);
-
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
 
   return (
     <div className="wa-stack wa-gap-xl">

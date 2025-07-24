@@ -1,5 +1,6 @@
 import React from 'react';
 import siteConfig from '../site.config';
+import { formatDate } from '../components';
 
 interface NavigationData {
   postsByYear: {
@@ -156,7 +157,32 @@ export default function AppShell({
             <div id="main" slot="main-content">
               {/* if this is a post, show the title */}
               {contentData.type === 'post' && (
-                <h1 className="wa-heading-xl">{contentData.title}</h1>
+                <>
+                  <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
+                    <h1 className="wa-heading-xl">{contentData.title}</h1>
+                    {contentData.metadata?.date && (
+                      <time className="wa-body-s"
+                        style={{
+                          color: 'var(--wa-color-neutral-500)',
+                          fontStyle: 'italic'
+                        }}>
+                        {formatDate(contentData.metadata.date)}
+                      </time>
+                    )}
+                  </div>
+                  <div className="wa-mobile-only wa-stack wa-gap-s" style={{ marginBottom: 'var(--wa-space-m)' }}>
+                    <h1 className="wa-heading-xl">{contentData.title}</h1>
+                    {contentData.metadata?.date && (
+                      <time className="wa-body-s"
+                        style={{
+                          color: 'var(--wa-color-neutral-500)',
+                          fontStyle: 'italic'
+                        }}>
+                        {formatDate(contentData.metadata.date)}
+                      </time>
+                    )}
+                  </div>
+                </>
               )}
               <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
             </div>
