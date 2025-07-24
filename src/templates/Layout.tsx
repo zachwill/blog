@@ -43,7 +43,7 @@ export default function AppShell({
   const isHomePage = currentPath === '/';
 
   return (
-    <html lang="en">
+    <html lang="en" className="wa-cloak">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,28 +84,45 @@ export default function AppShell({
               <wa-button appearance="plain" size="small" data-toggle-nav="">
                 <wa-icon name="bars" label="Toggle navigation"></wa-icon>
               </wa-button>
+              <wa-tooltip for="zachwill">zachwill.com</wa-tooltip>
               <a href="/">
-                <div className="wa-flex wa-align-items-center wa-gap-s">
-                  <wa-icon name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-                  <span className="wa-heading-m">Zach Williams</span>
-                </div>
+                <wa-button id="zachwill" appearance="plain" size="small">
+                  <div className="wa-flex wa-align-items-center wa-gap-s">
+                    <wa-icon name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+                    <span className="wa-heading-m">Zach Williams</span>
+                  </div>
+                </wa-button>
               </a>
             </div>
 
             <div id="app-toolbar" className="wa-flex wa-gap-xs">
               <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
-                <wa-button appearance="plain" size="small">
+                <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
+                <wa-button id="zach-twitter" appearance="plain" size="small">
                   <wa-icon name="at" label="Twitter"></wa-icon>
                 </wa-button>
               </a>
 
               <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
-                <wa-button appearance="plain" size="small">
+                <wa-tooltip for="zach-github">GitHub</wa-tooltip>
+                <wa-button id="zach-github" appearance="plain" size="small">
                   <wa-icon name="code" label="GitHub"></wa-icon>
                 </wa-button>
               </a>
             </div>
           </header>
+
+          <div slot="navigation-header" className="wa-mobile-only">
+            <wa-tooltip for="zachwill-mobile">zachwill.com</wa-tooltip>
+            <a href="/">
+              <wa-button id="zachwill-mobile" appearance="plain" size="small">
+                <div className="wa-flex wa-align-items-center wa-gap-s">
+                  <wa-icon name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+                  <span className="wa-heading-m">zachwill.com</span>
+                </div>
+              </wa-button>
+            </a>
+          </div>
 
           {/* Navigation Sidebar */}
           <div slot="navigation" id="nav">
