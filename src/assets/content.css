@@ -26,6 +26,10 @@ body {
     opacity: 1;
     transition: opacity 200ms ease-out;
 
+    a {
+        color: var(--wa-color-brand);
+    }
+
     &.theme-transitioning {
         opacity: 0;
     }
