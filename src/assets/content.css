@@ -234,7 +234,9 @@ main {
 
             /* Current/active state */
             &.current {
-                font-weight: var(--wa-font-weight-bold);
+                font-weight: var(--wa-font-weight-extrabold);
+                color: var(--wa-color-brand-on-loud);
+                background-color: var(--wa-color-brand-fill-loud);
             }
         }
 
