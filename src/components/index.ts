@@ -2,6 +2,7 @@
 export { About } from './About';
 export { FavoritePosts } from './FavoritePosts';
 export { RecentPosts } from './RecentPosts';
+export { Monkey } from './Monkey';
 
 // Export types
 export type { Post } from './types';
@@ -20,9 +21,11 @@ export const formatDate = (dateString: string): string => {
 import { About } from './About';
 import { FavoritePosts } from './FavoritePosts';
 import { RecentPosts } from './RecentPosts';
+import { Monkey } from './Monkey';
 
 export const mdxComponents = {
     About,
     FavoritePosts,
     RecentPosts,
+    Monkey,
 }; 

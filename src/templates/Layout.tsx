@@ -90,7 +90,7 @@ export default function AppShell({
               */}
               <wa-tooltip for="zachwill">zachwill.com</wa-tooltip>
               <a href="/" id="zachwill" className="wa-cluster wa-align-items-center wa-gap-s">
-                <wa-icon name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+                <wa-icon label="Lightning" name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
                 <span className="wa-heading-m">Zach Williams</span>
               </a>
             </div>
@@ -98,13 +98,13 @@ export default function AppShell({
             <div className="wa-cluster wa-gap-xs">
               <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
                 <wa-button id="zach-twitter" appearance="plain" size="small" aria-label="Twitter">
-                  <wa-icon name="at"></wa-icon>
+                  <wa-icon label="Twitter" name="at"></wa-icon>
                 </wa-button>
                 <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
               </a>
               <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
                 <wa-button id="zach-github" appearance="plain" size="small" aria-label="GitHub">
-                  <wa-icon name="code"></wa-icon>
+                  <wa-icon label="GitHub" name="code"></wa-icon>
                 </wa-button>
                 <wa-tooltip for="zach-github">GitHub</wa-tooltip>
               </a>
@@ -118,7 +118,7 @@ export default function AppShell({
           <div slot="navigation-header" className="wa-mobile-only">
             <wa-tooltip for="zachwill-dot-com">Home</wa-tooltip>
             <a href="/" id="zachwill-dot-com" className="wa-cluster wa-align-items-center wa-gap-s" data-drawer="close">
-              <wa-icon name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+              <wa-icon label="Home" name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
               <span className="wa-heading-m">zachwill.com</span>
             </a>
           </div>
