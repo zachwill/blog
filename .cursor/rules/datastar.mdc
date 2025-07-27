@@ -1,0 +1,129 @@
+---
+description: Datastar Reference
+globs: **/*.ts, **/*.tsx, **/*.mdx, **/*.js, **/*.jsx, **/*.html
+alwaysApply: false
+---
+
+# Datastar Cheatsheet
+
+## 1. Four-Sentence Overview
+
+- Datastar is "HTML + signals" sent from the server.
+- The server owns permanent state and streams UI/Signal patches over SSE.
+- The browser owns *ephemeral* state via lightweight, global signals.
+- You wire the two together with declarative `data-*` attributes—no client components, no hydration.
+
+## 2. Core Mental Model
+
+### HTML is the contract
+
+Element `id`s are API endpoints; the server sends fragments that morph into existing nodes.
+
+### Two worlds, two responsibilities
+
+- **Server**: business logic, DB access, template rendering, long-running flows.
+- **Client**: last-millisecond UX—toggling, typing, progress bars—via signals.
+
+### Continuous conversation
+
+- Any user action can fire `@get/@post/…`.
+- Response type decides the patch:
+  - `text/event-stream` → stream of `patch-elements` + `patch-signals`
+  - `text/html` → one-off DOM morph
+  - `application/json` → signal merge
+
+### State boundary
+
+- Keep only what must survive a refresh on the server.
+- Keep everything else (focus, open menus, form text) in signals.
+
+## 3. Reactive Primitives
+
+- `data-signals` - Mutable source of truth (`data-signals-count="0"` → `$count`).
+- `data-computed` - Read-only derived signal (`data-computed-total="$price*$qty"`).
+- `data-effect` - Runs expression now + on dependency change (`data-effect="$dirty && @post('/save')"`).
+- `data-on-*` - Event handler (runs once per event; does *not* re-run on signal change).
+
+Mnemonic: "S-C-E-E" → Signals, Computed, Effect, Event.
+
+## 4. Attribute Cheat-Sheet (grouped)
+
+### Bindings & Display
+
+- `data-text` - Text content.
+- `data-attr / data-attr-*` - Any attribute reactive (title, href, disabled…).
+- `data-class / -*` - Toggle classes (`data-class-active="$sel===id"`).
+- `data-style / -*` - Inline styles.
+- `data-show` - `display:none` while expression is falsy.
+
+### Two-way Form Helpers
+
+- `data-bind / -*` - Value ↔ signal.
+- `data-ref / -*` - Store DOM element in a signal (imperative escape hatch).
+
+### State & Computation
+
+- `data-signals / -*` - Declare or mutate signals.
+- `data-computed / -*` - Derived, read-only signals.
+
+### Effects / Lifecycle
+
+- `data-effect` - Reactive side-effect.
+- `data-on-load` - Fire once on process.
+- `data-on-interval` - Polling timers.
+- `data-on-intersect` - Viewport triggers.
+- `data-on-signal-patch` - Global listener for incoming patches.
+
+### Networking Indicators
+
+- `data-indicator / -*` - Boolean "in-flight" flag tied to same element's request.
+
+### Guard Rails
+
+- `data-ignore` - Skip parsing.
+- `data-ignore-morph` - Freeze subtree during DOM patches.
+- `data-preserve-attr` - Keep selected attrs intact during morphs.
+
+(Pro-only extras: persistence, query-string sync, RAF, resize, animate, etc.)
+
+## 5. Backend Actions & the SSE Loop
+
+Inside any expression you can call:
+
+`@method('/url', options?)` → GET, POST, PUT, PATCH, DELETE
+
+- All non-underscore (`_foo`) signals auto-sent (query or JSON body).
+- `options.selector` - Serialize a form.
+- `options.filterSignals` - `{include:/re/, exclude:/re/}`.
+- Retry helpers (`retryInterval`, `retryMaxCount` …).
+
+### Server responses:
+
+1. `text/event-stream` → continuous patches, keeps HTTP conn open.
+2. `text/html` → one fragment morph (target via `datastar-selector`).
+3. `application/json` → merge into signals.
+4. `text/javascript` → eval.
+
+## 6. Common Recipes & SPA → Datastar Mapping
+
+| Need | SPA way | Datastar idiom |
+|------|---------|---------------|
+| Local counter | useState | data-signals-count + data-text |
+| Derived value | useMemo | data-computed-total="$a*$b" |
+| Side-effect on change | useEffect | data-effect="$formDirty && @post('/autosave')" |
+| Conditional section | `{show && …}` | data-show="$show" |
+| "Click to Edit" | client state + API | Two server views keyed by same id; use @get/@put |
+| Disabled while loading | isLoading state | data-indicator="isLoading" + data-attr-disabled="$isLoading" |
+
+## 7. If you remember nothing else…
+
+1. Server renders **HTML**; element `id`s are the API.
+2. Client holds **signals** for moment-to-moment flair.
+3. Four primitives (signals, computed, effect, events) cover 95% of interactivity.
+4. `@get/@post` + SSE let the server patch both DOM and signals in real time.
+5. Use `data-attr`, `data-class`, `data-style`, `data-show`, `data-text` to *reflect* signal changes onto the DOM—no extra JS required.
+
+Now you can approach any UI problem the "Datastar-first" way:
+
+- Ask "Is this state ephemeral?" → signal.
+- Otherwise render it from the backend and, when it changes, stream a patch.
