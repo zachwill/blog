@@ -75,7 +75,7 @@ export default function AppShell({
           }
         }"
         {...{
-          "data-on-load__delay.200ms": "$webawesome = !document.querySelector('body').classList.contains('wa-cloak')"
+          "data-on-wa-discovery-complete": "$webawesome = !document.querySelector('body').classList.contains('wa-cloak')"
         }}
       >
         {/*
