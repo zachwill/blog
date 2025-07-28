@@ -157,7 +157,7 @@ function setupFileWatcher() {
 
     // Watch content files
     const contentWatcher = watch('./content', { recursive: true }, async (eventType, filename) => {
-        if (filename && filename.match(/\.(md|mdx)$/)) {
+        if (filename && filename.match(/\.(md|mdx|tsx)$/)) {
             console.log(`\n📝 Content changed: ${filename}`);
             await buildSite();
         }

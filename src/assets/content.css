@@ -51,7 +51,7 @@ wa-page {
    ============================================ */
 
 /* The main page header */
-[slot='header'] {
+header[slot='header'] {
     border-bottom: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
     padding: var(--wa-space-s) var(--wa-space-m);
 

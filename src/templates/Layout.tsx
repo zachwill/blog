@@ -2,6 +2,7 @@ import React from 'react';
 import siteConfig from '../site.config';
 import { Post } from './Post';
 import { About } from '@/components/About';
+import { SlotContent } from '@/types/slots';
 
 interface NavigationData {
   postsByYear: {
@@ -33,6 +34,7 @@ interface AppShellProps {
   navigationData: NavigationData;
   contentData: ContentData;
   currentPath: string;
+  slotContent?: SlotContent;
 }
 
 
@@ -40,7 +42,8 @@ export default function AppShell({
   title,
   navigationData,
   contentData,
-  currentPath
+  currentPath,
+  slotContent
 }: AppShellProps) {
   const pageTitle = title || siteConfig.title;
 
@@ -69,88 +72,115 @@ export default function AppShell({
           - We set the mobile breakpoint directly.
         */}
         <wa-page mobile-breakpoint="1080px">
-          {/* 
-            WHY THIS IS BETTER:
-            - This is a direct child of wa-page.
-            - We use `wa-split` as the top-level layout primitive for the header. No extra divs needed.
-            - We use `wa-cluster` to group related items. It's more declarative than a div with flex properties.
-          */}
-          <header slot="header" className="wa-split">
-            <div className="wa-cluster wa-align-items-center">
-              {/* This toggle button is now simpler and correctly placed. */}
-              <wa-button appearance="plain" size="small" data-toggle-nav>
-                <wa-icon name="bars" label="Toggle navigation"></wa-icon>
-              </wa-button>
+          {/* Render custom banner slot if provided */}
+          {slotContent?.banner && (
+            <div slot="banner">
+              {slotContent.banner}
+            </div>
+          )}
 
-              {/*
+          {/* Render custom header or default header */}
+          {slotContent?.header ? (
+            <header slot="header">
+              {slotContent.header}
+            </header>
+          ) : (
+            <header slot="header" className="wa-split top-header">
+              <div className="wa-cluster wa-align-items-center">
+                {/* This toggle button is now simpler and correctly placed. */}
+                <wa-button appearance="plain" size="small" data-toggle-nav>
+                  <wa-icon name="bars" label="Toggle navigation"></wa-icon>
+                </wa-button>
+
+                {/*
                 WHY THIS IS BETTER:
                 - The home link is a simple `<a>` tag styled with layout utilities. 
                 - No need for a complex button-within-a-button structure.
                 - This is more semantic and accessible.
               */}
-              <wa-tooltip for="zachwill">zachwill.com</wa-tooltip>
-              <a href="/" id="zachwill" className="wa-cluster wa-align-items-center wa-gap-s">
-                <wa-icon label="Lightning" name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-                <span className="wa-heading-m">Zach Williams</span>
+                <wa-tooltip for="zachwill">zachwill.com</wa-tooltip>
+                <a href="/" id="zachwill" className="wa-cluster wa-align-items-center wa-gap-s">
+                  <wa-icon label="Lightning" name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+                  <span className="wa-heading-m">Zach Williams</span>
+                </a>
+              </div>
+
+              <div className="wa-cluster wa-gap-xs">
+                <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
+                  <wa-button id="zach-twitter" appearance="plain" size="small" aria-label="Twitter">
+                    <wa-icon label="Twitter" name="at"></wa-icon>
+                  </wa-button>
+                  <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
+                </a>
+                <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
+                  <wa-button id="zach-github" appearance="plain" size="small" aria-label="GitHub">
+                    <wa-icon label="GitHub" name="code"></wa-icon>
+                  </wa-button>
+                  <wa-tooltip for="zach-github">GitHub</wa-tooltip>
+                </a>
+              </div>
+            </header>
+          )}
+
+          {/* Render custom subheader slot if provided */}
+          {slotContent?.subheader && (
+            <div slot="subheader">
+              {slotContent.subheader}
+            </div>
+          )}
+
+          {/* Render custom navigation-header or default */}
+          {slotContent?.['navigation-header'] ? (
+            <div slot="navigation-header">
+              {slotContent['navigation-header']}
+            </div>
+          ) : (
+            <div slot="navigation-header" className="wa-mobile-only">
+              <wa-tooltip for="zachwill-dot-com">Home</wa-tooltip>
+              <a href="/" id="zachwill-dot-com" className="wa-cluster wa-align-items-center wa-gap-s" data-drawer="close">
+                <wa-icon label="Home" name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+                <span className="wa-heading-m">zachwill.com</span>
               </a>
             </div>
+          )}
 
-            <div className="wa-cluster wa-gap-xs">
-              <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
-                <wa-button id="zach-twitter" appearance="plain" size="small" aria-label="Twitter">
-                  <wa-icon label="Twitter" name="at"></wa-icon>
-                </wa-button>
-                <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
-              </a>
-              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
-                <wa-button id="zach-github" appearance="plain" size="small" aria-label="GitHub">
-                  <wa-icon label="GitHub" name="code"></wa-icon>
-                </wa-button>
-                <wa-tooltip for="zach-github">GitHub</wa-tooltip>
-              </a>
+          {/* Render custom navigation or default */}
+          {slotContent?.navigation ? (
+            <nav slot="navigation">
+              {slotContent.navigation}
+            </nav>
+          ) : (
+            <nav slot="navigation">
+              {Object.entries(navigationData.postsByYear)
+                .sort(([a], [b]) => b.localeCompare(a))
+                .map(([year, posts]) => (
+                  <div className="nav-section" key={year}>
+                    <h2>{year}</h2>
+                    <ul className="posts-list">
+                      {posts.map(post => (
+                        <li key={post.permalink}>
+                          <a
+                            href={post.permalink}
+                            className={currentPath === post.permalink ? 'current' : ''}
+                            // This is the "pro-tip" for closing the drawer on navigation
+                            data-drawer="close"
+                          >
+                            {post.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+            </nav>
+          )}
+
+          {/* Render custom navigation-footer slot if provided */}
+          {slotContent?.['navigation-footer'] && (
+            <div slot="navigation-footer">
+              {slotContent['navigation-footer']}
             </div>
-          </header>
-
-          {/*
-            - This content will ONLY appear at the top of the mobile navigation drawer.
-            - We add `data-drawer="close"` to the link so it closes the menu if the user clicks it.
-          */}
-          <div slot="navigation-header" className="wa-mobile-only">
-            <wa-tooltip for="zachwill-dot-com">Home</wa-tooltip>
-            <a href="/" id="zachwill-dot-com" className="wa-cluster wa-align-items-center wa-gap-s" data-drawer="close">
-              <wa-icon label="Home" name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-              <span className="wa-heading-m">zachwill.com</span>
-            </a>
-          </div>
-
-          {/*
-            WHY THIS IS BETTER:
-            - The `navigation` content is now wrapped in a semantic `<nav>` tag.
-            - The component will automatically move this into a drawer on mobile.
-          */}
-          <nav slot="navigation">
-            {Object.entries(navigationData.postsByYear)
-              .sort(([a], [b]) => b.localeCompare(a))
-              .map(([year, posts]) => (
-                <div className="nav-section" key={year}>
-                  <h2>{year}</h2>
-                  <ul className="posts-list">
-                    {posts.map(post => (
-                      <li key={post.permalink}>
-                        <a
-                          href={post.permalink}
-                          className={currentPath === post.permalink ? 'current' : ''}
-                          // This is the "pro-tip" for closing the drawer on navigation
-                          data-drawer="close"
-                        >
-                          {post.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-          </nav>
+          )}
 
           {/* 
             CORRECTED SLOT PLACEMENT:
@@ -160,24 +190,52 @@ export default function AppShell({
             - 3. A footer for the main area (`main-footer` slot)
           */}
 
-          {/* This is an optional header that appears *above* your main content. We can leave it empty if not needed. */}
-          {/* <header slot="main-header">
-              ... could put a title here ...
-          </header> */}
+          {/* Render custom main-header slot if provided */}
+          {slotContent?.['main-header'] && (
+            <header slot="main-header">
+              {slotContent['main-header']}
+            </header>
+          )}
 
-          {/* The default slot is for your primary content. */}
-          <main>
-            {contentData.type === 'post' ? (
-              <Post contentData={contentData} />
-            ) : (
-              <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
-            )}
-          </main>
+          {/* Render custom main content or default content */}
+          {slotContent?.main ? (
+            <main>
+              {slotContent.main}
+            </main>
+          ) : (
+            <main>
+              {contentData.type === 'post' ? (
+                <Post contentData={contentData} />
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
+              )}
+            </main>
+          )}
 
-          {/* This footer appears directly below the main content, but before the page footer. */}
-          <footer slot="main-footer">
-            {/* <About /> */}
-          </footer>
+          {/* Render custom main-footer or default */}
+          {slotContent?.['main-footer'] ? (
+            <footer slot="main-footer">
+              {slotContent['main-footer']}
+            </footer>
+          ) : (
+            <footer slot="main-footer">
+              {/* <About /> */}
+            </footer>
+          )}
+
+          {/* Render custom aside slot if provided */}
+          {slotContent?.aside && (
+            <aside slot="aside">
+              {slotContent.aside}
+            </aside>
+          )}
+
+          {/* Render custom footer slot if provided */}
+          {slotContent?.footer && (
+            <footer slot="footer">
+              {slotContent.footer}
+            </footer>
+          )}
 
         </wa-page>
       </body>

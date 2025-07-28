@@ -14,6 +14,7 @@ import Layout from './templates/Layout';
 import generateRssXml from './templates/Rss';
 import { mdxComponents } from './components';
 import siteConfig from './site.config';
+import { SlotPageData, SlotPageExports, SlotContent, PageSlot } from './types/slots';
 
 // Fix React SSR bug with custom elements - converts 'className' to 'class' for web components
 function fixWebComponentAttributes(html: string): string {
@@ -42,6 +43,9 @@ interface PageData {
     showHeader: boolean;
     layout?: string;
 }
+
+// Union type for both regular and slot-based pages
+type ProcessedPageData = PageData | SlotPageData;
 
 interface NavigationData {
     postsByYear: Record<string, Array<{
@@ -177,6 +181,79 @@ async function processPosts(): Promise<PostData[]> {
     }
 }
 
+async function processTsxPages(): Promise<SlotPageData[]> {
+    console.log('Processing TSX slot-based pages...');
+    const tsxPages: SlotPageData[] = [];
+
+    try {
+        const pageFiles = await readdir('content/pages');
+
+        for (const filename of pageFiles) {
+            const ext = extname(filename);
+            if (ext !== '.tsx') continue;
+
+            console.log(`Processing TSX page: ${filename}`);
+
+            const baseName = filename.replace(/\.tsx$/, '');
+            const modulePath = join(process.cwd(), 'content/pages', filename);
+
+            try {
+                // Dynamically import the TSX module
+                const module = await import(modulePath);
+                const config = module.config;
+
+                if (!config || !config.title) {
+                    console.warn(`TSX page ${filename} missing required config.title`);
+                    continue;
+                }
+
+                // Build slots from exported functions
+                const slots: SlotContent = {};
+                const slotNames: PageSlot[] = [
+                    'banner', 'header', 'subheader', 'menu', 'navigation-header',
+                    'navigation', 'navigation-footer', 'main-header', 'main',
+                    'main-footer', 'aside', 'footer', 'navigation-toggle', 'skip-to-content'
+                ];
+
+                // Check for exported slot functions (capitalize first letter)
+                for (const slotName of slotNames) {
+                    const exportName = slotName.charAt(0).toUpperCase() + slotName.slice(1).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+                    const SlotComponent = module[exportName];
+
+                    if (SlotComponent && typeof SlotComponent === 'function') {
+                        slots[slotName] = React.createElement(SlotComponent);
+                    }
+                }
+
+                // Handle Main as the default slot if no 'main' slot is defined
+                if (!slots.main && module.Main) {
+                    slots.main = React.createElement(module.Main);
+                }
+
+                const permalink = config.permalink || `/${baseName}/`;
+
+                tsxPages.push({
+                    title: config.title,
+                    permalink,
+                    slots,
+                    config,
+                    isSlotBased: true
+                });
+
+            } catch (moduleError) {
+                console.error(`Error importing TSX page ${filename}:`, moduleError);
+                continue;
+            }
+        }
+
+        console.log(`Processed ${tsxPages.length} TSX pages`);
+        return tsxPages;
+    } catch (error) {
+        console.error('Error processing TSX pages:', error);
+        return [];
+    }
+}
+
 async function processPages(): Promise<PageData[]> {
     console.log('Processing static pages...');
     const pages: PageData[] = [];
@@ -217,7 +294,7 @@ async function processPages(): Promise<PageData[]> {
 }
 
 // Navigation generation
-function generateNavigationData(posts: PostData[], pages: PageData[]): NavigationData {
+function generateNavigationData(posts: PostData[], pages: PageData[], tsxPages: SlotPageData[]): NavigationData {
     const postsByYear: Record<string, any[]> = {};
 
     // Group posts by year
@@ -239,21 +316,32 @@ function generateNavigationData(posts: PostData[], pages: PageData[]): Navigatio
         postsByYear[year].sort((a, b) => b.date.localeCompare(a.date));
     });
 
-    return {
-        postsByYear,
-        pages: pages
+    // Combine regular pages and TSX pages for navigation
+    const allPages = [
+        ...pages
+            .filter(page => page.permalink !== '/') // Don't show home in navigation
+            .map(page => ({
+                title: page.title,
+                permalink: page.permalink
+            })),
+        ...tsxPages
             .filter(page => page.permalink !== '/') // Don't show home in navigation
             .map(page => ({
                 title: page.title,
                 permalink: page.permalink
             }))
+    ];
+
+    return {
+        postsByYear,
+        pages: allPages
     };
 }
 
 
 
 // Content generation
-async function generateContent(posts: PostData[], pages: PageData[], navigationData: NavigationData) {
+async function generateContent(posts: PostData[], pages: PageData[], tsxPages: SlotPageData[], navigationData: NavigationData) {
     console.log('Generating content with WebAwesome app shell...');
 
     // Process all posts
@@ -331,7 +419,32 @@ async function generateContent(posts: PostData[], pages: PageData[], navigationD
         await writeHtmlFile(outputPath, html);
     }
 
-    console.log(`Generated ${posts.length} posts and ${pages.length} pages`);
+    // Generate TSX slot-based pages
+    for (const tsxPage of tsxPages) {
+        const contentData: ContentData = {
+            type: 'page',
+            title: tsxPage.title,
+            content: '' // TSX pages use slots instead of content
+        };
+
+        const html = fixWebComponentAttributes(renderToStaticMarkup(
+            <Layout
+                title={tsxPage.title}
+                navigationData={navigationData}
+                contentData={contentData}
+                currentPath={tsxPage.permalink}
+                slotContent={tsxPage.slots}
+            />
+        ));
+
+        const outputPath = tsxPage.permalink === '/'
+            ? 'dist/index.html'
+            : join('dist', tsxPage.permalink.slice(1), 'index.html');
+
+        await writeHtmlFile(outputPath, html);
+    }
+
+    console.log(`Generated ${posts.length} posts, ${pages.length} pages, and ${tsxPages.length} TSX pages`);
 }
 
 async function generateRssFeed(posts: PostData[]) {
@@ -369,13 +482,14 @@ async function build() {
 
     const posts = await processPosts();
     const pages = await processPages();
-    const navigationData = generateNavigationData(posts, pages);
+    const tsxPages = await processTsxPages();
+    const navigationData = generateNavigationData(posts, pages, tsxPages);
 
-    await generateContent(posts, pages, navigationData);
+    await generateContent(posts, pages, tsxPages, navigationData);
     await generateRssFeed(posts);
     await copyAssets();
 
-    console.log(`✅ Clean build complete! Generated ${posts.length} posts and ${pages.length} pages.`);
+    console.log(`✅ Clean build complete! Generated ${posts.length} posts, ${pages.length} pages, and ${tsxPages.length} TSX pages.`);
 }
 
 // Run the build
