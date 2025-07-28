@@ -63,9 +63,9 @@ export default function AppShell({
       </head>
 
       <body
-        className="wa-palette-zach wa-theme-zach wa-cloak"
+        className="wa-palette-zach wa-theme-zach wa-cloak wa-light"
         data-signals-webawesome="!document.querySelector('body').classList.contains('wa-cloak')"
-        data-class-wa-dak="window.matchMedia('(prefers-color-scheme: dark)').matches"
+        { /* data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches" */}
         data-effect="if ($webawesome) {
           const nav = document.querySelector('nav .current');
           const article = document.querySelector('main h1');
