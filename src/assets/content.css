@@ -14,7 +14,6 @@ body {
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: var(--wa-color-surface-default);
 }
 
 body {
@@ -22,6 +21,24 @@ body {
         color: var(--wa-color-brand);
     }
 }
+
+html,
+body,
+main,
+article {
+    background-color: var(--wa-color-surface-default);
+}
+
+@media (prefers-color-scheme: dark) {
+
+    html,
+    body,
+    main,
+    article {
+        background-color: var(--wa-color-neutral-05);
+    }
+}
+
 
 /* ============================================
    WA-PAGE: THE MAIN SCAFFOLD
