@@ -29,16 +29,6 @@ article {
     background-color: var(--wa-color-surface-default);
 }
 
-@media (prefers-color-scheme: dark) {
-
-    html,
-    body,
-    main,
-    article {
-        background-color: var(--wa-color-neutral-05);
-    }
-}
-
 
 /* ============================================
    WA-PAGE: THE MAIN SCAFFOLD
