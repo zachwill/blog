@@ -151,26 +151,13 @@ wa-button[data-toggle-nav] {
     }
 }
 
-.icon.purple {
-    /* 1. DEFINE and set default (light theme) values for your variables */
-    --icon-fg-color: var(--wa-color-purple-50);
-    --icon-bg-color: var(--wa-color-purple-90);
-
-    /* 2. USE the variables to style the component */
-    color: var(--icon-fg-color);
-    background-color: var(--icon-bg-color);
-
-    /* This is applied to a <wa-badge>, so let's set its size */
+.icon {
     font-size: var(--wa-font-size-xl);
-}
 
-/*
-    3. REDEFINE ONLY THE VARIABLES for dark mode.
-    This is much cleaner than re-declaring all the properties again.
-  */
-html.wa-dark .icon.purple {
-    --icon-fg-color: var(--wa-color-purple-60);
-    --icon-bg-color: var(--wa-color-purple-20);
+    &.purple {
+        color: var(--wa-color-purple-on-quiet);
+        background-color: var(--wa-color-purple-fill-normal);
+    }
 }
 
 /* ============================================
@@ -201,11 +188,13 @@ html.wa-dark .icon.purple {
 
 ::view-transition-old(root) {
     animation: fade-out 180ms cubic-bezier(.4, 0, 1, 1) both;
+    /* animation: fade-out-up 250ms cubic-bezier(0.65, 0.05, 0.35, 1); */
     /* ease-out */
 }
 
 ::view-transition-new(root) {
     animation: fade-in 250ms cubic-bezier(0, 0, .2, 1) both;
+    /* animation: fade-in-up 250ms cubic-bezier(0.65, 0.05, 0.35, 1); */
 }
 
 @keyframes fade-out {
@@ -225,5 +214,29 @@ html.wa-dark .icon.purple {
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes fade-out-up {
+    0% {
+        opacity: 1;
+        transform: translateZ(0)
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(0, -4rem, 0)
+    }
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 4rem, 0)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateZ(0)
     }
 }
