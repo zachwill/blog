@@ -30,6 +30,12 @@ data-monkey got boring meeting
 with boring manager Rob`}
         </pre>
       </div>
+
+      <div className="wa-cluster wa-justify-content-center wa-gap-m">
+        <wa-badge variant="brand">🚀 Built with slot-based TSX</wa-badge>
+        <wa-badge variant="success">✨ Zero MDX stubs needed</wa-badge>
+        <wa-badge variant="neutral">🎯 Direct slot targeting</wa-badge>
+      </div>
     </div>
   );
 }
@@ -73,10 +79,5 @@ export function Aside() {
 
 export function Footer() {
   return (
-    <div className="wa-cluster wa-justify-content-center wa-gap-m">
-      <wa-badge variant="brand">🚀 Built with slot-based TSX</wa-badge>
-      <wa-badge variant="success">✨ Zero MDX stubs needed</wa-badge>
-      <wa-badge variant="neutral">🎯 Direct slot targeting</wa-badge>
-    </div>
   );
 } 
