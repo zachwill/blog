@@ -190,15 +190,40 @@ html.wa-dark .icon.purple {
     }
 }
 
-/* outgoing page */
+/* ============================================
+   VIEW TRANSITIONS
+   ============================================ */
+
+/* Enable view transitions for page navigation (MPA) */
+@view-transition {
+    navigation: auto;
+}
+
 ::view-transition-old(root) {
-  animation: fade-out 180ms cubic-bezier(.4,0,1,1) both; /* ease-out */
+    animation: fade-out 180ms cubic-bezier(.4, 0, 1, 1) both;
+    /* ease-out */
 }
 
-/* incoming page */
 ::view-transition-new(root) {
-  animation: fade-in 250ms cubic-bezier(0,0,.2,1) both;  /* ease-in */
+    animation: fade-in 250ms cubic-bezier(0, 0, .2, 1) both;
 }
 
-@keyframes fade-out { from {opacity:1;} to {opacity:0;} }
-@keyframes fade-in  { from {opacity:0;} to {opacity:1;} }
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

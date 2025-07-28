@@ -2,7 +2,6 @@
 export { About } from './About';
 export { FavoritePosts } from './FavoritePosts';
 export { RecentPosts } from './RecentPosts';
-export { Monkey } from './Monkey';
 export { default as DataThemeTest } from './DataThemeTest';
 
 // Export types
@@ -22,13 +21,11 @@ export const formatDate = (dateString: string): string => {
 import { About } from './About';
 import { FavoritePosts } from './FavoritePosts';
 import { RecentPosts } from './RecentPosts';
-import { Monkey } from './Monkey';
 import DataThemeTest from './DataThemeTest';
 
 export const mdxComponents = {
     About,
     FavoritePosts,
     RecentPosts,
-    Monkey,
     DataThemeTest,
 }; 

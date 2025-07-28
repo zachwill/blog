@@ -9,7 +9,7 @@ export const config = {
 export function Main() {
   return (
     <div className="wa-stack wa-gap-m">
-      <h2>About data-monkey</h2>
+      <h2>data-monkey</h2>
       <p>
         This page demonstrates the new slot-based TSX system. The monkey component
         below can interact with DOM fragments and update content dynamically.
