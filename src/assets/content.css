@@ -17,10 +17,6 @@ body {
     background-color: var(--wa-color-surface-default);
 }
 
-html:has(.wa-dark) {
-    background-color: var(--wa-color-neutral-05);
-}
-
 body {
     a {
         color: var(--wa-color-brand);

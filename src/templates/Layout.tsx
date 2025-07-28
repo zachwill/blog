@@ -64,6 +64,7 @@ export default function AppShell({
 
       <body
         className="wa-palette-zach wa-theme-zach wa-cloak"
+        style={{ backgroundColor: "var(--wa-color-surface-default)" }}
         data-signals-webawesome="!document.querySelector('body').classList.contains('wa-cloak')"
         data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches"
         data-effect="if ($webawesome) {
