@@ -48,7 +48,7 @@ export default function AppShell({
   const pageTitle = title || siteConfig.title;
 
   return (
-    <html lang="en" className="wa-cloak">
+    <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,8 +63,20 @@ export default function AppShell({
       </head>
 
       <body
-        className="wa-palette-zach wa-theme-zach"
+        className="wa-palette-zach wa-theme-zach wa-cloak"
+        data-signals-webawesome="!document.querySelector('body').classList.contains('wa-cloak')"
         data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches"
+        data-effect="if ($webawesome) {
+          const nav = document.querySelector('nav .current');
+          const article = document.querySelector('main h1');
+          if (nav) {
+            nav.scrollIntoView({ behavior: 'smooth' });
+            article.scrollIntoView({ behavior: 'instant' });
+          }
+        }"
+        {...{
+          "data-on-load__delay.200ms": "$webawesome = !document.querySelector('body').classList.contains('wa-cloak')"
+        }}
       >
         {/*
           WHY THIS IS BETTER:
@@ -239,6 +251,6 @@ export default function AppShell({
 
         </wa-page>
       </body>
-    </html>
+    </html >
   );
 }

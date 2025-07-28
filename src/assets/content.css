@@ -81,7 +81,6 @@ header[slot='header'] {
     wa-page[view='desktop'] & {
         border-right: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
         overflow-y: auto;
-        height: 100vh;
         /* Ensure it can scroll independently */
     }
 }
