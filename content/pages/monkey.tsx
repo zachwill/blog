@@ -1,10 +1,41 @@
 import React from 'react';
-import { Monkey } from '@/components/Monkey';
 
 export const config = {
   title: "data-monkey 🐵",
   permalink: "/monkey/"
 };
+
+function Monkey() {
+  return (
+    <div className="wa-cluster wa-gap-m">
+      <script type="module" src="/assets/monkey.js"></script>
+      <wa-button
+        variant="brand"
+        data-on-click="@monkey('/assets/mock-response.html')"
+        data-monkey="{
+          patch: '#target-div',
+          select: '#fragment-one,
+          swap: 'inner',
+          url: '?bananas',
+        }"
+      >
+        Fetch Fragment 1 🍌
+      </wa-button>
+
+      <wa-button
+        data-on-click="@monkey('/assets/mock-response.html')"
+        data-monkey="{
+          patch: '#target-div',
+          select: '#fragment-two,
+          swap: 'inner',
+          url: '?monkeypatched',
+        }"
+      >
+        Fetch Fragment 2 🐒
+      </wa-button>
+    </div>
+  );
+}
 
 export function Main() {
   return (
@@ -52,10 +83,6 @@ export function Aside() {
           <p>Use these buttons to test dynamic content loading:</p>
           <Monkey />
         </div>
-
-        <div slot="footer">
-          <wa-badge variant="neutral" pill>Interactive Demo</wa-badge>
-        </div>
       </wa-card>
 
       <wa-card>
@@ -76,8 +103,3 @@ export function Aside() {
     </div>
   );
 }
-
-export function Footer() {
-  return (
-  );
-} 
