@@ -14,6 +14,7 @@ body {
     padding: 0;
     margin: 0;
     height: 100%;
+    background-color: var(--wa-color-surface-default);
 }
 
 html:has(.wa-dark) {
