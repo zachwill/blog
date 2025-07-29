@@ -60,6 +60,7 @@ export default function AppShell({
         <link rel="stylesheet" href="/assets/content.css" />
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
+        <script type="module" src="/assets/inspector.js"></script>
       </head>
 
       <body
@@ -78,11 +79,7 @@ export default function AppShell({
           "data-on-wa-discovery-complete": "$webawesome = !document.querySelector('body').classList.contains('wa-cloak')"
         }}
       >
-        {/*
-          WHY THIS IS BETTER:
-          - We remove `disable-navigation-toggle` and `view="desktop"`. The component handles these automatically.
-          - We set the mobile breakpoint directly.
-        */}
+        <datastar-inspector></datastar-inspector>
         <wa-page mobile-breakpoint="1080px">
           {/* Render custom banner slot if provided */}
           {slotContent?.banner && (
@@ -231,7 +228,12 @@ export default function AppShell({
             </footer>
           ) : (
             <footer slot="main-footer">
-              {/* <About /> */}
+              {contentData.type === 'post' && (
+                <div className="wa-stack wa-gap-l" style={{ width: '80ch', margin: '0 auto', padding: '0 var(--wa-space-l)' }}>
+                  <wa-divider></wa-divider>
+                  <About heading="m" fontSize="m" gap="s" />
+                </div>
+              )}
             </footer>
           )}
 
