@@ -96,6 +96,7 @@ export function Main() {
       `}</style>
       <div className="showcase-examples-wrapper">
         <div className="showcase-examples">
+
           <wa-card>
             <div slot="header" className="wa-split">
               <h3 className="wa-heading-m">Your Cart</h3>
@@ -107,9 +108,9 @@ export function Main() {
               <div className="wa-flank">
                 <wa-avatar
                   shape="rounded"
-                  style={{ backgroundColor: 'var(--wa-color-green-60)', color: 'var(--wa-color-green-95)' }}
+                  style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
                 >
-                  <wa-icon slot="icon" name="sword-laser"></wa-icon>
+                  <wa-icon slot="icon" name="jedi"></wa-icon>
                 </wa-avatar>
                 <div className="wa-stack wa-gap-2xs">
                   <div className="wa-split wa-gap-2xs">
@@ -126,9 +127,9 @@ export function Main() {
               <div className="wa-flank">
                 <wa-avatar
                   shape="rounded"
-                  style={{ backgroundColor: 'var(--wa-color-cyan-60)', color: 'var(--wa-color-cyan-95)' }}
+                  style={{ backgroundColor: 'var(--wa-color-purple-fill-normal)', color: 'var(--wa-color-purple-on-quiet)' }}
                 >
-                  <wa-icon slot="icon" name="robot-astromech"></wa-icon>
+                  <wa-icon slot="icon" name="robot"></wa-icon>
                 </wa-avatar>
                 <div className="wa-stack wa-gap-2xs">
                   <div className="wa-split wa-gap-2xs">
@@ -154,6 +155,7 @@ export function Main() {
               </wa-button>
             </div>
           </wa-card>
+
           <wa-card>
             <wa-avatar shape="rounded" style={{ '--size': '1.8lh', float: 'left', marginRight: 'var(--wa-space-m)' }}>
               <wa-icon slot="icon" name="hat-wizard" style={{ fontSize: '1.75em' }}></wa-icon>
@@ -167,15 +169,16 @@ export function Main() {
             <div className="wa-stack">
               <h3 className="wa-heading-m">Sign In</h3>
               <wa-input tabIndex={-1} label="Email" placeholder="ddjarin@mandalore.gov" inert>
-                <wa-icon slot="start" name="envelope" variant="regular"></wa-icon>
+                <wa-icon slot="start" name="envelope"></wa-icon>
               </wa-input>
               <wa-input tabIndex={-1} label="Password" type="password" inert>
-                <wa-icon slot="start" name="lock" variant="regular"></wa-icon>
+                <wa-icon slot="start" name="lock"></wa-icon>
               </wa-input>
               <wa-button tabIndex={-1} variant="brand">Sign In</wa-button>
               <a href="#" tabIndex={-1} className="wa-body-s">I forgot my password</a>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-stack">
               <div className="wa-split">
@@ -194,6 +197,7 @@ export function Main() {
               <a href="" tabIndex={-1}>View all completed</a>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-stack">
               <div className="wa-frame wa-border-radius-m" style={{ alignSelf: 'center', maxInlineSize: '25ch' }}>
@@ -231,6 +235,7 @@ export function Main() {
               </div>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-stack">
               <h3 className="wa-heading-m">Chalmun's Spaceport Cantina</h3>
@@ -255,10 +260,11 @@ export function Main() {
               </div>
             </div>
           </wa-card>
+
           <wa-card appearance="plain" style={{ '--spacing': '0' }}>
             <div className="wa-stack wa-gap-s">
               <wa-callout variant="success">
-                <wa-icon slot="icon" name="user-bounty-hunter"></wa-icon>
+                <wa-icon slot="icon" name="rocket"></wa-icon>
                 <div className="wa-split">
                   <span>This is the way.</span>
                   <wa-button variant="success" size="small">
@@ -267,7 +273,7 @@ export function Main() {
                 </div>
               </wa-callout>
               <wa-callout variant="warning">
-                <wa-icon slot="icon" name="starfighter-twin-ion-engine"></wa-icon>
+                <wa-icon slot="icon" name="triangle-exclamation"></wa-icon>
                 <div className="wa-split">
                   <span>It's a trap!</span>
                   <wa-button variant="warning" size="small">
@@ -276,7 +282,7 @@ export function Main() {
                 </div>
               </wa-callout>
               <wa-callout variant="danger">
-                <wa-icon slot="icon" name="space-station-moon"></wa-icon>
+                <wa-icon slot="icon" name="moon"></wa-icon>
                 <div className="wa-split">
                   <span>That's no moon.</span>
                   <wa-button variant="danger" size="small">
@@ -286,6 +292,7 @@ export function Main() {
               </wa-callout>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-stack">
               <div className="wa-flank:end">
@@ -298,6 +305,7 @@ export function Main() {
               </p>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-stack">
               <div className="wa-split wa-align-items-start">
@@ -318,7 +326,7 @@ export function Main() {
                   <dd><wa-format-date date="2025-03-15"></wa-format-date></dd>
                 </div>
                 <div className="wa-flank wa-align-items-center">
-                  <dt><wa-icon name="coin-vertical" fixed-width></wa-icon></dt>
+                  <dt><wa-icon name="coins" fixed-width></wa-icon></dt>
                   <dd>Paid with copper pennies</dd>
                 </div>
               </dl>
@@ -330,11 +338,12 @@ export function Main() {
               </a>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-stack">
               <div className="wa-split">
                 <div className="wa-cluster wa-heading-l">
-                  <wa-icon name="book-sparkles"></wa-icon>
+                  <wa-icon name="bookmark"></wa-icon>
                   <h3>Fellowship</h3>
                 </div>
                 <wa-badge>Most Popular</wa-badge>
@@ -368,6 +377,7 @@ export function Main() {
               </div>
             </div>
           </wa-card>
+
           <wa-card className="showcase-code-sample">
             <pre>
               &lt;<span className="tag">div</span> <span className="attribute">class</span>="<span className="value">fellowship</span>"&gt;
@@ -379,7 +389,8 @@ export function Main() {
               &lt;/<span className="tag">ul</span>&gt;
               &lt;/<span className="tag">div</span>&gt;</pre>
           </wa-card>
-          <wa-card with-footer>
+
+          <wa-card>
             <div className="wa-flank:end">
               <div className="wa-stack wa-gap-xs">
                 <div className="wa-cluster wa-gap-xs">
@@ -404,14 +415,15 @@ export function Main() {
               </wa-button>
             </div>
           </wa-card>
+
           <wa-card>
             <div className="wa-flank:end">
               <a href="" className="wa-flank wa-link-plain" tabIndex={-1}>
                 <wa-avatar
                   shape="rounded"
-                  style={{ backgroundColor: 'var(--wa-color-yellow-90)', color: 'var(--wa-color-yellow-50)' }}
+                  style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
                 >
-                  <wa-icon slot="icon" name="egg-fried"></wa-icon>
+                  <wa-icon slot="icon" name="mug-saucer"></wa-icon>
                 </wa-avatar>
                 <div className="wa-gap-2xs wa-stack">
                   <span className="wa-heading-s">Second Breakfast</span>
@@ -429,6 +441,7 @@ export function Main() {
               <wa-tooltip for="more-actions-2">View menu</wa-tooltip>
             </div>
           </wa-card>
+
           <wa-card>
             <div slot="header" className="wa-stack wa-gap-xs">
               <h2 className="wa-heading-m">Decks</h2>
@@ -441,7 +454,7 @@ export function Main() {
                 <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
                   <wa-avatar
                     shape="rounded"
-                    style={{ backgroundColor: 'var(--wa-color-blue-90)', color: 'var(--wa-color-blue-50)' }}
+                    style={{ backgroundColor: 'var(--wa-color-brand-fill-normal)', color: 'var(--wa-color-brand-on-quiet)' }}
                   >
                     <wa-icon slot="icon" name="shield"></wa-icon>
                   </wa-avatar>
@@ -455,9 +468,9 @@ export function Main() {
                 <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
                   <wa-avatar
                     shape="rounded"
-                    style={{ backgroundColor: 'var(--wa-color-green-90)', color: 'var(--wa-color-green-50)' }}
+                    style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
                   >
-                    <wa-icon slot="icon" name="chevrons-up"></wa-icon>
+                    <wa-icon slot="icon" name="tower-observation"></wa-icon>
                   </wa-avatar>
                   <div className="wa-stack wa-gap-2xs">
                     <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
@@ -469,7 +482,7 @@ export function Main() {
                 <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
                   <wa-avatar
                     shape="rounded"
-                    style={{ backgroundColor: 'var(--wa-color-red-90)', color: 'var(--wa-color-red-50)' }}
+                    style={{ backgroundColor: 'var(--wa-color-danger-fill-normal)', color: 'var(--wa-color-danger-on-quiet)' }}
                   >
                     <wa-icon slot="icon" name="explosion"></wa-icon>
                   </wa-avatar>
@@ -483,9 +496,9 @@ export function Main() {
                 <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
                   <wa-avatar
                     shape="rounded"
-                    style={{ backgroundColor: 'var(--wa-color-yellow-90)', color: 'var(--wa-color-yellow-50)' }}
+                    style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
                   >
-                    <wa-icon slot="icon" name="moon-stars"></wa-icon>
+                    <wa-icon slot="icon" name="hand-sparkles"></wa-icon>
                   </wa-avatar>
                   <div className="wa-stack wa-gap-2xs">
                     <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
@@ -497,6 +510,7 @@ export function Main() {
               </div>
             </div>
           </wa-card>
+
         </div>
       </div>
     </>
