@@ -1,7 +1,7 @@
 import React from 'react';
 import siteConfig from '../site.config';
-import { Post } from './Post';
-import { About } from '@/components/About';
+import { Header } from '../components/Header';
+import { Nav } from '../components/Nav';
 import { SlotContent } from '@/types/slots';
 
 interface NavigationData {
@@ -38,7 +38,7 @@ interface AppShellProps {
 }
 
 
-export default function AppShell({
+export default function Layout({
   title,
   navigationData,
   contentData,
@@ -60,7 +60,6 @@ export default function AppShell({
         <link rel="stylesheet" href="/assets/content.css" />
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
-        <script type="module" src="/assets/inspector.js"></script>
       </head>
 
       <body
@@ -89,45 +88,9 @@ export default function AppShell({
 
           {/* Render custom header or default header */}
           {slotContent?.header ? (
-            <header slot="header">
-              {slotContent.header}
-            </header>
+            <div>{slotContent.header}</div>
           ) : (
-            <header slot="header" className="wa-split top-header">
-              <div className="wa-cluster wa-align-items-center">
-                {/* This toggle button is now simpler and correctly placed. */}
-                <wa-button appearance="plain" size="small" data-toggle-nav>
-                  <wa-icon name="bars" label="Toggle navigation"></wa-icon>
-                </wa-button>
-
-                {/*
-                WHY THIS IS BETTER:
-                - The home link is a simple `<a>` tag styled with layout utilities. 
-                - No need for a complex button-within-a-button structure.
-                - This is more semantic and accessible.
-              */}
-                <wa-tooltip for="zachwill">zachwill.com</wa-tooltip>
-                <a href="/" id="zachwill" className="wa-cluster wa-align-items-center wa-gap-s">
-                  <wa-icon label="Lightning" name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-                  <span className="wa-heading-m">Zach Williams</span>
-                </a>
-              </div>
-
-              <div className="wa-cluster wa-gap-xs">
-                <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer">
-                  <wa-button id="zach-twitter" appearance="plain" size="small" aria-label="Twitter">
-                    <wa-icon label="Twitter" name="at"></wa-icon>
-                  </wa-button>
-                  <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
-                </a>
-                <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
-                  <wa-button id="zach-github" appearance="plain" size="small" aria-label="GitHub">
-                    <wa-icon label="GitHub" name="code"></wa-icon>
-                  </wa-button>
-                  <wa-tooltip for="zach-github">GitHub</wa-tooltip>
-                </a>
-              </div>
-            </header>
+            <Header />
           )}
 
           {/* Render custom subheader slot if provided */}
@@ -137,50 +100,18 @@ export default function AppShell({
             </div>
           )}
 
-          {/* Render custom navigation-header or default */}
-          {slotContent?.['navigation-header'] ? (
-            <div slot="navigation-header">
-              {slotContent['navigation-header']}
-            </div>
-          ) : (
-            <div slot="navigation-header" className="wa-mobile-only">
-              <wa-tooltip for="zachwill-dot-com">Home</wa-tooltip>
-              <a href="/" id="zachwill-dot-com" className="wa-cluster wa-align-items-center wa-gap-s" data-drawer="close">
-                <wa-icon label="Home" name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-                <span className="wa-heading-m">zachwill.com</span>
-              </a>
-            </div>
-          )}
-
           {/* Render custom navigation or default */}
-          {slotContent?.navigation ? (
-            <nav slot="navigation">
-              {slotContent.navigation}
-            </nav>
+          {slotContent?.navigation || slotContent?.['navigation-header'] ? (
+            <>
+              {slotContent['navigation-header'] && (
+                <div>{slotContent['navigation-header']}</div>
+              )}
+              {slotContent.navigation && (
+                <div>{slotContent.navigation}</div>
+              )}
+            </>
           ) : (
-            <nav slot="navigation">
-              {Object.entries(navigationData.postsByYear)
-                .sort(([a], [b]) => b.localeCompare(a))
-                .map(([year, posts]) => (
-                  <div className="nav-section" key={year}>
-                    <h2>{year}</h2>
-                    <ul className="posts-list">
-                      {posts.map(post => (
-                        <li key={post.permalink}>
-                          <a
-                            href={post.permalink}
-                            className={currentPath === post.permalink ? 'current' : ''}
-                            // This is the "pro-tip" for closing the drawer on navigation
-                            data-drawer="close"
-                          >
-                            {post.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-            </nav>
+            <Nav navigationData={navigationData} currentPath={currentPath} />
           )}
 
           {/* Render custom navigation-footer slot if provided */}
@@ -207,16 +138,10 @@ export default function AppShell({
 
           {/* Render custom main content or default content */}
           {slotContent?.main ? (
-            <main>
-              {slotContent.main}
-            </main>
+            <div>{slotContent.main}</div>
           ) : (
             <main>
-              {contentData.type === 'post' ? (
-                <Post contentData={contentData} />
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
-              )}
+              <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
             </main>
           )}
 

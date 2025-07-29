@@ -12,6 +12,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Layout from './templates/Layout';
 import generateRssXml from './templates/Rss';
+import { Main as PostMain } from './templates/PostTemplate';
 import { mdxComponents } from './components';
 import siteConfig from './site.config';
 import { SlotPageData, SlotPageExports, SlotContent, PageSlot } from './types/slots';
@@ -21,7 +22,7 @@ function fixWebComponentAttributes(html: string): string {
     return html.replace(/className=/g, 'class=');
 }
 
-interface PostData {
+interface Post {
     title: string;
     date: string;
     permalink: string;
@@ -29,10 +30,7 @@ interface PostData {
     slug: string;
     filePath: string;
     isMdx: boolean;
-}
-
-interface ProcessedPost extends PostData {
-    processedContent: string;
+    processedContent?: string;
 }
 
 interface PageData {
@@ -103,7 +101,7 @@ async function processMarkdownContent(markdownContent: string): Promise<string> 
 
 async function processMdxContent(
     mdxContent: string,
-    componentProps?: { posts?: ProcessedPost[]; favoritePostSlugs?: string[] }
+    componentProps?: { posts?: Post[]; favoritePostSlugs?: string[] }
 ): Promise<string> {
     try {
         const { default: MdxComponent } = await evaluate(mdxContent, {
@@ -119,13 +117,16 @@ async function processMdxContent(
         const props = componentProps || {};
 
         // Create component context with props
-        const ComponentsWithProps = Object.entries(mdxComponents).reduce((acc, [name, Component]) => {
-            acc[name] = (compProps: any) => React.createElement(Component, { ...props, ...compProps });
+        const components = Object.entries(mdxComponents).reduce((acc, [name, Component]) => {
+            acc[name] = (compProps: any) => {
+                const finalProps = { ...props, ...compProps };
+                return React.createElement(Component as any, finalProps);
+            };
             return acc;
         }, {} as any);
 
         const html = renderToStaticMarkup(
-            <MdxComponent components={ComponentsWithProps} />
+            <MdxComponent components={components} />
         );
         return fixWebComponentAttributes(html);
     } catch (error) {
@@ -135,9 +136,9 @@ async function processMdxContent(
 }
 
 // Content processing
-async function processPosts(): Promise<PostData[]> {
+async function processPosts(): Promise<Post[]> {
     console.log('Processing blog posts...');
-    const posts: PostData[] = [];
+    const posts: Post[] = [];
 
     try {
         const postFiles = await readdir('content/posts');
@@ -294,7 +295,7 @@ async function processPages(): Promise<PageData[]> {
 }
 
 // Navigation generation
-function generateNavigationData(posts: PostData[], pages: PageData[], tsxPages: SlotPageData[]): NavigationData {
+function generateNavigationData(posts: Post[], pages: PageData[], tsxPages: SlotPageData[]): NavigationData {
     const postsByYear: Record<string, any[]> = {};
 
     // Group posts by year
@@ -341,40 +342,44 @@ function generateNavigationData(posts: PostData[], pages: PageData[], tsxPages: 
 
 
 // Content generation
-async function generateContent(posts: PostData[], pages: PageData[], tsxPages: SlotPageData[], navigationData: NavigationData) {
+async function generateContent(posts: Post[], pages: PageData[], tsxPages: SlotPageData[], navigationData: NavigationData) {
     console.log('Generating content with WebAwesome app shell...');
 
     // Process all posts
-    const processedPosts: ProcessedPost[] = await Promise.all(
-        posts.map(async (post) => {
-            const processedContent = post.isMdx
-                ? await processMdxContent(post.content)
-                : await processMarkdownContent(post.content);
-            return { ...post, processedContent };
-        })
-    );
+    for (const post of posts) {
+        post.processedContent = post.isMdx
+            ? await processMdxContent(post.content)
+            : await processMarkdownContent(post.content);
+    }
 
     // Sort posts by date (newest first)
-    processedPosts.sort((a, b) => b.date.localeCompare(a.date));
+    posts.sort((a, b) => b.date.localeCompare(a.date));
 
     // Generate individual post pages
-    for (const post of processedPosts) {
+    for (const post of posts) {
+        const postWithFavorite = {
+            ...post,
+            content: post.processedContent!,
+            isFavorite: siteConfig.favoritePosts.includes(post.slug)
+        };
+
+        const slots: SlotContent = {
+            main: React.createElement(PostMain, { post: postWithFavorite })
+        };
+
         const contentData: ContentData = {
             type: 'post',
             title: post.title,
-            content: `<article>${post.processedContent}</article>`,
-            metadata: {
-                date: post.date,
-                isFavorite: siteConfig.favoritePosts.includes(post.slug)
-            }
+            content: ''
         };
 
         const html = fixWebComponentAttributes(renderToStaticMarkup(
             <Layout
-                title={post.title}
+                title={`${post.title} | zachwill.com`}
                 navigationData={navigationData}
                 contentData={contentData}
                 currentPath={post.permalink}
+                slotContent={slots}
             />
         ));
 
@@ -382,23 +387,14 @@ async function generateContent(posts: PostData[], pages: PageData[], tsxPages: S
         await writeHtmlFile(outputPath, html);
     }
 
-    // Generate pages (including enhanced homepage)
+    // Generate regular pages (no special cases)
     for (const page of pages) {
-        let processedContent: string;
-
-        if (page.isMdx) {
-            // For home page, pass posts data to MDX components
-            const componentProps = page.layout === 'home'
-                ? { posts: processedPosts, favoritePostSlugs: siteConfig.favoritePosts }
-                : undefined;
-
-            processedContent = await processMdxContent(page.content, componentProps);
-        } else {
-            processedContent = await processMarkdownContent(page.content);
-        }
+        const processedContent = page.isMdx
+            ? await processMdxContent(page.content)
+            : await processMarkdownContent(page.content);
 
         const contentData: ContentData = {
-            type: page.layout === 'home' ? 'home' : 'page',
+            type: 'page',
             title: page.title,
             content: processedContent
         };
@@ -419,12 +415,23 @@ async function generateContent(posts: PostData[], pages: PageData[], tsxPages: S
         await writeHtmlFile(outputPath, html);
     }
 
-    // Generate TSX slot-based pages
+    // Generate TSX pages (including home page with posts data)
     for (const tsxPage of tsxPages) {
+        let slots = tsxPage.slots;
+
+        // Inject posts data for home page
+        if (tsxPage.permalink === '/') {
+            const homeModule = await import(join(process.cwd(), 'content/pages/home.tsx'));
+            slots = {
+                ...slots,
+                main: React.createElement(homeModule.Main, { posts, favoritePostSlugs: siteConfig.favoritePosts })
+            };
+        }
+
         const contentData: ContentData = {
-            type: 'page',
+            type: tsxPage.permalink === '/' ? 'home' : 'page',
             title: tsxPage.title,
-            content: '' // TSX pages use slots instead of content
+            content: ''
         };
 
         const html = fixWebComponentAttributes(renderToStaticMarkup(
@@ -433,7 +440,7 @@ async function generateContent(posts: PostData[], pages: PageData[], tsxPages: S
                 navigationData={navigationData}
                 contentData={contentData}
                 currentPath={tsxPage.permalink}
-                slotContent={tsxPage.slots}
+                slotContent={slots}
             />
         ));
 
@@ -447,7 +454,7 @@ async function generateContent(posts: PostData[], pages: PageData[], tsxPages: S
     console.log(`Generated ${posts.length} posts, ${pages.length} pages, and ${tsxPages.length} TSX pages`);
 }
 
-async function generateRssFeed(posts: PostData[]) {
+async function generateRssFeed(posts: Post[]) {
     console.log('Generating RSS feed...');
     const rssXml = generateRssXml({ posts });
     await writeFile('dist/atom.xml', rssXml);
