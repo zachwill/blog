@@ -51,7 +51,7 @@ export default function Layout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>⚡️ {pageTitle}</title>
+        <title>{`⚡️ ${pageTitle}`}</title>
         <meta name="author" content={siteConfig.author} />
         <meta name="description" content={siteConfig.description} />
         <link href="/atom.xml" rel="alternate" title="zachwill" type="application/atom+xml" />
