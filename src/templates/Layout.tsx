@@ -29,7 +29,7 @@ interface ContentData {
   };
 }
 
-interface AppShellProps {
+interface LayoutProps {
   title?: string;
   navigationData: NavigationData;
   contentData: ContentData;
@@ -44,7 +44,7 @@ export default function Layout({
   contentData,
   currentPath,
   slotContent
-}: AppShellProps) {
+}: LayoutProps) {
   const pageTitle = title || siteConfig.title;
 
   return (
