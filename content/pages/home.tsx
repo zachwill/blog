@@ -14,10 +14,10 @@ interface MainProps {
 
 export function Main({ posts }: MainProps) {
   return (
-    <main className="wa-stack wa-gap-xl">
+    <div className="wa-stack wa-gap-xl">
       <About />
       <wa-divider></wa-divider>
       <RecentPosts posts={posts} count={10} />
-    </main>
+    </div>
   );
 } 
