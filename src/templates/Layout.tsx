@@ -1,7 +1,6 @@
 import React from 'react';
 import siteConfig from '../site.config';
-import { Header } from '../components/Header';
-import { Nav } from '../components/Nav';
+import { Header, Nav } from '../components';
 import { SlotContent } from '@/types/slots';
 
 interface NavigationData {
@@ -138,7 +137,7 @@ export default function Layout({
 
           {/* Render custom main content or default content */}
           {slotContent?.main ? (
-            <div>{slotContent.main}</div>
+            <main>{slotContent.main}</main>
           ) : (
             <main>
               <div dangerouslySetInnerHTML={{ __html: contentData.content }} />

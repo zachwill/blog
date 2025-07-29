@@ -20,11 +20,9 @@ export function Main({ post }: { post: Post }) {
       <article>
         <header>
           <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
-            <a href={post.permalink}>
-              <h1 className="wa-heading-xl">
-                {post.title}
-              </h1>
-            </a>
+            <h1 className="wa-heading-xl">
+              {post.title}
+            </h1>
             <time className="wa-body-s">
               {formatDate(post.date)}
             </time>

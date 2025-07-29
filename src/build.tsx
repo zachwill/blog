@@ -1,5 +1,12 @@
+// Built-ins
 import { readdir, readFile, writeFile, mkdir, cp } from 'fs/promises';
 import { join, dirname, extname } from 'path';
+
+// React
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+
+// Third-party dependencies
 import matter from 'gray-matter';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -8,12 +15,14 @@ import remarkRehype from 'remark-rehype';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
 import { evaluate } from '@mdx-js/mdx';
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+
+// Local templates and components
 import Layout from './templates/Layout';
 import generateRssXml from './templates/Rss';
 import { Main as PostMain } from './templates/PostTemplate';
 import { mdxComponents } from './components';
+
+// Configuration and types
 import siteConfig from './site.config';
 import { SlotPageData, SlotPageExports, SlotContent, PageSlot } from './types/slots';
 

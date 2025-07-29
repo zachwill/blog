@@ -11,7 +11,7 @@ function Monkey() {
       <script type="module" src="/assets/monkey.js"></script>
       <wa-button
         variant="brand"
-        data-on-click="@monkey('/assets/mock-response.html')"
+        data-on-click="@monkey('/assets/mock.html')"
         data-monkey="{
           patch: '#target-div',
           select: '#fragment-one,
@@ -23,7 +23,7 @@ function Monkey() {
       </wa-button>
 
       <wa-button
-        data-on-click="@monkey('/assets/mock-response.html')"
+        data-on-click="@monkey('/assets/mock.html')"
         data-monkey="{
           patch: '#target-div',
           select: '#fragment-two,
