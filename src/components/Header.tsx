@@ -17,14 +17,14 @@ export function Header() {
       </div>
 
       <div className="wa-cluster wa-gap-xs">
+        <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
         <wa-button id="zach-twitter" appearance="plain" size="small" aria-label="Twitter" href={siteConfig.social.twitter} target="_blank">
           <wa-icon label="Twitter" name="at"></wa-icon>
         </wa-button>
-        <wa-tooltip for="zach-twitter">Twitter</wa-tooltip>
+        <wa-tooltip for="zach-github">GitHub</wa-tooltip>
         <wa-button id="zach-github" appearance="plain" size="small" aria-label="GitHub" href={siteConfig.social.github} target="_blank">
           <wa-icon label="GitHub" name="code"></wa-icon>
         </wa-button>
-        <wa-tooltip for="zach-github">GitHub</wa-tooltip>
       </div>
     </header>
   );
