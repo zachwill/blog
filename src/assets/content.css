@@ -96,6 +96,11 @@ header[slot='header'] {
 }
 
 /* The main content area and its footer */
+main {
+    padding: var(--wa-space-m);
+    /* padding-bottom: var(--wa-space-l); */
+}
+
 main:has(article),
 main:has(.about) {
     max-width: var(--app-content-max-width);

@@ -21,7 +21,7 @@ export function Main() {
 
         .showcase-examples {
           column-count: 1;
-          column-gap: var(--wa-space-l);
+          column-gap: var(--wa-space-m);
         }
 
         .showcase-examples wa-card {
@@ -30,7 +30,7 @@ export function Main() {
         }
 
         .showcase-examples wa-card:has(+ wa-card) {
-          margin-block-end: var(--wa-space-l);
+          margin-block-end: var(--wa-space-m);
         }
 
         .showcase-examples wa-card[appearance='plain'] {
@@ -46,9 +46,16 @@ export function Main() {
         }
 
         @media (min-width: 950px) {
+          main {
+            padding: var(--wa-space-l);
+          }
           .showcase-examples {
             column-count: auto;
+            column-gap: var(--wa-space-l);
             column-width: 22rem;
+            & wa-card:has(+ wa-card) {
+              margin-block-end: var(--wa-space-l);
+            }
           }
         }
 
@@ -96,7 +103,7 @@ export function Main() {
                 <wa-icon name="xmark" label="Close"></wa-icon>
               </wa-button>
             </div>
-            <div className="wa-stack wa-gap-xl">
+            <div className="wa-stack wa-gap-l">
               <div className="wa-flank">
                 <wa-avatar
                   shape="rounded"
