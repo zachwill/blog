@@ -79,7 +79,6 @@ export default function AppShell({
           "data-on-wa-discovery-complete": "$webawesome = !document.querySelector('body').classList.contains('wa-cloak')"
         }}
       >
-        <datastar-inspector></datastar-inspector>
         <wa-page mobile-breakpoint="1080px">
           {/* Render custom banner slot if provided */}
           {slotContent?.banner && (
@@ -222,18 +221,9 @@ export default function AppShell({
           )}
 
           {/* Render custom main-footer or default */}
-          {slotContent?.['main-footer'] ? (
+          {slotContent?.['main-footer'] && (
             <footer slot="main-footer">
               {slotContent['main-footer']}
-            </footer>
-          ) : (
-            <footer slot="main-footer">
-              {contentData.type === 'post' && (
-                <div className="wa-stack wa-gap-l" style={{ width: '80ch', margin: '0 auto', padding: '0 var(--wa-space-l)' }}>
-                  <wa-divider></wa-divider>
-                  <About heading="m" fontSize="m" gap="s" />
-                </div>
-              )}
             </footer>
           )}
 
