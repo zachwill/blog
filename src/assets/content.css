@@ -101,6 +101,11 @@ main:has(.about) {
     max-width: var(--app-content-max-width);
     margin-inline: auto;
     padding: var(--wa-space-l);
+
+    .purple {
+        color: var(--wa-color-purple-on-quiet);
+        background-color: var(--wa-color-purple-fill-normal);
+    }
 }
 
 /* ============================================
@@ -157,11 +162,6 @@ wa-button[data-toggle-nav] {
     &::part(base) {
         outline-color: transparent;
     }
-}
-
-.purple {
-    color: var(--wa-color-purple-on-quiet);
-    background-color: var(--wa-color-purple-fill-normal);
 }
 
 /* ============================================
