@@ -17,7 +17,7 @@ export function Main({ posts }: MainProps) {
     <div className="wa-stack wa-gap-xl">
       <About />
       <wa-divider></wa-divider>
-      <RecentPosts posts={posts} count={10} />
+      <RecentPosts posts={posts} count={80} />
     </div>
   );
 } 
