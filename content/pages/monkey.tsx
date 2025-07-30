@@ -7,11 +7,24 @@ export const config = {
 
 function Monkey() {
   return (
-    <div className="wa-cluster wa-gap-m">
-      <script type="module" src="/assets/monkey.js" />
+    <div className="wa-cluster wa-gap-m" data-signals="{hxButton: 'intro'}">
+      <wa-button
+        data-on-click="$hxButton = 'intro'"
+        data-effect="if ($hxButton === 'intro') @monkey('/assets/mock.html')"
+        data-monkey="{
+          patch: '#target',
+          select: '#reset',
+          swap: 'inner',
+          url: '?reset'
+        }"
+      >
+        Intro 🎹
+      </wa-button>
+
       <wa-button
         variant="brand"
-        data-on-click="@monkey('/assets/mock.html')"
+        data-on-click="$hxButton = 'one'"
+        data-effect="if ($hxButton === 'one') @monkey('/assets/mock.html')"
         data-monkey="{
           patch: '#target',
           select: '#fragment-one',
@@ -23,7 +36,9 @@ function Monkey() {
       </wa-button>
 
       <wa-button
-        data-on-click="@monkey('/assets/mock.html')"
+        variant="success"
+        data-on-click="$hxButton = 'two'"
+        data-effect="if ($hxButton === 'two') @monkey('/assets/mock.html')"
         data-monkey="{
           patch: '#target',
           select: '#fragment-two',
@@ -34,18 +49,6 @@ function Monkey() {
         Fetch 2 🐒
       </wa-button>
 
-      <wa-button
-        variant="danger"
-        data-on-click="@monkey('/assets/mock.html')"
-        data-monkey="{
-          patch: '#target',
-          select: '#reset',
-          swap: 'inner',
-          url: '?reset'
-        }"
-      >
-        Reset
-      </wa-button>
     </div>
   );
 }
@@ -53,43 +56,63 @@ function Monkey() {
 export function Main() {
   return (
     <div className="wa-stack wa-gap-m">
-      <h2>data-monkey</h2>
-      <p>
-        This page demonstrates the new slot-based TSX system. The monkey component
-        below can interact with DOM fragments and update content dynamically.
-      </p>
+      <script type="module" src="/assets/monkey.js" />
+      <style jsx>{`
+        main {
+          background-color: var(--wa-color-surface-lowered);
+        }
+      `}</style>
+      <wa-card>
+        <div slot="header">
+          <h2>data-monkey</h2>
+        </div>
 
-      <div id="target" style={{
-        border: '1px solid var(--wa-color-surface-border)',
-        padding: 'var(--wa-space-l)',
-        backgroundColor: 'var(--wa-color-bg-secondary)',
-        borderRadius: 'var(--wa-border-radius-m)',
-        overflow: 'hidden',
-      }}>
-        <pre className="wa-code-block">
-          {`data-monkey get up, get data
+        <div className="wa-stack wa-gap-l">
+          <Monkey />
+
+          <div id="target" style={{
+            border: '1px solid var(--wa-color-surface-border)',
+            padding: 'var(--wa-space-l)',
+            backgroundColor: 'var(--wa-color-bg-secondary)',
+            borderRadius: 'var(--wa-border-radius-m)',
+            overflow: 'hidden',
+          }}>
+            <pre className="wa-code-block">{`
+data-monkey get up, get data
 data-monkey patch the DOM
 
 data-monkey got boring meeting
 with boring manager Rob`.trim()}
-        </pre>
-      </div>
-
-      <wa-card>
-        <div slot="header">
-          <h3>🍌 Monkey Controls</h3>
+            </pre>
+          </div>
         </div>
 
-        <div className="wa-stack wa-gap-m">
-          <p>Use these buttons to test dynamic content loading:</p>
-          <Monkey />
-        </div>
-      </wa-card>
-
-      <wa-card>
         <wa-tab-group>
-          <wa-tab panel="one">Fetch 1</wa-tab>
-          <wa-tab panel="two">Fetch 2</wa-tab>
+          <wa-tab panel="intro"
+            data-on-click="$hxButton = 'intro'"
+            data-attr-active="$hxButton === 'intro'"
+          >
+            Intro
+          </wa-tab>
+          <wa-tab panel="one"
+            data-on-click="$hxButton = 'one'"
+            data-attr-active="$hxButton === 'one'"
+          >
+            Fetch 1
+          </wa-tab>
+          <wa-tab panel="two"
+            data-on-click="$hxButton = 'two'"
+            data-attr-active="$hxButton === 'two'"
+          >
+            Fetch 2
+          </wa-tab>
+
+          <wa-tab-panel name="intro">
+            <div class="wa-stack wa-gap-m">
+              <strong>What if Datastar included <code>hx-get</code>?</strong>
+              <p>That's the main gist of this...</p>
+            </div>
+          </wa-tab-panel>
 
           <wa-tab-panel name="one">
             <pre>
@@ -129,6 +152,6 @@ with boring manager Rob`.trim()}
 
         </wa-tab-group>
       </wa-card>
-    </div>
+    </div >
   );
 }
