@@ -38,6 +38,7 @@ const findForm = (el, selector) => {
 const monkeyFetch = async ({ el }, url, method = 'GET') => {
   // Get config early for confirm check
   const config = parseAttr(el.getAttribute('data-monkey'));
+  console.log(config);
   const {
     patch,
     select,
@@ -199,7 +200,7 @@ const monkeyFetch = async ({ el }, url, method = 'GET') => {
 };
 
 // Register HTTP methods
-['get', 'post', 'put', 'delete', 'patch'].forEach(method => {
+['hx-get', 'hx-post', 'hx-put', 'hx-delete', 'hx-patch'].forEach(method => {
   load({
     type: 'action',
     name: method,

@@ -8,30 +8,43 @@ export const config = {
 function Monkey() {
   return (
     <div className="wa-cluster wa-gap-m">
-      <script type="module" src="/assets/monkey.js"></script>
+      <script type="module" src="/assets/monkey.js" />
       <wa-button
         variant="brand"
         data-on-click="@monkey('/assets/mock.html')"
         data-monkey="{
-          patch: '#target-div',
-          select: '#fragment-one,
+          patch: '#target',
+          select: '#fragment-one',
           swap: 'inner',
-          url: '?bananas',
+          url: '?bananas'
         }"
       >
-        Fetch Fragment 1 🍌
+        Fetch 1 🍌
       </wa-button>
 
       <wa-button
         data-on-click="@monkey('/assets/mock.html')"
         data-monkey="{
-          patch: '#target-div',
-          select: '#fragment-two,
+          patch: '#target',
+          select: '#fragment-two',
           swap: 'inner',
-          url: '?monkeypatched',
+          url: '?monkeypatched'
         }"
       >
-        Fetch Fragment 2 🐒
+        Fetch 2 🐒
+      </wa-button>
+
+      <wa-button
+        variant="danger"
+        data-on-click="@monkey('/assets/mock.html')"
+        data-monkey="{
+          patch: '#target',
+          select: '#reset',
+          swap: 'inner',
+          url: '?reset'
+        }"
+      >
+        Reset
       </wa-button>
     </div>
   );
@@ -46,7 +59,7 @@ export function Main() {
         below can interact with DOM fragments and update content dynamically.
       </p>
 
-      <div id="target-div" style={{
+      <div id="target" style={{
         border: '1px solid var(--wa-color-surface-border)',
         padding: 'var(--wa-space-l)',
         backgroundColor: 'var(--wa-color-bg-secondary)',
@@ -58,47 +71,63 @@ export function Main() {
 data-monkey patch the DOM
 
 data-monkey got boring meeting
-with boring manager Rob`}
+with boring manager Rob`.trim()}
         </pre>
       </div>
 
-      <div className="wa-cluster wa-justify-content-center wa-gap-m">
-        <wa-badge variant="brand">🚀 Built with slot-based TSX</wa-badge>
-        <wa-badge variant="success">✨ Zero MDX stubs needed</wa-badge>
-        <wa-badge variant="neutral">🎯 Direct slot targeting</wa-badge>
-      </div>
-    </div>
-  );
-}
-
-export function Aside() {
-  return (
-    <div className="wa-stack wa-gap-m">
       <wa-card>
         <div slot="header">
           <h3>🍌 Monkey Controls</h3>
         </div>
 
-        <div className="wa-stack wa-gap-s">
+        <div className="wa-stack wa-gap-m">
           <p>Use these buttons to test dynamic content loading:</p>
           <Monkey />
         </div>
       </wa-card>
 
       <wa-card>
-        <div slot="header">
-          <h3>🔧 Technical Details</h3>
-        </div>
+        <wa-tab-group>
+          <wa-tab panel="one">Fetch 1</wa-tab>
+          <wa-tab panel="two">Fetch 2</wa-tab>
 
-        <div className="wa-stack wa-gap-xs">
-          <p><strong>Framework:</strong> React + Bun</p>
-          <p><strong>Components:</strong> WebAwesome</p>
-          <p><strong>Slots Used:</strong></p>
-          <ul>
-            <li><code>main</code> - Primary content</li>
-            <li><code>aside</code> - This sidebar</li>
-          </ul>
-        </div>
+          <wa-tab-panel name="one">
+            <pre>
+              {`
+<wa-button
+  data-on-click="@hx-get('/assets/mock.html')"
+  data-hx="{
+    patch: '#target-div',
+    select: '#fragment-one,
+    swap: 'inner',
+    url: '?bananas',
+  }"
+>
+  Fetch 1 🍌
+</wa-button>
+`.trim()}
+            </pre>
+          </wa-tab-panel>
+
+          <wa-tab-panel name="two">
+            <pre>
+              {`
+<wa-button
+  data-on-click="@hx-get('/assets/mock.html')"
+  data-hx="{
+    patch: '#target-div',
+    select: '#fragment-two,
+    swap: 'inner',
+    url: '?monkeypatched',
+  }"
+>
+  Fetch 2 🐒
+</wa-button>
+`.trim()}
+            </pre>
+          </wa-tab-panel>
+
+        </wa-tab-group>
       </wa-card>
     </div>
   );
