@@ -20,12 +20,6 @@ body {
 body {
     a {
         color: var(--wa-color-brand);
-
-        &:hover {
-            text-decoration: underline;
-            text-decoration-color: var(--wa-color-brand);
-            transition: text-decoration-color var(--wa-transition-normal) var(--wa-transition-easing);
-        }
     }
 }
 
@@ -112,6 +106,14 @@ main:has(.about) {
     max-width: var(--app-content-max-width);
     margin-inline: auto;
     padding: var(--wa-space-l);
+
+    a {
+        &:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--wa-color-brand);
+            transition: text-decoration-color var(--wa-transition-normal) var(--wa-transition-easing);
+        }
+    }
 
     .purple {
         color: var(--wa-color-purple-on-quiet);
