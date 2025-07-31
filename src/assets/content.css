@@ -20,6 +20,12 @@ body {
 body {
     a {
         color: var(--wa-color-brand);
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--wa-color-brand);
+            transition: text-decoration-color var(--wa-transition-normal) var(--wa-transition-easing);
+        }
     }
 }
 
