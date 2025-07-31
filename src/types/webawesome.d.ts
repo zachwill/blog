@@ -175,6 +175,7 @@ declare global {
     interface WaCallout extends HTMLElement {
         variant?: 'brand' | 'success' | 'warning' | 'danger' | 'neutral';
         size?: 'small' | 'medium' | 'large';
+        appearance?: 'accent' | 'filled' | 'outlined' | 'plain';
     }
 
     /**

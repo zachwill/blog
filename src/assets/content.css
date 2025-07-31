@@ -4,7 +4,7 @@
    GLOBALS & LAYOUT VARIABLES
    ============================================ */
 :root {
-    --app-navigation-width: 360px;
+    --app-navigation-width: 350px;
     --app-content-max-width: 80ch;
     --app-mobile-breakpoint: 1080px;
     --darkmode-background: #101219;
