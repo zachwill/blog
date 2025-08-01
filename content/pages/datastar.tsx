@@ -147,19 +147,65 @@ const DatastarIntro = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
-      <div>
-        <wa-divider></wa-divider>
-        <div className="wa-flank wa-align-items-start">
-          <wa-button size="large" appearance="filled">
-            <wa-icon name="hat-wizard" style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
-          </wa-button>
-          <p className="wa-body-l" style={{ margin: 0, fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-longform)' }}>
-            All we have to decide is what to do with the time that is given to us. There are other forces at work
-            in this world, Frodo, besides the will of evil.
-          </p>
-        </div>
-        <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <LongformQuote
+        icon="hat-wizard"
+        quote="All we have to decide is what to do with the time that is given to us. There are other forces at work in this world, Frodo, besides the will of evil."
+        href="#"
+        tooltip="Wise words from Gandalf"
+      />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+    </div>
+  </wa-card>
+);
+
+const HTMXComparison = () => (
+  <wa-card>
+    <img
+      slot="media"
+      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
+      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Compared to...
+          </dt>
+          <dd className="wa-heading-l">HTMX</dd>
+        </dl>
+        <wa-badge variant="warning">Hypermedia OG</wa-badge>
       </div>
+      <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+
+      <LongformQuote
+        icon="keyboard"
+        quote="My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one."
+        href="https://zachwill.com/analogies/"
+        tooltip="Hacker News comment"
+      />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -206,61 +252,13 @@ const SpreadsheetComparison = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
-      <div>
-        <wa-divider></wa-divider>
-        <div className="wa-flank">
-          <wa-button id="analogies" href="https://zachwill.com/analogies/" size="large" appearance="filled">
-            <wa-icon name="keyboard" style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
-          </wa-button>
-          <p className="wa-body-l" style={{ margin: 0, fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-longform)' }}>
-            My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one.
-          </p>
-        </div>
-        <wa-divider></wa-divider>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-    </div>
-  </wa-card>
-);
 
-const HTMXComparison = () => (
-  <wa-card>
-    <img
-      slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
-      alt="Album art"
-    />
-    <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Compared to...
-          </dt>
-          <dd className="wa-heading-l">HTMX</dd>
-        </dl>
-        <wa-badge variant="warning">Hypermedia OG</wa-badge>
-      </div>
-      <wa-divider></wa-divider>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <div>
-        <wa-divider></wa-divider>
-        <wa-avatar shape="rounded" style={{ '--size': '1.8lh', float: 'left', marginRight: 'var(--wa-space-m)' }}>
-          <wa-icon slot="icon" name="hat-wizard" style={{ fontSize: '1.75em' }}></wa-icon>
-        </wa-avatar>
-        <p className="wa-body-l" style={{ margin: 0, fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-longform)' }}>
-          &ldquo;All we have to decide is what to do with the time that is given to us. There are other forces at work
-          in this world, Frodo, besides the will of evil.&rdquo;
-        </p>
-        <wa-divider></wa-divider>
-      </div>
+      <LongformQuote
+        icon="keyboard"
+        quote="My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one."
+        href="https://zachwill.com/analogies/"
+        tooltip="Hacker News comment"
+      />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -497,7 +495,31 @@ const FolderCard = () => (
   </wa-card>
 );
 
-const DeckBuilderCard = () => (
+const LongformQuote = ({ icon, quote, href, tooltip }: { icon: string; quote: string; href: string; tooltip: string }) => {
+  const buttonId = `longform-quote-${icon.replace(/[^a-zA-Z0-9]/g, '-')}`;
+
+  return (
+    <>
+      <wa-divider></wa-divider>
+      <div className="wa-flank wa-align-items-start">
+        <wa-tooltip for={buttonId}>{tooltip}</wa-tooltip>
+        <wa-button id={buttonId} href={href} size="large" appearance="filled">
+          <wa-icon name={icon} style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
+        </wa-button>
+        <p className="wa-body-l" style={{
+          fontFamily: 'var(--wa-font-family-longform)',
+          fontWeight: 'var(--wa-font-weight-longform)',
+          fontStyle: 'italic'
+        }}>
+          {quote}
+        </p>
+      </div>
+      <wa-divider></wa-divider>
+    </>
+  );
+};
+
+const MentalModelsCard = () => (
   <wa-card>
     <div slot="header" className="wa-split wa-align-items-center">
       <h3 className="wa-heading-m">Mental Models</h3>
@@ -508,7 +530,7 @@ const DeckBuilderCard = () => (
     </div>
     <div className="wa-stack wa-gap-xl">
       <p className="wa-caption-m">
-        You haven't created any decks yet. Get started by selecting an aspect that matches your play style.
+        Datastar's focus on hypermedia, reactivity, and speed lead to some fun mental models.
       </p>
       <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
         <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
@@ -516,57 +538,61 @@ const DeckBuilderCard = () => (
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-brand-fill-normal)', color: 'var(--wa-color-brand-on-quiet)' }}
           >
-            <wa-icon slot="icon" name="shield"></wa-icon>
+            <wa-icon slot="icon" name="rocket"></wa-icon>
           </wa-avatar>
           <div className="wa-stack wa-gap-2xs">
             <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              Vigilance <wa-icon name="arrow-right"></wa-icon>
+              Intro <wa-icon name="arrow-right"></wa-icon>
             </span>
-            <p className="wa-caption-m">Protect, defend, and restore as you ready heavy-hitters.</p>
+            <p className="wa-caption-m">General ideas about why Datastar is awesome.</p>
           </div>
         </a>
-        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
-          <wa-avatar
-            shape="rounded"
-            style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
-          >
-            <wa-icon slot="icon" name="tower-observation"></wa-icon>
-          </wa-avatar>
-          <div className="wa-stack wa-gap-2xs">
-            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              Command <wa-icon name="arrow-right"></wa-icon>
-            </span>
-            <p className="wa-caption-m">Build imposing armies and stockpile resources.</p>
-          </div>
-        </a>
-        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
-          <wa-avatar
-            shape="rounded"
-            style={{ backgroundColor: 'var(--wa-color-danger-fill-normal)', color: 'var(--wa-color-danger-on-quiet)' }}
-          >
-            <wa-icon slot="icon" name="explosion"></wa-icon>
-          </wa-avatar>
-          <div className="wa-stack wa-gap-2xs">
-            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              Aggression <wa-icon name="arrow-right"></wa-icon>
-            </span>
-            <p className="wa-caption-m">Relentlessly deal damage and apply pressure to your opponent.</p>
-          </div>
-        </a>
+
         <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
           >
-            <wa-icon slot="icon" name="hand-sparkles"></wa-icon>
+            <wa-icon slot="icon" name="file-code"></wa-icon>
           </wa-avatar>
           <div className="wa-stack wa-gap-2xs">
             <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              Cunning <wa-icon name="arrow-right"></wa-icon>
+              HTMX <wa-icon name="arrow-right"></wa-icon>
             </span>
-            <p className="wa-caption-m">Disrupt and frustrate your opponent with dastardly tricks.</p>
+            <p className="wa-caption-m">Yes, both Datastar and HTMX use declarative attributes.</p>
           </div>
         </a>
+
+        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="table"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
+              Spreadsheets <wa-icon name="arrow-right"></wa-icon>
+            </span>
+            <p className="wa-caption-m">My favorite analogies revolve around spreadsheet cell updates.</p>
+          </div>
+        </a>
+
+        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-purple-fill-normal)', color: 'var(--wa-color-purple-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="feather-pointed"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
+              DuckDB <wa-icon name="arrow-right"></wa-icon>
+            </span>
+            <p className="wa-caption-m">Both have a focus on executable size, speed, and productivity.</p>
+          </div>
+        </a>
+
       </div>
     </div>
   </wa-card>
@@ -692,31 +718,7 @@ export function Main() {
                 <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Datastar is pretty awesome
               </div>
             </wa-callout>
-            <DeckBuilderCard />
-          </>
-        }
-      />
-
-      <wa-divider></wa-divider>
-
-      <TwoColumnSection
-        left={
-          <>
-            <SpreadsheetComparison />
-            <ReceiptCard />
-            <RestaurantCard />
-            <CodeSampleCard />
-          </>
-        }
-        right={
-          <>
-            <wa-callout variant="success" appearance="accent">
-              <wa-icon slot="icon" name="table"></wa-icon>
-              <Prose>
-                "Spreadsheets really are the fullest realization we've seen of functional-programming-without-code... It's no wonder they kicked off the microcomputer era."
-              </Prose>
-            </wa-callout>
-            <PricingCard />
+            <MentalModelsCard />
           </>
         }
       />
@@ -738,10 +740,34 @@ export function Main() {
             <wa-callout variant="warning" appearance="accent">
               <wa-icon slot="icon" name="file-code"></wa-icon>
               <Prose>
-                "People who compare HTMX to Datastar haven't actually measured anything."
+                &ldquo;People who compare HTMX to Datastar haven't actually measured anything.&rdquo;
               </Prose>
             </wa-callout>
             <ReceiptCard />
+          </>
+        }
+      />
+
+      <wa-divider></wa-divider>
+
+      <TwoColumnSection
+        left={
+          <>
+            <SpreadsheetComparison />
+            <ReceiptCard />
+            <RestaurantCard />
+            <CodeSampleCard />
+          </>
+        }
+        right={
+          <>
+            <wa-callout variant="success" appearance="accent">
+              <wa-icon slot="icon" name="table"></wa-icon>
+              <Prose>
+                &ldquo;Spreadsheets really are the fullest realization we've seen of functional-programming-without-code... It's no wonder they kicked off the microcomputer era.&rdquo;
+              </Prose>
+            </wa-callout>
+            <PricingCard />
           </>
         }
       />
@@ -759,10 +785,10 @@ export function Main() {
         }
         right={
           <>
-            <wa-callout variant="danger">
+            <wa-callout appearance="accent" style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>
               <wa-icon slot="icon" name="keyboard"></wa-icon>
               <Prose>
-                "My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one."
+                &ldquo;My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one.&rdquo;
               </Prose>
             </wa-callout>
             <PricingCard />
@@ -782,7 +808,7 @@ export function Main() {
         }
         right={
           <>
-            <DeckBuilderCard />
+            <MentalModelsCard />
             <QuoteCard />
           </>
         }
