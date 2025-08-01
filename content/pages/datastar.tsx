@@ -192,13 +192,24 @@ const SpreadsheetComparison = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
       <div>
         <wa-divider></wa-divider>
         <div className="wa-flank">
-          <wa-button size="large" appearance="filled">
+          <wa-button id="analogies" href="https://zachwill.com/analogies/" size="large" appearance="filled">
             <wa-icon name="keyboard" style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
           </wa-button>
           <p className="wa-body-l" style={{ margin: 0, fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-longform)' }}>
@@ -207,9 +218,6 @@ const SpreadsheetComparison = () => (
         </div>
         <wa-divider></wa-divider>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -681,7 +689,7 @@ export function Main() {
             <wa-callout variant="brand" appearance="accent">
               <wa-icon slot="icon" name="rocket"></wa-icon>
               <div>
-                <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:</span> Datastar is pretty awesome
+                <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Datastar is pretty awesome
               </div>
             </wa-callout>
             <DeckBuilderCard />
@@ -758,32 +766,6 @@ export function Main() {
               </Prose>
             </wa-callout>
             <PricingCard />
-          </>
-        }
-      />
-
-      <wa-divider></wa-divider>
-
-      <TwoColumnSection
-        left={
-          <>
-            <DatastarIntro />
-            <RestaurantCard />
-            <SettingsToggleCard />
-          </>
-        }
-        right={
-          <>
-            <wa-callout variant="brand">
-              <wa-icon slot="icon" name="rocket"></wa-icon>
-              <div className="wa-split">
-                <span>This is the way.</span>
-                <wa-button variant="brand" size="small" appearance="outlined">
-                  Follow the Creed
-                </wa-button>
-              </div>
-            </wa-callout>
-            <CodeSampleCard />
           </>
         }
       />
