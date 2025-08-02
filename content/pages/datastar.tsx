@@ -8,6 +8,87 @@ export const config = {
 // NOTE: Linter errors are present in this file but are being ignored
 // for now to focus on the layout changes, as requested.
 
+const PageCSS = () => (
+  <style>{`
+        main {
+          background-color: var(--wa-color-surface-lowered);
+          padding: var(--wa-space-m);
+        }
+
+        .datastar-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--wa-space-m);
+          align-items: start;
+        }
+        
+        .datastar-layout + .datastar-layout {
+          margin-top: var(--wa-space-xl);
+        }
+
+        @media (min-width: 950px) {
+          main {
+            padding: var(--wa-space-l);
+          }
+          .datastar-layout {
+            grid-template-columns: 4fr 3fr;
+            gap: var(--wa-space-l);
+          }
+        }
+        
+        .datastar-column {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--wa-space-l);
+        }
+
+        @media (min-width: 1080px) {
+          .datastar-column.is-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: calc(57px + var(--wa-space-l)); /* Header height + padding */
+          }
+        }
+        
+        /* Code sample colour overrides */
+        .showcase-code-sample {
+          --spacing: 0;
+          overflow-x: scroll;
+          overflow-y: hidden;
+        }
+
+        .showcase-code-sample pre {
+          background-color: var(--wa-color-surface-default);
+          color: var(--wa-color-text-quiet);
+        }
+
+        .showcase-code-sample .tag {
+          color: var(--wa-color-indigo-40);
+        }
+
+        .showcase-code-sample .attribute {
+          color: var(--wa-color-green-40);
+        }
+
+        .showcase-code-sample .value {
+          color: var(--wa-color-brand-40);
+        }
+
+        /* Dark mode tweaks */
+        .wa-dark .showcase-code-sample .tag {
+          color: var(--wa-color-indigo-70);
+        }
+
+        .wa-dark .showcase-code-sample .attribute {
+          color: var(--wa-color-green-70);
+        }
+
+        .wa-dark .showcase-code-sample .value {
+          color: var(--wa-color-brand-70);
+        }
+      `}</style>
+);
+
 const Prose = ({ children }: { children: ReactNode }) => (
   <p className="wa-body-m" style={{ margin: 0, fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-longform)', fontStyle: 'italic' }}>
     {children}
@@ -123,7 +204,7 @@ const TodoCard = () => (
 );
 
 const DatastarIntro = () => (
-  <wa-card>
+  <wa-card id="intro">
     <img
       slot="media"
       src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
@@ -164,7 +245,7 @@ const DatastarIntro = () => (
 );
 
 const HTMXComparison = () => (
-  <wa-card>
+  <wa-card id="htmx">
     <img
       slot="media"
       src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
@@ -204,7 +285,7 @@ const HTMXComparison = () => (
         icon="keyboard"
         quote="My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one."
         href="https://zachwill.com/analogies/"
-        tooltip="Hacker News comment"
+        tooltip="Bob Nystrom"
       />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
@@ -217,7 +298,7 @@ const HTMXComparison = () => (
 );
 
 const SpreadsheetComparison = () => (
-  <wa-card>
+  <wa-card id="spreadsheets">
     <img
       slot="media"
       src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
@@ -254,14 +335,117 @@ const SpreadsheetComparison = () => (
       </p>
 
       <LongformQuote
-        icon="keyboard"
-        quote="My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one."
-        href="https://zachwill.com/analogies/"
-        tooltip="Hacker News comment"
+        icon="calendar-check"
+        quote="All enterprise software competes with Excel. All productivity software competes with emailing things to yourself."
+        href="https://zachwill.com/competes-with/"
+        tooltip="Pavel Samsonov"
       />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+    </div>
+  </wa-card>
+);
+
+const DuckDBComparison = () => (
+  <wa-card id="duckdb">
+    <img
+      slot="media"
+      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
+      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Compared to...
+          </dt>
+          <dd className="wa-heading-l">DuckDB</dd>
+        </dl>
+        <wa-badge style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>Insanely Fast</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+
+      <LongformQuote
+        icon="feather-pointed"
+        quote="Product design is making things simpler to achieve, not adding new features."
+        href="https://zachwill.com/making-things-simpler/"
+        tooltip="Ben Tossell"
+      />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+    </div>
+  </wa-card>
+);
+
+const DatastarRecap = () => (
+  <wa-card id="recap">
+    <img
+      slot="media"
+      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
+      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Recap
+          </dt>
+          <dd className="wa-heading-l">Datastar</dd>
+        </dl>
+        <wa-badge>Hypermedia Framework</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+
+      <LongformQuote
+        icon="arrows-rotate"
+        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
+        href="https://zachwill.com/complex-systems/"
+        tooltip="John Gall"
+      />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -292,40 +476,6 @@ const RestaurantCard = () => (
         <wa-icon name="location-dot"></wa-icon>
         <a href="#" className="wa-caption-m" tabIndex={-1}>Mos Eisley, Tatooine</a>
       </div>
-    </div>
-  </wa-card>
-);
-
-const CalloutsCard = () => (
-  <wa-card appearance="plain" style={{ '--spacing': '0' }}>
-    <div className="wa-stack wa-gap-s">
-      <wa-callout variant="success">
-        <wa-icon slot="icon" name="rocket"></wa-icon>
-        <div className="wa-split">
-          <span>This is the way.</span>
-          <wa-button variant="success" size="small">
-            Follow the Creed
-          </wa-button>
-        </div>
-      </wa-callout>
-      <wa-callout variant="warning">
-        <wa-icon slot="icon" name="triangle-exclamation"></wa-icon>
-        <div className="wa-split">
-          <span>It's a trap!</span>
-          <wa-button variant="warning" size="small">
-            Take Evasive Action
-          </wa-button>
-        </div>
-      </wa-callout>
-      <wa-callout variant="danger">
-        <wa-icon slot="icon" name="moon"></wa-icon>
-        <div className="wa-split">
-          <span>That's no moon.</span>
-          <wa-button variant="danger" size="small">
-            Turn Around
-          </wa-button>
-        </div>
-      </wa-callout>
     </div>
   </wa-card>
 );
@@ -533,7 +683,7 @@ const MentalModelsCard = () => (
         Datastar's focus on hypermedia, reactivity, and speed lead to some fun mental models.
       </p>
       <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
-        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#intro" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-brand-fill-normal)', color: 'var(--wa-color-brand-on-quiet)' }}
@@ -548,7 +698,7 @@ const MentalModelsCard = () => (
           </div>
         </a>
 
-        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#htmx" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
@@ -563,7 +713,7 @@ const MentalModelsCard = () => (
           </div>
         </a>
 
-        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#spreadsheets" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
@@ -578,7 +728,7 @@ const MentalModelsCard = () => (
           </div>
         </a>
 
-        <a href="" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#duckdb" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-purple-fill-normal)', color: 'var(--wa-color-purple-on-quiet)' }}
@@ -623,84 +773,7 @@ const TwoColumnSection = ({ left, right }: TwoColumnSectionProps) => {
 export function Main() {
   return (
     <div className="wa-stack wa-gap-l">
-      <style>{`
-        main {
-          background-color: var(--wa-color-surface-lowered);
-          padding: var(--wa-space-m);
-        }
-
-        .datastar-layout {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--wa-space-m);
-          align-items: start;
-        }
-        
-        .datastar-layout + .datastar-layout {
-          margin-top: var(--wa-space-xl);
-        }
-
-        @media (min-width: 950px) {
-          main {
-            padding: var(--wa-space-l);
-          }
-          .datastar-layout {
-            grid-template-columns: 4fr 3fr;
-            gap: var(--wa-space-l);
-          }
-        }
-        
-        .datastar-column {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--wa-space-l);
-        }
-
-        @media (min-width: 1080px) {
-          .datastar-column.is-sticky {
-            position: -webkit-sticky;
-            position: sticky;
-            top: calc(57px + var(--wa-space-l)); /* Header height + padding */
-          }
-        }
-        
-        /* Code sample colour overrides */
-        .showcase-code-sample {
-          --spacing: 0;
-          overflow-x: scroll;
-          overflow-y: hidden;
-        }
-
-        .showcase-code-sample pre {
-          background-color: var(--wa-color-surface-default);
-          color: var(--wa-color-text-quiet);
-        }
-
-        .showcase-code-sample .tag {
-          color: var(--wa-color-indigo-40);
-        }
-
-        .showcase-code-sample .attribute {
-          color: var(--wa-color-green-40);
-        }
-
-        .showcase-code-sample .value {
-          color: var(--wa-color-brand-40);
-        }
-
-        /* Dark mode tweaks */
-        .wa-dark .showcase-code-sample .tag {
-          color: var(--wa-color-indigo-70);
-        }
-
-        .wa-dark .showcase-code-sample .attribute {
-          color: var(--wa-color-green-70);
-        }
-
-        .wa-dark .showcase-code-sample .value {
-          color: var(--wa-color-brand-70);
-        }
-      `}</style>
+      <PageCSS />
 
       <TwoColumnSection
         left={
@@ -729,10 +802,9 @@ export function Main() {
         left={
           <>
             <HTMXComparison />
-            <RestaurantCard />
-            <PricingCard />
             <CodeSampleCard />
             <SettingsToggleCard />
+            <RestaurantCard />
           </>
         }
         right={
@@ -756,7 +828,6 @@ export function Main() {
             <SpreadsheetComparison />
             <ReceiptCard />
             <RestaurantCard />
-            <CodeSampleCard />
           </>
         }
         right={
@@ -777,10 +848,9 @@ export function Main() {
       <TwoColumnSection
         left={
           <>
-            <DatastarIntro />
-            <RestaurantCard />
+            <DuckDBComparison />
+            <ShoppingCartCard />
             <CodeSampleCard />
-            <SettingsToggleCard />
           </>
         }
         right={
@@ -801,15 +871,17 @@ export function Main() {
       <TwoColumnSection
         left={
           <>
-            <DatastarIntro />
-            <ShoppingCartCard />
+            <DatastarRecap />
             <UserCard />
           </>
         }
         right={
           <>
+            <wa-callout appearance="accent">
+              <wa-icon slot="icon" name="rocket"></wa-icon>
+              Datastar is a hypermedia framework focused on reactivity.
+            </wa-callout>
             <MentalModelsCard />
-            <QuoteCard />
           </>
         }
       />
