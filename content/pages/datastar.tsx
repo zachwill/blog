@@ -156,34 +156,6 @@ const ShoppingCartCard = () => (
   </wa-card>
 );
 
-const QuoteCard = () => (
-  <wa-card>
-    <wa-avatar shape="rounded" style={{ '--size': '1.8lh', float: 'left', marginRight: 'var(--wa-space-m)' }}>
-      <wa-icon slot="icon" name="hat-wizard" style={{ fontSize: '1.75em' }}></wa-icon>
-    </wa-avatar>
-    <p className="wa-body-l" style={{ margin: 0, fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-longform)' }}>
-      &ldquo;All we have to decide is what to do with the time that is given to us. There are other forces at work
-      in this world, Frodo, besides the will of evil.&rdquo;
-    </p>
-  </wa-card>
-);
-
-const SignInCard = () => (
-  <wa-card>
-    <div className="wa-stack">
-      <h3 className="wa-heading-m">Sign In</h3>
-      <wa-input tabIndex={-1} label="Email" placeholder="ddjarin@mandalore.gov" inert>
-        <wa-icon slot="start" name="envelope"></wa-icon>
-      </wa-input>
-      <wa-input tabIndex={-1} label="Password" type="password" inert>
-        <wa-icon slot="start" name="lock"></wa-icon>
-      </wa-input>
-      <wa-button tabIndex={-1} variant="brand">Sign In</wa-button>
-      <a href="#" tabIndex={-1} className="wa-body-s">I forgot my password</a>
-    </div>
-  </wa-card>
-);
-
 const TodoCard = () => (
   <wa-card>
     <div slot="header" className="wa-split">
@@ -613,34 +585,6 @@ const UserCard = () => (
         <wa-icon slot="start" name="at"></wa-icon>
         Twitter
       </wa-button>
-    </div>
-  </wa-card>
-);
-
-const FolderCard = () => (
-  <wa-card>
-    <div className="wa-flank:end">
-      <a href="" className="wa-flank wa-link-plain" tabIndex={-1}>
-        <wa-avatar
-          shape="rounded"
-          style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
-        >
-          <wa-icon slot="icon" name="mug-saucer"></wa-icon>
-        </wa-avatar>
-        <div className="wa-gap-2xs wa-stack">
-          <span className="wa-heading-s">Second Breakfast</span>
-          <span className="wa-caption-m">19 Items</span>
-        </div>
-      </a>
-      <wa-dropdown>
-        <wa-button id="more-actions-2" slot="trigger" appearance="plain" size="small" tabIndex={-1}>
-          <wa-icon name="ellipsis-vertical" label="View menu"></wa-icon>
-        </wa-button>
-        <wa-dropdown-item>Copy link</wa-dropdown-item>
-        <wa-dropdown-item>Rename</wa-dropdown-item>
-        <wa-dropdown-item>Move to trash</wa-dropdown-item>
-      </wa-dropdown>
-      <wa-tooltip for="more-actions-2">View menu</wa-tooltip>
     </div>
   </wa-card>
 );
