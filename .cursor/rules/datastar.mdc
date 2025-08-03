@@ -4,126 +4,146 @@ globs: **/*.ts, **/*.tsx, **/*.mdx, **/*.js, **/*.jsx, **/*.html
 alwaysApply: false
 ---
 
-# Datastar Cheatsheet
+# Datastar Philosophy
 
-## 1. Four-Sentence Overview
+Datastar simplifies web development by dividing responsibilities. The server is the single source of truth for persistent data and business logic, while the browser handles ephemeral, reactive UI state.
 
-- Datastar is "HTML + signals" sent from the server.
-- The server owns permanent state and streams UI/Signal patches over SSE.
-- The browser owns *ephemeral* state via lightweight, global signals.
-- You wire the two together with declarative `data-*` attributes—no client components, no hydration.
+*   **Server:** Owns application state and renders HTML. It responds to client actions by sending targeted HTML patches or signal updates, typically over Server-Sent Events (SSE).
+*   **Client:** Uses declarative HTML attributes to manage UI-only state (e.g., form inputs, modal visibility) and to trigger requests to the server. There are no client-side frameworks or complex state synchronization libraries.
 
-## 2. Core Mental Model
+This model results in a continuous conversation: the user acts, the client informs the server, and the server replies with precise DOM or data updates.
 
-### HTML is the contract
+## Core Concepts
 
-Element `id`s are API endpoints; the server sends fragments that morph into existing nodes.
+### HTML is the API
+The server and client communicate through HTML. Stable `id` attributes on elements act as endpoints for the server to target with patches. This makes the DOM the contract for updates.
+```html
+<!-- The server can replace this entire card by targeting its id -->
+<div id="user-profile-card">...</div>
+```
+### Signals for Ephemeral State
+Signals are lightweight, reactive primitives for managing state that exists only in the browser. Use signals for interactive UI and immediate user feedback, not for data that must survive a page refresh.
 
-### Two worlds, two responsibilities
+### The Reactive Loop
+User interactions trigger backend actions, which in turn update the UI.
 
-- **Server**: business logic, DB access, template rendering, long-running flows.
-- **Client**: last-millisecond UX—toggling, typing, progress bars—via signals.
+1.  A user clicks a button with a `data-on-click` attribute.
+2.  The attribute calls a backend action like `@post('/action/save')`.
+3.  The server processes the request and streams back one or more patches.
+4.  Datastar applies the patches, either by morphing a DOM element or updating a client-side signal.
 
-### Continuous conversation
+## Reactive Primitives
 
-- Any user action can fire `@get/@post/…`.
-- Response type decides the patch:
-  - `text/event-stream` → stream of `patch-elements` + `patch-signals`
-  - `text/html` → one-off DOM morph
-  - `application/json` → signal merge
+Four core primitives handle nearly all client-side interactivity.
 
-### State boundary
+*   `data-signals-*`: Declares a mutable signal. This is the source of reactive state.
+    *   `data-signals-query=""` creates a `$query` signal.
+*   `data-computed-*`: Declares a read-only signal derived from other signals.
+    *   `data-computed-isValid="$query.length > 3"`
+*   `data-effect`: Runs a side effect when its signal dependencies change.
+    *   `data-effect="$query && @get(`/search?q=${$query}`)"`
+*   `data-on-*`: A standard event handler that runs once per event.
+    *   `data-on-submit="@post('/form')"`
 
-- Keep only what must survive a refresh on the server.
-- Keep everything else (focus, open menus, form text) in signals.
+## Connecting to the Backend
 
-## 3. Reactive Primitives
+Use `@` prefixed actions inside any attribute expression to communicate with the server. Actions like `@get`, `@post`, `@put`, and `@delete` map directly to `fetch` requests. All signals not prefixed with an underscore (`_`) are automatically sent with the request.
 
-- `data-signals` - Mutable source of truth (`data-signals-count="0"` → `$count`).
-- `data-computed` - Read-only derived signal (`data-computed-total="$price*$qty"`).
-- `data-effect` - Runs expression now + on dependency change (`data-effect="$dirty && @post('/save')"`).
-- `data-on-*` - Event handler (runs once per event; does *not* re-run on signal change).
+The server's `Content-Type` response header determines how Datastar processes the update:
 
-Mnemonic: "S-C-E-E" → Signals, Computed, Effect, Event.
+*   **`text/event-stream`**: The preferred method. It opens a connection to stream multiple `datastar-patch-*` events, allowing for granular updates to both DOM elements and signals.
+*   **`text/html`**: Performs a one-off DOM morph of a single element.
+*   **`application/json`**: Merges the JSON data directly into the client's signals.
 
-## 4. Attribute Cheat-Sheet (grouped)
+### Action Streams vs. Data Streams
 
-### Bindings & Display
+A key insight is to use SSE for two distinct purposes:
 
-- `data-text` - Text content.
-- `data-attr / data-attr-*` - Any attribute reactive (title, href, disabled…).
-- `data-class / -*` - Toggle classes (`data-class-active="$sel===id"`).
-- `data-style / -*` - Inline styles.
-- `data-show` - `display:none` while expression is falsy.
+1.  **Action Streams**: Short-lived streams triggered by user input (e.g., a form submission). They push one or more patches and then close the connection.
+2.  **Data Streams**: Long-lived streams for background server pushes (e.g., a stock ticker or notification feed). They remain open to push data to the client continuously.
 
-### Two-way Form Helpers
+## Common Patterns & Recipes
 
-- `data-bind / -*` - Value ↔ signal.
-- `data-ref / -*` - Store DOM element in a signal (imperative escape hatch).
+### Handling User Input
+The `data-bind` attribute provides two-way binding between a form input and a signal.
+```html
+<div data-signals-name="Alice">
+  <input type="text" data-bind-name>
+  <p>Hello, <span data-text="$name"></span>!</p>
+</div>
+```
+### Click to Edit
+This pattern demonstrates the full reactive loop. A component switches between a read-only view and an edit form, all orchestrated by the server.
+```html
+<!-- 1. Initial view served from the backend -->
+<div id="contact-1">
+  <p>Name: Babs Bunny</p>
+  <button data-on-click="@get('/contact/1/edit')">Edit</button>
+</div>
+
+<!-- 2. The server responds to the GET request with this form, -->
+<!--    which morphs the div#contact-1 -->
+<form id="contact-1" data-on-submit="@post('/contact/1')">
+  <input type="text" name="name" value="Babs Bunny">
+  <button type="submit">Save</button>
+</form>
+```
+### Loading Indicators
+The `data-indicator` attribute makes it trivial to show loading states during a network request. It toggles a CSS class on a target element.
+```html
+<button
+  data-on-click="@post('/action/save')"
+  data-indicator-self="is-loading"
+>
+  Save
+</button>
+```
+### SPA to Datastar Translation
+
+| Need | SPA Approach | Datastar Idiom |
+|------|---------|---------------|
+| Local counter | `useState` | `data-signals-count` + `data-text` |
+| Derived value | `useMemo` | `data-computed-total="$a*$b"` |
+| Side-effect on change | `useEffect` | `data-effect="$formDirty && @post('/autosave')"` |
+| Conditional section | `{show && …}` | `data-show="$show"` |
+| Click to Edit | Client state + API call | Two server views keyed by same `id`; use `@get`/`@put` to swap them |
+| Disabled while loading | `isLoading` state flag | `data-indicator` + `data-attr-disabled` |
+
+## Attribute Reference
 
 ### State & Computation
+*   `data-signals-*`: Declares or mutates signals.
+*   `data-computed-*`: Creates derived, read-only signals.
 
-- `data-signals / -*` - Declare or mutate signals.
-- `data-computed / -*` - Derived, read-only signals.
+### Bindings & Display
+*   `data-text`: Sets `textContent`.
+*   `data-show`: Toggles `display:none` if expression is falsy.
+*   `data-attr-*`: Binds to any attribute (e.g., `data-attr-href="$url"`).
+*   `data-class-*`: Toggles a class (e.g., `data-class-active="$sel===id"`).
+*   `data-style-*`: Sets an inline style property.
 
-### Effects / Lifecycle
+### Forms & Two-Way Binding
+*   `data-bind-*`: Provides two-way binding between a signal and a form element's value.
+*   `data-ref-*`: Stores the DOM element itself in a signal (an imperative escape hatch).
 
-- `data-effect` - Reactive side-effect.
-- `data-on-load` - Fire once on process.
-- `data-on-interval` - Polling timers.
-- `data-on-intersect` - Viewport triggers.
-- `data-on-signal-patch` - Global listener for incoming patches.
+### Effects & Lifecycle
+*   `data-effect`: Runs an expression reactively when its dependencies change.
+*   `data-on-load`: Runs once when the element is processed.
+*   `data-on-interval`: Runs an expression on a timer.
+*   `data-on-intersect`: Triggers when an element enters or leaves the viewport.
 
-### Networking Indicators
+### Networking & Indicators
+*   `data-indicator-*`: Toggles a class on a target during a fetch request initiated by the same element.
 
-- `data-indicator / -*` - Boolean "in-flight" flag tied to same element's request.
+### Control & Performance
+*   `data-ignore`: Prevents Datastar from parsing an element and its children.
+*   `data-ignore-morph`: Prevents an element and its children from being changed during a DOM patch.
+*   `data-preserve-attr`: Protects specified attributes from being overwritten during a morph.
 
-### Guard Rails
+## Guiding Principles
 
-- `data-ignore` - Skip parsing.
-- `data-ignore-morph` - Freeze subtree during DOM patches.
-- `data-preserve-attr` - Keep selected attrs intact during morphs.
-
-(Pro-only extras: persistence, query-string sync, RAF, resize, animate, etc.)
-
-## 5. Backend Actions & the SSE Loop
-
-Inside any expression you can call:
-
-`@method('/url', options?)` → GET, POST, PUT, PATCH, DELETE
-
-- All non-underscore (`_foo`) signals auto-sent (query or JSON body).
-- `options.selector` - Serialize a form.
-- `options.filterSignals` - `{include:/re/, exclude:/re/}`.
-- Retry helpers (`retryInterval`, `retryMaxCount` …).
-
-### Server responses:
-
-1. `text/event-stream` → continuous patches, keeps HTTP conn open.
-2. `text/html` → one fragment morph (target via `datastar-selector`).
-3. `application/json` → merge into signals.
-4. `text/javascript` → eval.
-
-## 6. Common Recipes & SPA → Datastar Mapping
-
-| Need | SPA way | Datastar idiom |
-|------|---------|---------------|
-| Local counter | useState | data-signals-count + data-text |
-| Derived value | useMemo | data-computed-total="$a*$b" |
-| Side-effect on change | useEffect | data-effect="$formDirty && @post('/autosave')" |
-| Conditional section | `{show && …}` | data-show="$show" |
-| "Click to Edit" | client state + API | Two server views keyed by same id; use @get/@put |
-| Disabled while loading | isLoading state | data-indicator="isLoading" + data-attr-disabled="$isLoading" |
-
-## 7. If you remember nothing else…
-
-1. Server renders **HTML**; element `id`s are the API.
-2. Client holds **signals** for moment-to-moment flair.
-3. Four primitives (signals, computed, effect, events) cover 95% of interactivity.
-4. `@get/@post` + SSE let the server patch both DOM and signals in real time.
-5. Use `data-attr`, `data-class`, `data-style`, `data-show`, `data-text` to *reflect* signal changes onto the DOM—no extra JS required.
-
-Now you can approach any UI problem the "Datastar-first" way:
-
-- Ask "Is this state ephemeral?" → signal.
-- Otherwise render it from the backend and, when it changes, stream a patch.
+*   **Prefer Declarative Attributes:** Write logic in `data-*` attributes instead of imperative JavaScript.
+*   **Keep `id`s Stable:** Every element you intend to patch from the server must have a stable `id`.
+*   **Derive State:** Use `data-computed` for derived values. Never duplicate state in multiple signals.
+*   **Validate on the Server:** When you think you need client-side validation, you probably want server-side validation that returns an HTML patch with error messages.
+*   **Stream Patches:** For any non-trivial update, stream multiple small SSE events instead of sending one large HTML response. This improves perceived performance.
