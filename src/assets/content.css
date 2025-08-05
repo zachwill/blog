@@ -103,6 +103,7 @@ main {
 
 main:has(article),
 main:has(.about) {
+    font-variant-numeric: tabular-nums;
     max-width: var(--app-content-max-width);
     margin-inline: auto;
     padding: var(--wa-space-l);
