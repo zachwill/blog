@@ -95,6 +95,245 @@ const Prose = ({ children }: { children: ReactNode }) => (
   </p>
 );
 
+const LongformQuote = ({ icon, quote, href, tooltip }: { icon: string; quote: string; href: string; tooltip: string }) => {
+  const buttonId = `longform-quote-${icon.replace(/[^a-zA-Z0-9]/g, '-')}`;
+
+  return (
+    <>
+      <wa-divider></wa-divider>
+      <div className="wa-flank wa-align-items-start">
+        <wa-tooltip for={buttonId}>{tooltip}</wa-tooltip>
+        <wa-button id={buttonId} href={href} size="large" appearance="filled">
+          <wa-icon name={icon} style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
+        </wa-button>
+        <p className="wa-body-l" style={{
+          fontFamily: 'var(--wa-font-family-longform)',
+          fontWeight: 'var(--wa-font-weight-longform)',
+          fontStyle: 'italic'
+        }}>
+          {quote}
+        </p>
+      </div>
+      <wa-divider></wa-divider>
+    </>
+  );
+};
+
+const CodeSampleCard = () => (
+  <wa-card className="showcase-code-sample">
+    <pre dangerouslySetInnerHTML={{
+      __html: `
+&lt;<span className="tag">div</span> <span className="attribute">class</span>="<span className="value">fellowship</span>"&gt;
+  &lt;<span className="tag">p</span> <span className="attribute">class</span>="<span className="value">ring-bearer</span>"&gt;
+    Frodo carries the &lt;<span className="tag">span</span> <span className="attribute">id</span>="<span className="value">one-ring</span>"&gt;One Ring&lt;/<span className="tag">span</span>&gt;
+  &lt;/<span className="tag">p</span>&gt;
+  &lt;<span className="tag">ul</span> <span className="attribute">class</span>="<span className="value">companions</span>"&gt;
+    &lt;<span className="tag">li</span> <span className="attribute">data-race</span>="<span className="value">wizard</span>"&gt;Gandalf the Grey&lt;/<span className="tag">li</span>&gt;
+    &lt;<span className="tag">li</span> <span className="attribute">data-race</span>="<span className="value">elf</span>"&gt;Legolas&lt;/<span className="tag">li</span>&gt;
+    &lt;<span className="tag">li</span> <span className="attribute">data-race</span>="<span className="value">dwarf</span>"&gt;Gimli&lt;/<span className="tag">li</span>&gt;
+  &lt;/<span className="tag">ul</span>&gt;
+&lt;/<span className="tag">div</span>&gt;`.trim()
+    }} />
+  </wa-card>
+);
+
+const MentalModelsCard = () => (
+  <wa-card>
+    <div slot="header" className="wa-split wa-align-items-center">
+      <h3 className="wa-heading-m">Mental Models</h3>
+      <wa-tooltip for="data-star-dev">https://data-star.dev</wa-tooltip>
+      <wa-button id="data-star-dev" href="https://data-star.dev" target="_blank" appearance="plain" size="small" tabIndex={-1}>
+        <wa-icon name="rocket" label="Datastar website"></wa-icon>
+      </wa-button>
+    </div>
+    <div className="wa-stack wa-gap-xl">
+      <p className="wa-caption-m">
+        Datastar's focus on hypermedia, reactivity, and speed lead to some fun mental models.
+      </p>
+      <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
+        <a href="#intro" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-brand-fill-normal)', color: 'var(--wa-color-brand-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="rocket"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
+              Intro <wa-icon name="arrow-right"></wa-icon>
+            </span>
+            <p className="wa-caption-m">General ideas about why Datastar is awesome.</p>
+          </div>
+        </a>
+
+        <a href="#htmx" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="file-code"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
+              HTMX <wa-icon name="arrow-right"></wa-icon>
+            </span>
+            <p className="wa-caption-m">Yes, both Datastar and HTMX use declarative attributes.</p>
+          </div>
+        </a>
+
+        <a href="#spreadsheets" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="table"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
+              Spreadsheets <wa-icon name="arrow-right"></wa-icon>
+            </span>
+            <p className="wa-caption-m">My favorite analogies revolve around spreadsheet cell updates.</p>
+          </div>
+        </a>
+
+        <a href="#duckdb" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-purple-fill-normal)', color: 'var(--wa-color-purple-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="feather-pointed"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
+              DuckDB <wa-icon name="arrow-right"></wa-icon>
+            </span>
+            <p className="wa-caption-m">Both have a focus on executable size, speed, and productivity.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </wa-card>
+);
+
+const PricingCard = () => (
+  <wa-card>
+    <div className="wa-stack">
+      <div className="wa-split">
+        <div className="wa-cluster wa-heading-l">
+          <wa-icon name="bookmark"></wa-icon>
+          <h3>Fellowship</h3>
+        </div>
+        <wa-badge>Most Popular</wa-badge>
+      </div>
+      <span className="wa-flank wa-align-items-baseline wa-gap-2xs">
+        <span className="wa-heading-2xl">$120</span>
+        <span className="wa-caption-l">per year</span>
+      </span>
+      <p className="wa-caption-l">Carry great power (and great responsibility).</p>
+      <wa-button variant="brand" tabIndex={-1}>Get this Plan</wa-button>
+    </div>
+    <div slot="footer" className="wa-stack wap-gap-s">
+      <h4 className="wa-heading-s">What You Get</h4>
+      <div className="wa-stack">
+        <div className="wa-flank">
+          <wa-icon name="user" fixed-width></wa-icon>
+          <span className="wa-caption-m">9 users</span>
+        </div>
+        <div className="wa-flank">
+          <wa-icon name="ring" fixed-width></wa-icon>
+          <span className="wa-caption-m">1 ring</span>
+        </div>
+        <div className="wa-flank">
+          <wa-icon name="chess-rook" fixed-width></wa-icon>
+          <span className="wa-caption-m">API access to Isengard</span>
+        </div>
+        <div className="wa-flank">
+          <wa-icon name="feather" fixed-width></wa-icon>
+          <span className="wa-caption-m">Priority eagle support</span>
+        </div>
+      </div>
+    </div>
+  </wa-card>
+);
+
+const ReceiptCard = () => (
+  <wa-card>
+    <div className="wa-stack">
+      <div className="wa-split wa-align-items-start">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-heading-s">Amount</dt>
+          <dd className="wa-heading-l">$5,610.00</dd>
+        </dl>
+        <wa-badge appearance="filled outlined" variant="success">Paid</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <dl className="wa-stack">
+        <div className="wa-flank wa-align-items-center">
+          <dt><wa-icon name="user" label="Name" fixed-width></wa-icon></dt>
+          <dd>Tom Bombadil</dd>
+        </div>
+        <div className="wa-flank wa-align-items-center">
+          <dt><wa-icon name="calendar-days" label="Date" fixed-width></wa-icon></dt>
+          <dd><wa-format-date date="2025-03-15"></wa-format-date></dd>
+        </div>
+        <div className="wa-flank wa-align-items-center">
+          <dt><wa-icon name="coins" fixed-width></wa-icon></dt>
+          <dd>Paid with copper pennies</dd>
+        </div>
+      </dl>
+    </div>
+    <div slot="footer">
+      <a href="" className="wa-cluster wa-gap-2xs" tabIndex={-1}>
+        <span>Download Receipt</span>
+        <wa-icon name="arrow-right"></wa-icon>
+      </a>
+    </div>
+  </wa-card>
+);
+
+const RestaurantCard = () => (
+  <wa-card>
+    <div className="wa-stack">
+      <h3 className="wa-heading-m">Chalmun's Spaceport Cantina</h3>
+      <div className="wa-cluster wa-gap-xs">
+        <wa-rating value="4.6" readonly tabIndex={-1}></wa-rating>
+        <strong>4.6</strong>
+        <span>(419 reviews)</span>
+      </div>
+      <div className="wa-cluster wa-gap-xs">
+        <div className="wa-cluster wa-gap-3xs">
+          <wa-icon name="dollar" style={{ color: 'var(--wa-color-green-60)' }}></wa-icon>
+          <wa-icon name="dollar" style={{ color: 'var(--wa-color-green-60)' }}></wa-icon>
+        </div>
+        <span className="wa-caption-m">&bull;</span>
+        <wa-tag size="small">Cocktail Bar</wa-tag>
+        <wa-tag size="small">Gastropub</wa-tag>
+        <wa-tag size="small">Local Fare</wa-tag>
+      </div>
+      <div className="wa-flank wa-gap-xs">
+        <wa-icon name="location-dot"></wa-icon>
+        <a href="#" className="wa-caption-m" tabIndex={-1}>Mos Eisley, Tatooine</a>
+      </div>
+    </div>
+  </wa-card>
+);
+
+const SettingsToggleCard = () => (
+  <wa-card>
+    <div className="wa-stack">
+      <div className="wa-flank:end">
+        <h3 id="odds-label" className="wa-heading-m">Tell Me the Odds</h3>
+        <wa-switch size="large" aria-labelledby="odds-label" tabIndex={-1}></wa-switch>
+      </div>
+      <p className="wa-body-s">
+        Allow protocol droids to inform you of probabilities, such as the success rate of navigating an asteroid
+        field. We recommend setting this to "Never."
+      </p>
+    </div>
+  </wa-card>
+);
+
 const ShoppingCartCard = () => (
   <wa-card>
     <div slot="header" className="wa-split">
@@ -175,6 +414,34 @@ const TodoCard = () => (
   </wa-card>
 );
 
+const UserCard = () => (
+  <wa-card>
+    <div className="wa-flank:end">
+      <div className="wa-stack wa-gap-xs">
+        <span className="wa-caption-m">Thanks for following along...</span>
+        <div className="wa-cluster wa-gap-xs">
+          <h3 className="wa-heading-m">Zach Williams</h3>
+          <wa-badge pill>Author</wa-badge>
+        </div>
+      </div>
+      <wa-avatar
+        image="https://images.unsplash.com/photo-1633268335280-a41fbde58707?q=80&w=3348&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        label="Avatar of a man wearing a sci-fi helmet (Photograph by Nandu Vasudevan)"
+      ></wa-avatar>
+    </div>
+    <div slot="footer" className="wa-grid wa-gap-xs" style={{ '--min-column-size': '10ch' }}>
+      <wa-button href="https://github.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
+        <wa-icon slot="start" name="code"></wa-icon>
+        Github
+      </wa-button>
+      <wa-button href="https://twitter.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
+        <wa-icon slot="start" name="at"></wa-icon>
+        Twitter
+      </wa-button>
+    </div>
+  </wa-card>
+);
+
 const DatastarIntro = () => (
   <wa-card id="intro">
     <img
@@ -209,6 +476,109 @@ const DatastarIntro = () => (
         href="#"
         tooltip="Wise words from Gandalf"
       />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+    </div>
+  </wa-card>
+);
+
+const DatastarRecap = () => (
+  <wa-card id="recap">
+    <img
+      slot="media"
+      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
+      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Recap
+          </dt>
+          <dd className="wa-heading-l">Datastar</dd>
+        </dl>
+        <wa-badge>Hypermedia Framework</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+
+      <LongformQuote
+        icon="arrows-rotate"
+        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
+        href="https://zachwill.com/complex-systems/"
+        tooltip="John Gall"
+      />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+    </div>
+  </wa-card>
+);
+
+const DuckDBComparison = () => (
+  <wa-card id="duckdb">
+    <img
+      slot="media"
+      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
+      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Compared to...
+          </dt>
+          <dd className="wa-heading-l">DuckDB</dd>
+        </dl>
+        <wa-badge style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>Insanely Fast</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+
+      <LongformQuote
+        icon="feather-pointed"
+        quote="Product design is making things simpler to achieve, not adding new features."
+        href="https://zachwill.com/making-things-simpler/"
+        tooltip="Ben Tossell"
+      />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -321,377 +691,6 @@ const SpreadsheetComparison = () => (
     </div>
   </wa-card>
 );
-
-const DuckDBComparison = () => (
-  <wa-card id="duckdb">
-    <img
-      slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
-      alt="Album art"
-    />
-    <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Compared to...
-          </dt>
-          <dd className="wa-heading-l">DuckDB</dd>
-        </dl>
-        <wa-badge style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>Insanely Fast</wa-badge>
-      </div>
-      <wa-divider></wa-divider>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
-        </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
-        </li>
-        <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-        </li>
-      </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-
-      <LongformQuote
-        icon="feather-pointed"
-        quote="Product design is making things simpler to achieve, not adding new features."
-        href="https://zachwill.com/making-things-simpler/"
-        tooltip="Ben Tossell"
-      />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-    </div>
-  </wa-card>
-);
-
-const DatastarRecap = () => (
-  <wa-card id="recap">
-    <img
-      slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
-      alt="Album art"
-    />
-    <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Recap
-          </dt>
-          <dd className="wa-heading-l">Datastar</dd>
-        </dl>
-        <wa-badge>Hypermedia Framework</wa-badge>
-      </div>
-      <wa-divider></wa-divider>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
-        </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
-        </li>
-        <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-        </li>
-      </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-
-      <LongformQuote
-        icon="arrows-rotate"
-        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
-        href="https://zachwill.com/complex-systems/"
-        tooltip="John Gall"
-      />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-    </div>
-  </wa-card>
-);
-
-const RestaurantCard = () => (
-  <wa-card>
-    <div className="wa-stack">
-      <h3 className="wa-heading-m">Chalmun's Spaceport Cantina</h3>
-      <div className="wa-cluster wa-gap-xs">
-        <wa-rating value="4.6" readonly tabIndex={-1}></wa-rating>
-        <strong>4.6</strong>
-        <span>(419 reviews)</span>
-      </div>
-      <div className="wa-cluster wa-gap-xs">
-        <div className="wa-cluster wa-gap-3xs">
-          <wa-icon name="dollar" style={{ color: 'var(--wa-color-green-60)' }}></wa-icon>
-          <wa-icon name="dollar" style={{ color: 'var(--wa-color-green-60)' }}></wa-icon>
-        </div>
-        <span className="wa-caption-m">&bull;</span>
-        <wa-tag size="small">Cocktail Bar</wa-tag>
-        <wa-tag size="small">Gastropub</wa-tag>
-        <wa-tag size="small">Local Fare</wa-tag>
-      </div>
-      <div className="wa-flank wa-gap-xs">
-        <wa-icon name="location-dot"></wa-icon>
-        <a href="#" className="wa-caption-m" tabIndex={-1}>Mos Eisley, Tatooine</a>
-      </div>
-    </div>
-  </wa-card>
-);
-
-const SettingsToggleCard = () => (
-  <wa-card>
-    <div className="wa-stack">
-      <div className="wa-flank:end">
-        <h3 id="odds-label" className="wa-heading-m">Tell Me the Odds</h3>
-        <wa-switch size="large" aria-labelledby="odds-label" tabIndex={-1}></wa-switch>
-      </div>
-      <p className="wa-body-s">
-        Allow protocol droids to inform you of probabilities, such as the success rate of navigating an asteroid
-        field. We recommend setting this to "Never."
-      </p>
-    </div>
-  </wa-card>
-);
-
-const ReceiptCard = () => (
-  <wa-card>
-    <div className="wa-stack">
-      <div className="wa-split wa-align-items-start">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-heading-s">Amount</dt>
-          <dd className="wa-heading-l">$5,610.00</dd>
-        </dl>
-        <wa-badge appearance="filled outlined" variant="success">Paid</wa-badge>
-      </div>
-      <wa-divider></wa-divider>
-      <dl className="wa-stack">
-        <div className="wa-flank wa-align-items-center">
-          <dt><wa-icon name="user" label="Name" fixed-width></wa-icon></dt>
-          <dd>Tom Bombadil</dd>
-        </div>
-        <div className="wa-flank wa-align-items-center">
-          <dt><wa-icon name="calendar-days" label="Date" fixed-width></wa-icon></dt>
-          <dd><wa-format-date date="2025-03-15"></wa-format-date></dd>
-        </div>
-        <div className="wa-flank wa-align-items-center">
-          <dt><wa-icon name="coins" fixed-width></wa-icon></dt>
-          <dd>Paid with copper pennies</dd>
-        </div>
-      </dl>
-    </div>
-    <div slot="footer">
-      <a href="" className="wa-cluster wa-gap-2xs" tabIndex={-1}>
-        <span>Download Receipt</span>
-        <wa-icon name="arrow-right"></wa-icon>
-      </a>
-    </div>
-  </wa-card>
-);
-
-const PricingCard = () => (
-  <wa-card>
-    <div className="wa-stack">
-      <div className="wa-split">
-        <div className="wa-cluster wa-heading-l">
-          <wa-icon name="bookmark"></wa-icon>
-          <h3>Fellowship</h3>
-        </div>
-        <wa-badge>Most Popular</wa-badge>
-      </div>
-      <span className="wa-flank wa-align-items-baseline wa-gap-2xs">
-        <span className="wa-heading-2xl">$120</span>
-        <span className="wa-caption-l">per year</span>
-      </span>
-      <p className="wa-caption-l">Carry great power (and great responsibility).</p>
-      <wa-button variant="brand" tabIndex={-1}>Get this Plan</wa-button>
-    </div>
-    <div slot="footer" className="wa-stack wap-gap-s">
-      <h4 className="wa-heading-s">What You Get</h4>
-      <div className="wa-stack">
-        <div className="wa-flank">
-          <wa-icon name="user" fixed-width></wa-icon>
-          <span className="wa-caption-m">9 users</span>
-        </div>
-        <div className="wa-flank">
-          <wa-icon name="ring" fixed-width></wa-icon>
-          <span className="wa-caption-m">1 ring</span>
-        </div>
-        <div className="wa-flank">
-          <wa-icon name="chess-rook" fixed-width></wa-icon>
-          <span className="wa-caption-m">API access to Isengard</span>
-        </div>
-        <div className="wa-flank">
-          <wa-icon name="feather" fixed-width></wa-icon>
-          <span className="wa-caption-m">Priority eagle support</span>
-        </div>
-      </div>
-    </div>
-  </wa-card>
-);
-
-const CodeSampleCard = () => (
-  <wa-card className="showcase-code-sample">
-    <pre dangerouslySetInnerHTML={{
-      __html: `
-&lt;<span className="tag">div</span> <span className="attribute">class</span>="<span className="value">fellowship</span>"&gt;
-  &lt;<span className="tag">p</span> <span className="attribute">class</span>="<span className="value">ring-bearer</span>"&gt;
-    Frodo carries the &lt;<span className="tag">span</span> <span className="attribute">id</span>="<span className="value">one-ring</span>"&gt;One Ring&lt;/<span className="tag">span</span>&gt;
-  &lt;/<span className="tag">p</span>&gt;
-  &lt;<span className="tag">ul</span> <span className="attribute">class</span>="<span className="value">companions</span>"&gt;
-    &lt;<span className="tag">li</span> <span className="attribute">data-race</span>="<span className="value">wizard</span>"&gt;Gandalf the Grey&lt;/<span className="tag">li</span>&gt;
-    &lt;<span className="tag">li</span> <span className="attribute">data-race</span>="<span className="value">elf</span>"&gt;Legolas&lt;/<span className="tag">li</span>&gt;
-    &lt;<span className="tag">li</span> <span className="attribute">data-race</span>="<span className="value">dwarf</span>"&gt;Gimli&lt;/<span className="tag">li</span>&gt;
-  &lt;/<span className="tag">ul</span>&gt;
-&lt;/<span className="tag">div</span>&gt;`.trim()
-    }} />
-  </wa-card>
-);
-
-const UserCard = () => (
-  <wa-card>
-    <div className="wa-flank:end">
-      <div className="wa-stack wa-gap-xs">
-        <span className="wa-caption-m">Thanks for following along...</span>
-        <div className="wa-cluster wa-gap-xs">
-          <h3 className="wa-heading-m">Zach Williams</h3>
-          <wa-badge pill>Author</wa-badge>
-        </div>
-      </div>
-      <wa-avatar
-        image="https://images.unsplash.com/photo-1633268335280-a41fbde58707?q=80&w=3348&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        label="Avatar of a man wearing a sci-fi helmet (Photograph by Nandu Vasudevan)"
-      ></wa-avatar>
-    </div>
-    <div slot="footer" className="wa-grid wa-gap-xs" style={{ '--min-column-size': '10ch' }}>
-      <wa-button href="https://github.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
-        <wa-icon slot="start" name="code"></wa-icon>
-        Github
-      </wa-button>
-      <wa-button href="https://twitter.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
-        <wa-icon slot="start" name="at"></wa-icon>
-        Twitter
-      </wa-button>
-    </div>
-  </wa-card>
-);
-
-const LongformQuote = ({ icon, quote, href, tooltip }: { icon: string; quote: string; href: string; tooltip: string }) => {
-  const buttonId = `longform-quote-${icon.replace(/[^a-zA-Z0-9]/g, '-')}`;
-
-  return (
-    <>
-      <wa-divider></wa-divider>
-      <div className="wa-flank wa-align-items-start">
-        <wa-tooltip for={buttonId}>{tooltip}</wa-tooltip>
-        <wa-button id={buttonId} href={href} size="large" appearance="filled">
-          <wa-icon name={icon} style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
-        </wa-button>
-        <p className="wa-body-l" style={{
-          fontFamily: 'var(--wa-font-family-longform)',
-          fontWeight: 'var(--wa-font-weight-longform)',
-          fontStyle: 'italic'
-        }}>
-          {quote}
-        </p>
-      </div>
-      <wa-divider></wa-divider>
-    </>
-  );
-};
-
-const MentalModelsCard = () => (
-  <wa-card>
-    <div slot="header" className="wa-split wa-align-items-center">
-      <h3 className="wa-heading-m">Mental Models</h3>
-      <wa-tooltip for="data-star-dev">https://data-star.dev</wa-tooltip>
-      <wa-button id="data-star-dev" href="https://data-star.dev" target="_blank" appearance="plain" size="small" tabIndex={-1}>
-        <wa-icon name="rocket" label="Datastar website"></wa-icon>
-      </wa-button>
-    </div>
-    <div className="wa-stack wa-gap-xl">
-      <p className="wa-caption-m">
-        Datastar's focus on hypermedia, reactivity, and speed lead to some fun mental models.
-      </p>
-      <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
-        <a href="#intro" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
-          <wa-avatar
-            shape="rounded"
-            style={{ backgroundColor: 'var(--wa-color-brand-fill-normal)', color: 'var(--wa-color-brand-on-quiet)' }}
-          >
-            <wa-icon slot="icon" name="rocket"></wa-icon>
-          </wa-avatar>
-          <div className="wa-stack wa-gap-2xs">
-            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              Intro <wa-icon name="arrow-right"></wa-icon>
-            </span>
-            <p className="wa-caption-m">General ideas about why Datastar is awesome.</p>
-          </div>
-        </a>
-
-        <a href="#htmx" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
-          <wa-avatar
-            shape="rounded"
-            style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
-          >
-            <wa-icon slot="icon" name="file-code"></wa-icon>
-          </wa-avatar>
-          <div className="wa-stack wa-gap-2xs">
-            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              HTMX <wa-icon name="arrow-right"></wa-icon>
-            </span>
-            <p className="wa-caption-m">Yes, both Datastar and HTMX use declarative attributes.</p>
-          </div>
-        </a>
-
-        <a href="#spreadsheets" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
-          <wa-avatar
-            shape="rounded"
-            style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
-          >
-            <wa-icon slot="icon" name="table"></wa-icon>
-          </wa-avatar>
-          <div className="wa-stack wa-gap-2xs">
-            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              Spreadsheets <wa-icon name="arrow-right"></wa-icon>
-            </span>
-            <p className="wa-caption-m">My favorite analogies revolve around spreadsheet cell updates.</p>
-          </div>
-        </a>
-
-        <a href="#duckdb" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
-          <wa-avatar
-            shape="rounded"
-            style={{ backgroundColor: 'var(--wa-color-purple-fill-normal)', color: 'var(--wa-color-purple-on-quiet)' }}
-          >
-            <wa-icon slot="icon" name="feather-pointed"></wa-icon>
-          </wa-avatar>
-          <div className="wa-stack wa-gap-2xs">
-            <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              DuckDB <wa-icon name="arrow-right"></wa-icon>
-            </span>
-            <p className="wa-caption-m">Both have a focus on executable size, speed, and productivity.</p>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </wa-card>
-);
-
 
 interface TwoColumnSectionProps {
   left: ReactNode;
