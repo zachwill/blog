@@ -321,7 +321,8 @@ const RestaurantCard = () => (
 
 const MorpheusMatrixCard = () => (
   <wa-card
-    data-signals-morpheus="true"
+    data-signals-slider="85"
+    data-computed-morpheus="$slider >= 50"
     data-computed-morpheus-quote="$morpheus ? 'Stay in Wonderland' : 'The story ends...'"
     data-computed-morpheus-subquote="$morpheus ? 'See how deep the rabbit hole goes...' : 'You wake up in your bed.'"
   >
@@ -332,15 +333,17 @@ const MorpheusMatrixCard = () => (
           <p className="wa-caption-m" data-text="$morpheusSubquote"></p>
         </div>
         <wa-switch
-          data-attr-checked="$morpheus ? true : false"
-          data-on-click="event.preventDefault(); $morpheus = !$morpheus; console.log(el);"
+          disabled
+          data-attr-checked="$slider >= 50 ? true : false"
+          data-on-click="event.preventDefault()"
           size="medium"
           aria-labelledby="odds-label"
           tabIndex={-1}
           style={{ '--wa-form-control-activated-color': 'var(--wa-color-danger-fill-loud)' }}></wa-switch>
       </div>
       <wa-comparison
-        data-attr-position="$morpheus ? 85 : 15"
+        position={85}
+        data-on-mousemove="$slider = el.position"
       >
         <img slot="before" src="/assets/morpheus-htmx.jpg" alt="Morpheus + HTMX" />
         <img slot="after" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
