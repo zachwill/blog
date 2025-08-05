@@ -151,7 +151,7 @@ const MentalModelsCard = () => (
         Datastar's focus on hypermedia, reactivity, and speed lead to some fun mental models.
       </p>
       <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
-        <a href="#intro" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#intro" data-on-click="event.preventDefault(); document.querySelector('#intro').scrollIntoView({ behavior: 'smooth' })" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-brand-fill-normal)', color: 'var(--wa-color-brand-on-quiet)' }}
@@ -166,7 +166,7 @@ const MentalModelsCard = () => (
           </div>
         </a>
 
-        <a href="#htmx" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#htmx" data-on-click="event.preventDefault(); document.querySelector('#htmx').scrollIntoView({ behavior: 'smooth' })" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-warning-fill-normal)', color: 'var(--wa-color-warning-on-quiet)' }}
@@ -181,7 +181,7 @@ const MentalModelsCard = () => (
           </div>
         </a>
 
-        <a href="#spreadsheets" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#spreadsheets" data-on-click="event.preventDefault(); document.querySelector('#spreadsheets').scrollIntoView({ behavior: 'smooth' })" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-success-fill-normal)', color: 'var(--wa-color-success-on-quiet)' }}
@@ -196,7 +196,7 @@ const MentalModelsCard = () => (
           </div>
         </a>
 
-        <a href="#duckdb" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
+        <a href="#duckdb" data-on-click="event.preventDefault(); document.querySelector('#duckdb').scrollIntoView({ behavior: 'smooth' })" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
             style={{ backgroundColor: 'var(--wa-color-purple-fill-normal)', color: 'var(--wa-color-purple-on-quiet)' }}
@@ -467,9 +467,17 @@ const DatastarIntro = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+        </li>
+        <li>
+          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        </li>
+      </ul>
       <LongformQuote
         icon="hat-wizard"
         quote="All we have to decide is what to do with the time that is given to us. There are other forces at work in this world, Frodo, besides the will of evil."
@@ -605,6 +613,9 @@ const HTMXComparison = () => (
         <wa-badge variant="warning">Hypermedia OG</wa-badge>
       </div>
       <wa-divider></wa-divider>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -745,8 +756,8 @@ export function Main() {
         left={
           <>
             <HTMXComparison />
-            <CodeSampleCard />
             <SettingsToggleCard />
+            <CodeSampleCard />
           </>
         }
         right={
