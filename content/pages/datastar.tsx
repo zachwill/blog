@@ -343,9 +343,8 @@ const MorpheusMatrixCard = () => (
       </div>
       <wa-comparison
         position={85}
-        data-on-click="$slider = el.position"
-        data-on-drag="$slider = el.position"
         data-on-mousemove="$slider = el.position"
+        data-on-touchmove="$slider = el.position"
       >
         <img slot="before" src="/assets/morpheus-htmx.jpg" alt="Morpheus + HTMX" />
         <img slot="after" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
