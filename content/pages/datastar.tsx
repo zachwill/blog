@@ -747,7 +747,6 @@ export function Main() {
             <HTMXComparison />
             <CodeSampleCard />
             <SettingsToggleCard />
-            <RestaurantCard />
           </>
         }
         right={
