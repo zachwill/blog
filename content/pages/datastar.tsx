@@ -319,17 +319,32 @@ const RestaurantCard = () => (
   </wa-card>
 );
 
-const SettingsToggleCard = () => (
-  <wa-card>
+const MorpheusMatrixCard = () => (
+  <wa-card
+    data-signals-morpheus="true"
+    data-computed-morpheus-quote="$morpheus ? 'Stay in Wonderland' : 'The story ends...'"
+    data-computed-morpheus-subquote="$morpheus ? 'See how deep the rabbit hole goes...' : 'You wake up in your bed.'"
+  >
     <div className="wa-stack">
       <div className="wa-flank:end">
-        <h3 id="odds-label" className="wa-heading-m">Tell Me the Odds</h3>
-        <wa-switch size="large" aria-labelledby="odds-label" tabIndex={-1}></wa-switch>
+        <div className="wa-stack wa-gap-xs">
+          <h3 id="odds-label" className="wa-heading-m" data-text="$morpheusQuote"></h3>
+          <p className="wa-caption-m" data-text="$morpheusSubquote"></p>
+        </div>
+        <wa-switch
+          data-attr-checked="$morpheus ? true : false"
+          data-on-click="event.preventDefault(); $morpheus = !$morpheus; console.log(el);"
+          size="medium"
+          aria-labelledby="odds-label"
+          tabIndex={-1}
+          style={{ '--wa-form-control-activated-color': 'var(--wa-color-danger-fill-loud)' }}></wa-switch>
       </div>
-      <p className="wa-body-s">
-        Allow protocol droids to inform you of probabilities, such as the success rate of navigating an asteroid
-        field. We recommend setting this to "Never."
-      </p>
+      <wa-comparison
+        data-attr-position="$morpheus ? 85 : 15"
+      >
+        <img slot="before" src="/assets/morpheus-htmx.jpg" alt="Morpheus + HTMX" />
+        <img slot="after" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
+      </wa-comparison>
     </div>
   </wa-card>
 );
@@ -405,11 +420,11 @@ const TodoCard = () => (
       </wa-button>
     </div>
     <div className="wa-stack">
-      <wa-checkbox tabIndex={-1} checked>Umbrella for Adelard</wa-checkbox>
-      <wa-checkbox tabIndex={-1} checked>Waste-paper basket for Dora</wa-checkbox>
-      <wa-checkbox tabIndex={-1} checked>Pen and ink for Milo</wa-checkbox>
-      <wa-checkbox tabIndex={-1}>Mirror for Angelica</wa-checkbox>
-      <wa-checkbox tabIndex={-1}>Silver spoons for Lobelia</wa-checkbox>
+      <wa-checkbox tabIndex={-1} checked>Read the introduction</wa-checkbox>
+      <wa-checkbox tabIndex={-1} checked>Enjoy the Gandalf quote</wa-checkbox>
+      <wa-checkbox tabIndex={-1} checked>Check off an example todo</wa-checkbox>
+      <wa-checkbox tabIndex={-1}>Check out the Datastar docs</wa-checkbox>
+      <wa-checkbox tabIndex={-1}>Keep scrolling for more comparisons</wa-checkbox>
     </div>
   </wa-card>
 );
@@ -467,6 +482,9 @@ const DatastarIntro = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <p>
+        <strong>Header for the list below goes here</strong>
+      </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
@@ -513,6 +531,18 @@ const DatastarRecap = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <LongformQuote
+        icon="arrows-rotate"
+        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
+        href="https://zachwill.com/complex-systems/"
+        tooltip="John Gall"
+      />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
@@ -524,19 +554,7 @@ const DatastarRecap = () => (
           Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
         </li>
       </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
 
-      <LongformQuote
-        icon="arrows-rotate"
-        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
-        href="https://zachwill.com/complex-systems/"
-        tooltip="John Gall"
-      />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
     </div>
   </wa-card>
 );
@@ -563,6 +581,12 @@ const DuckDBComparison = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+      </p>
+      <p>
+        <strong>Header for the list below goes here</strong>
+      </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
@@ -574,9 +598,6 @@ const DuckDBComparison = () => (
           Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
         </li>
       </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
 
       <LongformQuote
         icon="feather-pointed"
@@ -584,9 +605,6 @@ const DuckDBComparison = () => (
         href="https://zachwill.com/making-things-simpler/"
         tooltip="Ben Tossell"
       />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
@@ -619,6 +637,9 @@ const HTMXComparison = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <p>
+        <strong>Header for the list below goes here</strong>
+      </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
@@ -630,9 +651,6 @@ const HTMXComparison = () => (
           Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
         </li>
       </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
 
       <LongformQuote
         icon="keyboard"
@@ -672,6 +690,9 @@ const SpreadsheetComparison = () => (
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
       </p>
+      <p>
+        <strong>Header for the list below goes here</strong>
+      </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
@@ -679,13 +700,13 @@ const SpreadsheetComparison = () => (
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
         </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+        </li>
         <li>
           Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
         </li>
       </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
 
       <LongformQuote
         icon="calendar-check"
@@ -756,7 +777,6 @@ export function Main() {
         left={
           <>
             <HTMXComparison />
-            <SettingsToggleCard />
             <CodeSampleCard />
           </>
         }
@@ -768,7 +788,7 @@ export function Main() {
                 &ldquo;People who compare HTMX to Datastar haven't actually measured anything.&rdquo;
               </Prose>
             </wa-callout>
-            <ReceiptCard />
+            <MorpheusMatrixCard />
           </>
         }
       />
