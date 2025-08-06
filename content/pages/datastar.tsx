@@ -673,7 +673,7 @@ const HTMXComparison = () => (
   <wa-card id="htmx">
     <img
       slot="media"
-      src="/assets/htmx-carl.jpg"
+      src="/assets/htmx-up.jpg"
       style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
     />
@@ -835,7 +835,7 @@ export function Main() {
             <wa-callout variant="warning" appearance="accent">
               <wa-icon slot="icon" name="file-code"></wa-icon>
               <Prose>
-                &ldquo;People who compare HTMX to Datastar haven't actually measured anything.&rdquo;
+                &ldquo;<strong>Hobbit software:</strong> Pretty chill, keeps to itself, tends to its databases, hangs out with other hobbit software at the pub, unbothered by the scheming of wizards and orcs...&rdquo;
               </Prose>
             </wa-callout>
             <MorpheusMatrixCard />
