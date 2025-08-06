@@ -148,7 +148,7 @@ const MentalModelsCard = () => (
     </div>
     <div className="wa-stack wa-gap-xl">
       <p className="wa-caption-m">
-        Datastar's focus on hypermedia, reactivity, and speed lead to some fun mental models.
+        Datastar's focus on hypermedia, reactivity, and speed leads to some fun mental models.
       </p>
       <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
         <a href="#intro" data-on-click="event.preventDefault(); document.querySelector('#intro').scrollIntoView({ behavior: 'smooth' })" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
@@ -353,6 +353,59 @@ const MorpheusMatrixCard = () => (
   </wa-card>
 );
 
+const MorpheusSpreadsheetCard = () => (
+  <wa-card
+    data-signals-spreadsheet="85"
+    data-computed-morpheus-excel="$spreadsheet >= 50"
+    data-computed-morpheus-excel-quote="$morpheusExcel ? 'You have to understand...' : 'Stay in Wonderland'"
+    data-computed-morpheus-excel-subquote="$morpheusExcel ? 'Most are not ready to be unplugged' : 'See how deep the rabbit hole goes...'"
+  >
+    <div className="wa-stack">
+      <div className="wa-flank:end">
+        <div className="wa-stack wa-gap-xs">
+          <h3 id="odds-label" className="wa-heading-m" data-text="$morpheusExcelQuote"></h3>
+          <p className="wa-caption-m" data-text="$morpheusExcelSubquote"></p>
+        </div>
+      </div>
+      <wa-comparison
+        position={85}
+        data-on-mousemove="$spreadsheet = el.position"
+        data-on-touchmove="$spreadsheet = el.position"
+      >
+        <img slot="before" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
+        <img slot="after" src="/assets/matrix-datastar.jpg" alt="Morpheus + HTMX" />
+      </wa-comparison>
+    </div>
+  </wa-card>
+);
+
+const MorpheusDuckDBCard = () => (
+  <wa-card
+    data-signals-duckdb="85"
+    data-computed-morpheus-duckdb="$duckdb >= 50"
+    data-computed-morpheus-duckdb-quote="$morpheusDuckdb ? 'Deja vu is usually a glitch...' : 'Stay in Wonderland'"
+    data-computed-morpheus-duckdb-subquote="$morpheusDuckdb ? 'It happens when they change something' : 'See how deep the rabbit hole goes...'"
+  >
+    <div className="wa-stack">
+      <div className="wa-flank:end">
+        <div className="wa-stack wa-gap-xs">
+          <h3 id="odds-label" className="wa-heading-m" data-text="$morpheusDuckdbQuote"></h3>
+          <p className="wa-caption-m" data-text="$morpheusDuckdbSubquote"></p>
+        </div>
+      </div>
+      <wa-comparison
+        position={85}
+        data-on-mousemove="$duckdb = el.position"
+        data-on-touchmove="$duckdb = el.position"
+      >
+        <img slot="before" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
+        <img slot="after" src="/assets/matrix-rocket.jpg" alt="Morpheus + HTMX" />
+      </wa-comparison>
+    </div>
+  </wa-card>
+);
+
+
 const ShoppingCartCard = () => (
   <wa-card>
     <div slot="header" className="wa-split">
@@ -465,8 +518,8 @@ const DatastarIntro = () => (
   <wa-card id="intro">
     <img
       slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      src="/assets/datastar-blast.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
     />
     <div className="wa-stack">
@@ -517,8 +570,8 @@ const DatastarRecap = () => (
   <wa-card id="recap">
     <img
       slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      src="/assets/datastar-blast.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
     />
     <div className="wa-stack">
@@ -567,8 +620,8 @@ const DuckDBComparison = () => (
   <wa-card id="duckdb">
     <img
       slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      src="/assets/matrix-duckdb.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
     />
     <div className="wa-stack">
@@ -620,8 +673,8 @@ const HTMXComparison = () => (
   <wa-card id="htmx">
     <img
       slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      src="/assets/htmx-carl.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
     />
     <div className="wa-stack">
@@ -673,8 +726,8 @@ const SpreadsheetComparison = () => (
   <wa-card id="spreadsheets">
     <img
       slot="media"
-      src="https://images.unsplash.com/photo-1614642237208-a17ea4a90221?q=40"
-      style={{ aspectRatio: '2.5/1', objectFit: 'cover' }}
+      src="/assets/matrix-clippy.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
     />
     <div className="wa-stack">
@@ -752,7 +805,6 @@ export function Main() {
         left={
           <>
             <DatastarIntro />
-            <CodeSampleCard />
             <TodoCard />
           </>
         }
@@ -797,7 +849,6 @@ export function Main() {
         left={
           <>
             <SpreadsheetComparison />
-            <ReceiptCard />
             <RestaurantCard />
           </>
         }
@@ -809,7 +860,7 @@ export function Main() {
                 &ldquo;Spreadsheets really are the fullest realization we've seen of functional-programming-without-code... It's no wonder they kicked off the microcomputer era.&rdquo;
               </Prose>
             </wa-callout>
-            <PricingCard />
+            <MorpheusSpreadsheetCard />
           </>
         }
       />
@@ -832,7 +883,7 @@ export function Main() {
                 &ldquo;My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one.&rdquo;
               </Prose>
             </wa-callout>
-            <PricingCard />
+            <MorpheusDuckDBCard />
           </>
         }
       />
