@@ -534,23 +534,20 @@ const DatastarIntro = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        Datastar is a framework focused on interactivity and streaming updates through a handful of HTML attributes. The server owns persistent state and logic; the client handles reactive UI with signals. The server computes and streams patches — while the client provides immediate feedback.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        HTML is the contract between these two. Stable element ids are server targets; the DOM is the update surface. Events trigger server actions that stream patches — morphing elements or updating signals. There's little state to synchronize, as the frontend acts as a dumb, reactive terminal.
       </p>
       <p>
-        <strong>Header for the list below goes here</strong>
+        <strong>Datastar's philosophy</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
-        </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+          <strong>Stream-first approach:</strong> Simple patches via SSE; real-time pushes and multi-target updates are first-class.
         </li>
         <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+          <strong>Declarative reactivity:</strong> Interactive UI is handled through signals and HTML attributes.
         </li>
       </ul>
       <LongformQuote
@@ -560,110 +557,7 @@ const DatastarIntro = () => (
         tooltip="Wise words from Gandalf"
       />
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-    </div>
-  </wa-card>
-);
-
-const DatastarRecap = () => (
-  <wa-card id="recap">
-    <img
-      slot="media"
-      src="/assets/datastar-blast.jpg"
-      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
-      alt="Album art"
-    />
-    <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Recap
-          </dt>
-          <dd className="wa-heading-l">Datastar</dd>
-        </dl>
-        <wa-badge>Hypermedia Framework</wa-badge>
-      </div>
-      <wa-divider></wa-divider>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <LongformQuote
-        icon="arrows-rotate"
-        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
-        href="https://zachwill.com/complex-systems/"
-        tooltip="John Gall"
-      />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
-        </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
-        </li>
-        <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-        </li>
-      </ul>
-
-    </div>
-  </wa-card>
-);
-
-const DuckDBComparison = () => (
-  <wa-card id="duckdb">
-    <img
-      slot="media"
-      src="/assets/matrix-duckdb.jpg"
-      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
-      alt="Album art"
-    />
-    <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Compared to...
-          </dt>
-          <dd className="wa-heading-l">DuckDB</dd>
-        </dl>
-        <wa-badge style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>Insanely Fast</wa-badge>
-      </div>
-      <wa-divider></wa-divider>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-      </p>
-      <p>
-        <strong>Header for the list below goes here</strong>
-      </p>
-      <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
-        </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
-        </li>
-        <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
-        </li>
-      </ul>
-
-      <LongformQuote
-        icon="feather-pointed"
-        quote="Product design is making things simpler to achieve, not adding new features."
-        href="https://zachwill.com/making-things-simpler/"
-        tooltip="Ben Tossell"
-      />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        Designed for hard problems — multi-target updates, real-time state, reactive UX — easy problems solve themselves. Datastar treats client reactivity as a core primitive. The result is a hypermedia framework capable of handling simple CRUD apps or a million multiplayer checkboxes.
       </p>
     </div>
   </wa-card>
@@ -689,23 +583,20 @@ const HTMXComparison = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        HTMX extends hypermedia: any element makes requests; any event triggers them; any target receives updates. Strong locality of behavior via hx-* attributes keeps the server authoritative and the client minimal. For CRUD and linear flows without heavy JavaScript, HTMX excels. Its declarative approach makes request/response very easy to implement.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        But HTMX strains with complex UI interactions. Multi-part updates require out-of-band swaps — a workable solution to a messy problem. Ephemeral UI state remains ad hoc, requiring a good chunk of users to bolt on Alpine. These trade-offs are from HTMX's core approach: declarative request/response rather than declarative interactivity.
       </p>
       <p>
-        <strong>Header for the list below goes here</strong>
+        <strong>Where Datastar diverges</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
-        </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+          <strong>Reactivity as a core primitive:</strong> Signals, computed values, and effects handle ephemeral UI; no bolt-ons needed.
         </li>
         <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+          <strong>Streaming updates:</strong> SSE delivers patches to multiple targets; no OOB workarounds required.
         </li>
       </ul>
 
@@ -716,8 +607,16 @@ const HTMXComparison = () => (
         tooltip="Bob Nystrom"
       />
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        Both embrace declarative HTML and the server as the source of truth, but their centers of gravity differ.
       </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          HTMX extends hypermedia with declarative request/response: minimal client, server in charge.
+        </li>
+        <li>
+          Datastar combines declarative reactivity with streaming updates: it assumes a responsive UI and makes it achievable in pragmatic ways.
+        </li>
+      </ul>
     </div>
   </wa-card>
 );
@@ -742,23 +641,23 @@ const SpreadsheetComparison = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        My favorite mental model for Datastar is spreadsheets. Spreadsheets are incredibly useful across domains. Yet the database remains the truth, while the spreadsheet provides a reactive view. In this analogy: signals are cells and computed values are formulas. Type in a cell (data-bind) for immediate updates — but the database (server) owns persistent truth.
       </p>
       <p>
-        <strong>Header for the list below goes here</strong>
+        <strong>Datastar as a spreadsheet</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+          <strong>Signals as cells:</strong> Hold ephemeral values (inputs, toggles, flags); update instantly.
         </li>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis.
+          <strong>Computed values as formulas:</strong> Derive from signals automatically; dependencies change, values recalculate.
         </li>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu.
+          <strong>Effects as macros:</strong> Fire on signal changes; handle toasts, indicators, styling — never business logic.
         </li>
         <li>
-          Enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+          <strong>Bindings allow edits:</strong> Two-way flow between DOM and signals; input updates signal, signal updates DOM.
         </li>
       </ul>
 
@@ -769,8 +668,116 @@ const SpreadsheetComparison = () => (
         tooltip="Pavel Samsonov"
       />
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum maximus arcu, quis hendrerit purus faucibus in. Nullam ut vestibulum massa. Vestibulum lacinia enim ac elit congue convallis. Duis lobortis ante et lectus aliquam volutpat. Suspendisse potenti. Vivamus ut auctor magna.
+        Make no mistake: using spreadsheets requires discipline — otherwise an analyst's view can turn into a tangled mess. The same can happen with signals and effects. But if the server owns state and streams patches, then the client can act as an interactive terminal.
       </p>
+    </div>
+  </wa-card>
+);
+
+const DuckDBComparison = () => (
+  <wa-card id="duckdb">
+    <img
+      slot="media"
+      src="/assets/matrix-duckdb.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Compared to...
+          </dt>
+          <dd className="wa-heading-l">DuckDB</dd>
+        </dl>
+        <wa-badge style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>Insanely Fast</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          <strong>Hypermedia ≈ SQLite:</strong> embedded, straightforward, useful
+        </li>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          <strong>React/Solid/Svelte ≈ MySQL/Postgres:</strong> full client applications
+        </li>
+        <li>
+          <strong>Datastar ≈ DuckDB:</strong> embedded, powerful without a heavy burden
+        </li>
+      </ul>
+      <p>
+        Both DuckDB and Datastar handle hard cases (complex analytical queries; real-time, multiplayer updates) while aiming to keep the simple cases simple.
+      </p>
+      <p>
+        <strong>Datastar as DuckDB</strong>
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          <strong>Embedded, but powerful:</strong> Multi-target orchestration via SSE; interactivity via HTML attributes.
+        </li>
+        <li>
+          <strong>Built for modern platforms:</strong> modern browser features (SSE, View Transitions, Web Components) narrow SPA advantages (interactive UI/UX); Datastar aims to reduce the reactivity UX gap.
+        </li>
+      </ul>
+
+      <LongformQuote
+        icon="feather-pointed"
+        quote="Product design is making things simpler to achieve, not adding new features."
+        href="https://zachwill.com/making-things-simpler/"
+        tooltip="Ben Tossell"
+      />
+      <p>
+        There are problems that neither SQLite or MySQL/Postgres are great for — and where DuckDB shines. In my opinion, Datastar is a good analogy. On the other hand, some demands require heavier frameworks.
+      </p>
+    </div>
+  </wa-card>
+);
+
+const DatastarRecap = () => (
+  <wa-card id="recap">
+    <img
+      slot="media"
+      src="/assets/datastar-blast.jpg"
+      style={{ aspectRatio: '2/1', objectFit: 'cover' }}
+      alt="Album art"
+    />
+    <div className="wa-stack">
+      <div className="wa-flank:end wa-align-items-center">
+        <dl className="wa-stack wa-gap-2xs">
+          <dt className="wa-caption-m">
+            Recap
+          </dt>
+          <dd className="wa-heading-l">Datastar</dd>
+        </dl>
+        <wa-badge>Hypermedia Framework</wa-badge>
+      </div>
+      <wa-divider></wa-divider>
+      <p>
+        Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, the server streams patches, and the DOM morphs or signals update. This general loop centralizes truth while keeping UI interactive.
+      </p>
+      <p>
+        Datastar is designed for hypermedia's hard problems first. Multi-target updates, real-time pushes, and reactive UX are core primitives. The framework assumes these capabilities and delivers a pragmatic set of tools. SSE coordinates patches, signals provide feedback, and effects handle side concerns.
+      </p>
+      <LongformQuote
+        icon="arrows-rotate"
+        quote="A complex system that works is invariably found to have evolved from a simple system that worked."
+        href="https://zachwill.com/complex-systems/"
+        tooltip="John Gall"
+      />
+      <p>
+        Handful of Datastar patterns: two-way forms (data-bind); ephemeral toasts (data-on-load__delay); virtual scrolling (data-ref + throttling). Notice these aren't hacks, they're included.
+      </p>
+      <p>
+        When in doubt, write hobbit software — treat browsers as interactive terminals; stream patches; ignore framework wars.
+      </p>
+      <ul>
+        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+          <strong>Shared DNA:</strong> HTMX and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
+        </li>
+        <li>
+          <strong>Different areas of focus:</strong> HTMX extends hypermedia with request/response; Datastar adds spreadsheet reactivity and orchestrates streaming updates.
+        </li>
+      </ul>
+
     </div>
   </wa-card>
 );
