@@ -490,7 +490,7 @@ const UserCard = () => (
   <wa-card>
     <div className="wa-flank:end">
       <div className="wa-stack wa-gap-xs">
-        <span className="wa-caption-m">Thanks for following along...</span>
+        <span className="wa-caption-m">Thanks for following along!</span>
         <div className="wa-cluster wa-gap-xs">
           <h3 className="wa-heading-m">Zach Williams</h3>
           <wa-badge pill>Author</wa-badge>
@@ -534,7 +534,7 @@ const DatastarIntro = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Datastar is a framework focused on interactivity and streaming updates through a handful of HTML attributes. The server owns persistent state and logic; the client handles reactive UI with signals. The server computes and streams patches — while the client provides immediate feedback.
+        Datastar is a framework focused on interactivity and streaming updates through a handful of HTML attributes. The server owns persistent state and logic; the client handles reactive UI with signals. The server computes and streams patches; the client provides immediate feedback.
       </p>
       <p>
         HTML is the contract between these two. Stable element ids are server targets; the DOM is the update surface. Events trigger server actions that stream patches — morphing elements or updating signals. There's little state to synchronize, as the frontend acts as a dumb, reactive terminal.
@@ -856,7 +856,6 @@ export function Main() {
         left={
           <>
             <SpreadsheetComparison />
-            <RestaurantCard />
           </>
         }
         right={
@@ -878,8 +877,6 @@ export function Main() {
         left={
           <>
             <DuckDBComparison />
-            <ShoppingCartCard />
-            <CodeSampleCard />
           </>
         }
         right={
