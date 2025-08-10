@@ -127,14 +127,6 @@ footer[slot='main-footer'] {
     max-width: var(--app-content-max-width);
     margin-inline: auto;
     padding: 0 var(--wa-space-l) var(--wa-space-l) var(--wa-space-l);
-
-    a {
-        &:hover {
-            text-decoration: underline;
-            text-decoration-color: var(--wa-color-brand);
-            transition: text-decoration-color var(--wa-transition-normal) var(--wa-transition-easing);
-        }
-    }
 }
 
 /* ============================================

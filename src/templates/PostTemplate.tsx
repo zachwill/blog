@@ -42,8 +42,8 @@ export function Main({ post }: { post: Post }) {
 
 export function MainFooter() {
   return (
-    <a href="/datastar">
-      <wa-callout variant="brand">
+    <a href="/datastar" style={{ width: 'var(--app-content-max-width)' }}>
+      <wa-callout variant="brand" style={{ width: '100%' }}>
         <wa-icon slot="icon" name="rocket"></wa-icon>
         <div className="wa-align-items-baseline">
           <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Check out my recent deep dive on Datastar here &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
