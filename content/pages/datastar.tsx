@@ -178,9 +178,9 @@ const MentalModelsCard = () => (
           </wa-avatar>
           <div className="wa-stack wa-gap-2xs">
             <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
-              HTMX <wa-icon name="arrow-right"></wa-icon>
+              htmx <wa-icon name="arrow-right"></wa-icon>
             </span>
-            <p className="wa-caption-m">Yes, both Datastar and HTMX use declarative attributes.</p>
+            <p className="wa-caption-m">Yes, both Datastar and htmx use declarative attributes.</p>
           </div>
         </a>
 
@@ -247,7 +247,7 @@ const MorpheusMatrixCard = () => (
         data-on-mousemove="$slider = el.position"
         data-on-touchmove="$slider = el.position"
       >
-        <img slot="before" src="/assets/morpheus-htmx.jpg" alt="Morpheus + HTMX" />
+        <img slot="before" src="/assets/morpheus-htmx.jpg" alt="Morpheus + htmx" />
         <img slot="after" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
       </wa-comparison>
     </div>
@@ -274,7 +274,7 @@ const MorpheusSpreadsheetCard = () => (
         data-on-touchmove="$spreadsheet = el.position"
       >
         <img slot="before" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
-        <img slot="after" src="/assets/matrix-datastar.jpg" alt="Morpheus + HTMX" />
+        <img slot="after" src="/assets/matrix-datastar.jpg" alt="Morpheus + htmx" />
       </wa-comparison>
     </div>
   </wa-card>
@@ -300,7 +300,7 @@ const MorpheusDuckDBCard = () => (
         data-on-touchmove="$duckdb = el.position"
       >
         <img slot="before" src="/assets/morpheus-datastar.jpg" alt="Morpheus + Datastar" />
-        <img slot="after" src="/assets/matrix-rocket.jpg" alt="Morpheus + HTMX" />
+        <img slot="after" src="/assets/matrix-rocket.jpg" alt="Morpheus + htmx" />
       </wa-comparison>
     </div>
   </wa-card>
@@ -416,16 +416,16 @@ const HTMXComparison = () => (
           <dt className="wa-caption-m">
             Compared to...
           </dt>
-          <dd className="wa-heading-l">HTMX</dd>
+          <dd className="wa-heading-l">htmx</dd>
         </dl>
         <wa-badge variant="warning">Hypermedia OG</wa-badge>
       </div>
       <wa-divider></wa-divider>
       <p>
-        <a href="https://htmx.org" target="_blank">HTMX</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests; any event triggers them; any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Strong locality of behavior</a> via <code>hx-*</code> attributes keeps the server authoritative and the client minimal. <strong>For CRUD and linear flows without heavy JavaScript, HTMX excels.</strong> Its declarative approach makes request/response very easy to implement.
+        <a href="https://htmx.org" target="_blank">htmx</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests; any event triggers them; any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Strong locality of behavior</a> via <code>hx-*</code> attributes keeps the server authoritative and the client minimal. <strong>For CRUD and linear flows without heavy JavaScript, htmx excels.</strong> Its declarative approach makes request/response very easy to implement.
       </p>
       <p>
-        But HTMX strains with complex UI interactions. Multi-part updates require <a href="https://htmx.org/attributes/hx-swap-oob/" target="_blank">out-of-band swaps</a> — a &ldquo;workable solution&rdquo; to a messy problem. Ephemeral UI state remains ad hoc, requiring <a href="https://www.reddit.com/r/htmx/search?q=alpine&restrict_sr=on" target="_blank">a good chunk of users</a> to bolt on <a href="https://alpinejs.dev" target="_blank">Alpine</a>. These trade-offs are from HTMX's core approach: declarative request/response rather than declarative interactivity.
+        But htmx strains with complex UI interactions. Multi-part updates require <a href="https://htmx.org/attributes/hx-swap-oob/" target="_blank">out-of-band swaps</a> — a &ldquo;workable solution&rdquo; to a messy problem. Ephemeral UI state remains ad hoc, requiring <a href="https://www.reddit.com/r/htmx/search?q=alpine&restrict_sr=on" target="_blank">a good chunk of users</a> to bolt on <a href="https://alpinejs.dev" target="_blank">Alpine</a>. These trade-offs are from htmx's core approach: declarative request/response rather than declarative interactivity.
       </p>
       <p>
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Where Datastar diverges</strong>
@@ -450,7 +450,7 @@ const HTMXComparison = () => (
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          HTMX extends hypermedia with <a href="https://github.com/search?q=hx-get&type=code" target="_blank">declarative request/response</a>: minimal client, server in charge.
+          htmx extends hypermedia with <a href="https://github.com/search?q=hx-get&type=code" target="_blank">declarative request/response</a>: minimal client, server in charge.
         </li>
         <li>
           Datastar combines <a href="https://data-star.dev/examples/click_to_edit" target="_blank">declarative reactivity</a> with <a href="https://data-star.dev/examples/dbmon" target="_blank">streaming updates</a>: it assumes a responsive UI and makes it achievable in pragmatic ways.
@@ -611,10 +611,10 @@ const DatastarRecap = () => (
       <p><strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Hypermedia Recap</strong></p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          <strong>Shared DNA:</strong> HTMX and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
+          <strong>Shared DNA:</strong> htmx and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
         </li>
         <li>
-          <strong>Different areas of focus:</strong> HTMX extends hypermedia with request/response; Datastar adds spreadsheet reactivity and orchestrates streaming updates.
+          <strong>Different areas of focus:</strong> htmx extends hypermedia with request/response; Datastar adds spreadsheet reactivity and orchestrates streaming updates.
         </li>
       </ul>
 
