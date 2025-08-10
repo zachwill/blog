@@ -540,7 +540,7 @@ const DatastarIntro = () => (
         HTML is the contract between these two. Stable element ids are server targets; the DOM is the update surface. Events trigger server actions that stream patches — morphing elements or updating signals. There's little state to synchronize, as the frontend acts as a dumb, reactive terminal.
       </p>
       <p>
-        <strong>Datastar's philosophy</strong>
+        <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar's philosophy</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
@@ -557,7 +557,7 @@ const DatastarIntro = () => (
         tooltip="Wise words from Gandalf"
       />
       <p>
-        Designed for hard problems — multi-target updates, real-time state, reactive UX — easy problems solve themselves. Datastar treats client reactivity as a core primitive. The result is a hypermedia framework capable of handling simple CRUD apps or a million multiplayer checkboxes.
+        <strong>Datastar treats client reactivity as a core primitive.</strong> The result is a hypermedia framework capable of handling simple CRUD apps or a million multiplayer checkboxes.
       </p>
     </div>
   </wa-card>
@@ -583,13 +583,13 @@ const HTMXComparison = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        HTMX extends hypermedia: any element makes requests; any event triggers them; any target receives updates. Strong locality of behavior via hx-* attributes keeps the server authoritative and the client minimal. For CRUD and linear flows without heavy JavaScript, HTMX excels. Its declarative approach makes request/response very easy to implement.
+        HTMX extends hypermedia: any element makes requests; any event triggers them; any target receives updates. Strong locality of behavior via <code>hx-*</code> attributes keeps the server authoritative and the client minimal. <strong>For CRUD and linear flows without heavy JavaScript, HTMX excels.</strong> Its declarative approach makes request/response very easy to implement.
       </p>
       <p>
-        But HTMX strains with complex UI interactions. Multi-part updates require out-of-band swaps — a workable solution to a messy problem. Ephemeral UI state remains ad hoc, requiring a good chunk of users to bolt on Alpine. These trade-offs are from HTMX's core approach: declarative request/response rather than declarative interactivity.
+        But HTMX strains with complex UI interactions. Multi-part updates require out-of-band swaps — a &ldquo;workable solution&rdquo; to a messy problem. Ephemeral UI state remains ad hoc, requiring a good chunk of users to bolt on Alpine. These trade-offs are from HTMX's core approach: declarative request/response rather than declarative interactivity.
       </p>
       <p>
-        <strong>Where Datastar diverges</strong>
+        <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Where Datastar diverges</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
@@ -611,10 +611,10 @@ const HTMXComparison = () => (
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          HTMX extends hypermedia with declarative request/response: minimal client, server in charge.
+          <strong>HTMX extends hypermedia with <em>declarative request/response</em>:</strong> minimal client, server in charge.
         </li>
         <li>
-          Datastar combines declarative reactivity with streaming updates: it assumes a responsive UI and makes it achievable in pragmatic ways.
+          <strong>Datastar combines <em>declarative reactivity</em> with streaming updates:</strong> it assumes a responsive UI and makes it achievable in pragmatic ways.
         </li>
       </ul>
     </div>
@@ -644,7 +644,7 @@ const SpreadsheetComparison = () => (
         My favorite mental model for Datastar is spreadsheets. Spreadsheets are incredibly useful across domains. Yet the database remains the truth, while the spreadsheet provides a reactive view. In this analogy: signals are cells and computed values are formulas. Type in a cell (data-bind) for immediate updates — but the database (server) owns persistent truth.
       </p>
       <p>
-        <strong>Datastar as a spreadsheet</strong>
+        <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as a spreadsheet</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
@@ -705,10 +705,10 @@ const DuckDBComparison = () => (
         </li>
       </ul>
       <p>
-        Both DuckDB and Datastar handle hard cases (complex analytical queries; real-time, multiplayer updates) while aiming to keep the simple cases simple.
+        Both DuckDB and Datastar handle hard cases (complex analytical queries; real-time, multiplayer updates) while keeping the simple cases simple.
       </p>
       <p>
-        <strong>Datastar as DuckDB</strong>
+        <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as DuckDB</strong>
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
@@ -752,13 +752,13 @@ const DatastarRecap = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, the server streams patches, and the DOM morphs or signals update. This general loop centralizes truth while keeping UI interactive.
+        Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop centralizes truth while keeping UI interactive.
       </p>
       <p>
-        Datastar is designed for hypermedia's hard problems first. Multi-target updates, real-time pushes, and reactive UX are core primitives. The framework assumes these capabilities and delivers a pragmatic set of tools.
+        Datastar is designed for hypermedia's hard problems first. Multi-target updates, real-time pushes, and reactive UX are core primitives. <strong>The framework assumes these capabilities and delivers a pragmatic set of tools.</strong>
       </p>
       <p>
-        Handful of Datastar patterns: two-way forms (data-bind); ephemeral toasts (data-on-load__delay); virtual scrolling (data-ref + throttling). Notice these aren't hacks, they're included.
+        Handful of Datastar patterns: two-way forms (<code>data-bind</code>); ephemeral toasts (<code>data-on-load__delay</code>); virtual scrolling (<code>data-ref</code> + throttling). Notice these aren't hacks, they're included.
       </p>
       <LongformQuote
         icon="arrows-rotate"
@@ -767,9 +767,9 @@ const DatastarRecap = () => (
         tooltip="John Gall"
       />
       <p>
-        When in doubt, write hobbit software — treat browsers as interactive terminals; stream patches; ignore framework wars.
+        When in doubt, <a href="/hobbit-software" target="_blank" rel="noopener noreferrer">write hobbit software</a> — treat browsers as interactive terminals; stream patches; ignore framework wars.
       </p>
-      <p><strong>Hypermedia Recap</strong></p>
+      <p><strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Hypermedia Recap</strong></p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           <strong>Shared DNA:</strong> HTMX and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
