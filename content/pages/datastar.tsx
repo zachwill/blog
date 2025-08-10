@@ -586,6 +586,7 @@ const DatastarRecap = () => (
       src="/assets/datastar-blast.jpg"
       style={{ aspectRatio: '2/1', objectFit: 'cover' }}
       alt="Album art"
+      data-on-load="console.log('⚡️ This site was built with Bun, Datastar, and WebAwesome 🚀')"
     />
     <div className="wa-stack">
       <div className="wa-flank:end wa-align-items-center">
