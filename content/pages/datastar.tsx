@@ -498,7 +498,7 @@ const SpreadsheetComparison = () => (
           <strong>Signals as cells:</strong> Hold ephemeral values (inputs, toggles, flags); update instantly.
         </li>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          <strong>Computed values as formulas:</strong> Derive from signals automatically; dependencies change, values recalculate.
+          <strong>Computed values as formulas:</strong> Derive from signals automatically; values recalculate when dependencies change.
         </li>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           <strong>Effects as macros:</strong> Fire on signal changes; handle toasts, indicators, styling — never business logic.
