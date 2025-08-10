@@ -247,6 +247,7 @@ async function processTsxPages(): Promise<SlotPageData[]> {
                     permalink,
                     slots,
                     config,
+                    openGraph: config.openGraph,
                     isSlotBased: true
                 });
 
@@ -450,6 +451,7 @@ async function generateContent(posts: Post[], pages: PageData[], tsxPages: SlotP
                 contentData={contentData}
                 currentPath={tsxPage.permalink}
                 slotContent={slots}
+                openGraph={tsxPage.openGraph}
             />
         ));
 
@@ -478,10 +480,16 @@ async function copyAssets() {
 
         // Copy root assets
         try {
+            // Try to copy favicon.ico if it exists
             await cp('src/assets/favicon.ico', 'dist/favicon.ico');
+        } catch (error) {
+            console.warn('favicon.ico not found in src/assets');
+        }
+
+        try {
             await cp('CNAME', 'dist/CNAME');
         } catch (error) {
-            console.warn('Some optional assets not found');
+            console.warn('CNAME file not found');
         }
 
         console.log('Assets copied');

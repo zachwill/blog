@@ -1,8 +1,16 @@
 import React, { ReactNode } from 'react';
 
 export const config = {
-  title: "Datastar",
-  permalink: "/datastar/"
+  title: "Notes on Datastar",
+  permalink: "/datastar/",
+  openGraph: {
+    title: "My notes on Datastar",
+    description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes. The server owns persistent state and logic; the client handles reactive UI with signals.",
+    image: "/assets/datastar-blast.jpg",
+    imageAlt: "Datastar framework logo",
+    type: "article" as const,
+    twitterCard: "summary_large_image" as const
+  }
 };
 
 // NOTE: Linter errors are present in this file but are being ignored

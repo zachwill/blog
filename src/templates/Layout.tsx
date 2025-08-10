@@ -1,7 +1,7 @@
 import React from 'react';
 import siteConfig from '../site.config';
 import { Header, Nav } from '../components';
-import { SlotContent } from '@/types/slots';
+import { SlotContent, OpenGraphData } from '@/types/slots';
 
 interface NavigationData {
   postsByYear: {
@@ -34,6 +34,7 @@ interface LayoutProps {
   contentData: ContentData;
   currentPath: string;
   slotContent?: SlotContent;
+  openGraph?: OpenGraphData;
 }
 
 
@@ -42,19 +43,61 @@ export default function Layout({
   navigationData,
   contentData,
   currentPath,
-  slotContent
+  slotContent,
+  openGraph
 }: LayoutProps) {
   const pageTitle = title || siteConfig.title;
+
+  // Build OpenGraph metadata with sensible defaults
+  const ogData = {
+    title: openGraph?.title || pageTitle,
+    description: openGraph?.description || siteConfig.description,
+    image: openGraph?.image ? `${siteConfig.url}${openGraph.image}` : undefined,
+    imageAlt: openGraph?.imageAlt,
+    url: openGraph?.url || `${siteConfig.url}${currentPath}`,
+    type: openGraph?.type || 'website',
+    siteName: openGraph?.siteName || siteConfig.title,
+    locale: openGraph?.locale || 'en_US',
+    twitterCard: openGraph?.twitterCard || 'summary_large_image',
+    twitterSite: openGraph?.twitterSite || '@zachwill',
+    twitterCreator: openGraph?.twitterCreator || '@zachwill',
+  };
 
   return (
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{`⚡️ ${pageTitle}`}</title>
+        <title>{pageTitle}</title>
         <meta name="author" content={siteConfig.author} />
-        <meta name="description" content={siteConfig.description} />
+        <meta name="description" content={ogData.description} />
         <link href="/atom.xml" rel="alternate" title="zachwill" type="application/atom+xml" />
+
+        {/* Favicon links */}
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+
+        {/* OpenGraph meta tags */}
+        <meta property="og:title" content={ogData.title} />
+        <meta property="og:description" content={ogData.description} />
+        <meta property="og:url" content={ogData.url} />
+        <meta property="og:type" content={ogData.type} />
+        <meta property="og:site_name" content={ogData.siteName} />
+        <meta property="og:locale" content={ogData.locale} />
+        {ogData.image && (
+          <>
+            <meta property="og:image" content={ogData.image} />
+            {ogData.imageAlt && <meta property="og:image:alt" content={ogData.imageAlt} />}
+          </>
+        )}
+
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content={ogData.twitterCard} />
+        <meta name="twitter:title" content={ogData.title} />
+        <meta name="twitter:description" content={ogData.description} />
+        {ogData.twitterSite && <meta name="twitter:site" content={ogData.twitterSite} />}
+        {ogData.twitterCreator && <meta name="twitter:creator" content={ogData.twitterCreator} />}
+        {ogData.image && <meta name="twitter:image" content={ogData.image} />}
+        {ogData.imageAlt && <meta name="twitter:image:alt" content={ogData.imageAlt} />}
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>

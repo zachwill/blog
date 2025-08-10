@@ -1,5 +1,21 @@
 import { ReactNode } from 'react';
 
+// OpenGraph metadata for social media sharing
+export interface OpenGraphData {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  url?: string;
+  type?: 'website' | 'article' | 'video' | 'music';
+  siteName?: string;
+  locale?: string;
+  // Twitter-specific fields
+  twitterCard?: 'summary' | 'summary_large_image' | 'app' | 'player';
+  twitterSite?: string;
+  twitterCreator?: string;
+}
+
 // Available slots in wa-page component
 export type PageSlot =
   | 'banner'
@@ -23,6 +39,7 @@ export interface SlotPageConfig {
   permalink?: string;
   description?: string;
   layout?: 'default' | 'full-width' | 'minimal';
+  openGraph?: OpenGraphData;
 }
 
 // Slot content mapping
@@ -37,7 +54,7 @@ export interface SlotBasedPage {
 // Helper type for TSX page exports
 export interface SlotPageExports {
   config: SlotPageConfig;
-  [key: string]: React.ComponentType<any> | SlotPageConfig;
+  [key: string]: React.ComponentType<any> | SlotPageConfig | undefined;
 }
 
 // Extended page data to include slot information
@@ -46,5 +63,6 @@ export interface SlotPageData {
   permalink: string;
   slots: SlotContent;
   config: SlotPageConfig;
+  openGraph?: OpenGraphData;
   isSlotBased: true;
 } 
