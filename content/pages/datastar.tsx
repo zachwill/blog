@@ -381,7 +381,7 @@ const DatastarIntro = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        <a href="https://data-star.dev" target="_blank">Datastar is a framework</a> focused on interactivity and streaming updates through a <a href="https://data-star.dev/guide/reactive_signals" target="_blank">handful of HTML attributes</a>. <strong>The server owns persistent state and logic; the client handles reactive UI with signals.</strong> The server computes and streams patches; the client provides immediate feedback.
+        <a href="https://data-star.dev" target="_blank">Datastar is a framework</a> focused on interactivity and streaming updates through a <a href="https://data-star.dev/guide/reactive_signals" target="_blank">handful of HTML attributes</a>. <strong>The server owns persistent state and logic; the client handles reactive UI with signals.</strong>
       </p>
       <p>
         HTML is the contract between these two. Stable element ids are <a href="https://data-star.dev/examples/progressive_load" target="_blank">server targets</a>; the DOM is the update surface. Events trigger server actions that <a href="https://data-star.dev/reference/sse_events" target="_blank">stream patches</a> — morphing elements or updating signals. There's little state to synchronize, as the frontend acts as a dumb, reactive terminal.
