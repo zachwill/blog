@@ -404,7 +404,7 @@ const DatastarIntro = () => (
         tooltip="Wise words from Gandalf"
       />
       <p>
-        <strong>Datastar treats client reactivity as a core primitive.</strong> The result is a hypermedia framework capable of handling simple <a href="/web-apps/" target="_blank">CRUD apps</a> or a <a href="https://checkboxes.andersmurphy.com" target="_blank"><em>billion</em> multiplayer checkboxes</a>.
+        <strong>Datastar treats reactivity as a core primitive.</strong> The result is a hypermedia framework capable of handling simple <a href="/web-apps/" target="_blank">CRUD apps</a> or a <a href="https://checkboxes.andersmurphy.com" target="_blank"><em>billion</em> multiplayer checkboxes</a>.
       </p>
     </div>
   </wa-card>
