@@ -192,7 +192,7 @@ const MentalModelsCard = () => (
             <span className="wa-align-items-center wa-cluster wa-gap-xs wa-heading-s">
               Spreadsheets <wa-icon name="arrow-right"></wa-icon>
             </span>
-            <p className="wa-caption-m">My favorite analogies revolve around spreadsheet cell updates.</p>
+            <p className="wa-caption-m">My favorite analogy revolves around spreadsheet cell updates.</p>
           </div>
         </a>
 
@@ -497,8 +497,8 @@ const UserCard = () => (
         </div>
       </div>
       <wa-avatar
-        image="https://images.unsplash.com/photo-1633268335280-a41fbde58707?q=80&w=3348&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        label="Avatar of a man wearing a sci-fi helmet (Photograph by Nandu Vasudevan)"
+        image="/assets/zach.png"
+        label="Zach Williams"
       ></wa-avatar>
     </div>
     <div slot="footer" className="wa-grid wa-gap-xs" style={{ '--min-column-size': '10ch' }}>
@@ -755,7 +755,10 @@ const DatastarRecap = () => (
         Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, the server streams patches, and the DOM morphs or signals update. This general loop centralizes truth while keeping UI interactive.
       </p>
       <p>
-        Datastar is designed for hypermedia's hard problems first. Multi-target updates, real-time pushes, and reactive UX are core primitives. The framework assumes these capabilities and delivers a pragmatic set of tools. SSE coordinates patches, signals provide feedback, and effects handle side concerns.
+        Datastar is designed for hypermedia's hard problems first. Multi-target updates, real-time pushes, and reactive UX are core primitives. The framework assumes these capabilities and delivers a pragmatic set of tools.
+      </p>
+      <p>
+        Handful of Datastar patterns: two-way forms (data-bind); ephemeral toasts (data-on-load__delay); virtual scrolling (data-ref + throttling). Notice these aren't hacks, they're included.
       </p>
       <LongformQuote
         icon="arrows-rotate"
@@ -764,11 +767,9 @@ const DatastarRecap = () => (
         tooltip="John Gall"
       />
       <p>
-        Handful of Datastar patterns: two-way forms (data-bind); ephemeral toasts (data-on-load__delay); virtual scrolling (data-ref + throttling). Notice these aren't hacks, they're included.
-      </p>
-      <p>
         When in doubt, write hobbit software — treat browsers as interactive terminals; stream patches; ignore framework wars.
       </p>
+      <p><strong>Hypermedia Recap</strong></p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
           <strong>Shared DNA:</strong> HTMX and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
@@ -905,7 +906,7 @@ export function Main() {
           <>
             <wa-callout appearance="accent">
               <wa-icon slot="icon" name="rocket"></wa-icon>
-              Datastar is a hypermedia framework focused on reactivity.
+              Datastar is a hypermedia framework focused on reactivity and streaming updates.
             </wa-callout>
             <MentalModelsCard />
           </>
