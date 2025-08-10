@@ -488,7 +488,7 @@ const SpreadsheetComparison = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        My favorite mental model for Datastar is spreadsheets. <a href="/spreadsheets-realization/" target="_blank">Spreadsheets</a> are <a href="/competes-with/" target="_blank">incredibly useful</a> across domains. <strong>Yet the database remains the truth, while the spreadsheet provides a reactive view.</strong> In this analogy: signals are cells and computed values are formulas. Type in a cell (<code>data-bind</code>) for immediate updates — but the database owns persistent truth.
+        My favorite mental model for Datastar is spreadsheets. <a href="/spreadsheets-realization/" target="_blank">Spreadsheets</a> are <a href="/competes-with/" target="_blank">incredibly useful</a> across domains. <strong>Yet the database remains the truth, while the spreadsheet provides a reactive view.</strong> In this analogy: signals are cells and computed values are formulas. Type in a cell (<code>data-bind</code>) for immediate updates — but the database remains the source of truth.
       </p>
       <p>
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as a spreadsheet</strong>
