@@ -391,7 +391,7 @@ const DatastarIntro = () => (
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          <strong>Stream-first approach:</strong> Simple patches via <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a>; real-time pushes and multi-target updates are first-class.
+          <strong>Stream-first approach:</strong> Simple patches with <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a>; real-time pushes and multi-target updates are first-class.
         </li>
         <li>
           <strong>Declarative reactivity:</strong> Interactive UI is handled through <a href="https://data-star.dev/guide/reactive_signals#frontend-reactivity" target="_blank">signals</a> and <a href="https://data-star.dev/reference/attributes" target="_blank">HTML attributes</a>.
@@ -430,7 +430,7 @@ const HTMXComparison = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        <a href="https://htmx.org" target="_blank">htmx</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests; any event triggers them; any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Strong locality of behavior</a> via <code>hx-*</code> attributes keeps the server in charge and the client minimal. <strong>For CRUD and linear flows without heavy JavaScript, htmx excels.</strong> Its declarative approach makes request/response very easy to implement.
+        <a href="https://htmx.org" target="_blank">htmx</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests; any event triggers them; any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Strong locality of behavior</a> with <code>hx-*</code> attributes keeps the server in charge and the client minimal. <strong>For CRUD and linear flows without heavy JavaScript, htmx excels.</strong> Its declarative approach makes request/response very easy to implement.
       </p>
       <p>
         But htmx strains with complex UI interactions. Multi-part updates require <a href="https://htmx.org/attributes/hx-swap-oob/" target="_blank">out-of-band swaps</a> — a &ldquo;workable solution&rdquo; to a messy problem. Ephemeral UI state remains ad hoc, requiring <a href="https://www.reddit.com/r/htmx/search?q=alpine&restrict_sr=on" target="_blank">a good chunk of users</a> to bolt on <a href="https://alpinejs.dev" target="_blank">Alpine</a>. These trade-offs are from htmx's core approach: declarative request/response rather than declarative interactivity.
@@ -559,7 +559,7 @@ const DuckDBComparison = () => (
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          <strong>Embedded, but powerful:</strong> Multi-target orchestration via SSE; interactivity via HTML attributes.
+          <strong>Embedded, but powerful:</strong> Multi-target orchestration with SSE; interactivity with HTML attributes.
         </li>
         <li>
           <strong>Built for modern platforms:</strong> modern browser features (SSE, View Transitions, Web Components) narrow SPA advantages (interactive UI/UX); Datastar aims to reduce the reactivity UX gap.
