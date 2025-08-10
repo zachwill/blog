@@ -391,7 +391,7 @@ const DatastarIntro = () => (
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          <strong>Stream-first approach:</strong> Simple patches with <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a>; real-time updates to elements or signals.
+          <strong>Stream-first approach:</strong> Simple patches with <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a>; real-time updates to <a href="https://data-star.dev/reference/sse_events#event-types" target="_blank">elements or signals</a>.
         </li>
         <li>
           <strong>Declarative reactivity:</strong> Interactive UI is handled through <a href="https://data-star.dev/guide/reactive_signals#frontend-reactivity" target="_blank">signals</a> and <a href="https://data-star.dev/reference/attributes" target="_blank">HTML attributes</a>.
