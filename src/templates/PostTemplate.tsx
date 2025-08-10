@@ -38,4 +38,17 @@ export function Main({ post }: { post: Post }) {
       <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }} />
     </article>
   );
-} 
+}
+
+export function MainFooter() {
+  return (
+    <a href="/datastar">
+      <wa-callout variant="brand">
+        <wa-icon slot="icon" name="rocket"></wa-icon>
+        <div className="wa-align-items-baseline">
+          <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Check out my recent deep dive on Datastar here &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
+        </div>
+      </wa-callout>
+    </a>
+  );
+}

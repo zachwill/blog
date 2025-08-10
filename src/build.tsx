@@ -19,7 +19,7 @@ import { evaluate } from '@mdx-js/mdx';
 // Local templates and components
 import Layout from './templates/Layout';
 import generateRssXml from './templates/Rss';
-import { Main as PostMain } from './templates/PostTemplate';
+import { Main as PostMain, MainFooter } from './templates/PostTemplate';
 import { mdxComponents } from './components';
 
 // Configuration and types
@@ -374,7 +374,8 @@ async function generateContent(posts: Post[], pages: PageData[], tsxPages: SlotP
         };
 
         const slots: SlotContent = {
-            main: React.createElement(PostMain, { post: postWithFavorite })
+            main: React.createElement(PostMain, { post: postWithFavorite }),
+            'main-footer': React.createElement(MainFooter)
         };
 
         const contentData: ContentData = {
