@@ -440,7 +440,7 @@ const HTMXComparison = () => (
       </p>
       <ul>
         <li style={{ marginBottom: 'var(--wa-space-s)' }}>
-          <strong>Reactivity as a core primitive:</strong> Signals, computed values, and effects handle ephemeral UI; no bolt-ons needed.
+          <strong>Reactivity as core primitives:</strong> Signals, computed values, and effects handle ephemeral UI; no bolt-ons needed.
         </li>
         <li>
           <strong>Streaming updates:</strong> SSE delivers patches to multiple targets; no OOB workarounds required.
