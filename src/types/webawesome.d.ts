@@ -269,6 +269,25 @@ declare global {
     }
 
     /**
+     * **wa-comparison**
+     *
+     * A before/after comparison component for images or other content.
+     *
+     * @property position - The initial position of the divider as a percentage (0-100).
+     *
+     * @event wa-change - Emitted when the divider position changes.
+     *
+     * @slot before - Content to display on the left/top side.
+     * @slot after - Content to display on the right/bottom side.
+     */
+    interface WaComparison extends HTMLElement {
+        position?: number;
+        addEventListener(type: 'wa-change', listener: (this: WaComparison, ev: WaCustomEvent<{ position: number }>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+    }
+
+    /**
      * **wa-copy-button**
      *
      * A button that copies text to the clipboard.
@@ -985,6 +1004,7 @@ declare global {
         'wa-carousel-item': WaCarouselItem;
         'wa-checkbox': WaCheckbox;
         'wa-color-picker': WaColorPicker;
+        'wa-comparison': WaComparison;
         'wa-copy-button': WaCopyButton;
         'wa-details': WaDetails;
         'wa-dialog': WaDialog;
@@ -1055,6 +1075,7 @@ declare global {
             'wa-carousel-item': WaReactProps<WaCarouselItem>;
             'wa-checkbox': WaReactProps<WaCheckbox>;
             'wa-color-picker': WaReactProps<WaColorPicker>;
+            'wa-comparison': WaReactProps<WaComparison>;
             'wa-copy-button': WaReactProps<WaCopyButton>;
             'wa-details': WaReactProps<WaDetails>;
             'wa-dialog': WaReactProps<WaDialog>;
