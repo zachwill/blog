@@ -32,6 +32,15 @@ export function Nav({ navigationData, currentPath }: NavProps) {
       </div>
 
       <nav slot="navigation">
+        <a href="/datastar">
+          <wa-callout variant="brand">
+            <wa-icon slot="icon" name="rocket"></wa-icon>
+            <div className="wa-align-items-baseline">
+              Notes on Datastar &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
+            </div>
+          </wa-callout>
+        </a>
+        <wa-divider></wa-divider>
         {Object.entries(navigationData.postsByYear)
           .sort(([a], [b]) => b.localeCompare(a))
           .map(([year, posts]) => (
