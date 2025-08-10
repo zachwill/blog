@@ -225,6 +225,7 @@ const MorpheusMatrixCard = () => (
     data-computed-morpheus="$slider >= 50"
     data-computed-morpheus-quote="$morpheus ? 'Stay in Wonderland' : 'The story ends...'"
     data-computed-morpheus-subquote="$morpheus ? 'See how deep the rabbit hole goes...' : 'You wake up in your bed.'"
+    data-on-intersect="$keepScrolling = true"
   >
     <div className="wa-stack">
       <div className="wa-flank:end">
@@ -417,7 +418,7 @@ const HTMXComparison = () => (
           </dt>
           <dd className="wa-heading-l">HTMX</dd>
         </dl>
-        <wa-badge data-on-intersect="$keepScrolling = true" variant="warning">Hypermedia OG</wa-badge>
+        <wa-badge variant="warning">Hypermedia OG</wa-badge>
       </div>
       <wa-divider></wa-divider>
       <p>
