@@ -443,7 +443,7 @@ const HTMXComparison = () => (
           Signals, computed values, and effects for interactive UI.
         </li>
         <li>
-          SSE patches updates to multiple targets; no OOB workarounds needed.
+          SSE patches multiple elements and signals; no OOB workarounds needed.
         </li>
       </ul>
 
