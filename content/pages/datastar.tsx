@@ -117,7 +117,7 @@ const LongformQuote = ({ icon, quote, href, tooltip }: { icon: string; quote: st
       <div className="wa-flank wa-align-items-start">
         <wa-tooltip for={buttonId}>{tooltip}</wa-tooltip>
         <wa-button id={buttonId} href={href} target="_blank" size="large" appearance="filled">
-          <wa-icon name={icon} style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
+          <wa-icon name={icon} label={tooltip} style={{ fontSize: 'var(--wa-font-size-xl)' }}></wa-icon>
         </wa-button>
         <p className="wa-body-l" style={{
           fontFamily: 'var(--wa-font-family-longform)',

@@ -3,7 +3,7 @@ export default {
     author: "Zach Williams, @zachwill",
     email: "git@zachwill.com",
     url: "http://zachwill.com",
-    description: "Zach Williams is a superhero currently based in Portland.",
+    description: "Zach Williams is currently Director of Data Science for the Portland Trail Blazers.",
 
     // Social links for header buttons
     social: {
@@ -32,13 +32,13 @@ export default {
     projects: [
         {
             title: "Portland Trail Blazers",
-            description: "Director of Data Science for the NBA team",
+            description: "Director of Data Science",
             url: "https://www.nba.com/blazers/zach-williams"
         },
         {
-            title: "GitHub Projects",
-            description: "Open-source projects and contributions",
-            url: "https://github.com/zachwill"
+            title: "My notes on Datastar",
+            description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes.",
+            url: "https://zachwill.com/datastar/"
         }
     ],
 
