@@ -74,6 +74,11 @@ const PageCSS = () => (
           color: var(--wa-color-brand-40);
         }
 
+        .showcase-code-sample .comment {
+          color: var(--wa-color-text-quiet);
+          font-style: italic;
+        }
+
         /* Dark mode tweaks */
         .wa-dark .showcase-code-sample .tag {
           color: var(--wa-color-indigo-70);
@@ -123,6 +128,7 @@ const CodeSampleCard = () => (
   <wa-card className="showcase-code-sample">
     <pre dangerouslySetInnerHTML={{
       __html: `
+<span class="comment">&lt;!-- Hobbit Autocomplete --&gt;</span>
 &lt;<span class="tag">input</span>
   <span class="attribute">type</span>="<span class="value">text</span>"
   <span class="attribute">placeholder</span>="<span class="value">Search meals (e.g. elevenses)</span>"
@@ -334,13 +340,13 @@ const UserCard = () => (
       ></wa-avatar>
     </div>
     <div slot="footer" className="wa-grid wa-gap-xs" style={{ '--min-column-size': '10ch' }}>
-      <wa-button href="https://github.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
-        <wa-icon slot="start" name="code"></wa-icon>
-        Github
-      </wa-button>
       <wa-button href="https://twitter.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
         <wa-icon slot="start" name="at"></wa-icon>
         Twitter
+      </wa-button>
+      <wa-button href="https://github.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
+        <wa-icon slot="start" name="code"></wa-icon>
+        Github
       </wa-button>
     </div>
   </wa-card>
