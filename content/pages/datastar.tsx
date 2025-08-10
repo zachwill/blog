@@ -600,7 +600,7 @@ const DatastarRecap = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop centralizes truth while keeping UI interactive.
+        Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop keeps the server in charge and the UI interactive.
       </p>
       <p>
         Datastar is designed for hypermedia's <a href="https://www.youtube.com/watch?v=xzC3g0qIRro" target="_blank">hard problems first</a>. Multi-target updates, real-time pushes, and reactive UX are core primitives. <strong>The framework assumes these capabilities and delivers a pragmatic set of tools.</strong>
