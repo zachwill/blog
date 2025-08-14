@@ -16,6 +16,8 @@ export const config = {
 // NOTE: Linter errors are present in this file but are being ignored
 // for now to focus on the layout changes, as requested.
 
+const cssVars = (vars: Record<string, string | number>): React.CSSProperties => vars as unknown as React.CSSProperties;
+
 const PageCSS = () => (
   <style>{`
         main {
@@ -107,8 +109,6 @@ const Prose = ({ children }: { children: ReactNode }) => (
     {children}
   </p>
 );
-
-const cssVars = (vars: Record<string, string | number>): React.CSSProperties => vars as unknown as React.CSSProperties;
 
 type BadgeProps = {
   label: string;
