@@ -110,6 +110,34 @@ const Prose = ({ children }: { children: ReactNode }) => (
 
 const cssVars = (vars: Record<string, string | number>): React.CSSProperties => vars as unknown as React.CSSProperties;
 
+type BadgeProps = {
+  label: string;
+  variant?: string;
+  style?: React.CSSProperties;
+};
+
+const CardHeader = ({
+  caption,
+  title,
+  badge
+}: {
+  caption: string;
+  title: string;
+  badge?: BadgeProps;
+}) => (
+  <div className="wa-flank:end wa-align-items-center">
+    <dl className="wa-stack wa-gap-2xs">
+      <dt className="wa-caption-m">{caption}</dt>
+      <dd className="wa-heading-l">{title}</dd>
+    </dl>
+    {badge ? (
+      <wa-badge variant={badge.variant as any} style={badge.style}>
+        {badge.label}
+      </wa-badge>
+    ) : null}
+  </div>
+);
+
 const QuoteCallout = ({
   icon,
   children,
@@ -389,15 +417,7 @@ const DatastarIntro = () => (
       alt="Album art"
     />
     <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Intro
-          </dt>
-          <dd className="wa-heading-l">Datastar</dd>
-        </dl>
-        <wa-badge>Hypermedia Framework</wa-badge>
-      </div>
+      <CardHeader caption="Intro" title="Datastar" badge={{ label: 'Hypermedia Framework' }} />
       <wa-divider></wa-divider>
       <p>
         <a href="https://data-star.dev" target="_blank">Datastar is a framework</a> focused on interactivity and streaming updates through a <a href="https://data-star.dev/guide/reactive_signals" target="_blank">handful of HTML attributes</a>. <strong>The server owns state and logic; the client handles reactive UI with signals.</strong>
@@ -438,15 +458,7 @@ const HTMXComparison = () => (
       alt="Album art"
     />
     <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Compared to...
-          </dt>
-          <dd className="wa-heading-l">htmx</dd>
-        </dl>
-        <wa-badge variant="warning">Hypermedia OG</wa-badge>
-      </div>
+      <CardHeader caption="Compared to..." title="htmx" badge={{ label: 'Hypermedia OG', variant: 'warning' }} />
       <wa-divider></wa-divider>
       <p>
         <a href="https://htmx.org" target="_blank">htmx</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests; any event triggers them; any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Locality of behavior</a> with <code>hx-*</code> attributes keeps the server in charge and the client minimal. <strong>For CRUD apps without heavy JavaScript, htmx excels.</strong> Its approach makes request/response <em>very easy</em> to implement.
@@ -496,15 +508,7 @@ const SpreadsheetComparison = () => (
       alt="Album art"
     />
     <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Compared to...
-          </dt>
-          <dd className="wa-heading-l">Spreadsheets</dd>
-        </dl>
-        <wa-badge variant="success">Reactivity & Effects</wa-badge>
-      </div>
+      <CardHeader caption="Compared to..." title="Spreadsheets" badge={{ label: 'Reactivity & Effects', variant: 'success' }} />
       <wa-divider></wa-divider>
       <p>
         My favorite mental model for Datastar is spreadsheets. <a href="/spreadsheets-realization/" target="_blank">Spreadsheets</a> are <a href="/competes-with/" target="_blank">incredibly useful</a> across domains. <strong>Yet the database remains the truth, while the spreadsheet provides a reactive view.</strong> In this analogy: signals are cells and computed values are formulas. Type in a cell (<code>data-bind</code>) for immediate updates — but the database remains the source of truth.
@@ -549,15 +553,7 @@ const DuckDBComparison = () => (
       alt="Album art"
     />
     <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Compared to...
-          </dt>
-          <dd className="wa-heading-l">DuckDB</dd>
-        </dl>
-        <wa-badge style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>Insanely Fast</wa-badge>
-      </div>
+      <CardHeader caption="Compared to..." title="DuckDB" badge={{ label: 'Insanely Fast', style: { backgroundColor: 'var(--wa-color-purple-fill-loud)' } }} />
       <wa-divider></wa-divider>
       <ul>
         <li>
@@ -608,15 +604,7 @@ const DatastarRecap = () => (
       data-on-load="console.log('⚡️ This site was built with Bun, Datastar, and WebAwesome 🚀')"
     />
     <div className="wa-stack">
-      <div className="wa-flank:end wa-align-items-center">
-        <dl className="wa-stack wa-gap-2xs">
-          <dt className="wa-caption-m">
-            Recap
-          </dt>
-          <dd className="wa-heading-l">Datastar</dd>
-        </dl>
-        <wa-badge>Hypermedia Framework</wa-badge>
-      </div>
+      <CardHeader caption="Recap" title="Datastar" badge={{ label: 'Hypermedia Framework' }} />
       <wa-divider></wa-divider>
       <p>
         Datastar enforces boundaries: state and logic on server; signals are ephemeral. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop keeps the server in charge and the UI interactive.
