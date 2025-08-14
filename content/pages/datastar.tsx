@@ -108,6 +108,25 @@ const Prose = ({ children }: { children: ReactNode }) => (
   </p>
 );
 
+const cssVars = (vars: Record<string, string | number>): React.CSSProperties => vars as unknown as React.CSSProperties;
+
+const QuoteCallout = ({
+  icon,
+  children,
+  variant,
+  style
+}: {
+  icon: string;
+  children: ReactNode;
+  variant?: 'brand' | 'warning' | 'success';
+  style?: React.CSSProperties;
+}) => (
+  <wa-callout variant={variant as any} appearance="accent" style={style}>
+    <wa-icon slot="icon" name={icon}></wa-icon>
+    <Prose>{children}</Prose>
+  </wa-callout>
+);
+
 const LongformQuote = ({ icon, quote, href, tooltip }: { icon: string; quote: string; href: string; tooltip: string }) => {
   const buttonId = `longform-quote-${icon.replace(/[^a-zA-Z0-9]/g, '-')}`;
 
@@ -161,7 +180,7 @@ const MentalModelsCard = () => (
       <p className="wa-caption-m">
         Datastar's focus on hypermedia, reactivity, and speed leads to some fun mental models.
       </p>
-      <div className="wa-grid wa-gap-xl" style={{ '--min-column-size': '30ch' }}>
+      <div className="wa-grid wa-gap-xl" style={cssVars({ '--min-column-size': '30ch' })}>
         <a href="#intro" data-on-click="event.preventDefault(); document.querySelector('#intro').scrollIntoView({ behavior: 'smooth' })" className="wa-flank wa-align-items-start wa-link-plain" tabIndex={-1}>
           <wa-avatar
             shape="rounded"
@@ -248,7 +267,7 @@ const MorpheusMatrixCard = () => (
           size="medium"
           aria-labelledby="odds-label"
           tabIndex={-1}
-          style={{ '--wa-form-control-activated-color': 'var(--wa-color-danger-fill-loud)' }}></wa-switch>
+          style={cssVars({ '--wa-form-control-activated-color': 'var(--wa-color-danger-fill-loud)' })}></wa-switch>
       </div>
       <wa-comparison
         position={85}
@@ -348,7 +367,7 @@ const UserCard = () => (
         label="Zach Williams"
       ></wa-avatar>
     </div>
-    <div slot="footer" className="wa-grid wa-gap-xs" style={{ '--min-column-size': '10ch' }}>
+    <div slot="footer" className="wa-grid wa-gap-xs" style={cssVars({ '--min-column-size': '10ch' })}>
       <wa-button href="https://twitter.com/zachwill" target="_blank" appearance="outlined" tabIndex={-1}>
         <wa-icon slot="start" name="at"></wa-icon>
         Twitter
@@ -666,12 +685,9 @@ export function Main() {
         }
         right={
           <>
-            <wa-callout variant="brand" appearance="accent">
-              <wa-icon slot="icon" name="rocket"></wa-icon>
-              <div>
-                <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Datastar is pretty awesome
-              </div>
-            </wa-callout>
+            <QuoteCallout icon="rocket" variant="brand">
+              <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Datastar is pretty awesome
+            </QuoteCallout>
             <MentalModelsCard />
           </>
         }
@@ -688,12 +704,9 @@ export function Main() {
         }
         right={
           <>
-            <wa-callout variant="warning" appearance="accent">
-              <wa-icon slot="icon" name="file-code"></wa-icon>
-              <Prose>
-                &ldquo;<strong>Hobbit software:</strong> Pretty chill, keeps to itself, tends to its databases, hangs out with other hobbit software at the pub, unbothered by the scheming of wizards and orcs...&rdquo;
-              </Prose>
-            </wa-callout>
+            <QuoteCallout icon="file-code" variant="warning">
+              &ldquo;<strong>Hobbit software:</strong> Pretty chill, keeps to itself, tends to its databases, hangs out with other hobbit software at the pub, unbothered by the scheming of wizards and orcs...&rdquo;
+            </QuoteCallout>
             <MorpheusMatrixCard />
           </>
         }
@@ -709,12 +722,9 @@ export function Main() {
         }
         right={
           <>
-            <wa-callout variant="success" appearance="accent">
-              <wa-icon slot="icon" name="table"></wa-icon>
-              <Prose>
-                &ldquo;Spreadsheets really are the fullest realization we've seen of functional-programming-without-code... It's no wonder they kicked off the microcomputer era.&rdquo;
-              </Prose>
-            </wa-callout>
+            <QuoteCallout icon="table" variant="success">
+              &ldquo;Spreadsheets really are the fullest realization we've seen of functional-programming-without-code... It's no wonder they kicked off the microcomputer era.&rdquo;
+            </QuoteCallout>
             <MorpheusSpreadsheetCard />
           </>
         }
@@ -730,12 +740,9 @@ export function Main() {
         }
         right={
           <>
-            <wa-callout appearance="accent" style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>
-              <wa-icon slot="icon" name="keyboard"></wa-icon>
-              <Prose>
-                &ldquo;My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one.&rdquo;
-              </Prose>
-            </wa-callout>
+            <QuoteCallout icon="keyboard" style={{ backgroundColor: 'var(--wa-color-purple-fill-loud)' }}>
+              &ldquo;My basic rule is: analogies are great for a sympathetic audience and bad for an antagonistic one.&rdquo;
+            </QuoteCallout>
             <MorpheusDuckDBCard />
           </>
         }
