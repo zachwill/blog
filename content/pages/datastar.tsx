@@ -685,9 +685,12 @@ export function Main() {
         }
         right={
           <>
-            <QuoteCallout icon="rocket" variant="brand">
-              <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Datastar is pretty awesome
-            </QuoteCallout>
+            <wa-callout variant="brand" appearance="accent">
+              <wa-icon slot="icon" name="rocket"></wa-icon>
+              <div>
+                <span style={{ fontFamily: 'var(--wa-font-family-longform)', fontWeight: 'var(--wa-font-weight-normal)', fontStyle: 'italic' }}>Author's Note:&nbsp;</span> Datastar is pretty awesome
+              </div>
+            </wa-callout>
             <MentalModelsCard />
           </>
         }
