@@ -122,6 +122,11 @@ main:has(.about) {
     }
 }
 
+/* List item spacing in main content */
+main :where(ul, ol)>li+li {
+    margin-top: var(--wa-space-s);
+}
+
 /* Style the main-footer slot to match the main content area */
 footer[slot='main-footer'] {
     max-width: var(--app-content-max-width);

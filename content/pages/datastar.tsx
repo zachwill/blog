@@ -5,7 +5,7 @@ export const config = {
   permalink: "/datastar/",
   openGraph: {
     title: "My notes on Datastar",
-    description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes. The server owns persistent state and logic; the client handles reactive UI with signals.",
+    description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes. The server owns state and logic; the client handles reactive UI with signals.",
     image: "/assets/datastar-blast.jpg",
     imageAlt: "Datastar framework logo",
     type: "article" as const,
@@ -390,7 +390,7 @@ const DatastarIntro = () => (
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar's philosophy</strong>
       </p>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Stream-first:</strong> Simple patches with <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a>; real-time updates to <a href="https://data-star.dev/reference/sse_events#event-types" target="_blank">elements or signals</a>.
         </li>
         <li>
@@ -439,7 +439,7 @@ const HTMXComparison = () => (
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Where Datastar diverges</strong>
       </p>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           Signals, computed values, and effects for interactive UI.
         </li>
         <li>
@@ -457,7 +457,7 @@ const HTMXComparison = () => (
         Both embrace declarative HTML and the server as the source of truth, but their centers of gravity differ.
       </p>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           htmx extends hypermedia with <a href="https://github.com/search?q=hx-get&type=code" target="_blank">declarative request/response</a>: minimal client, server in charge.
         </li>
         <li>
@@ -494,13 +494,13 @@ const SpreadsheetComparison = () => (
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as a spreadsheet</strong>
       </p>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Signals as cells:</strong> Hold ephemeral values (inputs, toggles, flags); update instantly.
         </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Computed values as formulas:</strong> Derive from signals automatically; recalculate when dependencies change.
         </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Effects as macros:</strong> Fire on signal changes; handle toasts, indicators, styling — never business logic.
         </li>
         <li>
@@ -541,10 +541,10 @@ const DuckDBComparison = () => (
       </div>
       <wa-divider></wa-divider>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Hypermedia ≈ SQLite:</strong> embedded, straightforward, useful
         </li>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>React/Solid/Svelte ≈ MySQL/Postgres:</strong> full client applications
         </li>
         <li>
@@ -558,7 +558,7 @@ const DuckDBComparison = () => (
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as DuckDB</strong>
       </p>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Embedded, but powerful:</strong> Multi-target orchestration with SSE; interactivity with HTML attributes.
         </li>
         <li>
@@ -600,7 +600,7 @@ const DatastarRecap = () => (
       </div>
       <wa-divider></wa-divider>
       <p>
-        Datastar enforces boundaries: persistent state on server; ephemeral in signals. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop keeps the server in charge and the UI interactive.
+        Datastar enforces boundaries: state and logic on server; signals are ephemeral. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop keeps the server in charge and the UI interactive.
       </p>
       <p>
         Datastar is designed for hypermedia's <a href="https://www.youtube.com/watch?v=xzC3g0qIRro" target="_blank">hard problems first</a>. Multi-target updates, real-time pushes, and reactive UX are core primitives. <strong>The framework assumes these capabilities and delivers a pragmatic set of tools.</strong>
@@ -619,7 +619,7 @@ const DatastarRecap = () => (
       </p>
       <p><strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Hypermedia Recap</strong></p>
       <ul>
-        <li style={{ marginBottom: 'var(--wa-space-s)' }}>
+        <li>
           <strong>Shared DNA:</strong> htmx and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
         </li>
         <li>
