@@ -23,11 +23,11 @@ function ShoppingCart() {
             <wa-icon slot="icon" name="jedi"></wa-icon>
           </wa-avatar>
           <div className="wa-stack wa-gap-2xs">
-            <div className="wa-split wa-gap-2xs">
+            <div className="wa-flank:end wa-gap-2xs">
               <strong>Initiate Saber</strong>
               <strong>$179.99</strong>
             </div>
-            <div className="wa-split wa-gap-2xs wa-caption-m">
+            <div className="wa-flank:end wa-gap-2xs wa-caption-m">
               <span>Green</span>
               <a href="#" tabIndex={-1}>Remove</a>
             </div>
@@ -42,11 +42,11 @@ function ShoppingCart() {
             <wa-icon slot="icon" name="robot"></wa-icon>
           </wa-avatar>
           <div className="wa-stack wa-gap-2xs">
-            <div className="wa-split wa-gap-2xs">
+            <div className="wa-flank:end wa-gap-2xs">
               <strong>Repair Droid</strong>
               <strong>$3,049.99</strong>
             </div>
-            <div className="wa-split wa-gap-2xs wa-caption-m">
+            <div className="wa-flank:end wa-gap-2xs wa-caption-m">
               <span>R-series</span>
               <a href="#" tabIndex={-1}>Remove</a>
             </div>
