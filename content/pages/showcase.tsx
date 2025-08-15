@@ -8,10 +8,10 @@ export const config = {
 function ShoppingCart() {
   return (
     <wa-card>
-      <div slot="header" className="wa-split">
+      <div slot="header" className="wa-flank:end">
         <h3 className="wa-heading-m">Your Cart</h3>
         <wa-button appearance="plain" size="small" tabIndex={-1}>
-          <wa-icon name="xmark" label="Close"></wa-icon>
+          <wa-icon name="cart-shopping" label="Close"></wa-icon>
         </wa-button>
       </div>
       <div className="wa-stack wa-gap-l">
@@ -409,8 +409,11 @@ function FolderCard() {
 function DeckSelection() {
   return (
     <wa-card>
-      <div slot="header" className="wa-stack wa-gap-xs">
+      <div slot="header" className="wa-flank:end wa-gap-xs">
         <h2 className="wa-heading-m">Decks</h2>
+        <wa-button appearance="plain" size="small" tabIndex={-1}>
+          <wa-icon name="arrow-up-right-from-square" label="Close"></wa-icon>
+        </wa-button>
       </div>
       <div className="wa-stack wa-gap-xl">
         <p className="wa-caption-m">
