@@ -16,7 +16,7 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
         <div key={post.slug} className="post-content">
           {/* Post Header */}
           <header>
-            <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
+            <div className="wa-desktop-only wa-flank:end wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
               <a href={post.permalink}>
                 <h3 className="wa-heading-xl">
                   {post.title}

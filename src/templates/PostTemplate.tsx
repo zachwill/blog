@@ -18,7 +18,7 @@ export function Main({ post }: { post: Post }) {
   return (
     <article>
       <header>
-        <div className="wa-desktop-only wa-split wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
+        <div className="wa-desktop-only wa-flank:end wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
           <h1 className="wa-heading-xl">
             {post.title}
           </h1>
