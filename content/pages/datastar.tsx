@@ -518,13 +518,13 @@ const SpreadsheetComparison = () => (
       </p>
       <ul>
         <li>
-          <strong>Signals as cells:</strong> Hold ephemeral values (inputs, toggles, flags); update instantly.
+          <strong>Signals ≈ <code>cells</code>:</strong> Hold ephemeral values (inputs, toggles, flags); update instantly.
         </li>
         <li>
-          <strong>Computed values as formulas:</strong> Derive from signals automatically; recalculate when dependencies change.
+          <strong>Computed values ≈ <code>formulas</code>:</strong> Automatically recalculate when dependencies change.
         </li>
         <li>
-          <strong>Effects as macros:</strong> Fire on signal changes; handle toasts, indicators, styling — never business logic.
+          <strong>Effects ≈ <code>macros</code>:</strong> Fire on signal changes; handle toasts, indicators, styling — but never business logic.
         </li>
         <li>
           <strong>Bindings allow edits:</strong> Two-way flow between DOM and signals; input updates signal, signal updates DOM.
