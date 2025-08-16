@@ -81,9 +81,6 @@ export default function Layout({
         <link rel="manifest" href="/assets/manifest.json" />
 
         {/* Apple Touch Icon and PWA meta tags for iOS */}
-        <link rel="apple-touch-icon" href="/assets/Icon.png" />
-        <link rel="apple-touch-icon" sizes="192x192" href="/assets/Icon.png" />
-        <link rel="apple-touch-icon" sizes="512x512" href="/assets/Icon@2x.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="zachwill" />
