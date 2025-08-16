@@ -36,6 +36,19 @@ const PageCSS = () => (
           margin-top: var(--wa-space-xl);
         }
 
+        /* On mobile, right column (sticky on desktop) comes first */
+        .datastar-column {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--wa-space-m);
+        }
+        .datastar-column:first-child {
+          order: 2;
+        }
+        .datastar-column:last-child {
+          order: 1;
+        }
+
         @media (min-width: 950px) {
           main {
             padding: var(--wa-space-l);
@@ -44,13 +57,19 @@ const PageCSS = () => (
             grid-template-columns: 4fr 3fr;
             gap: var(--wa-space-l);
           }
+          
+          /* Reset order on desktop */
+          .datastar-column {
+            gap: var(--wa-space-l);
+          }
+          .datastar-column:first-child {
+            order: 0;
+          }
+          .datastar-column:last-child {
+            order: 0;
+          }
         }
         
-        .datastar-column {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--wa-space-l);
-        }
 
         @media (min-width: 1080px) {
           .datastar-column.is-sticky {
@@ -647,12 +666,9 @@ const TwoColumnSection = ({ left, right }: TwoColumnSectionProps) => {
   return (
     <section className="datastar-layout">
       <div className="datastar-column">
-        <div className="wa-stack wa-gap-m wa-mobile-only">
-          {right}
-        </div>
         {left}
       </div>
-      <div className="datastar-column is-sticky wa-desktop-only">
+      <div className="datastar-column is-sticky">
         {right}
       </div>
     </section>
