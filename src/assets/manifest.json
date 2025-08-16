@@ -1,0 +1,24 @@
+{
+  "name": "zachwill.com",
+  "short_name": "zachwill",
+  "description": "Zach Williams is currently Director of Data Science for the Portland Trail Blazers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+  "lang": "en-US",
+  "scope": "/"
+}

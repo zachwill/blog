@@ -480,12 +480,6 @@ async function copyAssets() {
         await cp('src/assets', 'dist/assets', { recursive: true });
 
         // Copy root assets
-        try {
-            // Try to copy favicon.ico if it exists
-            await cp('src/assets/favicon.ico', 'dist/favicon.ico');
-        } catch (error) {
-            console.warn('favicon.ico not found in src/assets');
-        }
 
         try {
             await cp('CNAME', 'dist/CNAME');
