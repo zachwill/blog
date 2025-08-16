@@ -33,7 +33,9 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
+
         <wa-divider></wa-divider>
+
         <div className="wa-flank">
           <wa-avatar
             shape="rounded"
@@ -44,7 +46,7 @@ function ShoppingCart() {
           <div className="wa-stack wa-gap-2xs">
             <div className="wa-flank:end wa-gap-2xs">
               <strong>Repair Droid</strong>
-              <strong>$3,049.99</strong>
+              <strong>$2,149.99</strong>
             </div>
             <div className="wa-flank:end wa-gap-2xs wa-caption-m">
               <span>R-series</span>
@@ -52,6 +54,28 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
+
+        <wa-divider></wa-divider>
+
+        <div className="wa-flank">
+          <wa-avatar
+            shape="rounded"
+            style={{ backgroundColor: 'var(--wa-color-danger-fill-normal)', color: 'var(--wa-color-danger-on-quiet)' }}
+          >
+            <wa-icon slot="icon" name="explosion"></wa-icon>
+          </wa-avatar>
+          <div className="wa-stack wa-gap-2xs">
+            <div className="wa-flank:end wa-gap-2xs">
+              <strong>Imperial Attack</strong>
+              <strong>$849.99</strong>
+            </div>
+            <div className="wa-flank:end wa-gap-2xs wa-caption-m">
+              <span>Star Destroyer Series</span>
+              <a href="#" tabIndex={-1}>Remove</a>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div slot="footer" className="wa-stack">
         <div className="wa-split">
@@ -85,8 +109,13 @@ function QuoteCard() {
 function SignInForm() {
   return (
     <wa-card>
-      <div className="wa-stack">
+      <div slot="header" className="wa-flank:end">
         <h3 className="wa-heading-m">Sign In</h3>
+        <wa-button appearance="plain" size="small" tabIndex={-1}>
+          <wa-icon name="ellipsis" label="More Options"></wa-icon>
+        </wa-button>
+      </div>
+      <div className="wa-stack">
         <wa-input tabIndex={-1} label="Email" placeholder="ddjarin@mandalore.gov" {...{ inert: true } as any}>
           <wa-icon slot="start" name="envelope"></wa-icon>
         </wa-input>
@@ -103,13 +132,13 @@ function SignInForm() {
 function TodoList() {
   return (
     <wa-card>
+      <div slot="header" className="wa-flank:end">
+        <h3 className="wa-heading-m">To-Do</h3>
+        <wa-button appearance="plain" size="small" tabIndex={-1}>
+          <wa-icon name="plus" label="Add task"></wa-icon>
+        </wa-button>
+      </div>
       <div className="wa-stack">
-        <div className="wa-split">
-          <h3 className="wa-heading-m">To-Do</h3>
-          <wa-button appearance="plain" size="small" tabIndex={-1}>
-            <wa-icon name="plus" label="Add task"></wa-icon>
-          </wa-button>
-        </div>
         <wa-checkbox tabIndex={-1} checked>Umbrella for Adelard</wa-checkbox>
         <wa-checkbox tabIndex={-1} checked>Waste-paper basket for Dora</wa-checkbox>
         <wa-checkbox tabIndex={-1} checked>Pen and ink for Milo</wa-checkbox>
@@ -575,19 +604,20 @@ export function Main() {
         <div className="showcase-examples">
 
           <ShoppingCart />
+          <DeckSelection />
+          <PricingCard />
           <QuoteCard />
           <SignInForm />
+          <FolderCard />
+
+          <RestaurantCard />
           <TodoList />
           <MusicPlayer />
-          <RestaurantCard />
           <CalloutExamples />
           <SettingsToggle />
           <InvoiceCard />
-          <PricingCard />
           <CodeSample />
           <UserProfile />
-          <FolderCard />
-          <DeckSelection />
 
         </div>
       </div >
