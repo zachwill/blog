@@ -320,13 +320,14 @@ function PricingCard() {
   return (
     <wa-card>
       <div className="wa-stack">
-        <div className="wa-split">
+        <div className="wa-flank:end">
           <div className="wa-cluster wa-heading-l">
             <wa-icon name="bookmark"></wa-icon>
             <h3>Fellowship</h3>
           </div>
           <wa-badge>Most Popular</wa-badge>
         </div>
+        <wa-divider></wa-divider>
         <span className="wa-flank wa-align-items-baseline wa-gap-2xs">
           <span className="wa-heading-2xl">$120</span>
           <span className="wa-caption-l">per year</span>
