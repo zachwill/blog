@@ -151,7 +151,7 @@ footer[slot='main-footer'] {
     }
 
     wa-details::part(header) {
-        padding-bottom: var(--wa-space-s);
+        padding: var(--wa-space-s) 0;
     }
 
     ul {
