@@ -32,35 +32,41 @@ export function Nav({ navigationData, currentPath }: NavProps) {
       </div>
 
       <nav slot="navigation">
-        <a href="/datastar">
-          <wa-callout variant="brand">
-            <wa-icon slot="icon" name="rocket"></wa-icon>
-            <div className="wa-align-items-baseline">
-              My notes on Datastar &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
-            </div>
-          </wa-callout>
-        </a>
-        <wa-divider></wa-divider>
-        {Object.entries(navigationData.postsByYear)
-          .sort(([a], [b]) => b.localeCompare(a))
-          .map(([year, posts]) => (
-            <div className="nav-section" key={year}>
-              <h2>{year}</h2>
-              <ul className="posts-list">
-                {posts.map(post => (
-                  <li key={post.permalink}>
-                    <a
-                      href={post.permalink}
-                      className={currentPath === post.permalink ? 'current' : ''}
-                      data-drawer="close"
-                    >
-                      {post.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="wa-stack wa-gap-m">
+          <a href="/datastar">
+            <wa-callout variant="brand">
+              <wa-icon slot="icon" name="rocket"></wa-icon>
+              <div className="wa-align-items-baseline">
+                My notes on Datastar &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
+              </div>
+            </wa-callout>
+          </a>
+
+          <wa-divider></wa-divider>
+
+          {Object.entries(navigationData.postsByYear)
+            .sort(([a], [b]) => b.localeCompare(a))
+            .map(([year, posts]) => (
+              <wa-details appearance="plain" open>
+                <div slot="summary">
+                  <span className="wa-heading-s">{year}</span>
+                </div>
+                <ul>
+                  {posts.map(post => (
+                    <li key={post.permalink}>
+                      <a
+                        href={post.permalink}
+                        className={currentPath === post.permalink ? 'current' : ''}
+                        data-drawer="close"
+                      >
+                        {post.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </wa-details>
+            ))}
+        </div>
       </nav>
     </>
   );

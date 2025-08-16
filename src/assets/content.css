@@ -140,14 +140,18 @@ footer[slot='main-footer'] {
 
 /* Navigation list styling */
 [slot='navigation'] {
-    .nav-section {
-        padding-bottom: var(--wa-space-l);
+    wa-details {
+        margin: 0;
     }
 
-    h2 {
-        font-size: var(--wa-font-size-s);
-        color: var(--wa-color-text-quiet);
-        margin: 0 0 var(--wa-space-xs) 0;
+    wa-details::part(header),
+    wa-details::part(summary),
+    wa-details::part(content) {
+        padding: 0;
+    }
+
+    wa-details::part(header) {
+        padding-bottom: var(--wa-space-s);
     }
 
     ul {
@@ -155,6 +159,10 @@ footer[slot='main-footer'] {
         list-style: none;
         padding: 0;
         margin: 0;
+    }
+
+    li {
+        margin-inline-start: var(--wa-space-xs);
     }
 
     li a {
