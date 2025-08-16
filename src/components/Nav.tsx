@@ -42,6 +42,8 @@ export function Nav({ navigationData, currentPath }: NavProps) {
             </wa-callout>
           </a>
 
+          <wa-divider style={{ margin: 'var(--wa-space-s) 0' }}></wa-divider>
+
           {Object.entries(navigationData.postsByYear)
             .sort(([a], [b]) => b.localeCompare(a))
             .map(([year, posts]) => (

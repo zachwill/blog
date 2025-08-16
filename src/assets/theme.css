@@ -599,7 +599,7 @@
         --wa-font-family-body: system-ui, 'Inter', sans-serif;
         --wa-font-family-heading: var(--wa-font-family-body);
         --wa-font-family-code: ui-monospace, monospace;
-        --wa-font-family-longform: ui-serif, serif;
+        --wa-font-family-longform: ui-serif, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
 
         /* Font sizes use a ratio of 1.125 to scale sizes proportionally.
      * For larger font sizes, each size is twice 1.125x larger to maximize impact.
