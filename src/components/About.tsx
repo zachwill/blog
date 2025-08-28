@@ -11,9 +11,9 @@ export function About({ heading = 'xl', fontSize = 'l', gap = 'm' }) {
       </div>
 
       <div style={{ fontSize: `var(--wa-font-size-${fontSize})` }}>
-        <wa-tooltip for="zach-linkedin">LinkedIn</wa-tooltip>
-        <wa-tooltip for="zach-nba">NBA.com</wa-tooltip>
-        I'm currently <a id="zach-linkedin" href="https://linkedin.com/in/heyzachwill">Director of Data Science</a> for the <a id="zach-nba" href="https://www.nba.com/blazers/zach-williams">Portland Trail Blazers</a>.
+        <wa-tooltip for="zach-linkedin">NBA.com</wa-tooltip>
+        <wa-tooltip for="zach-nba">🏀 Rip City</wa-tooltip>
+        I'm currently <a id="zach-linkedin" href="https://www.nba.com/blazers/zach-williams">Director of Data Science</a> for the <a id="zach-nba" href="https://www.nba.com/blazers/zach-williams">Portland Trail Blazers</a>.
       </div>
 
       <a href="/datastar">
