@@ -315,6 +315,7 @@ declare global {
      * @slot collapse-icon - A custom icon to show when expanded.
      */
     interface WaDetails extends HTMLElement {
+        appearance?: string;
         summary?: string;
         open?: boolean;
         disabled?: boolean;
