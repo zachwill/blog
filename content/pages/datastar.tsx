@@ -455,12 +455,6 @@ const DatastarIntro = () => (
           <strong>Reactive:</strong> Interactive UI is handled through <a href="https://data-star.dev/guide/reactive_signals#frontend-reactivity" target="_blank">signals</a> and <a href="https://data-star.dev/reference/attributes" target="_blank">HTML attributes</a>.
         </li>
       </ul>
-      <LongformQuote
-        icon="hat-wizard"
-        quote="All we have to decide is what to do with the time that is given to us. There are other forces at work in this world, Frodo, besides the will of evil."
-        href="https://www.goodreads.com/quotes/7374580"
-        tooltip="Wise words from Gandalf"
-      />
       <p>
         <strong>Datastar includes reactivity as a core idea.</strong> The result is a hypermedia framework capable of handling simple <a href="/web-apps/" target="_blank">CRUD apps</a> or a <a href="https://checkboxes.andersmurphy.com" target="_blank"><em>billion</em> multiplayer checkboxes</a>.
       </p>
