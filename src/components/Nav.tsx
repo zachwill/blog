@@ -47,7 +47,7 @@ export function Nav({ navigationData, currentPath }: NavProps) {
           {Object.entries(navigationData.postsByYear)
             .sort(([a], [b]) => b.localeCompare(a))
             .map(([year, posts]) => (
-              <wa-details appearance="plain" open>
+              <wa-details key={year} appearance="plain" open>
                 <div slot="summary">
                   <span className="wa-heading-s">{year}</span>
                 </div>
