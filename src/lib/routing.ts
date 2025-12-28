@@ -111,10 +111,14 @@ function normalizeSlot(
   slot: ((ctx: PageContext) => ReactNode) | (() => ReactNode) | undefined
 ): ((ctx: PageContext) => ReactNode) | undefined {
   if (!slot) return undefined;
-  // Check if the function expects arguments
+  
+  // Return a wrapper that passes context if the function expects it
   return (ctx: PageContext) => {
-    // Call with context - if the function ignores it, that's fine
-    return (slot as (ctx: PageContext) => ReactNode)(ctx);
+    // If the function expects arguments, pass context; otherwise call without
+    if (slot.length > 0) {
+      return (slot as (ctx: PageContext) => ReactNode)(ctx);
+    }
+    return (slot as () => ReactNode)();
   };
 }
 
