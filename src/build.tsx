@@ -1,3 +1,16 @@
+/**
+ * Static Site Build Script
+ *
+ * This build system supports two content types that work similarly:
+ *
+ * 1. TSX files - Export a `config` object (metadata) and slot components (Main, Header, etc.)
+ * 2. MD files  - Use YAML frontmatter (becomes config) and markdown content (becomes Main slot)
+ *
+ * Both content types are processed into the same PageSpec structure, making MD files
+ * a natural subset of TSX files. The pattern is inspired by modern frameworks that
+ * treat pages as components with metadata exports.
+ */
+
 // Built-ins
 import { readdir, readFile, writeFile, mkdir, cp } from 'fs/promises';
 import { join, dirname, extname } from 'path';
@@ -6,7 +19,7 @@ import { join, dirname, extname } from 'path';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-// Third-party dependencies
+// Markdown processing
 import matter from 'gray-matter';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -14,45 +27,24 @@ import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
-import { evaluate } from '@mdx-js/mdx';
 
-// Local templates and components
+// Local modules
 import Layout from './templates/Layout';
 import generateRssXml from './templates/Rss';
 import { Main as PostMain, MainFooter } from './templates/PostTemplate';
-import { mdxComponents } from './components';
-
-// Configuration and types
 import siteConfig from './site.config';
-import { SlotPageData, SlotPageExports, SlotContent, PageSlot } from './types/slots';
+import type { PageMeta, PageSpec, ComponentModule } from './lib/routing';
+import { specFromModule } from './lib/routing';
 
-// Fix React SSR bug with custom elements - converts 'className' to 'class' for web components
-function fixWebComponentAttributes(html: string): string {
-    return html.replace(/className=/g, 'class=');
-}
-
+// Types for internal use
 interface Post {
     title: string;
     date: string;
     permalink: string;
     content: string;
     slug: string;
-    filePath: string;
-    isMdx: boolean;
     processedContent?: string;
 }
-
-interface PageData {
-    title: string;
-    permalink: string;
-    content: string;
-    isMdx: boolean;
-    showHeader: boolean;
-    layout?: string;
-}
-
-// Union type for both regular and slot-based pages
-type ProcessedPageData = PageData | SlotPageData;
 
 interface NavigationData {
     postsByYear: Record<string, Array<{
@@ -61,455 +53,335 @@ interface NavigationData {
         date: string;
         slug: string;
     }>>;
-    pages: Array<{
-        title: string;
-        permalink: string;
-    }>;
+    pages: Array<{ title: string; permalink: string }>;
 }
 
-interface ContentData {
-    type: 'post' | 'page' | 'home';
-    title: string;
-    content: string;
-    metadata?: {
-        date?: string;
-        isFavorite?: boolean;
-    };
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// Utility Functions
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Utility functions
+/** Fix React SSR bug with custom elements - converts 'className' to 'class' */
+const fixWebComponentAttributes = (html: string): string =>
+    html.replace(/className=/g, 'class=');
+
+/** Ensure directory exists */
 async function ensureDir(dirPath: string) {
-    try {
-        await mkdir(dirPath, { recursive: true });
-    } catch (error) {
-        // Directory might already exist
-    }
+    await mkdir(dirPath, { recursive: true }).catch(() => { });
 }
 
+/** Write HTML file with DOCTYPE */
 async function writeHtmlFile(filePath: string, content: string) {
     await ensureDir(dirname(filePath));
     await writeFile(filePath, `<!DOCTYPE html>${content}`);
 }
 
-async function processMarkdownContent(markdownContent: string): Promise<string> {
-    try {
-        const processor = unified()
-            .use(remarkParse)
-            .use(remarkGfm)
-            .use(remarkRehype)
-            .use(rehypeHighlight)
-            .use(rehypeStringify);
-
-        const result = await processor.process(markdownContent);
-        return String(result);
-    } catch (error) {
-        console.error('Error processing Markdown:', error);
-        return markdownContent;
-    }
+/** Process Markdown to HTML */
+async function processMarkdown(content: string): Promise<string> {
+    const processor = unified()
+        .use(remarkParse)
+        .use(remarkGfm)
+        .use(remarkRehype)
+        .use(rehypeHighlight)
+        .use(rehypeStringify);
+    const result = await processor.process(content);
+    return String(result);
 }
 
-async function processMdxContent(
-    mdxContent: string,
-    componentProps?: { posts?: Post[]; favoritePostSlugs?: string[] }
-): Promise<string> {
-    try {
-        const { default: MdxComponent } = await evaluate(mdxContent, {
-            development: false,
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeHighlight],
-            jsx: React.createElement,
-            jsxs: React.createElement,
-            Fragment: React.Fragment
-        });
+// ─────────────────────────────────────────────────────────────────────────────
+// Content Processing
+// ─────────────────────────────────────────────────────────────────────────────
 
-        // Create props object for components
-        const props = componentProps || {};
-
-        // Create component context with props
-        const components = Object.entries(mdxComponents).reduce((acc, [name, Component]) => {
-            acc[name] = (compProps: any) => {
-                const finalProps = { ...props, ...compProps };
-                return React.createElement(Component as any, finalProps);
-            };
-            return acc;
-        }, {} as any);
-
-        const html = renderToStaticMarkup(
-            <MdxComponent components={components} />
-        );
-        return fixWebComponentAttributes(html);
-    } catch (error) {
-        console.error('Error processing MDX:', error);
-        return await processMarkdownContent(mdxContent);
-    }
-}
-
-// Content processing
+/**
+ * Process blog posts from content/posts directory.
+ * Posts are MD files with YAML frontmatter and date-prefixed filenames.
+ */
 async function processPosts(): Promise<Post[]> {
-    console.log('Processing blog posts...');
+    console.log('📝 Processing blog posts...');
     const posts: Post[] = [];
+    const postFiles = await readdir('content/posts');
 
-    try {
-        const postFiles = await readdir('content/posts');
+    for (const filename of postFiles) {
+        if (!filename.match(/\.(md|mdx)$/)) continue;
 
-        for (const filename of postFiles) {
-            const ext = extname(filename);
-            if (!ext.match(/\.(md|mdx)$/)) continue;
+        // Parse filename: YYYY-MM-DD-slug.md
+        const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(md|mdx)$/);
+        if (!match) {
+            console.warn(`  ⚠️ Skipping ${filename} - invalid name format`);
+            continue;
+        }
 
-            const isMdx = ext === '.mdx';
-            console.log(`Processing ${isMdx ? 'MDX' : 'Markdown'} post: ${filename}`);
+        const [, date, slug] = match;
+        const fileContent = await readFile(join('content/posts', filename), 'utf-8');
+        const { data: frontmatter, content } = matter(fileContent);
 
-            const filePath = join('content/posts', filename);
-            const fileContent = await readFile(filePath, 'utf-8');
-            const { data: frontmatter, content } = matter(fileContent);
+        posts.push({
+            title: (frontmatter.title as string) || slug.replace(/-/g, ' '),
+            date,
+            permalink: (frontmatter.permalink as string) || `/${slug}/`,
+            content,
+            slug,
+        });
+    }
 
-            const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(md|mdx)$/);
-            if (!match) {
-                console.warn(`Skipping file with invalid name format: ${filename}`);
+    console.log(`  ✓ ${posts.length} posts`);
+    return posts;
+}
+
+/**
+ * Process TSX pages from content/pages directory.
+ * TSX files export a `config` object and slot components.
+ */
+async function processTsxPages(): Promise<PageSpec[]> {
+    console.log('⚛️  Processing TSX pages...');
+    const pages: PageSpec[] = [];
+    const pageFiles = await readdir('content/pages');
+
+    for (const filename of pageFiles) {
+        if (extname(filename) !== '.tsx') continue;
+
+        const modulePath = join(process.cwd(), 'content/pages', filename);
+        try {
+            const mod = await import(modulePath) as ComponentModule;
+            if (!mod.config?.title) {
+                console.warn(`  ⚠️ Skipping ${filename} - missing config.title`);
                 continue;
             }
-
-            const [, date, slug] = match;
-            const permalink = frontmatter.permalink || `/${slug}/`;
-
-            posts.push({
-                title: frontmatter.title || slug.replace(/-/g, ' '),
-                date,
-                permalink,
-                content,
-                slug,
-                filePath,
-                isMdx
-            });
+            pages.push(specFromModule(mod));
+        } catch (err) {
+            console.error(`  ❌ Error importing ${filename}:`, err);
         }
-
-        console.log(`Processed ${posts.length} posts`);
-        return posts;
-    } catch (error) {
-        console.error('Error processing posts:', error);
-        return [];
     }
+
+    console.log(`  ✓ ${pages.length} TSX pages`);
+    return pages;
 }
 
-async function processTsxPages(): Promise<SlotPageData[]> {
-    console.log('Processing TSX slot-based pages...');
-    const tsxPages: SlotPageData[] = [];
+/**
+ * Process Markdown pages from content/pages directory.
+ * MD files use frontmatter as config, content becomes the Main slot.
+ */
+async function processMdPages(): Promise<PageSpec[]> {
+    console.log('📄 Processing Markdown pages...');
+    const pages: PageSpec[] = [];
+    const pageFiles = await readdir('content/pages');
 
-    try {
-        const pageFiles = await readdir('content/pages');
+    for (const filename of pageFiles) {
+        if (!filename.match(/\.(md|mdx)$/)) continue;
 
-        for (const filename of pageFiles) {
-            const ext = extname(filename);
-            if (ext !== '.tsx') continue;
+        const fileContent = await readFile(join('content/pages', filename), 'utf-8');
+        const { data: frontmatter, content } = matter(fileContent);
+        const baseName = filename.replace(/\.(md|mdx)$/, '');
 
-            console.log(`Processing TSX page: ${filename}`);
+        // Process markdown content to HTML
+        const htmlContent = await processMarkdown(content);
 
-            const baseName = filename.replace(/\.tsx$/, '');
-            const modulePath = join(process.cwd(), 'content/pages', filename);
+        const meta: PageMeta = {
+            title: (frontmatter.title as string) || baseName.replace(/-/g, ' '),
+            permalink: (frontmatter.permalink as string) || `/${baseName}/`,
+            layout: frontmatter.layout as PageMeta['layout'],
+        };
 
-            try {
-                // Dynamically import the TSX module
-                const module = await import(modulePath);
-                const config = module.config;
-
-                if (!config || !config.title) {
-                    console.warn(`TSX page ${filename} missing required config.title`);
-                    continue;
-                }
-
-                // Build slots from exported functions
-                const slots: SlotContent = {};
-                const slotNames: PageSlot[] = [
-                    'banner', 'header', 'subheader', 'menu', 'navigation-header',
-                    'navigation', 'navigation-footer', 'main-header', 'main',
-                    'main-footer', 'aside', 'footer', 'navigation-toggle', 'skip-to-content'
-                ];
-
-                // Check for exported slot functions (capitalize first letter)
-                for (const slotName of slotNames) {
-                    const exportName = slotName.charAt(0).toUpperCase() + slotName.slice(1).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-                    const SlotComponent = module[exportName];
-
-                    if (SlotComponent && typeof SlotComponent === 'function') {
-                        slots[slotName] = React.createElement(SlotComponent);
-                    }
-                }
-
-                // Handle Main as the default slot if no 'main' slot is defined
-                if (!slots.main && module.Main) {
-                    slots.main = React.createElement(module.Main);
-                }
-
-                const permalink = config.permalink || `/${baseName}/`;
-
-                tsxPages.push({
-                    title: config.title,
-                    permalink,
-                    slots,
-                    config,
-                    openGraph: config.openGraph,
-                    isSlotBased: true
-                });
-
-            } catch (moduleError) {
-                console.error(`Error importing TSX page ${filename}:`, moduleError);
-                continue;
-            }
-        }
-
-        console.log(`Processed ${tsxPages.length} TSX pages`);
-        return tsxPages;
-    } catch (error) {
-        console.error('Error processing TSX pages:', error);
-        return [];
+        pages.push({
+            meta,
+            slots: {
+                // Main slot renders the processed HTML content
+                Main: () => <div dangerouslySetInnerHTML={{ __html: htmlContent }} />,
+            },
+        });
     }
+
+    console.log(`  ✓ ${pages.length} Markdown pages`);
+    return pages;
 }
 
-async function processPages(): Promise<PageData[]> {
-    console.log('Processing static pages...');
-    const pages: PageData[] = [];
+// ─────────────────────────────────────────────────────────────────────────────
+// Navigation Data
+// ─────────────────────────────────────────────────────────────────────────────
 
-    try {
-        const pageFiles = await readdir('content/pages');
-
-        for (const filename of pageFiles) {
-            const ext = extname(filename);
-            if (!ext.match(/\.(md|mdx)$/)) continue;
-
-            const isMdx = ext === '.mdx';
-            console.log(`Processing ${isMdx ? 'MDX' : 'Markdown'} page: ${filename}`);
-
-            const filePath = join('content/pages', filename);
-            const fileContent = await readFile(filePath, 'utf-8');
-            const { data: frontmatter, content } = matter(fileContent);
-
-            const baseName = filename.replace(/\.(md|mdx)$/, '');
-            const permalink = frontmatter.permalink || `/${baseName}/`;
-
-            pages.push({
-                title: frontmatter.title || baseName.replace(/-/g, ' '),
-                permalink,
-                content,
-                isMdx,
-                showHeader: frontmatter.layout !== 'resume',
-                layout: frontmatter.layout
-            });
-        }
-
-        console.log(`Processed ${pages.length} pages`);
-        return pages;
-    } catch (error) {
-        console.error('Error processing pages:', error);
-        return [];
-    }
-}
-
-// Navigation generation
-function generateNavigationData(posts: Post[], pages: PageData[], tsxPages: SlotPageData[]): NavigationData {
-    const postsByYear: Record<string, any[]> = {};
-
+/** Build navigation data from posts and pages */
+function buildNavigationData(posts: Post[], pages: PageSpec[]): NavigationData {
     // Group posts by year
-    posts.forEach(post => {
+    const postsByYear: NavigationData['postsByYear'] = {};
+    for (const post of posts) {
         const year = post.date.substring(0, 4);
-        if (!postsByYear[year]) {
-            postsByYear[year] = [];
-        }
+        if (!postsByYear[year]) postsByYear[year] = [];
         postsByYear[year].push({
             title: post.title,
             permalink: post.permalink,
             date: post.date,
-            slug: post.slug
+            slug: post.slug,
         });
-    });
-
-    // Sort posts within each year by date (newest first)
-    Object.keys(postsByYear).forEach(year => {
-        postsByYear[year].sort((a, b) => b.date.localeCompare(a.date));
-    });
-
-    // Combine regular pages and TSX pages for navigation
-    const allPages = [
-        ...pages
-            .filter(page => page.permalink !== '/') // Don't show home in navigation
-            .map(page => ({
-                title: page.title,
-                permalink: page.permalink
-            })),
-        ...tsxPages
-            .filter(page => page.permalink !== '/') // Don't show home in navigation
-            .map(page => ({
-                title: page.title,
-                permalink: page.permalink
-            }))
-    ];
-
-    return {
-        postsByYear,
-        pages: allPages
-    };
-}
-
-
-
-// Content generation
-async function generateContent(posts: Post[], pages: PageData[], tsxPages: SlotPageData[], navigationData: NavigationData) {
-    console.log('Generating content with WebAwesome app shell...');
-
-    // Process all posts
-    for (const post of posts) {
-        post.processedContent = post.isMdx
-            ? await processMdxContent(post.content)
-            : await processMarkdownContent(post.content);
     }
 
-    // Sort posts by date (newest first)
+    // Sort posts within each year (newest first)
+    for (const year of Object.keys(postsByYear)) {
+        postsByYear[year].sort((a, b) => b.date.localeCompare(a.date));
+    }
+
+    // Collect page links (excluding home)
+    const pageLinks = pages
+        .filter(p => p.meta.permalink !== '/')
+        .map(p => ({ title: p.meta.title, permalink: p.meta.permalink }));
+
+    return { postsByYear, pages: pageLinks };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HTML Generation
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Render a page to HTML and write to dist */
+async function renderPage(
+    title: string,
+    permalink: string,
+    slotContent: Record<string, React.ReactNode>,
+    navigationData: NavigationData,
+    contentData: { type: 'post' | 'page' | 'home'; title: string; content: string },
+    openGraph?: PageMeta['openGraph']
+) {
+    const html = fixWebComponentAttributes(renderToStaticMarkup(
+        <Layout
+            title={title}
+            navigationData={navigationData}
+            contentData={contentData}
+            currentPath={permalink}
+            slotContent={slotContent}
+            openGraph={openGraph}
+        />
+    ));
+
+    const outputPath = permalink === '/'
+        ? 'dist/index.html'
+        : join('dist', permalink.slice(1), 'index.html');
+
+    await writeHtmlFile(outputPath, html);
+}
+
+/** Generate all blog post pages */
+async function generatePostPages(posts: Post[], navigationData: NavigationData) {
+    console.log('📝 Generating post pages...');
+
+    // Process all markdown content
+    for (const post of posts) {
+        post.processedContent = await processMarkdown(post.content);
+    }
+
+    // Sort by date (newest first)
     posts.sort((a, b) => b.date.localeCompare(a.date));
 
-    // Generate individual post pages
+    // Generate each post page
     for (const post of posts) {
-        const postWithFavorite = {
+        const postData = {
             ...post,
             content: post.processedContent!,
-            isFavorite: siteConfig.favoritePosts.includes(post.slug)
+            isFavorite: siteConfig.favoritePosts.includes(post.slug),
         };
 
-        const slots: SlotContent = {
-            main: React.createElement(PostMain, { post: postWithFavorite }),
-            'main-footer': React.createElement(MainFooter)
-        };
-
-        const contentData: ContentData = {
-            type: 'post',
-            title: post.title,
-            content: ''
-        };
-
-        const html = fixWebComponentAttributes(renderToStaticMarkup(
-            <Layout
-                title={`${post.title} | zachwill.com`}
-                navigationData={navigationData}
-                contentData={contentData}
-                currentPath={post.permalink}
-                slotContent={slots}
-            />
-        ));
-
-        const outputPath = join('dist', post.permalink.slice(1), 'index.html');
-        await writeHtmlFile(outputPath, html);
+        await renderPage(
+            `${post.title} | zachwill.com`,
+            post.permalink,
+            {
+                main: React.createElement(PostMain, { post: postData }),
+                'main-footer': React.createElement(MainFooter),
+            },
+            navigationData,
+            { type: 'post', title: post.title, content: '' }
+        );
     }
 
-    // Generate regular pages (no special cases)
-    for (const page of pages) {
-        const processedContent = page.isMdx
-            ? await processMdxContent(page.content)
-            : await processMarkdownContent(page.content);
-
-        const contentData: ContentData = {
-            type: 'page',
-            title: page.title,
-            content: processedContent
-        };
-
-        const html = fixWebComponentAttributes(renderToStaticMarkup(
-            <Layout
-                title={page.title}
-                navigationData={navigationData}
-                contentData={contentData}
-                currentPath={page.permalink}
-            />
-        ));
-
-        const outputPath = page.permalink === '/'
-            ? 'dist/index.html'
-            : join('dist', page.permalink.slice(1), 'index.html');
-
-        await writeHtmlFile(outputPath, html);
-    }
-
-    // Generate TSX pages (including home page with posts data)
-    for (const tsxPage of tsxPages) {
-        let slots = tsxPage.slots;
-
-        // Inject posts data for home page
-        if (tsxPage.permalink === '/') {
-            const homeModule = await import(join(process.cwd(), 'content/pages/home.tsx'));
-            slots = {
-                ...slots,
-                main: React.createElement(homeModule.Main, { posts, favoritePostSlugs: siteConfig.favoritePosts })
-            };
-        }
-
-        const contentData: ContentData = {
-            type: tsxPage.permalink === '/' ? 'home' : 'page',
-            title: tsxPage.title,
-            content: ''
-        };
-
-        const html = fixWebComponentAttributes(renderToStaticMarkup(
-            <Layout
-                title={tsxPage.title}
-                navigationData={navigationData}
-                contentData={contentData}
-                currentPath={tsxPage.permalink}
-                slotContent={slots}
-                openGraph={tsxPage.openGraph}
-            />
-        ));
-
-        const outputPath = tsxPage.permalink === '/'
-            ? 'dist/index.html'
-            : join('dist', tsxPage.permalink.slice(1), 'index.html');
-
-        await writeHtmlFile(outputPath, html);
-    }
-
-    console.log(`Generated ${posts.length} posts, ${pages.length} pages, and ${tsxPages.length} TSX pages`);
+    console.log(`  ✓ ${posts.length} post pages`);
 }
 
+/** Generate all static pages (TSX and MD) */
+async function generateStaticPages(
+    pages: PageSpec[],
+    posts: Post[],
+    navigationData: NavigationData
+) {
+    console.log('📄 Generating static pages...');
+
+    for (const page of pages) {
+        const { meta, slots } = page;
+        const ctx = { path: meta.permalink, query: {} };
+
+        // Special handling for home page - inject posts data
+        let mainSlot: React.ReactNode;
+        if (meta.permalink === '/') {
+            const homeModule = await import(join(process.cwd(), 'content/pages/home.tsx'));
+            mainSlot = React.createElement(homeModule.Main, {
+                posts,
+                favoritePostSlugs: siteConfig.favoritePosts,
+            });
+        } else {
+            mainSlot = slots.Main(ctx);
+        }
+
+        // Build slot content including optional Scripts and Styles
+        const slotContent: Record<string, React.ReactNode> = { main: mainSlot };
+        if (slots.Scripts) slotContent.scripts = slots.Scripts(ctx);
+        if (slots.Styles) slotContent.styles = slots.Styles(ctx);
+
+        await renderPage(
+            meta.title,
+            meta.permalink,
+            slotContent,
+            navigationData,
+            {
+                type: meta.permalink === '/' ? 'home' : 'page',
+                title: meta.title,
+                content: '',
+            },
+            meta.openGraph
+        );
+    }
+
+    console.log(`  ✓ ${pages.length} static pages`);
+}
+
+/** Generate RSS feed */
 async function generateRssFeed(posts: Post[]) {
-    console.log('Generating RSS feed...');
+    console.log('📡 Generating RSS feed...');
     const rssXml = generateRssXml({ posts });
     await writeFile('dist/atom.xml', rssXml);
-    console.log('Generated RSS feed');
+    console.log('  ✓ RSS feed');
 }
 
+/** Copy static assets */
 async function copyAssets() {
-    console.log('Copying assets...');
-    try {
-        await ensureDir('dist/assets');
-        await cp('src/assets', 'dist/assets', { recursive: true });
-
-        // Copy root assets
-
-        try {
-            await cp('CNAME', 'dist/CNAME');
-        } catch (error) {
-            console.warn('CNAME file not found');
-        }
-
-        console.log('Assets copied');
-    } catch (error) {
-        console.error('Error copying assets:', error);
-    }
+    console.log('📦 Copying assets...');
+    await ensureDir('dist/assets');
+    await cp('src/assets', 'dist/assets', { recursive: true });
+    await cp('CNAME', 'dist/CNAME').catch(() => { });
+    console.log('  ✓ Assets copied');
 }
 
-// Main build function
-async function build() {
-    console.log('🚀 Starting clean WebAwesome build...');
+// ─────────────────────────────────────────────────────────────────────────────
+// Main Build
+// ─────────────────────────────────────────────────────────────────────────────
 
+async function build() {
+    console.log('\n🚀 Building static site...\n');
     await ensureDir('dist');
 
+    // 1. Process all content
     const posts = await processPosts();
-    const pages = await processPages();
     const tsxPages = await processTsxPages();
-    const navigationData = generateNavigationData(posts, pages, tsxPages);
+    const mdPages = await processMdPages();
+    const allPages = [...tsxPages, ...mdPages];
 
-    await generateContent(posts, pages, tsxPages, navigationData);
+    // 2. Build navigation data
+    const navigationData = buildNavigationData(posts, allPages);
+
+    // 3. Generate HTML pages
+    await generatePostPages(posts, navigationData);
+    await generateStaticPages(allPages, posts, navigationData);
+
+    // 4. Generate RSS and copy assets
     await generateRssFeed(posts);
     await copyAssets();
 
-    console.log(`✅ Clean build complete! Generated ${posts.length} posts, ${pages.length} pages, and ${tsxPages.length} TSX pages.`);
+    console.log(`\n✅ Build complete!`);
+    console.log(`   ${posts.length} posts, ${allPages.length} pages\n`);
 }
 
-// Run the build
 build().catch(console.error); 

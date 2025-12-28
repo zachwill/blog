@@ -1,33 +1,48 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import siteConfig from '../site.config';
 import { Header, Nav } from '../components';
-import { SlotContent, OpenGraphData } from '@/types/slots';
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Navigation structure for the sidebar */
 interface NavigationData {
-  postsByYear: {
-    [year: string]: {
-      title: string;
-      permalink: string;
-      date: string;
-      slug: string;
-    }[];
-  };
-  pages: {
+  postsByYear: Record<string, Array<{
     title: string;
     permalink: string;
-  }[];
+    date: string;
+    slug: string;
+  }>>;
+  pages: Array<{ title: string; permalink: string }>;
 }
 
+/** Content metadata passed to Layout */
 interface ContentData {
   type: 'post' | 'page' | 'home';
   title: string;
   content: string;
-  metadata?: {
-    date?: string;
-    isFavorite?: boolean;
-  };
 }
 
+/** Open Graph / Twitter Card metadata */
+interface OpenGraphData {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  url?: string;
+  type?: 'website' | 'article';
+  siteName?: string;
+  locale?: string;
+  twitterCard?: 'summary' | 'summary_large_image';
+  twitterSite?: string;
+  twitterCreator?: string;
+}
+
+/** Slot content for customizing layout areas */
+type SlotContent = Record<string, ReactNode>;
+
+/** Layout component props */
 interface LayoutProps {
   title?: string;
   navigationData: NavigationData;
@@ -109,6 +124,8 @@ export default function Layout({
         {ogData.imageAlt && <meta name="twitter:image:alt" content={ogData.imageAlt} />}
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
+        {/* Page-specific styles */}
+        {slotContent?.styles}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
       </head>
@@ -218,6 +235,9 @@ export default function Layout({
           )}
 
         </wa-page>
+
+        {/* Page-specific scripts loaded at end of body */}
+        {slotContent?.scripts}
       </body>
     </html >
   );
