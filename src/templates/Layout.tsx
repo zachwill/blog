@@ -124,6 +124,8 @@ export default function Layout({
         {ogData.imageAlt && <meta name="twitter:image:alt" content={ogData.imageAlt} />}
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
+        {/* Page-specific styles */}
+        {slotContent?.styles}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
       </head>
@@ -233,6 +235,9 @@ export default function Layout({
           )}
 
         </wa-page>
+
+        {/* Page-specific scripts loaded at end of body */}
+        {slotContent?.scripts}
       </body>
     </html >
   );

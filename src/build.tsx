@@ -302,6 +302,7 @@ async function generateStaticPages(
 
     for (const page of pages) {
         const { meta, slots } = page;
+        const ctx = { path: meta.permalink, query: {} };
 
         // Special handling for home page - inject posts data
         let mainSlot: React.ReactNode;
@@ -312,13 +313,18 @@ async function generateStaticPages(
                 favoritePostSlugs: siteConfig.favoritePosts,
             });
         } else {
-            mainSlot = slots.Main({ path: meta.permalink, query: {} });
+            mainSlot = slots.Main(ctx);
         }
+
+        // Build slot content including optional Scripts and Styles
+        const slotContent: Record<string, React.ReactNode> = { main: mainSlot };
+        if (slots.Scripts) slotContent.scripts = slots.Scripts(ctx);
+        if (slots.Styles) slotContent.styles = slots.Styles(ctx);
 
         await renderPage(
             meta.title,
             meta.permalink,
-            { main: mainSlot },
+            slotContent,
             navigationData,
             {
                 type: meta.permalink === '/' ? 'home' : 'page',
