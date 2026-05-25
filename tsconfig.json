@@ -12,7 +12,6 @@
         "moduleResolution": "bundler",
         // Type checking only (no compilation)
         "noEmit": true,
-        "ignoreDeprecations": "6.0",
         // Strict type checking
         "strict": true,
         "skipLibCheck": true,

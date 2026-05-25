@@ -3,8 +3,8 @@
  *
  * This build system supports two content types that work similarly:
  *
- * 1. TSX files - Export a `config` object (metadata) and slot components (Main, Header, etc.)
- * 2. MD files  - Use YAML frontmatter (becomes config) and markdown content (becomes Main slot)
+ * 1. TSX files - Export a `config` object and components (Main, optional MainFooter/Styles/Scripts)
+ * 2. MD files  - Use YAML frontmatter (becomes config) and Markdown content (becomes Main slot)
  *
  * Both content types are processed into the same PageSpec structure, making MD files
  * a natural subset of TSX files. The pattern is inspired by modern frameworks that
@@ -12,7 +12,7 @@
  */
 
 // Built-ins
-import { readdir, readFile, writeFile, mkdir, cp } from 'fs/promises';
+import { readdir, readFile, writeFile, mkdir, cp, rm } from 'fs/promises';
 import { join, dirname, extname } from 'path';
 
 // React
@@ -34,7 +34,7 @@ import generateRssXml from './templates/Rss';
 import { Main as PostMain, MainFooter } from './templates/PostTemplate';
 import siteConfig from './site.config';
 import type { PageMeta, PageSpec, ComponentModule } from './lib/routing';
-import { specFromModule } from './lib/routing';
+import { normalizePermalink, specFromModule } from './lib/routing';
 
 // Types for internal use
 interface Post {
@@ -53,7 +53,6 @@ interface NavigationData {
         date: string;
         slug: string;
     }>>;
-    pages: Array<{ title: string; permalink: string }>;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -101,10 +100,10 @@ async function processPosts(): Promise<Post[]> {
     const postFiles = await readdir('content/posts');
 
     for (const filename of postFiles) {
-        if (!filename.match(/\.(md|mdx)$/)) continue;
+        if (!filename.endsWith('.md')) continue;
 
         // Parse filename: YYYY-MM-DD-slug.md
-        const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(md|mdx)$/);
+        const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/);
         if (!match) {
             console.warn(`  ⚠️ Skipping ${filename} - invalid name format`);
             continue;
@@ -117,7 +116,7 @@ async function processPosts(): Promise<Post[]> {
         posts.push({
             title: (frontmatter.title as string) || slug.replace(/-/g, ' '),
             date,
-            permalink: (frontmatter.permalink as string) || `/${slug}/`,
+            permalink: normalizePermalink((frontmatter.permalink as string) || `/${slug}/`),
             content,
             slug,
         });
@@ -166,19 +165,18 @@ async function processMdPages(): Promise<PageSpec[]> {
     const pageFiles = await readdir('content/pages');
 
     for (const filename of pageFiles) {
-        if (!filename.match(/\.(md|mdx)$/)) continue;
+        if (!filename.endsWith('.md')) continue;
 
         const fileContent = await readFile(join('content/pages', filename), 'utf-8');
         const { data: frontmatter, content } = matter(fileContent);
-        const baseName = filename.replace(/\.(md|mdx)$/, '');
+        const baseName = filename.replace(/\.md$/, '');
 
         // Process markdown content to HTML
         const htmlContent = await processMarkdown(content);
 
         const meta: PageMeta = {
             title: (frontmatter.title as string) || baseName.replace(/-/g, ' '),
-            permalink: (frontmatter.permalink as string) || `/${baseName}/`,
-            layout: frontmatter.layout as PageMeta['layout'],
+            permalink: normalizePermalink((frontmatter.permalink as string) || `/${baseName}/`),
         };
 
         pages.push({
@@ -199,7 +197,7 @@ async function processMdPages(): Promise<PageSpec[]> {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Build navigation data from posts and pages */
-function buildNavigationData(posts: Post[], pages: PageSpec[]): NavigationData {
+function buildNavigationData(posts: Post[]): NavigationData {
     // Group posts by year
     const postsByYear: NavigationData['postsByYear'] = {};
     for (const post of posts) {
@@ -218,12 +216,7 @@ function buildNavigationData(posts: Post[], pages: PageSpec[]): NavigationData {
         postsByYear[year].sort((a, b) => b.date.localeCompare(a.date));
     }
 
-    // Collect page links (excluding home)
-    const pageLinks = pages
-        .filter(p => p.meta.permalink !== '/')
-        .map(p => ({ title: p.meta.title, permalink: p.meta.permalink }));
-
-    return { postsByYear, pages: pageLinks };
+    return { postsByYear };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -316,8 +309,9 @@ async function generateStaticPages(
             mainSlot = slots.Main(ctx);
         }
 
-        // Build slot content including optional Scripts and Styles
+        // Build slot content including optional page slots
         const slotContent: Record<string, React.ReactNode> = { main: mainSlot };
+        if (slots.MainFooter) slotContent['main-footer'] = slots.MainFooter(ctx);
         if (slots.Scripts) slotContent.scripts = slots.Scripts(ctx);
         if (slots.Styles) slotContent.styles = slots.Styles(ctx);
 
@@ -361,6 +355,7 @@ async function copyAssets() {
 
 async function build() {
     console.log('\n🚀 Building static site...\n');
+    await rm('dist', { recursive: true, force: true });
     await ensureDir('dist');
 
     // 1. Process all content
@@ -370,7 +365,7 @@ async function build() {
     const allPages = [...tsxPages, ...mdPages];
 
     // 2. Build navigation data
-    const navigationData = buildNavigationData(posts, allPages);
+    const navigationData = buildNavigationData(posts);
 
     // 3. Generate HTML pages
     await generatePostPages(posts, navigationData);

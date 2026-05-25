@@ -1,195 +1,207 @@
 import { watch } from 'fs';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 import { serve } from 'bun';
 
-const execAsync = promisify(exec);
+const DEV_PORT = 8000;
+const RELOAD_SCRIPT = `
+<script type="module">
+  const events = new EventSource('/__dev/events');
+  events.addEventListener('reload', () => location.reload());
+</script>`;
 
+const reloadClients = new Set<ReadableStreamDefaultController<string>>();
 let buildInProgress = false;
+let buildAgain = false;
+let buildTimer: ReturnType<typeof setTimeout> | undefined;
+
+function queueBuild(reason: string) {
+    console.log(`\n${reason}`);
+
+    if (buildTimer) {
+        clearTimeout(buildTimer);
+    }
+
+    buildTimer = setTimeout(() => {
+        buildSite();
+    }, 75);
+}
 
 async function buildSite() {
     if (buildInProgress) {
-        console.log('⏳ Build already in progress, skipping...');
+        buildAgain = true;
+        console.log('⏳ Build already in progress; queued one follow-up build');
         return;
     }
 
     buildInProgress = true;
-    console.log('🔨 Building WebAwesome site...');
 
-    try {
-        await execAsync('bun run src/build.tsx');
-        console.log('✅ WebAwesome build completed successfully');
-    } catch (error) {
-        console.error('❌ Build failed:', error);
-    } finally {
-        buildInProgress = false;
+    do {
+        buildAgain = false;
+        console.log('🔨 Building site...');
+
+        const process = Bun.spawn(['bun', 'run', 'src/build.tsx'], {
+            stdout: 'inherit',
+            stderr: 'inherit',
+        });
+
+        const exitCode = await process.exited;
+        if (exitCode === 0) {
+            console.log('✅ Build completed successfully');
+            notifyReloadClients();
+        } else {
+            console.error(`❌ Build failed with exit code ${exitCode}`);
+        }
+    } while (buildAgain);
+
+    buildInProgress = false;
+}
+
+function notifyReloadClients() {
+    const message = `event: reload\ndata: ${Date.now()}\n\n`;
+
+    for (const client of reloadClients) {
+        try {
+            client.enqueue(message);
+        } catch {
+            reloadClients.delete(client);
+        }
     }
 }
 
+function contentTypeFor(path: string): string | undefined {
+    if (path.endsWith('.css')) return 'text/css';
+    if (path.endsWith('.js')) return 'application/javascript';
+    if (path.endsWith('.html')) return 'text/html';
+    if (path.endsWith('.xml')) return 'application/xml';
+    if (path.endsWith('.svg')) return 'image/svg+xml';
+    if (path.endsWith('.png')) return 'image/png';
+    if (path.endsWith('.jpg') || path.endsWith('.jpeg')) return 'image/jpeg';
+    return undefined;
+}
+
+async function htmlResponse(file: Bun.BunFile) {
+    const html = await file.text();
+    const body = html.includes('</body>')
+        ? html.replace('</body>', `${RELOAD_SCRIPT}</body>`)
+        : `${html}${RELOAD_SCRIPT}`;
+
+    return new Response(body, {
+        headers: { 'Content-Type': 'text/html' },
+    });
+}
+
+async function fileResponse(filePath: string) {
+    const file = Bun.file(`./dist${filePath}`);
+    if (!(await file.exists())) return undefined;
+
+    if (filePath.endsWith('.html')) {
+        return htmlResponse(file);
+    }
+
+    const headers: Record<string, string> = {};
+    const contentType = contentTypeFor(filePath);
+    if (contentType) headers['Content-Type'] = contentType;
+
+    return new Response(file, { headers });
+}
+
+function devEventsResponse() {
+    const stream = new ReadableStream<string>({
+        start(controller) {
+            reloadClients.add(controller);
+            controller.enqueue(': connected\n\n');
+        },
+        cancel(controller) {
+            reloadClients.delete(controller);
+        },
+    });
+
+    return new Response(stream, {
+        headers: {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            Connection: 'keep-alive',
+        },
+    });
+}
+
 async function startDevServer() {
-    console.log('🚀 Starting WebAwesome development server...');
+    console.log('🚀 Starting development server...');
 
     const server = serve({
-        port: 8000,
+        port: DEV_PORT,
         development: true,
 
         async fetch(req) {
             const url = new URL(req.url);
 
-            // Handle dev status endpoint
             if (url.pathname === '/dev-status') {
                 return new Response('OK', { status: 200 });
             }
 
-            // Handle WebAwesome CDN resources (for offline development)
-            if (url.pathname.startsWith('/webawesome/')) {
-                // In production, these come from CDN, but for dev we might want to proxy or serve locally
-                return new Response('/* WebAwesome resources served from CDN */', {
-                    headers: { 'Content-Type': 'text/css' }
-                });
+            if (url.pathname === '/__dev/events') {
+                return devEventsResponse();
             }
 
-            // Determine file path to serve
             let filePath = url.pathname;
             if (filePath === '/') {
                 filePath = '/index.html';
             }
 
-            try {
-                // Try to serve the exact file first
-                const file = Bun.file(`./dist${filePath}`);
-                if (await file.exists()) {
-                    // Add proper MIME types for WebAwesome assets
-                    const headers: Record<string, string> = {};
+            const exactFile = await fileResponse(filePath);
+            if (exactFile) return exactFile;
 
-                    if (filePath.endsWith('.css')) {
-                        headers['Content-Type'] = 'text/css';
-                    } else if (filePath.endsWith('.js')) {
-                        headers['Content-Type'] = 'application/javascript';
-                    } else if (filePath.endsWith('.html')) {
-                        headers['Content-Type'] = 'text/html';
-                    } else if (filePath.endsWith('.xml')) {
-                        headers['Content-Type'] = 'application/xml';
-                    }
-
-                    return new Response(file, { headers });
-                }
-
-                // If no extension, try adding .html
-                if (!filePath.includes('.')) {
-                    const htmlFile = Bun.file(`./dist${filePath}.html`);
-                    if (await htmlFile.exists()) {
-                        return new Response(htmlFile, {
-                            headers: { 'Content-Type': 'text/html' }
-                        });
-                    }
-                }
-
-                // Try index.html in that directory (for clean URLs)
-                const indexFile = Bun.file(`./dist${filePath}/index.html`);
-                if (await indexFile.exists()) {
-                    return new Response(indexFile, {
-                        headers: { 'Content-Type': 'text/html' }
-                    });
-                }
-
-                // 404 fallback with WebAwesome styling
-                const notFoundHtml = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Not Found | zachwill.com</title>
-    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.3/dist/styles/webawesome.css" />
-    <link rel="stylesheet" href="/assets/content.css" />
-</head>
-<body class="wa-palette-rudimentary wa-theme-tailspin">
-    <wa-page>
-        <main style="padding: var(--wa-space-xl); text-align: center;">
-            <div style="margin-bottom: var(--wa-space-l);">
-                <wa-badge appearance="filled" style="font-size: var(--wa-font-size-xl); background-color: var(--wa-color-red-90);">
-                    <wa-icon name="exclamation-triangle" style="color: var(--wa-color-red-50);"></wa-icon>
-                </wa-badge>
-            </div>
-            <h1 class="wa-heading-2xl">404 - Page Not Found</h1>
-            <p>The page you're looking for doesn't exist.</p>
-            <div style="margin-top: var(--wa-space-l);">
-                <a href="/" style="text-decoration: none;">
-                    <wa-button appearance="primary">
-                        <wa-icon name="house" slot="prefix"></wa-icon>
-                        Go Home
-                    </wa-button>
-                </a>
-            </div>
-        </main>
-    </wa-page>
-    <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.3/dist/webawesome.ssr-loader.js"></script>
-</body>
-</html>`;
-
-                return new Response(notFoundHtml, {
-                    status: 404,
-                    headers: { 'Content-Type': 'text/html' }
-                });
-            } catch (error) {
-                console.error('Error serving file:', error);
-                return new Response('Internal Server Error', {
-                    status: 500,
-                    headers: { 'Content-Type': 'text/plain' }
-                });
+            if (!filePath.includes('.')) {
+                const htmlFile = await fileResponse(`${filePath}.html`);
+                if (htmlFile) return htmlFile;
             }
+
+            const indexFile = await fileResponse(`${filePath}/index.html`);
+            if (indexFile) return indexFile;
+
+            return new Response('Not Found', {
+                status: 404,
+                headers: { 'Content-Type': 'text/plain' },
+            });
         },
     });
 
-    console.log(`🌐 WebAwesome blog server running at ${server.url}`);
-    console.log(`📱 Mobile responsive design with WebAwesome components`);
+    console.log(`🌐 Blog server running at ${server.url}`);
     return server;
 }
 
 function setupFileWatcher() {
     console.log('\n📁 Watching for changes in:');
-    console.log('  - content/posts/ (Markdown and MDX files)');
-    console.log('  - content/pages/ (Markdown and MDX files)');
-    console.log('  - content/drafts/ (Markdown and MDX files)');
-    console.log('  - src/templates/ (React components)');
-    console.log('  - src/assets/ (CSS, images, etc.)');
-    console.log('  - src/site.config.ts (Site configuration)');
+    console.log('  - content/posts/ (Markdown files)');
+    console.log('  - content/pages/ (Markdown and TSX files)');
+    console.log('  - src/ (templates, components, assets, config)');
 
-    // Watch content files
-    const contentWatcher = watch('./content', { recursive: true }, async (eventType, filename) => {
-        if (filename && filename.match(/\.(md|mdx|tsx)$/)) {
-            console.log(`\n📝 Content changed: ${filename}`);
-            await buildSite();
-        }
+    const contentWatcher = watch('./content', { recursive: true }, (_eventType, filename) => {
+        if (!filename) return;
+        if (filename.startsWith('drafts/')) return;
+        if (!filename.match(/\.(md|tsx)$/)) return;
+
+        queueBuild(`📝 Content changed: ${filename}`);
     });
 
-    // Watch source files (templates, config, assets)
-    const srcWatcher = watch('./src', { recursive: true }, async (eventType, filename) => {
-        if (filename && !filename.includes('dev.ts')) {
-            console.log(`\n🔧 Source changed: ${filename}`);
-            await buildSite();
-        }
+    const srcWatcher = watch('./src', { recursive: true }, (_eventType, filename) => {
+        if (!filename) return;
+        if (filename.includes('dev.ts')) return;
+
+        queueBuild(`🔧 Source changed: ${filename}`);
     });
 
     return { contentWatcher, srcWatcher };
 }
 
 async function runDev() {
-    console.log('🚀 Starting WebAwesome blog development mode...');
-    console.log('🎨 Using WebAwesome design system');
+    console.log('🚀 Starting blog development mode...');
 
-    // Initial build
     await buildSite();
-
-    // Start the development server
     const server = await startDevServer();
-
-    // Set up file watching for automatic rebuilds
     const watchers = setupFileWatcher();
 
-    // Handle graceful shutdown
     process.on('SIGINT', () => {
-        console.log('\n👋 Shutting down WebAwesome development server...');
+        console.log('\n👋 Shutting down development server...');
         watchers.contentWatcher.close();
         watchers.srcWatcher.close();
         server.stop();
@@ -197,9 +209,7 @@ async function runDev() {
     });
 
     console.log('\n💡 Press Ctrl+C to stop the development server');
-    console.log('🔥 Rebuild-on-change enabled');
-    console.log('🧭 Navigate with the sidebar - posts organized by year');
-    console.log('📱 Test mobile responsiveness with the responsive design');
+    console.log('🔥 Rebuild-on-change and browser reload enabled');
 }
 
-runDev().catch(console.error); 
+runDev().catch(console.error);

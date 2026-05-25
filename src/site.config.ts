@@ -27,27 +27,4 @@ export default {
         "2017-11-01-apprenticeship",
         "2014-01-14-build-almost-nothing"
     ],
-
-    // Projects for homepage
-    projects: [
-        {
-            title: "Portland Trail Blazers",
-            description: "Director of Data Science",
-            url: "https://www.nba.com/blazers/zach-williams"
-        },
-        {
-            title: "My notes on Datastar",
-            description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes.",
-            url: "https://zachwill.com/datastar/"
-        }
-    ],
-
-    pageMap: {
-        about: '/about/',
-        resume: '/resume/'
-    },
-
-    tagPath(tag: string) {
-        return `/tag/${tag}/`;
-    }
-}; 
+};

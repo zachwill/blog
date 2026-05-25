@@ -2,11 +2,6 @@ import React, { ReactNode } from 'react';
 import siteConfig from '../site.config';
 import { Header, Nav } from '../components';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Types
-// ─────────────────────────────────────────────────────────────────────────────
-
-/** Navigation structure for the sidebar */
 interface NavigationData {
   postsByYear: Record<string, Array<{
     title: string;
@@ -14,17 +9,14 @@ interface NavigationData {
     date: string;
     slug: string;
   }>>;
-  pages: Array<{ title: string; permalink: string }>;
 }
 
-/** Content metadata passed to Layout */
 interface ContentData {
   type: 'post' | 'page' | 'home';
   title: string;
   content: string;
 }
 
-/** Open Graph / Twitter Card metadata */
 interface OpenGraphData {
   title?: string;
   description?: string;
@@ -39,10 +31,13 @@ interface OpenGraphData {
   twitterCreator?: string;
 }
 
-/** Slot content for customizing layout areas */
-type SlotContent = Record<string, ReactNode>;
+type SlotContent = {
+  main?: ReactNode;
+  'main-footer'?: ReactNode;
+  scripts?: ReactNode;
+  styles?: ReactNode;
+};
 
-/** Layout component props */
 interface LayoutProps {
   title?: string;
   navigationData: NavigationData;
@@ -51,7 +46,6 @@ interface LayoutProps {
   slotContent?: SlotContent;
   openGraph?: OpenGraphData;
 }
-
 
 export default function Layout({
   title,
@@ -62,8 +56,6 @@ export default function Layout({
   openGraph
 }: LayoutProps) {
   const pageTitle = title || siteConfig.title;
-
-  // Build OpenGraph metadata with sensible defaults
   const ogData = {
     title: openGraph?.title || pageTitle,
     description: openGraph?.description || siteConfig.description,
@@ -87,20 +79,13 @@ export default function Layout({
         <meta name="author" content={siteConfig.author} />
         <meta name="description" content={ogData.description} />
         <link href="/atom.xml" rel="alternate" title="zachwill" type="application/atom+xml" />
-
-        {/* Favicon links */}
         <link rel="icon" href="/assets/favicon.svg" />
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-
-        {/* PWA Manifest */}
         <link rel="manifest" href="/assets/manifest.json" />
-
-        {/* Apple Touch Icon and PWA meta tags for iOS */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="zachwill" />
 
-        {/* OpenGraph meta tags */}
         <meta property="og:title" content={ogData.title} />
         <meta property="og:description" content={ogData.description} />
         <meta property="og:url" content={ogData.url} />
@@ -114,7 +99,6 @@ export default function Layout({
           </>
         )}
 
-        {/* Twitter Card meta tags */}
         <meta name="twitter:card" content={ogData.twitterCard} />
         <meta name="twitter:title" content={ogData.title} />
         <meta name="twitter:description" content={ogData.description} />
@@ -122,9 +106,9 @@ export default function Layout({
         {ogData.twitterCreator && <meta name="twitter:creator" content={ogData.twitterCreator} />}
         {ogData.image && <meta name="twitter:image" content={ogData.image} />}
         {ogData.imageAlt && <meta name="twitter:image:alt" content={ogData.imageAlt} />}
+
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
-        {/* Page-specific styles */}
         {slotContent?.styles}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
@@ -137,7 +121,7 @@ export default function Layout({
         data-effect="if ($webawesome) {
           const nav = document.querySelector('nav .current');
           const article = document.querySelector('main h1');
-          if (nav) {
+          if (nav && article) {
             nav.scrollIntoView({ behavior: 'smooth' });
             article.scrollIntoView({ behavior: 'instant' });
           }
@@ -147,98 +131,22 @@ export default function Layout({
         }}
       >
         <wa-page mobile-breakpoint="1080px">
-          {/* Render custom banner slot if provided */}
-          {slotContent?.banner && (
-            <div slot="banner">
-              {slotContent.banner}
-            </div>
-          )}
+          <Header />
+          <Nav navigationData={navigationData} currentPath={currentPath} />
 
-          {/* Render custom header or default header */}
-          {slotContent?.header ? (
-            <div>{slotContent.header}</div>
-          ) : (
-            <Header />
-          )}
+          <main>
+            {slotContent?.main || <div dangerouslySetInnerHTML={{ __html: contentData.content }} />}
+          </main>
 
-          {/* Render custom subheader slot if provided */}
-          {slotContent?.subheader && (
-            <div slot="subheader">
-              {slotContent.subheader}
-            </div>
-          )}
-
-          {/* Render custom navigation or default */}
-          {slotContent?.navigation || slotContent?.['navigation-header'] ? (
-            <>
-              {slotContent['navigation-header'] && (
-                <div>{slotContent['navigation-header']}</div>
-              )}
-              {slotContent.navigation && (
-                <div>{slotContent.navigation}</div>
-              )}
-            </>
-          ) : (
-            <Nav navigationData={navigationData} currentPath={currentPath} />
-          )}
-
-          {/* Render custom navigation-footer slot if provided */}
-          {slotContent?.['navigation-footer'] && (
-            <div slot="navigation-footer">
-              {slotContent['navigation-footer']}
-            </div>
-          )}
-
-          {/* 
-            CORRECTED SLOT PLACEMENT:
-            - The main content area is now correctly composed of three *direct children* of `<wa-page>`.
-            - 1. A header for the main area (`main-header` slot)
-            - 2. The main content itself (`main` in the default slot)
-            - 3. A footer for the main area (`main-footer` slot)
-          */}
-
-          {/* Render custom main-header slot if provided */}
-          {slotContent?.['main-header'] && (
-            <header slot="main-header">
-              {slotContent['main-header']}
-            </header>
-          )}
-
-          {/* Render custom main content or default content */}
-          {slotContent?.main ? (
-            <main>{slotContent.main}</main>
-          ) : (
-            <main>
-              <div dangerouslySetInnerHTML={{ __html: contentData.content }} />
-            </main>
-          )}
-
-          {/* Render custom main-footer or default */}
           {slotContent?.['main-footer'] && (
             <footer slot="main-footer">
               {slotContent['main-footer']}
             </footer>
           )}
-
-          {/* Render custom aside slot if provided */}
-          {slotContent?.aside && (
-            <aside slot="aside">
-              {slotContent.aside}
-            </aside>
-          )}
-
-          {/* Render custom footer slot if provided */}
-          {slotContent?.footer && (
-            <footer slot="footer">
-              {slotContent.footer}
-            </footer>
-          )}
-
         </wa-page>
 
-        {/* Page-specific scripts loaded at end of body */}
         {slotContent?.scripts}
       </body>
-    </html >
+    </html>
   );
 }

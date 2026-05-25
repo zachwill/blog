@@ -9,10 +9,6 @@ interface NavigationData {
       slug: string;
     }[];
   };
-  pages: {
-    title: string;
-    permalink: string;
-  }[];
 }
 
 interface NavProps {

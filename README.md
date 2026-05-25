@@ -8,26 +8,23 @@ Custom static site generator built with Bun.
 # Install dependencies
 bun install
 
-# Development with hot reloading
+# Development with watch rebuilds and browser reload
 bun run dev       # → http://localhost:8000
 
-# Build for production  
+# Build for production
 bun run build     # → outputs to dist/
-
-# Build with per-file logging
-BUILD_VERBOSE=1 bun run build
 ```
 
 ## Content Structure
 
 ```
 content/
-├── posts/        # Blog posts: YYYY-MM-DD-slug.md/mdx
-├── drafts/       # Unpublished drafts (same naming)
-└── pages/        # Static pages: page-name.md/mdx
+├── posts/        # Blog posts: YYYY-MM-DD-slug.md
+├── drafts/       # Unpublished drafts
+└── pages/        # Static pages: page-name.md or custom TSX pages
 ```
 
-### Writing Posts
+## Writing Posts
 
 Create `content/posts/2025-01-01-my-post.md`:
 
@@ -43,24 +40,12 @@ Your content here...
 Raw HTML and WebAwesome custom elements are allowed in Markdown posts, so callouts work directly:
 
 ```html
-<wa-callout variant="brand" appearance="plain">
+<wa-callout variant="brand" appearance="outlined">
   <wa-icon slot="icon" name="font"></wa-icon>
-  No bells and whistles on this <strong>plain</strong> callout
+  No bells and whistles on this <strong>outlined</strong> callout
 </wa-callout>
 ```
 
-### MDX Support
+## Custom Pages
 
-Use `.mdx` extension for React components in Markdown:
-
-```jsx
----
-title: Interactive Post
----
-
-# Regular Markdown
-
-<CustomComponent prop="value" />
-
-More markdown...
-```
+Use `.tsx` pages in `content/pages/` for bespoke layouts, local components, page-specific styles/scripts, and WebAwesome-heavy pages. Each TSX page exports a `config` object and a `Main` component.
