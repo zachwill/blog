@@ -176,7 +176,7 @@ function setupFileWatcher() {
 
 async function runDev() {
     console.log('🚀 Starting WebAwesome blog development mode...');
-    console.log('🎨 Using WebAwesome design system with Tailspin theme');
+    console.log('🎨 Using WebAwesome design system');
 
     // Initial build
     await buildSite();
@@ -197,7 +197,7 @@ async function runDev() {
     });
 
     console.log('\n💡 Press Ctrl+C to stop the development server');
-    console.log('🔥 Hot reloading enabled - site rebuilds when files change');
+    console.log('🔥 Rebuild-on-change enabled');
     console.log('🧭 Navigate with the sidebar - posts organized by year');
     console.log('📱 Test mobile responsiveness with the responsive design');
 }

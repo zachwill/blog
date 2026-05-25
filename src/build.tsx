@@ -80,9 +80,9 @@ async function processMarkdown(content: string): Promise<string> {
     const processor = unified()
         .use(remarkParse)
         .use(remarkGfm)
-        .use(remarkRehype)
+        .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeHighlight)
-        .use(rehypeStringify);
+        .use(rehypeStringify, { allowDangerousHtml: true });
     const result = await processor.process(content);
     return String(result);
 }

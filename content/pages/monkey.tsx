@@ -57,7 +57,7 @@ export function Main() {
   return (
     <div className="wa-stack wa-gap-m">
       <script type="module" src="/assets/monkey.js" />
-      <style jsx>{`
+      <style>{`
         main {
           background-color: var(--wa-color-surface-lowered);
         }
@@ -108,7 +108,7 @@ with boring manager Rob`.trim()}
           </wa-tab>
 
           <wa-tab-panel name="intro">
-            <div class="wa-stack wa-gap-m">
+            <div className="wa-stack wa-gap-m">
               <strong>What if Datastar included <code>hx-get</code>?</strong>
               <p>That's the main gist of this...</p>
             </div>

@@ -47,24 +47,26 @@ export function Nav({ navigationData, currentPath }: NavProps) {
           {Object.entries(navigationData.postsByYear)
             .sort(([a], [b]) => b.localeCompare(a))
             .map(([year, posts]) => (
-              <wa-details key={year} appearance="plain" open>
-                <div slot="summary">
-                  <span className="wa-heading-s">{year}</span>
-                </div>
-                <ul>
-                  {posts.map(post => (
-                    <li key={post.permalink}>
-                      <a
-                        href={post.permalink}
-                        className={currentPath === post.permalink ? 'current' : ''}
-                        data-drawer="close"
-                      >
-                        {post.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </wa-details>
+              <React.Fragment key={year}>
+                <wa-details appearance="plain" open>
+                  <div slot="summary">
+                    <span className="wa-heading-s">{year}</span>
+                  </div>
+                  <ul>
+                    {posts.map(post => (
+                      <li key={post.permalink}>
+                        <a
+                          href={post.permalink}
+                          className={currentPath === post.permalink ? 'current' : ''}
+                          data-drawer="close"
+                        >
+                          {post.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </wa-details>
+              </React.Fragment>
             ))}
         </div>
       </nav>
