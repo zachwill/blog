@@ -10,6 +10,6 @@ permalink : /stroke-of-luck/
 > 
 > Instead, it seems that **selling intelligence might end up as a race to the bottom.**
 > 
-> Who would've thought that having access to enough textual inputs and outputs, along with a vaguely similar transformer architecture, would be enough to copy rather useful intelligence.
+> Who would've thought that having access to enough textual inputs and outputs, along with a vaguely similar transformer architecture, would be enough to copy rather useful intelligence?
 
 &mdash; [Hacker News](https://news.ycombinator.com/item?id=49421351)
