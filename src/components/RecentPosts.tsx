@@ -15,27 +15,15 @@ export function RecentPosts({ posts, count = 80 }: RecentPostsProps) {
       {recentPosts.map((post, index) => (
         <div key={post.slug} className="post-content">
           {/* Post Header */}
-          <header>
-            <div className="wa-desktop-only wa-flank:end wa-align-items-baseline" style={{ marginBottom: 'var(--wa-space-l)' }}>
-              <a href={post.permalink}>
-                <h3 className="wa-heading-xl">
-                  {post.title}
-                </h3>
-              </a>
-              <time className="wa-body-s">
-                {formatDate(post.date)}
-              </time>
-            </div>
-            <div className="wa-mobile-only wa-stack wa-gap-s" style={{ marginBottom: 'var(--wa-space-m)' }}>
-              <a href={post.permalink}>
-                <h3 className="wa-heading-l">
-                  {post.title}
-                </h3>
-              </a>
-              <time className="wa-body-s">
-                {formatDate(post.date)}
-              </time>
-            </div>
+          <header className="post-header">
+            <a href={post.permalink}>
+              <h3 className="wa-heading-xl post-title">
+                {post.title}
+              </h3>
+            </a>
+            <time className="wa-body-s">
+              {formatDate(post.date)}
+            </time>
           </header>
 
           {/* Post Content */}

@@ -54,6 +54,7 @@ export function Nav({ navigationData, currentPath }: NavProps) {
                         <a
                           href={post.permalink}
                           className={currentPath === post.permalink ? 'current' : ''}
+                          aria-current={currentPath === post.permalink ? 'page' : undefined}
                           data-drawer="close"
                         >
                           {post.title}
