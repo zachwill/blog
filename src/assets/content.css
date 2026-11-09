@@ -203,6 +203,12 @@ footer[slot='main-footer'] {
     padding: 0 var(--wa-space-l) var(--wa-space-l) var(--wa-space-l);
 }
 
+/* Keep the Datastar recommendation's blue rocket, with a quieter neutral surface. */
+footer[slot='main-footer'] wa-callout {
+    background-color: light-dark(#fafbfc, #171b24);
+    border-color: var(--wa-color-surface-border);
+}
+
 /* ============================================
    CONTENT & COMPONENT STYLING
    ============================================ */
