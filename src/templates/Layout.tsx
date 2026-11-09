@@ -110,26 +110,33 @@ export default function Layout({
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
         {slotContent?.styles}
-        <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.ssr-loader.js`}></script>
+        <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
       </head>
 
-      <body
-        className="wa-palette-zach wa-theme-zach wa-cloak"
-        data-signals-webawesome="!document.querySelector('body').classList.contains('wa-cloak')"
-        data-class-wa-dark="window.matchMedia('(prefers-color-scheme: dark)').matches"
-        data-effect="if ($webawesome) {
-          const nav = document.querySelector('nav .current');
-          const article = document.querySelector('main h1');
-          if (nav && article) {
-            nav.scrollIntoView({ behavior: 'smooth' });
-            article.scrollIntoView({ behavior: 'instant' });
-          }
-        }"
-        {...{
-          "data-on-load__delay.200ms": "$webawesome = !document.querySelector('body').classList.contains('wa-cloak')"
-        }}
-      >
+      <body className={`${siteConfig.webawesome.theme} wa-cloak`}>
+        {/* Register before deferred modules run; theme and readiness don't depend on Datastar. */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          (() => {
+            const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const updateTheme = () => document.body.classList.toggle('wa-dark', colorScheme.matches);
+            updateTheme();
+            colorScheme.addEventListener('change', updateTheme);
+
+            document.addEventListener('wa-discovery-complete', async () => {
+              const page = document.querySelector('wa-page');
+              await page?.updateComplete;
+              requestAnimationFrame(() => {
+                const nav = document.querySelector('nav .current');
+                const article = document.querySelector('main h1');
+                if (nav && article && !window.location.hash) {
+                  if (page?.view === 'desktop') nav.scrollIntoView({ behavior: 'smooth' });
+                  article.scrollIntoView({ behavior: 'instant' });
+                }
+              });
+            }, { once: true });
+          })();
+        ` }} />
         <wa-page mobile-breakpoint="1080px">
           <Header />
           <Nav navigationData={navigationData} currentPath={currentPath} />

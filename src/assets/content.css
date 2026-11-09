@@ -23,6 +23,20 @@ body {
     }
 }
 
+/* Preserve the beta.3 content styling across Web Awesome's new native defaults. */
+blockquote {
+    color: inherit;
+    font-size: var(--wa-font-size-l);
+}
+
+:is(ul, ol)>li::marker {
+    color: currentColor;
+}
+
+pre {
+    border-radius: var(--wa-border-radius-m);
+}
+
 @media (prefers-color-scheme: dark) {
 
     html,
@@ -50,7 +64,7 @@ wa-page {
         --menu-padding: var(--wa-space-l) 0;
     }
 
-    &::part(base) {
+    &::part(page) {
         background-color: var(--wa-color-surface-default);
     }
 }

@@ -15,6 +15,28 @@ bun run dev       # → http://localhost:8000
 bun run build     # → outputs to dist/
 ```
 
+## Web Awesome
+
+Web Awesome Pro **3.14.0** loads from the version-pinned kit CDN configured in
+`src/site.config.ts`. Do not copy the licensed Pro distribution into this public
+repository. The build needs no local Web Awesome package; visitors need access to
+the kit CDN for component JavaScript/styles and the Font Awesome CDN for icons.
+
+`src/templates/Layout.tsx` uses `webawesome.loader.js`: React generates static HTML,
+not Lit declarative-shadow-root SSR. The loader discovers components and removes
+`wa-cloak` (with its built-in two-second fallback). Initial post scrolling waits for
+`wa-discovery-complete`, rather than assuming the components load within 200 ms.
+System dark mode is applied before the components load and follows OS changes.
+Datastar remains unchanged and is not required for theme/loader initialization.
+
+Keep `wa-palette-zach` and `wa-theme-zach` in `src/assets/theme.css`; their palette,
+typography, and spacing are intentional. The theme retains the beta-era heading
+utility scale (one step larger than body text). Callout copy stays in normal inline
+flow; 3.14's alignment utilities now create flex containers.
+`src/assets/content.css` preserves the previous native blockquote, list-marker,
+and code-block styling. Keep the custom
+cascade-layer order aligned with Web Awesome's `styles/layers.css` when upgrading.
+
 ## Content Structure
 
 ```

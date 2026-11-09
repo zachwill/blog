@@ -32,7 +32,7 @@ export function Nav({ navigationData, currentPath }: NavProps) {
           <a href="/datastar">
             <wa-callout variant="brand">
               <wa-icon slot="icon" name="rocket"></wa-icon>
-              <div className="wa-align-items-baseline">
+              <div>
                 My recent notes on Datastar &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
               </div>
             </wa-callout>

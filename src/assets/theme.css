@@ -1,4 +1,16 @@
-@layer wa-native, wa-utilities, wa-color-palette, wa-color-variant, wa-theme, wa-theme-dimension, wa-theme-overrides;
+@layer wa-native, wa-base, wa-utilities, wa-color-palette, wa-color-variant, wa-theme, wa-theme-dimension, wa-theme-overrides;
+
+/* Preserve this site's beta-era heading scale: 3.14 utilities now use the
+   same size for headings and body text, instead of headings being one step up. */
+@layer wa-utilities {
+    .wa-heading-xs { font-size: var(--wa-font-size-s); }
+    .wa-heading-s { font-size: var(--wa-font-size-m); }
+    .wa-heading-m { font-size: var(--wa-font-size-l); }
+    .wa-heading-l { font-size: var(--wa-font-size-xl); }
+    .wa-heading-xl { font-size: var(--wa-font-size-2xl); }
+    .wa-heading-2xl { font-size: var(--wa-font-size-3xl); }
+    .wa-heading-3xl { font-size: var(--wa-font-size-4xl); }
+}
 
 /* Generates --wa-color-{hue}-on tokens for pairing with any palette's key colors */
 :where(:root),

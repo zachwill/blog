@@ -14,9 +14,9 @@ export default {
 
     // WebAwesome configuration
     webawesome: {
-        version: "3.0.0-beta.3",
+        version: "3.14.0",
         theme: "wa-palette-zach wa-theme-zach",
-        cdnBase: "https://early.webawesome.com/webawesome@3.0.0-beta.3/dist"
+        cdnBase: "https://ka-p.webawesome.com/kit/999eff129b244c1b/webawesome@3.14.0"
     },
 
     // Favorite posts for homepage showcase
