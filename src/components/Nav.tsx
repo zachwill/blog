@@ -22,24 +22,13 @@ export function Nav({ navigationData, currentPath }: NavProps) {
       <div slot="navigation-header" className="wa-mobile-only">
         <wa-tooltip for="zachwill-dot-com">Home</wa-tooltip>
         <a href="/" id="zachwill-dot-com" className="wa-cluster wa-align-items-center wa-gap-s" data-drawer="close">
-          <wa-icon label="Home" name="home" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
-          <span className="wa-heading-m">zachwill.com</span>
+          <wa-icon label="Home" name="bolt" style={{ color: 'var(--wa-color-brand)' }}></wa-icon>
+          <span className="wa-heading-m">Zach Williams</span>
         </a>
       </div>
 
-      <nav slot="navigation">
-        <div className="wa-stack wa-gap-s">
-          <a href="/datastar">
-            <wa-callout variant="brand">
-              <wa-icon slot="icon" name="rocket"></wa-icon>
-              <div>
-                My recent notes on Datastar &nbsp;<wa-icon name="arrow-up-right-from-square" style={{ fontSize: 'var(--wa-font-size-xs)' }}></wa-icon>
-              </div>
-            </wa-callout>
-          </a>
-
-          <wa-divider style={{ margin: 'var(--wa-space-s) 0' }}></wa-divider>
-
+      <nav slot="navigation" aria-label="Post archive">
+        <div className="wa-stack">
           {Object.entries(navigationData.postsByYear)
             .sort(([a], [b]) => b.localeCompare(a))
             .map(([year, posts]) => (
