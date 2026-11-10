@@ -5,7 +5,7 @@ export const config = {
   permalink: "/datastar/",
   openGraph: {
     title: "My notes on Datastar",
-    description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes. The server owns state and logic; the client handles reactive UI with signals.",
+    description: "Datastar is a framework focused on interactivity and streaming updates through HTML attributes. The server owns state and logic. The client handles reactive UI with signals.",
     image: "/assets/datastar-blast.jpg",
     imageAlt: "Datastar framework logo",
     type: "article" as const,
@@ -79,6 +79,27 @@ const PageCSS = () => (
           }
         }
         
+        /* Keep bullets as scanning anchors, with longer analogy labels on their own line. */
+        .datastar-analogy-list {
+          list-style: disc outside;
+          margin: 0;
+          padding-inline-start: 1.125em;
+        }
+
+        .datastar-analogy-list li {
+          display: list-item;
+          margin: 0;
+          padding: 0;
+        }
+
+        .datastar-analogy-list li + li {
+          margin-block-start: .6em;
+        }
+
+        .datastar-analogy-list--stacked li strong {
+          display: block;
+        }
+
         /* Code sample colour overrides */
         .showcase-code-sample {
           --spacing: 0;
@@ -439,7 +460,7 @@ const DatastarIntro = () => (
       <CardHeader caption="Intro" title="Datastar" badge={{ label: 'Hypermedia Framework' }} />
       <wa-divider></wa-divider>
       <p>
-        <a href="https://data-star.dev" target="_blank">Datastar is a framework</a> focused on interactivity and streaming updates through a <a href="https://data-star.dev/guide/reactive_signals" target="_blank">handful of HTML attributes</a>. <strong>The server owns state and logic; the client handles reactive UI with signals.</strong>
+        <a href="https://data-star.dev" target="_blank">Datastar is a framework</a> focused on interactivity and streaming updates through a <a href="https://data-star.dev/guide/reactive_signals" target="_blank">handful of HTML attributes</a>. <strong>The server owns state and logic. The client handles reactive UI with signals.</strong>
       </p>
       <p>
         HTML is the contract between these two. Element <code>ids</code> are <a href="https://data-star.dev/examples/progressive_load" target="_blank">server targets</a>. Events trigger the server to <a href="https://data-star.dev/reference/sse_events" target="_blank">stream patches</a> — morphing elements or updating signals. There's little state to synchronize, as the frontend acts as a dumb, reactive terminal.
@@ -449,7 +470,7 @@ const DatastarIntro = () => (
       </p>
       <ul>
         <li>
-          <strong>Stream-first:</strong> Simple patches with <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a>; real-time updates to <a href="https://data-star.dev/reference/sse_events#event-types" target="_blank">elements or signals</a>.
+          <strong>Stream-first:</strong> Simple patches with <a href="https://data-star.dev/reference/sse_events" target="_blank">SSE</a> deliver real-time updates to <a href="https://data-star.dev/reference/sse_events#event-types" target="_blank">elements or signals</a>.
         </li>
         <li>
           <strong>Reactive:</strong> Interactive UI is handled through <a href="https://data-star.dev/guide/reactive_signals#frontend-reactivity" target="_blank">signals</a> and <a href="https://data-star.dev/reference/attributes" target="_blank">HTML attributes</a>.
@@ -474,7 +495,7 @@ const HTMXComparison = () => (
       <CardHeader caption="Compared to..." title="htmx" badge={{ label: 'Hypermedia OG', variant: 'warning' }} />
       <wa-divider></wa-divider>
       <p>
-        <a href="https://htmx.org" target="_blank">htmx</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests; any event triggers them; any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Locality of behavior</a> with <code>hx-*</code> attributes keeps the server in charge and the client minimal. <strong>For CRUD apps without heavy JavaScript, htmx excels.</strong> Its approach makes request/response <em>very easy</em> to implement.
+        <a href="https://htmx.org" target="_blank">htmx</a> extends <a href="https://www.youtube.com/watch?v=VKu3Dyyzzjg&t=9m20s" target="_blank">hypermedia</a>: any element makes requests, any event triggers them, and any target receives updates. <a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank">Locality of behavior</a> with <code>hx-*</code> attributes keeps the server in charge and the client minimal. <strong>For CRUD apps without heavy JavaScript, htmx excels.</strong> Its approach makes request/response <em>very easy</em> to implement.
       </p>
       <p>
         But htmx strains with complex UI interactions. Updating multiple parts of the DOM requires <a href="https://htmx.org/attributes/hx-swap-oob/" target="_blank">out-of-band swaps</a> — a &ldquo;workable solution&rdquo; to a messy problem. Interactive UI requires <a href="https://www.reddit.com/r/htmx/search?q=alpine&restrict_sr=on" target="_blank">a good chunk of users</a> to bolt on <a href="https://alpinejs.dev" target="_blank">Alpine</a>. These trade-offs are from htmx's core approach: declarative request/response rather than declarative interactivity.
@@ -487,7 +508,7 @@ const HTMXComparison = () => (
           Signals, computed values, and effects for interactive UI.
         </li>
         <li>
-          SSE patches multiple elements and signals; no OOB workarounds needed.
+          SSE patches multiple elements and signals without OOB workarounds.
         </li>
       </ul>
 
@@ -529,18 +550,18 @@ const SpreadsheetComparison = () => (
       <p>
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as a spreadsheet</strong>
       </p>
-      <ul>
+      <ul className="datastar-analogy-list datastar-analogy-list--stacked">
         <li>
-          <strong>Signals ≈ <code>cells</code>:</strong> Hold ephemeral values (inputs, toggles, flags); update instantly.
+          <strong>Signals ≈ <code>cells</code>:</strong> Hold ephemeral values (inputs, toggles, flags) and update instantly.
         </li>
         <li>
           <strong>Computed values ≈ <code>formulas</code>:</strong> Automatically recalculate when dependencies change.
         </li>
         <li>
-          <strong>Effects ≈ <code>macros</code>:</strong> Fire on signal changes; handle toasts, indicators, styling — but never business logic.
+          <strong>Effects ≈ <code>macros</code>:</strong> Fire on signal changes to handle toasts, indicators, and styling — but never business logic.
         </li>
         <li>
-          <strong>Bindings allow edits:</strong> Two-way flow between DOM and signals; input updates signal, signal updates DOM.
+          <strong>Bindings allow edits:</strong> Two-way flow between DOM and signals. Input updates the signal, and the signal updates the DOM.
         </li>
       </ul>
 
@@ -568,7 +589,7 @@ const DuckDBComparison = () => (
     <div className="wa-stack">
       <CardHeader caption="Compared to..." title="DuckDB" badge={{ label: 'Insanely Fast', style: { backgroundColor: 'var(--wa-color-purple-fill-loud)' } }} />
       <wa-divider></wa-divider>
-      <ul>
+      <ul className="datastar-analogy-list">
         <li>
           <strong>Hypermedia ≈ SQLite:</strong> embedded, straightforward, useful
         </li>
@@ -580,17 +601,17 @@ const DuckDBComparison = () => (
         </li>
       </ul>
       <p>
-        Both <a href="https://duckdb.org" target="_blank">DuckDB</a> and Datastar handle hard cases (<a href="https://duckdb.org/why_duckdb" target="_blank">complex analytical queries</a>; real-time, multiplayer updates) while keeping the <a href="https://data-star.dev/examples/templ_counter" target="_blank">simple cases simple</a>.
+        Both <a href="https://duckdb.org" target="_blank">DuckDB</a> and Datastar handle hard cases (<a href="https://duckdb.org/why_duckdb" target="_blank">complex analytical queries</a> and real-time, multiplayer updates) while keeping the <a href="https://data-star.dev/examples/templ_counter" target="_blank">simple cases simple</a>.
       </p>
       <p>
         <strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Datastar as DuckDB</strong>
       </p>
-      <ul>
+      <ul className="datastar-analogy-list datastar-analogy-list--stacked">
         <li>
-          <strong>Embedded, but powerful:</strong> Multi-target orchestration with SSE; interactivity with HTML attributes.
+          <strong>Embedded, but powerful:</strong> Multi-target orchestration with SSE and interactivity with HTML attributes.
         </li>
         <li>
-          <strong>Built for modern platforms:</strong> modern browser features (SSE, View Transitions, Web Components) narrow SPA advantages (interactive UI/UX); Datastar aims to reduce the reactivity UX gap.
+          <strong>Built for modern platforms:</strong> modern browser features (SSE, View Transitions, Web Components) narrow SPA advantages (interactive UI/UX). Datastar aims to reduce the reactivity UX gap.
         </li>
       </ul>
 
@@ -601,7 +622,7 @@ const DuckDBComparison = () => (
         tooltip="Ben Tossell"
       />
       <p>
-        <strong>There are problems that neither SQLite or MySQL/Postgres are great for — and where DuckDB shines.</strong> Datastar is a good analogy. Choose the best tool for your problem; some demands require even heavier frameworks.
+        <strong>There are problems that neither SQLite or MySQL/Postgres are great for — and where DuckDB shines.</strong> Datastar is a good analogy. Choose the best tool for your problem. Some demands require even heavier frameworks.
       </p>
     </div>
   </wa-card>
@@ -620,13 +641,13 @@ const DatastarRecap = () => (
       <CardHeader caption="Recap" title="Datastar" badge={{ label: 'Hypermedia Framework' }} />
       <wa-divider></wa-divider>
       <p>
-        Datastar enforces boundaries: state and logic on server; signals are ephemeral. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop keeps the server in charge and the UI interactive.
+        Datastar enforces boundaries: state and logic live on the server, while signals are ephemeral. Events trigger compute, SSE patches HTML, and the DOM morphs. This loop keeps the server in charge and the UI interactive.
       </p>
       <p>
         Datastar is designed for hypermedia's <a href="https://www.youtube.com/watch?v=xzC3g0qIRro" target="_blank">hard problems first</a>. Multi-target updates, real-time pushes, and reactive UX are core primitives. <strong>The framework assumes these capabilities and delivers a pragmatic set of tools.</strong>
       </p>
       <p>
-        Handful of Datastar patterns: two-way forms (<code>data-bind</code>); <a href="https://github.com/andersmurphy/hyperlith/blob/master/examples/billion_cells/src/app/main.clj#L281" target="_blank">ephemeral toasts</a> (<code>data-on-load__delay</code>); <a href="https://github.com/andersmurphy/hyperlith/blob/master/examples/virtual_scroll_y/src/app/main.clj#L112-L113" target="_blank">virtual scrolling</a> (<code>data-ref</code> + throttling). Notice these aren't hacks, they're included.
+        A handful of Datastar patterns: two-way forms (<code>data-bind</code>), <a href="https://github.com/andersmurphy/hyperlith/blob/master/examples/billion_cells/src/app/main.clj#L281" target="_blank">ephemeral toasts</a> (<code>data-on-load__delay</code>), and <a href="https://github.com/andersmurphy/hyperlith/blob/master/examples/virtual_scroll_y/src/app/main.clj#L112-L113" target="_blank">virtual scrolling</a> (<code>data-ref</code> + throttling). Notice these aren't hacks, they're included.
       </p>
       <LongformQuote
         icon="arrows-rotate"
@@ -635,7 +656,7 @@ const DatastarRecap = () => (
         tooltip="John Gall"
       />
       <p>
-        When in doubt, <a href="/hobbit-software" target="_blank" rel="noopener noreferrer">write hobbit software</a> — treat browsers as interactive terminals; stream patches; ignore framework wars.
+        When in doubt, <a href="/hobbit-software" target="_blank" rel="noopener noreferrer">write hobbit software</a> — treat browsers as interactive terminals, stream patches, and ignore framework wars.
       </p>
       <p><strong style={{ fontFamily: 'var(--wa-font-family-longform)', fontStyle: 'italic' }}>Hypermedia Recap</strong></p>
       <ul>
@@ -643,7 +664,7 @@ const DatastarRecap = () => (
           <strong>Shared DNA:</strong> htmx and Datastar use declarative HTML attributes, embrace the server, and minimize client complexity.
         </li>
         <li>
-          <strong>Different areas of focus:</strong> htmx extends hypermedia with request/response; Datastar adds spreadsheet reactivity and orchestrates streaming updates.
+          <strong>Different areas of focus:</strong> htmx extends hypermedia with request/response, while Datastar adds spreadsheet reactivity and orchestrates streaming updates.
         </li>
       </ul>
 
