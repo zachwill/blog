@@ -1,0 +1,390 @@
+/* The homepage and post footer share a compact desktop introduction. */
+wa-page[view="desktop"] .about {
+  --about-copy-size: 1rem;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: var(--wa-space-l);
+}
+
+wa-page[view="desktop"] .about-heading {
+  gap: .75rem;
+}
+
+wa-page[view="desktop"] .about-heading wa-badge,
+wa-page[view="desktop"] .about-heading wa-icon,
+wa-page[view="desktop"] .about-title {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+wa-page[view="desktop"] .about-copy {
+  line-height: 1.5;
+}
+
+wa-page[view="desktop"] .about-copy a {
+  white-space: nowrap;
+}
+
+#about-zach.about-drawer {
+  --size: min(28rem, 100dvi);
+  --spacing: 1.75rem;
+}
+
+#about-zach.about-drawer::part(dialog) {
+  max-inline-size: 100dvi;
+}
+
+#about-zach.about-drawer::part(header) {
+  align-items: center;
+  padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--wa-color-surface-border);
+}
+
+#about-zach.about-drawer::part(title) {
+  min-inline-size: 0;
+  font-size: 1rem;
+  font-weight: 550;
+}
+
+#about-zach.about-drawer::part(header-actions) {
+  align-self: flex-start;
+}
+
+#about-zach.about-drawer::part(close-button__base) {
+  min-inline-size: 44px;
+  min-block-size: 44px;
+}
+
+#about-zach.about-drawer::part(body) {
+  padding: 1.75rem;
+  overscroll-behavior: contain;
+}
+
+#about-zach.about-drawer::part(footer) {
+  padding: 1.25rem 1.75rem max(1.5rem, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--wa-color-surface-border);
+}
+
+#about-zach.about-drawer :is(h2, h3, p, ol) {
+  margin: 0;
+}
+
+#about-zach.about-drawer .az-identity {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1.125rem;
+  font-weight: 400;
+}
+
+#about-zach.about-drawer .az-portrait {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: .625rem;
+}
+
+#about-zach.about-drawer .az-name {
+  display: block;
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 650;
+  letter-spacing: -.025em;
+  line-height: 1.15;
+  margin-bottom: .125rem;
+}
+
+#about-zach.about-drawer .az-role {
+  display: block;
+  color: var(--wa-color-text-quiet);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+#about-zach.about-drawer .az-blog {
+  margin-top: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#about-zach.about-drawer .az-blog + .az-timeline {
+  margin-top: 1.5rem;
+}
+
+#about-zach.about-drawer .az-timeline {
+  list-style: none;
+  padding: 0 0 0 1.125rem;
+  --az-row-gap: 1.125rem;
+  border-left: 1px solid transparent;
+  display: grid;
+  gap: var(--az-row-gap);
+}
+
+#about-zach.about-drawer .az-timeline > li {
+  position: relative;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+#about-zach.about-drawer .az-timeline > li::before {
+  content: '';
+  position: absolute;
+  left: -1.375rem;
+  top: .35rem;
+  inline-size: .4375rem;
+  block-size: .4375rem;
+  border-radius: 50%;
+  background: var(--wa-color-text-quiet);
+  outline: 4px solid var(--wa-color-surface-raised, var(--wa-color-surface-default));
+  z-index: 1;
+}
+
+/* Connect marker centers without changing the role text column. */
+#about-zach.about-drawer .az-timeline > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: calc(-1.375rem + .21875rem - .5px);
+  top: .56875rem;
+  bottom: calc(-1 * var(--az-row-gap) - .56875rem);
+  inline-size: 1px;
+  background: var(--wa-color-surface-border);
+}
+
+#about-zach.about-drawer .az-timeline > li:first-child::before {
+  background: var(--wa-color-brand-fill-loud);
+}
+
+#about-zach.about-drawer .az-date {
+  display: block;
+  color: var(--wa-color-text-quiet);
+  font-size: .8125rem;
+  line-height: 1.45;
+  margin-top: .1875rem;
+  margin-bottom: 0;
+}
+
+#about-zach.about-drawer .az-job {
+  font: inherit;
+  font-weight: 600;
+  font-size: .9375rem;
+  line-height: 1.4;
+}
+
+#about-zach.about-drawer .az-detail {
+  color: color-mix(in srgb, var(--wa-color-text-quiet) 70%, var(--wa-color-text-normal));
+  margin-top: .5rem;
+}
+
+#about-zach.about-drawer .az-overlap {
+  border-left: 2px solid var(--wa-color-surface-border);
+  margin-top: .625rem;
+  padding-left: .75rem;
+  color: color-mix(in srgb, var(--wa-color-text-quiet) 70%, var(--wa-color-text-normal));
+  font-size: .875rem;
+  text-wrap: pretty;
+}
+
+#about-zach.about-drawer .az-overlap strong {
+  color: var(--wa-color-text-normal);
+  font-weight: 550;
+}
+
+#about-zach.about-drawer .az-email-short {
+  display: none;
+}
+
+#about-zach.about-drawer .az-actions {
+  display: grid;
+  gap: .625rem;
+  inline-size: 100%;
+}
+
+#about-zach.about-drawer .az-actions wa-button {
+  inline-size: 100%;
+}
+
+#about-zach.about-drawer .az-actions wa-button::part(base) {
+  min-block-size: 2.875rem;
+  height: auto;
+  font-size: 1rem;
+  justify-content: center;
+}
+
+#about-zach.about-drawer .az-actions wa-button::part(label) {
+  flex: 0 0 10.25em;
+  text-align: start;
+}
+
+#about-zach.about-drawer .az-actions svg {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  display: block;
+}
+
+#about-zach.about-drawer .az-linkedin {
+  --wa-color-brand-fill-loud: #0a66c2;
+  --wa-color-brand-border-loud: #0a66c2;
+  --wa-color-brand-on-loud: #fff;
+}
+
+#about-zach.about-drawer .az-linkedin::part(base) {
+  background: #0a66c2;
+  border-color: #0a66c2;
+  color: white;
+}
+
+#about-zach.about-drawer .az-linkedin:hover::part(base) {
+  background: #004b9b;
+  border-color: #004b9b;
+}
+
+#about-zach.about-drawer .az-actions .az-linkedin::part(label) {
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  #about-zach.about-drawer {
+    --spacing: 1.25rem;
+  }
+
+  #about-zach.about-drawer::part(header) {
+    padding-inline: 1.25rem .75rem;
+  }
+
+  #about-zach.about-drawer::part(body) {
+    padding: 1.5rem 1.25rem;
+  }
+
+  #about-zach.about-drawer::part(footer) {
+    padding: 1rem 1.25rem max(1.125rem, env(safe-area-inset-bottom));
+  }
+
+  #about-zach.about-drawer .az-identity {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  #about-zach.about-drawer .az-name {
+    font-size: 1.375rem;
+  }
+}
+
+@media (max-width: 340px) {
+  #about-zach.about-drawer .az-identity {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+    gap: .875rem;
+  }
+
+  #about-zach.about-drawer .az-name {
+    font-size: 1.25rem;
+  }
+
+  #about-zach.about-drawer .az-role {
+    font-size: .8125rem;
+  }
+}
+
+/* Keep more of the timeline visible on short screens. */
+@media (max-height: 640px) {
+  #about-zach.about-drawer::part(footer) {
+    padding-block: .75rem max(.75rem, env(safe-area-inset-bottom));
+  }
+
+  #about-zach.about-drawer .az-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #about-zach.about-drawer .az-actions wa-button::part(label) {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+
+  #about-zach.about-drawer .az-email-address {
+    display: none;
+  }
+
+  #about-zach.about-drawer .az-email-short {
+    display: inline;
+  }
+}
+
+wa-page:has(> #about-navigation-footer) > nav[slot="navigation"] {
+  grid-row: 2;
+  min-height: 0;
+}
+
+#about-navigation-footer {
+  grid-row: 3;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 14px max(12px, env(safe-area-inset-bottom, 0px));
+  border-block-start: 1px solid var(--wa-color-surface-border);
+}
+
+wa-page[view="desktop"] > #about-navigation-footer {
+  border-inline-end: 1px solid var(--wa-color-surface-border);
+}
+
+#about-navigation-footer wa-button,
+#about-post-footer wa-button {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  --wa-color-neutral-fill-normal: var(--wa-color-surface-lowered);
+}
+
+#about-navigation-footer wa-button::part(base),
+#about-post-footer wa-button::part(base) {
+  justify-content: center;
+  min-block-size: 44px;
+  block-size: auto;
+  padding: 0 16px;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--wa-color-text-normal);
+}
+
+#about-navigation-footer svg,
+#about-post-footer svg {
+  width: 20px;
+  height: 20px;
+}
+
+footer[slot="main-footer"]:has(> #about-post-footer) {
+  width: 100%;
+}
+
+#about-post-footer {
+  width: 100%;
+  min-width: 0;
+}
+
+#about-post-footer .about-post-desktop {
+  display: none;
+  font-variant-numeric: tabular-nums;
+}
+
+wa-page[view="desktop"] #about-post-footer .about-post-desktop {
+  display: block;
+  border-block-start: 1px solid var(--wa-color-surface-border);
+  padding-block-start: var(--wa-space-l);
+}
+
+wa-page[view="desktop"] #about-footer-trigger {
+  display: none;
+}
+
+#about-post-footer .about .purple {
+  color: var(--wa-color-purple-on-quiet);
+  background-color: var(--wa-color-purple-fill-normal);
+}
+
+#about-navigation-footer wa-button::part(base):focus-visible,
+#about-post-footer wa-button::part(base):focus-visible {
+  outline: 2px solid var(--wa-color-text-normal);
+  outline-offset: 3px;
+}

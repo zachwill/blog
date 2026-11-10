@@ -140,8 +140,8 @@ declare global {
      */
     interface WaButton extends HTMLElement {
         variant?: 'brand' | 'success' | 'warning' | 'danger' | 'neutral';
-        appearance?: 'filled' | 'outlined' | 'plain';
-        size?: 'small' | 'medium' | 'large';
+        appearance?: 'accent' | 'filled' | 'outlined' | 'plain';
+        size?: 's' | 'm' | 'l' | 'small' | 'medium' | 'large';
         pill?: boolean;
         loading?: boolean;
         disabled?: boolean;

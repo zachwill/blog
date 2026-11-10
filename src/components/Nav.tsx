@@ -1,4 +1,5 @@
 import React from 'react';
+import { AboutButton } from './AboutButton';
 
 interface NavigationData {
   postsByYear: {
@@ -56,6 +57,10 @@ export function Nav({ navigationData, currentPath }: NavProps) {
             ))}
         </div>
       </nav>
+
+      <div id="about-navigation-footer" slot="navigation-footer">
+        <AboutButton location="sidebar" />
+      </div>
     </>
   );
 } 

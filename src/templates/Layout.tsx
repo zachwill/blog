@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import siteConfig from '../site.config';
-import { Header, Nav } from '../components';
+import { AboutDrawer, Header, Nav } from '../components';
 
 interface NavigationData {
   postsByYear: Record<string, Array<{
@@ -109,6 +109,7 @@ export default function Layout({
 
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
+        <link rel="stylesheet" href="/assets/about.css" />
         {slotContent?.styles}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
@@ -152,6 +153,8 @@ export default function Layout({
           )}
         </wa-page>
 
+        <AboutDrawer />
+        <script type="module" src="/assets/about.js"></script>
         {slotContent?.scripts}
       </body>
     </html>

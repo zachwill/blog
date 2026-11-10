@@ -1,4 +1,6 @@
 export { About } from './About';
+export { AboutDrawer } from './AboutDrawer';
+export { AboutButton } from './AboutButton';
 export { RecentPosts } from './RecentPosts';
 
 // Export layout components
