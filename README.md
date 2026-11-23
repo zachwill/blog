@@ -4,7 +4,7 @@ Custom static site generator built with Bun.
 
 ## Quick Start
 
-Use Bun 1.4.0 (also pinned in CI) on macOS or Linux.
+Use Bun 1.4.5 (also pinned in CI) on macOS or Linux.
 
 ```bash
 # Install dependencies
