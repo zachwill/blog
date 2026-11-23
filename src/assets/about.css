@@ -28,7 +28,7 @@ wa-page[view="desktop"] .about-copy a {
 
 #about-zach.about-drawer {
   --size: min(28rem, 100dvi);
-  --spacing: 1.75rem;
+  --spacing: 1.25rem;
 }
 
 #about-zach.about-drawer::part(dialog) {
@@ -37,7 +37,7 @@ wa-page[view="desktop"] .about-copy a {
 
 #about-zach.about-drawer::part(header) {
   align-items: center;
-  padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+  padding: 1.25rem .75rem 1.25rem var(--spacing);
   border-bottom: 1px solid var(--wa-color-surface-border);
 }
 
@@ -57,12 +57,12 @@ wa-page[view="desktop"] .about-copy a {
 }
 
 #about-zach.about-drawer::part(body) {
-  padding: 1.75rem;
+  padding: 1.25rem var(--spacing);
   overscroll-behavior: contain;
 }
 
 #about-zach.about-drawer::part(footer) {
-  padding: 1.25rem 1.75rem max(1.5rem, env(safe-area-inset-bottom));
+  padding: 1rem var(--spacing) max(1rem, env(safe-area-inset-bottom));
   border-top: 1px solid var(--wa-color-surface-border);
 }
 
@@ -104,27 +104,21 @@ wa-page[view="desktop"] .about-copy a {
   line-height: 1.5;
 }
 
-#about-zach.about-drawer .az-blog {
-  margin-top: 0;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-#about-zach.about-drawer .az-blog + .az-timeline {
-  margin-top: 1.5rem;
-}
-
 #about-zach.about-drawer .az-timeline {
-  list-style: none;
-  padding: 0 0 0 1.125rem;
   --az-row-gap: 1.125rem;
-  border-left: 1px solid transparent;
+  --az-timeline-inset: 1rem;
+  --az-marker-size: .4375rem;
+  list-style: none;
+  padding: 0;
+  padding-inline-start: var(--az-timeline-inset);
   display: grid;
   gap: var(--az-row-gap);
 }
 
 #about-zach.about-drawer .az-timeline > li {
   position: relative;
+  margin: 0;
+  padding: 0;
   font-size: .875rem;
   line-height: 1.5;
 }
@@ -132,10 +126,10 @@ wa-page[view="desktop"] .about-copy a {
 #about-zach.about-drawer .az-timeline > li::before {
   content: '';
   position: absolute;
-  left: -1.375rem;
-  top: .35rem;
-  inline-size: .4375rem;
-  block-size: .4375rem;
+  inset-inline-start: calc(-1 * var(--az-timeline-inset));
+  top: .4375rem;
+  inline-size: var(--az-marker-size);
+  block-size: var(--az-marker-size);
   border-radius: 50%;
   background: var(--wa-color-text-quiet);
   outline: 4px solid var(--wa-color-surface-raised, var(--wa-color-surface-default));
@@ -146,9 +140,9 @@ wa-page[view="desktop"] .about-copy a {
 #about-zach.about-drawer .az-timeline > li:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: calc(-1.375rem + .21875rem - .5px);
-  top: .56875rem;
-  bottom: calc(-1 * var(--az-row-gap) - .56875rem);
+  inset-inline-start: calc(-1 * var(--az-timeline-inset) + var(--az-marker-size) / 2 - .5px);
+  top: .65625rem;
+  bottom: calc(-1 * var(--az-row-gap) - .65625rem);
   inline-size: 1px;
   background: var(--wa-color-surface-border);
 }
@@ -182,8 +176,6 @@ wa-page[view="desktop"] .about-copy a {
   border-left: 2px solid var(--wa-color-surface-border);
   margin-top: .625rem;
   padding-left: .75rem;
-  color: color-mix(in srgb, var(--wa-color-text-quiet) 70%, var(--wa-color-text-normal));
-  font-size: .875rem;
   text-wrap: pretty;
 }
 
@@ -192,75 +184,40 @@ wa-page[view="desktop"] .about-copy a {
   font-weight: 550;
 }
 
-#about-zach.about-drawer .az-email-short {
-  display: none;
+#about-zach.about-drawer .az-overlap .az-date {
+  margin-block-start: .125rem;
 }
 
-#about-zach.about-drawer .az-actions {
-  display: grid;
-  gap: .625rem;
+#about-zach.about-drawer .az-overlap .az-detail {
+  margin-block-start: .25rem;
+}
+
+#about-zach.about-drawer .az-email {
+  --wa-color-neutral-fill-loud: #000;
+  --wa-color-neutral-on-loud: #fff;
   inline-size: 100%;
 }
 
-#about-zach.about-drawer .az-actions wa-button {
-  inline-size: 100%;
+.wa-dark #about-zach.about-drawer .az-email {
+  --wa-color-neutral-fill-loud: #656a7b;
+  --wa-color-mix-hover: var(--wa-color-neutral-70) 12%;
 }
 
-#about-zach.about-drawer .az-actions wa-button::part(base) {
+#about-zach.about-drawer .az-email::part(base) {
   min-block-size: 2.875rem;
-  height: auto;
   font-size: 1rem;
   justify-content: center;
 }
 
-#about-zach.about-drawer .az-actions wa-button::part(label) {
-  flex: 0 0 10.25em;
-  text-align: start;
-}
-
-#about-zach.about-drawer .az-actions svg {
+#about-zach.about-drawer .az-email svg {
   inline-size: 1.125rem;
   block-size: 1.125rem;
   display: block;
 }
 
-#about-zach.about-drawer .az-linkedin {
-  --wa-color-brand-fill-loud: #0a66c2;
-  --wa-color-brand-border-loud: #0a66c2;
-  --wa-color-brand-on-loud: #fff;
-}
-
-#about-zach.about-drawer .az-linkedin::part(base) {
-  background: #0a66c2;
-  border-color: #0a66c2;
-  color: white;
-}
-
-#about-zach.about-drawer .az-linkedin:hover::part(base) {
-  background: #004b9b;
-  border-color: #004b9b;
-}
-
-#about-zach.about-drawer .az-actions .az-linkedin::part(label) {
-  flex: 0 1 auto;
-  text-align: center;
-}
-
 @media (max-width: 420px) {
   #about-zach.about-drawer {
-    --spacing: 1.25rem;
-  }
-
-  #about-zach.about-drawer::part(header) {
-    padding-inline: 1.25rem .75rem;
-  }
-
-  #about-zach.about-drawer::part(body) {
-    padding: 1.5rem 1.25rem;
-  }
-
-  #about-zach.about-drawer::part(footer) {
-    padding: 1rem 1.25rem max(1.125rem, env(safe-area-inset-bottom));
+    --spacing: 1rem;
   }
 
   #about-zach.about-drawer .az-identity {
@@ -292,23 +249,6 @@ wa-page[view="desktop"] .about-copy a {
 @media (max-height: 640px) {
   #about-zach.about-drawer::part(footer) {
     padding-block: .75rem max(.75rem, env(safe-area-inset-bottom));
-  }
-
-  #about-zach.about-drawer .az-actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  #about-zach.about-drawer .az-actions wa-button::part(label) {
-    flex: 0 1 auto;
-    text-align: center;
-  }
-
-  #about-zach.about-drawer .az-email-address {
-    display: none;
-  }
-
-  #about-zach.about-drawer .az-email-short {
-    display: inline;
   }
 }
 
