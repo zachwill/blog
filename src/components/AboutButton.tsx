@@ -4,11 +4,12 @@ export function AboutButton({ location }: { location: 'sidebar' | 'footer' }) {
   return (
     <wa-button
       id={`about-${location}-trigger`}
+      className="about-trigger"
       data-about-zach={location}
       type="button"
       variant="neutral"
       appearance="filled"
-      size={location === 'sidebar' ? 'm' : 's'}
+      size="s"
       with-start
       aria-haspopup="dialog"
       aria-controls="about-zach"

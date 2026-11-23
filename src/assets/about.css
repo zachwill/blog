@@ -298,36 +298,43 @@ wa-page[view="desktop"] > #about-navigation-footer {
   border-inline-end: 1px solid var(--app-frame-border-color);
 }
 
-#about-navigation-footer wa-button,
-#about-post-footer wa-button {
+.about-trigger {
   display: block;
-  width: 100%;
-  max-width: 100%;
+  inline-size: 100%;
   --wa-color-neutral-fill-normal: var(--wa-color-surface-lowered);
 }
 
-#about-navigation-footer wa-button::part(base),
-#about-post-footer wa-button::part(base) {
+.about-trigger::part(base) {
   justify-content: center;
+  min-block-size: 44px;
+  block-size: auto;
+  padding-inline: 16px;
+  gap: 10px;
+  font-size: 1rem;
   color: var(--wa-color-text-normal);
 }
 
-#about-navigation-footer svg {
-  width: 1em;
-  height: 1em;
+.about-trigger::part(end) {
+  display: none;
 }
 
-wa-page:not([view="desktop"]) :is(#about-navigation-footer, #about-post-footer) wa-button::part(base) {
-  min-block-size: 44px;
-  block-size: auto;
-  padding: 0 16px;
-  gap: 10px;
-  font-size: 16px;
+.about-trigger > svg {
+  inline-size: 20px;
+  block-size: 20px;
+  /* The base gap replaces Web Awesome's default slotted icon margin. */
+  margin-inline: 0;
 }
 
-wa-page:not([view="desktop"]) :is(#about-navigation-footer, #about-post-footer) svg {
-  width: 20px;
-  height: 20px;
+wa-page[view="desktop"] .about-trigger::part(base) {
+  min-block-size: 32px;
+  block-size: 32px;
+  gap: 8px;
+  font-size: .8125rem;
+}
+
+wa-page[view="desktop"] .about-trigger > svg {
+  inline-size: 16px;
+  block-size: 16px;
 }
 
 footer[slot="main-footer"]:has(> #about-post-footer) {
@@ -359,8 +366,7 @@ wa-page[view="desktop"] #about-footer-trigger {
   background-color: var(--wa-color-purple-fill-normal);
 }
 
-#about-navigation-footer wa-button::part(base):focus-visible,
-#about-post-footer wa-button::part(base):focus-visible {
+.about-trigger::part(base):focus-visible {
   outline: 2px solid var(--wa-color-text-normal);
   outline-offset: 3px;
 }
