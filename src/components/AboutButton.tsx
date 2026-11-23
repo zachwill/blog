@@ -8,7 +8,7 @@ export function AboutButton({ location }: { location: 'sidebar' | 'footer' }) {
       type="button"
       variant="neutral"
       appearance="filled"
-      size="s"
+      size={location === 'sidebar' ? 'm' : 's'}
       with-start
       aria-haspopup="dialog"
       aria-controls="about-zach"

@@ -280,16 +280,23 @@ wa-page[view="desktop"] > #about-navigation-footer {
 #about-navigation-footer wa-button::part(base),
 #about-post-footer wa-button::part(base) {
   justify-content: center;
+  color: var(--wa-color-text-normal);
+}
+
+#about-navigation-footer svg {
+  width: 1em;
+  height: 1em;
+}
+
+wa-page:not([view="desktop"]) :is(#about-navigation-footer, #about-post-footer) wa-button::part(base) {
   min-block-size: 44px;
   block-size: auto;
   padding: 0 16px;
   gap: 10px;
   font-size: 16px;
-  color: var(--wa-color-text-normal);
 }
 
-#about-navigation-footer svg,
-#about-post-footer svg {
+wa-page:not([view="desktop"]) :is(#about-navigation-footer, #about-post-footer) svg {
   width: 20px;
   height: 20px;
 }
