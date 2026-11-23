@@ -18,13 +18,4 @@ export default {
         theme: "wa-palette-zach wa-theme-zach",
         cdnBase: "https://ka-p.webawesome.com/kit/999eff129b244c1b/webawesome@3.14.0"
     },
-
-    // Favorite posts for homepage showcase
-    favoritePosts: [
-        "2022-11-15-iterations-matter-more",
-        "2020-10-28-yes-code",
-        "2019-10-01-null-hypothesis",
-        "2017-11-01-apprenticeship",
-        "2014-01-14-build-almost-nothing"
-    ],
 };

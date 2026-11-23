@@ -9,7 +9,6 @@ export const config = {
 
 interface MainProps {
   posts: Post[];
-  favoritePostSlugs: string[];
 }
 
 export function Main({ posts }: MainProps) {

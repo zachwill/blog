@@ -11,12 +11,6 @@ interface NavigationData {
   }>>;
 }
 
-interface ContentData {
-  type: 'post' | 'page' | 'home';
-  title: string;
-  content: string;
-}
-
 interface OpenGraphData {
   title?: string;
   description?: string;
@@ -31,30 +25,16 @@ interface OpenGraphData {
   twitterCreator?: string;
 }
 
-type SlotContent = {
-  main?: ReactNode;
-  'main-footer'?: ReactNode;
-  scripts?: ReactNode;
-  styles?: ReactNode;
-};
-
 interface LayoutProps {
   title?: string;
   navigationData: NavigationData;
-  contentData: ContentData;
   currentPath: string;
-  slotContent?: SlotContent;
+  children: ReactNode;
+  footer?: ReactNode;
   openGraph?: OpenGraphData;
 }
 
-export default function Layout({
-  title,
-  navigationData,
-  contentData,
-  currentPath,
-  slotContent,
-  openGraph
-}: LayoutProps) {
+export default function Layout({ title, navigationData, currentPath, children, footer, openGraph }: LayoutProps) {
   const pageTitle = title || siteConfig.title;
   const ogData = {
     title: openGraph?.title || pageTitle,
@@ -110,7 +90,6 @@ export default function Layout({
         <link rel="stylesheet" href={`${siteConfig.webawesome.cdnBase}/styles/webawesome.css`} />
         <link rel="stylesheet" href="/assets/content.css" />
         <link rel="stylesheet" href="/assets/about.css" />
-        {slotContent?.styles}
         <script type="module" src={`${siteConfig.webawesome.cdnBase}/webawesome.loader.js`}></script>
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
       </head>
@@ -142,20 +121,12 @@ export default function Layout({
           <Header />
           <Nav navigationData={navigationData} currentPath={currentPath} />
 
-          <main>
-            {slotContent?.main || <div dangerouslySetInnerHTML={{ __html: contentData.content }} />}
-          </main>
-
-          {slotContent?.['main-footer'] && (
-            <footer slot="main-footer">
-              {slotContent['main-footer']}
-            </footer>
-          )}
+          <main>{children}</main>
+          {footer && <footer slot="main-footer">{footer}</footer>}
         </wa-page>
 
         <AboutDrawer />
         <script type="module" src="/assets/about.js"></script>
-        {slotContent?.scripts}
       </body>
     </html>
   );

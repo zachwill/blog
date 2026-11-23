@@ -9,13 +9,7 @@
     "dependencies": {
         "gray-matter": "^4.0.3",
         "react": "^18.0.0",
-        "react-dom": "^18.0.0",
-        "rehype-highlight": "^7.0.2",
-        "rehype-stringify": "^10.0.0",
-        "remark-gfm": "^4.0.1",
-        "remark-parse": "^11.0.0",
-        "remark-rehype": "^11.0.0",
-        "unified": "^11.0.0"
+        "react-dom": "^18.0.0"
     },
     "devDependencies": {
         "@types/bun": "^1.2.19",

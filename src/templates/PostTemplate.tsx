@@ -1,18 +1,7 @@
 import React from 'react';
 import { About, AboutButton, formatDate } from '../components';
 
-interface Post {
-  title: string;
-  date: string;
-  permalink: string;
-  content: string;
-  slug: string;
-  isFavorite?: boolean;
-}
-
-export const config = {
-  type: 'post' as const
-};
+import type { Post } from '../components/types';
 
 export function Main({ post }: { post: Post }) {
   return (
@@ -25,7 +14,7 @@ export function Main({ post }: { post: Post }) {
           {formatDate(post.date)}
         </time>
       </header>
-      <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className="post-content" dangerouslySetInnerHTML={{ __html: post.processedContent }} />
     </article>
   );
 }

@@ -4,6 +4,8 @@ Custom static site generator built with Bun.
 
 ## Quick Start
 
+Use Bun 1.4.0 (also pinned in CI) on macOS or Linux.
+
 ```bash
 # Install dependencies
 bun install
@@ -59,7 +61,7 @@ permalink: /custom-url/    # Optional; defaults to /my-post/
 Your content here...
 ```
 
-Raw HTML and WebAwesome custom elements are allowed in Markdown posts, so callouts work directly:
+Bun renders Markdown, including raw HTML, but does not syntax-highlight code blocks. Web Awesome callouts work directly in posts:
 
 ```html
 <wa-callout variant="brand" appearance="outlined">
@@ -70,4 +72,4 @@ Raw HTML and WebAwesome custom elements are allowed in Markdown posts, so callou
 
 ## Custom Pages
 
-Use `.tsx` pages in `content/pages/` for bespoke layouts, local components, page-specific styles/scripts, and WebAwesome-heavy pages. Each TSX page exports a `config` object and a `Main` component.
+Use `.tsx` pages in `content/pages/` for bespoke layouts and Web Awesome components. Export `config` with a `title` and `permalink`, and a `Main` component. `Main` receives `posts` if it needs them; an optional `MainFooter` renders in the layout's footer slot.
