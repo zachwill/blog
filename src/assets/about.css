@@ -26,6 +26,35 @@ wa-page[view="desktop"] .about-copy a {
   white-space: nowrap;
 }
 
+wa-page[view="desktop"] > main:has(> .home-feed) {
+  padding-block-start: 1.5rem;
+}
+
+wa-page[view="desktop"] .home-feed {
+  row-gap: 1rem;
+
+  > .about {
+    column-gap: 1rem;
+  }
+
+  .about-heading {
+    gap: .625rem;
+  }
+
+  .about-heading wa-badge {
+    padding: .3125rem .5625rem;
+  }
+
+  .about-heading :is(wa-badge, wa-icon) {
+    font-size: 1.125rem;
+  }
+
+  > wa-divider {
+    --color: color-mix(in srgb, var(--wa-color-surface-border) 85%, transparent);
+    margin-block-end: .375rem;
+  }
+}
+
 #about-zach.about-drawer {
   --size: min(28rem, 100dvi);
   --spacing: 1.25rem;
@@ -266,7 +295,7 @@ wa-page:has(> #about-navigation-footer) > nav[slot="navigation"] {
 }
 
 wa-page[view="desktop"] > #about-navigation-footer {
-  border-inline-end: 1px solid var(--wa-color-surface-border);
+  border-inline-end: 1px solid var(--app-frame-border-color);
 }
 
 #about-navigation-footer wa-button,

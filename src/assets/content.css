@@ -6,15 +6,7 @@
 :root {
     --app-navigation-width: 350px;
     --app-content-max-width: 80ch;
-    --app-mobile-breakpoint: 1080px;
     --darkmode-background: #101219;
-}
-
-/* Shorter desktop lines; preserve the existing tablet and phone column width. */
-@media screen and (min-width: 1081px) {
-    :root {
-        --app-content-max-width: 72ch;
-    }
 }
 
 html,
@@ -62,8 +54,10 @@ wa-page {
 
     /* Define column widths for the desktop view */
     &[view='desktop'] {
+        --app-content-max-width: 72ch;
+        --app-frame-border-color: color-mix(in srgb, var(--wa-color-surface-border) 66%, transparent);
         --menu-width: var(--app-navigation-width);
-        --menu-padding: 0.75rem;
+        --menu-padding: 0.5rem 0.8125rem 0.75rem;
     }
 
     /* Collapse columns on mobile. The 'auto' is key. */
@@ -119,7 +113,7 @@ wa-page {
 
 /* The main page header */
 header[slot='header'] {
-    border-bottom: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
+    border-bottom: var(--wa-border-style) var(--wa-panel-border-width) var(--app-frame-border-color, var(--wa-color-surface-border));
     padding: var(--wa-space-s) var(--wa-space-m);
 
     /* The wa-split component inside provides the spacing, so we don't need much padding here. */
@@ -158,7 +152,7 @@ header[slot='header'] {
 
     /* Add a border ONLY on desktop view */
     wa-page[view='desktop'] & {
-        border-right: var(--wa-border-style) var(--wa-panel-border-width) var(--wa-color-surface-border);
+        border-inline-end: var(--wa-border-style) var(--wa-panel-border-width) var(--app-frame-border-color);
         overflow-y: auto;
         /* Ensure it can scroll independently */
     }
@@ -218,6 +212,24 @@ footer[slot='main-footer'] {
 
     > :last-child {
         margin-bottom: 0;
+    }
+}
+
+/* Hang only top-level post quotes. Keep the same text measure as the inset quote. */
+wa-page[view='desktop'] :is(.post-body, article > .post-content) > blockquote {
+    --quote-rule-gap: 24px;
+    --quote-rule-width: 2px;
+    margin-inline-start: calc(-1 * (var(--quote-rule-gap) + var(--quote-rule-width)));
+    border-inline-start: var(--quote-rule-width) solid color-mix(in oklab, var(--wa-color-text-quiet) 17%, var(--wa-color-surface-border));
+    padding-inline: var(--quote-rule-gap) 35px;
+
+    p {
+        text-wrap: wrap;
+    }
+
+    /* Keep a clear pause before the next paragraph, usually the attribution. */
+    &:has(+ p) {
+        margin-block-end: 18px;
     }
 }
 
@@ -294,6 +306,32 @@ footer[slot='main-footer'] {
     }
 }
 
+wa-page[view='desktop'] > nav[slot='navigation'] {
+    > .wa-stack {
+        gap: .75rem;
+    }
+
+    wa-details::part(header) {
+        min-block-size: 2.125rem;
+        border-radius: var(--wa-border-radius-m);
+    }
+
+    wa-details [slot='summary'] > .wa-heading-s {
+        font-size: .875rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    wa-details::part(header):hover {
+        background-color: var(--wa-color-surface-lowered);
+    }
+
+    wa-details::part(header):focus-visible,
+    li a:focus-visible {
+        outline: var(--wa-focus-ring);
+        outline-offset: -2px;
+    }
+}
+
 wa-button[data-toggle-nav] {
     &::part(base) {
         outline-color: transparent;
@@ -304,12 +342,7 @@ wa-button[data-toggle-nav] {
    MOBILE-SPECIFIC ADJUSTMENTS
    ============================================ */
 
-/*
-  THE PADDING SOLUTION:
-  Use a media query matching your breakpoint to reduce padding on smaller screens.
-  This is more reliable and direct than trying to do it all with component attributes.
-*/
-@media screen and (max-width: 1080px) {
+wa-page[view='mobile'] {
     .post-header {
         margin-bottom: var(--wa-space-m);
 

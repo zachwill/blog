@@ -13,7 +13,7 @@ interface MainProps {
 
 export function Main({ posts }: MainProps) {
   return (
-    <div className="wa-stack wa-gap-xl">
+    <div className="home-feed wa-stack wa-gap-xl">
       <About />
       <wa-divider></wa-divider>
       <RecentPosts posts={posts} count={80} />
